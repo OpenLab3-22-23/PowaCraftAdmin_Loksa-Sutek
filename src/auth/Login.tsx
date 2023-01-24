@@ -20,35 +20,34 @@ export default function LogIn() {
   }
 
   return !session ? (
-    <div className="w-screen h-screen flex flex-col justify-center">
+    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/src/assets/bg.png')]">
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
+      <img src="src/assets/logo.svg" width="200" height="200"></img>
+        <h2 class="text-7xl text-white">Prihlásenie do panelu</h2>
+        <h3 class="text-5xl text-white">pre Admin-Team</h3>
+        <p class="text-lg">Email</p>
         <input
           id="email"
           type="email"
-          placeholder="Your Email"
+          placeholder="email@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-64 my-2"
+          className="w-64 my-2 bg-gray-200 rounded-full"
         />
+        <p class="text-lg">Heslo</p>
         <input
           id="password"
           type="password"
-          placeholder="Your password"
+          placeholder="*****"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-64 my-2"
+          className="w-64 my-2 bg-gray-200 rounded-full"
         />
         <input
           type="submit"
-          value="Log In"
-          className="w-64 rounded-full bg-sky-500/50 px-2 py-1 my-4"
+          value="Prihlásiť"
+          className="w-40 rounded-lg bg-green-600/80 px-2 py-1 my-4 text-2xl"
         />
-        <p className="mt-5">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-emerald-300">
-            Sign Up
-          </Link>
-        </p>
       </form>
     </div>
   ) : (
