@@ -22,31 +22,32 @@ export default function LogIn() {
   return !session ? (
     <div className="w-screen h-screen flex flex-col justify-center bg-[url('/src/assets/bg.png')]">
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
-      <img src="src/assets/logo.svg" width="200" height="200"></img>
+      <img src="src/assets/logo.svg" width="200" height="200" class="rounded-full border-4 border-amber-400"></img>
         <h2 class="text-7xl text-white">Prihlásenie do panelu</h2>
-        <h3 class="text-5xl text-white">pre Admin-Team</h3>
-        <p class="text-lg">Email</p>
+        <h3 class="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
+        <p class="text-2xl">Email</p>
         <input
           id="email"
           type="email"
           placeholder="email@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-64 my-2 bg-gray-200 rounded-full"
+          className="w-96 my-2 bg-gray-200 rounded-full"
         />
-        <p class="text-lg">Heslo</p>
+        <p class="text-2xl">Heslo</p>
         <input
           id="password"
           type="password"
           placeholder="*****"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-64 my-2 bg-gray-200 rounded-full"
+          className="w-96 my-2 bg-gray-200 rounded-full"
         />
+        <br/>
         <input
           type="submit"
           value="Prihlásiť"
-          className="w-40 rounded-lg bg-green-600/80 px-2 py-1 my-4 text-2xl"
+          className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl"
         />
       </form>
     </div>

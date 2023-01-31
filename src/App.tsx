@@ -10,7 +10,7 @@ function App() {
     <div className="w-screen h-screen">
       {session ? (
         <LandingPage />
-      ) : <Navigate to="/signup" />}
+      ) : <Navigate to="/login" />}
     </div>
   );
 }

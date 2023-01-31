@@ -5,11 +5,23 @@ import { useAuth } from "./Auth";
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [correct, setCorrect] = useState("");
+  const [nick, setNick] = useState("");
 
   const { signUp, session } = useAuth();
-
+// potrebujem trackovat hodnoty hesla a znovuhesla
+// pri zmene hesla a znovu hesla obe hodnoty porovnam a ak su odlisne nastavim flag na false
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    try{
+      const { error } = await signUp(password, correct);
+      if (password != correct) throw error;  
+    }
+    catch(error: any) {
+      alert(error.error_description || error.message);
+    }
+    finally {
+    }
     try {
       const { error } = await signUp(email, password);
       if (error) throw error;
@@ -20,35 +32,50 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-screen h-screen flex flex-col justify-center">
+    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/src/assets/bg.png')]">
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
+      <img src="src/assets/logo.svg" width="200" height="200" class="rounded-full border-4 border-amber-400"></img>
+      <h2 class="text-7xl text-white">Prihlásenie do panelu</h2>
+        <h3 class="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
+        <p class="text-2xl">Nickname</p>
+        <input
+          id="nick"
+          type="password"
+          placeholder="Fero-mrkvička1_25"
+          className="w-96 my-2 bg-gray-200 rounded-full"
+        />
+        <p class="text-2xl">Email</p>
         <input
           id="email"
           type="email"
-          placeholder="Your Email"
+          placeholder="email@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-64 my-2"
+          className="w-96 my-2 bg-gray-200 rounded-full"
         />
+        <p class="text-2xl">Heslo</p>
         <input
           id="password"
           type="password"
-          placeholder="Your password"
+          placeholder="*****"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-64 my-2"
+          className="w-96 my-2 bg-gray-200 rounded-full "
         />
+        <p class="text-2xl">Znovu Heslo</p>
         <input
-          type="submit"
-          value="Sign Up"
-          className="w-64 rounded-full bg-sky-500/50 px-2 py-1 my-4"
+        id="correct"
+        type="password"
+        placeholder="*****"
+        className="w-96 my-2 bg-gray-200 rounded-full"
         />
-        <p className="mt-5">
-          Already have an account?{" "}
-          <Link to="/login" className="text-emerald-300">
-            LogIn
-          </Link>
-        </p>
+        <br/>
+        <input
+          id="correct"
+          type="submit"
+          value="Prihlásiť"
+          className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl "
+        />
       </form>
     </div>
   ) : (
