@@ -14,20 +14,13 @@ export default function SignUp() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try{
-      const { error } = await signUp(password, correct);
-      if (password != correct) throw error;  
+      const { error } = await signUp(email, password);  
+      if (error) throw error;
     }
     catch(error: any) {
       alert(error.error_description || error.message);
     }
     finally {
-    }
-    try {
-      const { error } = await signUp(email, password);
-      if (error) throw error;
-    } catch (error: any) {
-      alert(error.error_description || error.message);
-    } finally {
     }
   }
 
@@ -40,7 +33,7 @@ export default function SignUp() {
         <p class="text-2xl">Nickname</p>
         <input
           id="nick"
-          type="password"
+          type="text"
           placeholder="Fero-mrkvička1_25"
           className="w-96 my-2 bg-gray-200 rounded-full"
         />
@@ -67,14 +60,16 @@ export default function SignUp() {
         id="correct"
         type="password"
         placeholder="*****"
+        onChange={(e) => setCorrect(e.target.value)}
         className="w-96 my-2 bg-gray-200 rounded-full"
         />
         <br/>
         <input
-          id="correct"
+          id="submitbtn"
           type="submit"
           value="Prihlásiť"
-          className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl "
+          className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-500 disabled:bg-green-600/40 disabled:text-black/40"
+          disabled={password != correct || password == ""}
         />
       </form>
     </div>
