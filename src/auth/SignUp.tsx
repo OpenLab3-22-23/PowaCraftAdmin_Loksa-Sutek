@@ -34,14 +34,14 @@ export default function SignUp() {
         <input
           id="nick"
           type="text"
-          placeholder="Fero-mrkvička1_25"
+          placeholder="Nickname"
           className="w-96 my-2 bg-gray-200 rounded-full"
         />
         <p class="text-2xl">Email</p>
         <input
           id="email"
           type="email"
-          placeholder="email@email.com"
+          placeholder="email@gmail.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-96 my-2 bg-gray-200 rounded-full"
@@ -67,7 +67,7 @@ export default function SignUp() {
         <input
           id="submitbtn"
           type="submit"
-          value="Prihlásiť"
+          value="Registrovať"
           className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-500 disabled:bg-green-600/40 disabled:text-black/40"
           disabled={password != correct || password == ""}
         />

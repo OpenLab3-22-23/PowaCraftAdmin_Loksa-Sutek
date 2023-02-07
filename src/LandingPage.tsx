@@ -15,7 +15,20 @@ export default function LandingPage(): JSX.Element {
                 <img src="src/assets/logo.svg" width="150" height="150" class="rounded-full" alt="obrazok"></img>
                 <a class="text-4xl text-white">PowaCraft</a>
                 <a class="text-xl align-bottom text-amber-400">Admin</a>
-                <button class="text-2xl absolute right-10 text-white"flex-end onClick={handleLogOut}>Odhlásiť sa</button>
+                <div className="box-content h-4 w-1/12 p-4 flex item-center"></div>
+                <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex item-center">
+                    <p className="text-2xl font-bold">Tvojde body:</p>
+                </div>
+                <div className="box-content h-4 w-10 p-4 bg-white rounded-lg mx-8 items-center justify-center flex item-center">
+                    <p className="text-lime-500 text-2xl">+0</p>
+                </div>
+                <div className="box-content h-4 w-10 p-4 bg-white rounded-lg mx-8 items-center justify-center flex item-center">
+                    <p className="text-red-600 text-2xl">-0</p>
+                </div>
+                <div className="box-content h-10 w-50">
+                <button class="text-2xl absolute left-0 text-white"flex-end onClick={handleLogOut}>Odhlásiť sa</button>
+                <img src="src/assets/steve.png" width="80" height="80" className="absolute right-0 rounded-full"></img>
+                </div>
             </div>
 
             <div class="pb-6 pl-5">
@@ -111,12 +124,14 @@ export default function LandingPage(): JSX.Element {
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
-
+                   
                 </div>
+            </div>
+            <div className="pl-5" >
+            <button data-modal-target="popupModal" data-modal-toggle="popupModal" className="block text-white bg-zinc-700/80 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+            Toggle modal
+            </button>
             </div>
         </div>
     )
