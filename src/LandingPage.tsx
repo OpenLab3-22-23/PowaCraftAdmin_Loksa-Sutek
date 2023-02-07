@@ -11,113 +11,207 @@ export default function LandingPage(): JSX.Element {
 
     return (
         <div className="h-full w-full bg-[url('/src/assets/bg.png')]">
-            <div class="flex items-center pl-5">
-                <img src="src/assets/logo.svg" width="150" height="150" class="rounded-full" alt="obrazok"></img>
-                <a class="text-4xl text-white">PowaCraft</a>
-                <a class="text-xl align-bottom text-amber-400">Admin</a>
-                <button class="text-2xl absolute right-10 text-white"flex-end onClick={handleLogOut}>Odhlásiť sa</button>
+            <div className="flex items-center pl-5">
+                <img src="src/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
+                <a className="text-4xl text-white">PowaCraft</a>
+                <a className="text-xl align-bottom text-amber-400">Admin</a>
+                <button className="text-2xl absolute right-10 text-white"flex-end onClick={handleLogOut}>Odhlásiť sa</button>
             </div>
 
-            <div class="pb-6 pl-5">
-                <a class="text-7xl text-white">Vitaj, NejakyHrac!</a>
+            <div className="pb-6 pl-5">
+                <a className="text-7xl text-white">Vitaj, NejakyHrac!</a>
             </div>
-            <div class="pl-5">
-                <div class="box-content h-1/2 w-3/6 bg-zinc-700/80 rounded-lg">
 
-                    <div class="justify-center flex pb-3 pt-2">
-                        <a class="text-4xl text-white">Zoznam úloh</a>
+
+
+
+
+
+
+            <div className="flex-col absolute right-10 w-96">
+
+
+
+                <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7">
+
+                    <div className="justify-center flex pb-3 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2">
+                        <a className="text-2xl text-white">Tvoje posledné body</a>
                         <hr/>
                     </div>
 
-                    <div class="h-0.5 bg-cyan-400 mb-4"></div>
-
-                    <div>
-                        <div class="w-full flex inline-block pb-5">
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <a class="text-2xl">1.</a>
-                            </div>
-                            <div class="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
-                                <div>
-                                    <a class="text-2xl text-white">Testovacia úloha1</a>
-                                </div>
-                            </div>
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <div>
-                                    <a class="text-green-600 text-2xl">+2</a>
-                                </div>
-                            </div>
+                    <div className="w-full flex inline-block pb-2">
+                        <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-xl">Pomoc hráčovi</a>
                         </div>
-
-                        <div class="w-full flex inline-block pb-5">
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <a class="text-2xl">2.</a>
-                            </div>
-                            <div class="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
-                                <div>
-                                    <a class="text-2xl text-white">Testovacia úloha2</a>
-                                </div>
-                            </div>
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <div>
-                                    <a class="text-green-600 text-2xl">+1</a>
-                                </div>
-                            </div>
+                        <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-2xl text-green-600">+1</a>
                         </div>
-
-                        <div class="w-full flex inline-block pb-5">
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <a class="text-2xl">3.</a>
-                            </div>
-                            <div class="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
-                                <div>
-                                    <a class="text-2xl text-white">Testovacia úloha3</a>
-                                </div>
-                            </div>
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <div>
-                                    <a class="text-green-600 text-2xl">+1</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-full flex inline-block pb-5">
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <a class="text-2xl">4.</a>
-                            </div>
-                            <div class="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
-                                <div>
-                                    <a class="text-2xl text-white">Testovacia úloha4</a>
-                                </div>
-                            </div>
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <div>
-                                    <a class="text-green-600 text-2xl">+3</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="w-full flex inline-block pb-5">
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <a class="text-2xl">5.</a>
-                            </div>
-                            <div class="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
-                                <div>
-                                    <a class="text-2xl text-white">Testovacia úloha5</a>
-                                </div>
-                            </div>
-                            <div class="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                                <div>
-                                    <a class="text-green-600 text-2xl">+2</a>
-                                </div>
-                            </div>
-                        </div>
-
-
-
                     </div>
 
+                    <div className="w-full flex inline-block pb-2">
+                        <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-xl">Nahlásenie hráča</a>
+                        </div>
+                        <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-2xl text-green-600">+2</a>
+                        </div>
+                    </div>
+
+                    <div className="w-full flex inline-block">
+                        <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-xl">Porušenie pravidiel</a>
+                        </div>
+                        <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-2xl text-red-600">-1</a>
+                        </div>
+                    </div>
+                </div>     
+
+
+                <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7">
+
+                    <div className="justify-center flex pb-3 pt-2 bg-amber-500/40 rounded-lg mb-2">
+                        <a className="text-2xl text-white">Najlepší helperi</a>
+                        <hr/>
+                    </div>
+
+                    <div className="w-full flex inline-block pb-2">
+                        <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-xl">Hrac1</a>
+                        </div>
+                        <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-2xl text-green-600">+23</a>
+                        </div>
+                    </div>
+
+                    <div className="w-full flex inline-block pb-2">
+                        <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-xl">Hrac2</a>
+                        </div>
+                        <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-2xl text-green-600">+16</a>
+                        </div>
+                    </div>
+
+                    <div className="w-full flex inline-block">
+                        <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-xl">Hrac3</a>
+                        </div>
+                        <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-2xl text-green-600">+9</a>
+                        </div>
+                    </div>
+                </div>       
+            </div>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div className="flex items-center pl-5">
+                <div className="box-content h-1/2 w-3/6 bg-zinc-700/80 rounded-lg">
+
+                    <div className="justify-center flex pb-3 pt-2">
+                        <a className="text-4xl text-white">Zoznam úloh</a>
+                        <hr/>
+                    </div>
+
+                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
+
+                    <div>
+                        <div className="w-full flex inline-block pb-5">
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <a className="text-2xl">1.</a>
+                            </div>
+                            <div className="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
+                                <div>
+                                    <a className="text-2xl text-white">Testovacia úloha1</a>
+                                </div>
+                            </div>
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <div>
+                                    <a className="text-green-600 text-2xl">+2</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="w-full flex inline-block pb-5">
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <a className="text-2xl">2.</a>
+                            </div>
+                            <div className="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
+                                <div>
+                                    <a className="text-2xl text-white">Testovacia úloha2</a>
+                                </div>
+                            </div>
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <div>
+                                    <a className="text-green-600 text-2xl">+1</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="w-full flex inline-block pb-5">
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <a className="text-2xl">3.</a>
+                            </div>
+                            <div className="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
+                                <div>
+                                    <a className="text-2xl text-white">Testovacia úloha3</a>
+                                </div>
+                            </div>
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <div>
+                                    <a className="text-green-600 text-2xl">+1</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="w-full flex inline-block pb-5">
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <a className="text-2xl">4.</a>
+                            </div>
+                            <div className="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
+                                <div>
+                                    <a className="text-2xl text-white">Testovacia úloha4</a>
+                                </div>
+                            </div>
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <div>
+                                    <a className="text-green-600 text-2xl">+3</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="w-full flex inline-block pb-5">
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <a className="text-2xl">5.</a>
+                            </div>
+                            <div className="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
+                                <div>
+                                    <a className="text-2xl text-white">Testovacia úloha5</a>
+                                </div>
+                            </div>
+                            <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
+                                <div>
+                                    <a className="text-green-600 text-2xl">+2</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div>    
         </div>
     )
 }
