@@ -15,18 +15,16 @@ export default function LandingPage(): JSX.Element {
                 <img src="src/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
                 <a className="text-4xl text-white">PowaCraft</a>
                 <a className="text-xl align-bottom text-amber-400">Admin</a>
-                <button className="text-2xl absolute right-10 text-white"flex-end onClick={handleLogOut}>Odhlásiť sa</button>
+                <div className="place-content-end flex absolute right-10 w-52 h-20 items-stretch">
+                <button className="text-2xl text-white text-center"flex-end onClick={handleLogOut}>Odhlásiť</button>
+                <div className="flex w-5"></div>
+                <img src="src/assets/steve.png" className="w-20 h-20 rounded-full"></img>
+                </div>
             </div>
 
             <div className="pb-6 pl-5">
-                <a className="text-7xl text-white">Vitaj, NejakyHrac!</a>
+                <a className="text-7xl text-white">Vitaj,</a>
             </div>
-
-
-
-
-
-
 
             <div className="flex-col absolute right-10 w-96">
 

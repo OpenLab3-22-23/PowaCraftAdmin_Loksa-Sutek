@@ -5,7 +5,6 @@ import { useAuth } from "./Auth";
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const { signIn, session } = useAuth();
 
   async function handleLogIn(e: React.FormEvent<HTMLFormElement>) {
