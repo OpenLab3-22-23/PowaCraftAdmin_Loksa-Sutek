@@ -9,8 +9,7 @@ export default function SignUp() {
   const [nick, setNick] = useState("");
 
   const { signUp, session } = useAuth();
-// potrebujem trackovat hodnoty hesla a znovuhesla
-// pri zmene hesla a znovu hesla obe hodnoty porovnam a ak su odlisne nastavim flag na false
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try{

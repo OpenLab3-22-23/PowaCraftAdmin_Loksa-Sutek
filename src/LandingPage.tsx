@@ -1,13 +1,34 @@
-import openlab from "./assets/openlab.svg";
+import { useState } from "react";
 import { useAuth } from "./auth/Auth";
+import { supabase } from "./supabase/supabaseClient";
 
-export default function LandingPage(): JSX.Element {
+export default function LandingPage( userData ): JSX.Element {
 
     const {signOut} = useAuth()
 
     function handleLogOut(): void {
         signOut();
     }
+
+    const [playerData, setPlayerData] = useState();
+
+    const fetchProfile = async () => {
+        const { data, error } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', userData.userData.user.id)
+
+            if (error) {
+                console.log("ERROR");
+            }
+            if (data) {
+                setPlayerData(data[0].username);
+                console.log("fetch");
+            }
+    }
+    fetchProfile();
+
+
 
     return (
         <div className="h-full w-full bg-[url('/src/assets/bg.png')]">
@@ -23,7 +44,9 @@ export default function LandingPage(): JSX.Element {
             </div>
 
             <div className="pb-6 pl-5">
-                <a className="text-7xl text-white">Vitaj,</a>
+
+
+                <a className="text-7xl text-white">Vitaj, {playerData}</a>
             </div>
 
             <div className="flex-col absolute right-10 w-96">
