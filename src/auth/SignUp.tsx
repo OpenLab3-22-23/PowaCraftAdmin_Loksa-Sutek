@@ -34,6 +34,8 @@ export default function SignUp() {
           id="nick"
           type="text"
           placeholder="Nickname"
+          value={nick}
+          onChange={(e) => setNick(e.target.value)}
           className="w-96 my-2 bg-gray-200 rounded-full"
         />
         <p class="text-2xl">Email</p>
@@ -76,3 +78,4 @@ export default function SignUp() {
     <Navigate to="/" />
   );
 }
+export const setNick = () => (nick)

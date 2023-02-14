@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "./auth/Auth";
 import { supabase } from "./supabase/supabaseClient";
+import { setNick } from "./auth/SignUp";
 
 export default function LandingPage( userData ): JSX.Element {
 
@@ -10,8 +11,14 @@ export default function LandingPage( userData ): JSX.Element {
         signOut();
     }
 
-    const [playerData, setPlayerData] = useState();
+    const [playerUsername, setPlayerData] = useState("");
 
+    console.log(setNick);
+
+    useEffect(() => {
+        fetchProfile();
+        changeUsername();
+    }, [])
     const fetchProfile = async () => {
         const { data, error } = await supabase
             .from('profiles')
@@ -23,10 +30,18 @@ export default function LandingPage( userData ): JSX.Element {
             }
             if (data) {
                 setPlayerData(data[0].username);
-                console.log("fetch");
             }
-    }
-    fetchProfile();
+        }
+        const changeUsername= async () => {
+            const { error } = await supabase
+                .from('profiles')
+                .update({username: setNick})
+                .eq('id', userData.userData.user.id)
+    
+                if (error) {
+                    console.log("ERROR");
+                }
+            }
 
 
 
@@ -43,15 +58,18 @@ export default function LandingPage( userData ): JSX.Element {
                 </div>
             </div>
 
-            <div className="pb-6 pl-5">
-
-
-                <a className="text-7xl text-white">Vitaj, {playerData}</a>
+            <div className="flex-col absolute right-10">
+                <a className="text-4xl text-cyan-600">Akademik</a>
             </div>
 
+
+
+            <div className="pb-6 pl-5">
+                <a className="text-7xl text-white">Vitaj, {playerUsername}</a>
+            </div>
+
+
             <div className="flex-col absolute right-10 w-96">
-
-
 
                 <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7">
 
