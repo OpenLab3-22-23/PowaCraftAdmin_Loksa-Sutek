@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "./auth/Auth";
 import { supabase } from "./supabase/supabaseClient";
-import { setNick } from "./auth/SignUp";
+
 
 export default function LandingPage( userData ): JSX.Element {
 
@@ -11,37 +11,41 @@ export default function LandingPage( userData ): JSX.Element {
         signOut();
     }
 
-    const [playerUsername, setPlayerData] = useState("");
+    const [username, setUsername] = useState("");
+    const [prefix, setPrefix] = useState("");    
 
-    console.log(setNick);
 
     useEffect(() => {
         fetchProfile();
-        changeUsername();
+        //changeUsername();
     }, [])
     const fetchProfile = async () => {
         const { data, error } = await supabase
             .from('profiles')
-            .select('*')
+            .select()
             .eq('id', userData.userData.user.id)
 
             if (error) {
                 console.log("ERROR");
             }
             if (data) {
-                setPlayerData(data[0].username);
+                console.log(data);
+                setUsername(data[0].username);
+                setPrefix(data[0].prefix);
             }
         }
-        const changeUsername= async () => {
-            const { error } = await supabase
-                .from('profiles')
-                .update({username: setNick})
-                .eq('id', userData.userData.user.id)
-    
-                if (error) {
-                    console.log("ERROR");
-                }
-            }
+        
+    // const changeUsername= async () => {
+    //     const { error } = await supabase
+    //         .from('profiles')
+    //         .update({username: setNick})
+    //         .eq('id', userData.userData.user.id)
+
+    //         if (error) {
+    //             console.log("ERROR");
+    //         }
+    //     }
+        
 
 
 
@@ -58,14 +62,14 @@ export default function LandingPage( userData ): JSX.Element {
                 </div>
             </div>
 
-            <div className="flex-col absolute right-10">
-                <a className="text-4xl text-cyan-600">Akademik</a>
+            <div className="flex-col absolute right-20">
+                <a className="text-4xl text-cyan-600">{prefix}</a>
             </div>
 
 
 
             <div className="pb-6 pl-5">
-                <a className="text-7xl text-white">Vitaj, {playerUsername}</a>
+                <a className="text-7xl text-white">Vitaj, {username}</a>
             </div>
 
 

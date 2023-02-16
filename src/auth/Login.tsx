@@ -21,10 +21,10 @@ export default function LogIn() {
   return !session ? (
     <div className="w-screen h-screen flex flex-col justify-center bg-[url('/src/assets/bg.png')]">
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
-      <img src="src/assets/logo.svg" width="200" height="200" class="rounded-full border-4 border-amber-400"></img>
-        <h2 class="text-7xl text-white">Prihlásenie do panelu</h2>
-        <h3 class="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
-        <p class="text-2xl">Email</p>
+      <img src="src/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
+        <h2 className="text-7xl text-white">Prihlásenie do panelu</h2>
+        <h3 className="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
+        <p className="text-2xl">Email</p>
         <input
           id="email"
           type="email"
@@ -33,7 +33,7 @@ export default function LogIn() {
           onChange={(e) => setEmail(e.target.value)}
           className="w-96 my-2 bg-gray-200 rounded-full"
         />
-        <p class="text-2xl">Heslo</p>
+        <p className="text-2xl">Heslo</p>
         <input
           id="password"
           type="password"
