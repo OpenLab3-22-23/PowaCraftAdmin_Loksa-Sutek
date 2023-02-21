@@ -3,7 +3,7 @@ import { useAuth } from "./auth/Auth";
 import { supabase } from "./supabase/supabaseClient";
 
 
-export default function LandingPage( userData ): JSX.Element {
+export default function LandingPage( {userData} ): JSX.Element {
 
     const {signOut} = useAuth()
 
@@ -13,39 +13,88 @@ export default function LandingPage( userData ): JSX.Element {
 
     const [username, setUsername] = useState("");
     const [prefix, setPrefix] = useState("");    
+    const [plusPoints, setPlusPoints] = useState(0);    
+    const [MinusPoints, setMinusPoints] = useState(0);    
+    let userNames = ['Jesse', 'Tom', 'Anna'];
+    let statsData: ({
+        username: any;
+    } & {
+        plus: any;
+    } & {
+        minus: any;
+    })[]
 
 
     useEffect(() => {
-        fetchProfile();
-        //changeUsername();
+        fetchUserProfile();
+        fetchStats();
     }, [])
-    const fetchProfile = async () => {
+    const fetchUserProfile = async () => {
         const { data, error } = await supabase
             .from('profiles')
             .select()
-            .eq('id', userData.userData.user.id)
+            .eq('id', userData.user.id)
 
             if (error) {
                 console.log("ERROR");
             }
             if (data) {
-                console.log(data);
                 setUsername(data[0].username);
-                setPrefix(data[0].prefix);
+                if (data[0].prefix == "")
+                {
+                    createDefaultData();
+                }
+                else
+                {
+                    setPrefix(data[0].prefix);
+                    setPlusPoints(data[0].plus);
+                    setMinusPoints(data[0].minus);
+                }
+            }
+        }
+    const createDefaultData= async () => {
+        const { error } = await supabase
+            .from('profiles')
+            .update({prefix: "Akademik", plus: 0, minus: 0})
+            .eq('id', userData.user.id)
+
+            if (error) {
+                console.log("ERROR");
             }
         }
         
-    // const changeUsername= async () => {
-    //     const { error } = await supabase
-    //         .from('profiles')
-    //         .update({username: setNick})
-    //         .eq('id', userData.userData.user.id)
 
-    //         if (error) {
-    //             console.log("ERROR");
-    //         }
-    //     }
-        
+
+
+        const fetchStats = async () => {
+            const { data, error } = await supabase
+                .from('profiles')
+                .select('username, plus, minus')
+    
+                if (error) {
+                    console.log("ERROR");
+                }
+                if (data) {
+                    statsData = data;
+                }
+            }
+
+
+
+            function WriteBestHelpers({nick}) {
+                return (
+                    <div className="w-full flex inline-block pb-2">
+                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-xl">{nick}</a>
+                    </div>
+                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-2xl text-green-600">+23</a>
+                    </div>
+                </div>
+                )
+              }
+
+
 
 
 
@@ -61,7 +110,7 @@ export default function LandingPage( userData ): JSX.Element {
                 <img src="src/assets/steve.png" className="w-20 h-20 rounded-full"></img>
                 </div>
             </div>
-
+        
             <div className="flex-col absolute right-20">
                 <a className="text-4xl text-cyan-600">{prefix}</a>
             </div>
@@ -111,39 +160,15 @@ export default function LandingPage( userData ): JSX.Element {
                 </div>     
 
 
-                <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7">
+                <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7" id="leaderboard">
 
                     <div className="justify-center flex pb-3 pt-2 bg-amber-500/40 rounded-lg mb-2">
                         <a className="text-2xl text-white">Najlepší helperi</a>
                         <hr/>
                     </div>
 
-                    <div className="w-full flex inline-block pb-2">
-                        <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                            <a className="text-xl">Hrac1</a>
-                        </div>
-                        <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                            <a className="text-2xl text-green-600">+23</a>
-                        </div>
-                    </div>
+                    {userNames.map(nick => <WriteBestHelpers nick={nick}/>)}
 
-                    <div className="w-full flex inline-block pb-2">
-                        <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                            <a className="text-xl">Hrac2</a>
-                        </div>
-                        <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                            <a className="text-2xl text-green-600">+16</a>
-                        </div>
-                    </div>
-
-                    <div className="w-full flex inline-block">
-                        <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                            <a className="text-xl">Hrac3</a>
-                        </div>
-                        <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                            <a className="text-2xl text-green-600">+9</a>
-                        </div>
-                    </div>
                 </div>       
             </div>   
 
