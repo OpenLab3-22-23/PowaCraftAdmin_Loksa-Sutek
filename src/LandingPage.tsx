@@ -14,7 +14,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [username, setUsername] = useState("");
     const [prefix, setPrefix] = useState("");    
     const [plusPoints, setPlusPoints] = useState(0);    
-    const [MinusPoints, setMinusPoints] = useState(0);    
+    const [minusPoints, setMinusPoints] = useState(0);    
     let userNames = ['Jesse', 'Tom', 'Anna'];
     let statsData: ({
         username: any;
@@ -93,8 +93,17 @@ export default function LandingPage( {userData} ): JSX.Element {
                 </div>
                 )
               }
-
-
+            
+            function MyButton(){
+                function popup() {
+                    alert('u clicked me');
+                }
+                    return (
+                        <button className="absolute right-5" onClick={popup}>
+                            Click me
+                        </button>
+                    );
+            }
 
 
 
@@ -113,10 +122,10 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <a className="text-2xl">Tvoje body:</a>
                     </div>
                     <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
-                        <a className="text-green-500 text-2xl">+8</a> 
+                        <a className="text-green-500 text-2xl">{plusPoints}</a> 
                     </div>
                     <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
-                        <a className="text-red-500 text-2xl">-2</a>
+                        <a className="text-red-500 text-2xl">{minusPoints}</a>
                     </div>    
                 </div>
                 <div className="place-content-end flex justify-end w-2/12 h-20 items-stretch right-10 pr-10">
@@ -185,17 +194,10 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
 
                     {userNames.map(nick => <WriteBestHelpers nick={nick}/>)}
-
+                    <MyButton></MyButton>
                 </div>       
-            </div>   
-
-
-
-
-
-
-
-
+            </div>  
+  
 
 
 
