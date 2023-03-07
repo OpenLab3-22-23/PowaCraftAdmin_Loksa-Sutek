@@ -14,7 +14,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [username, setUsername] = useState("");
     const [prefix, setPrefix] = useState("");
     const [plusPoints, setPlusPoints] = useState(0);
-    const [MinusPoints, setMinusPoints] = useState(0);
+    const [minusPoints, setMinusPoints] = useState(0);
     let [response, setResponse] = useState();
 
 
@@ -110,9 +110,18 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
                     </div>
                 )
+              }
+            
+            function MyButton(){
+                function popup() {
+                    alert('u clicked me');
+                }
+                    return (
+                        <button className="absolute right-5" onClick={popup}>
+                            Click me
+                        </button>
+                    );
             }
-
-
 
 
 
@@ -131,11 +140,11 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <a className="text-2xl">Tvoje body:</a>
                     </div>
                     <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
-                        <a className="text-green-500 text-2xl">+8</a>
+                        <a className="text-green-500 text-2xl">{plusPoints}</a> 
                     </div>
                     <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
-                        <a className="text-red-500 text-2xl">-2</a>
-                    </div>
+                        <a className="text-red-500 text-2xl">{minusPoints}</a>
+                    </div>    
                 </div>
                 <div className="place-content-end flex justify-end w-2/12 h-20 items-stretch right-10 pr-10">
                     <button className="text-2xl text-white text-center"flex-end onClick={handleLogOut}>Odhlásiť</button>
@@ -205,7 +214,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
 
                     {response ? <WriteBestHelpers /> : null}
-
+                    <MyButton></MyButton>
                 </div>
             </div>
 
