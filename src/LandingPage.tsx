@@ -12,23 +12,17 @@ export default function LandingPage( {userData} ): JSX.Element {
     }
 
     const [username, setUsername] = useState("");
-    const [prefix, setPrefix] = useState("");    
-    const [plusPoints, setPlusPoints] = useState(0);    
-    const [MinusPoints, setMinusPoints] = useState(0);    
-    let userNames = ['Jesse', 'Tom', 'Anna'];
-    let statsData: ({
-        username: any;
-    } & {
-        plus: any;
-    } & {
-        minus: any;
-    })[]
+    const [prefix, setPrefix] = useState("");
+    const [plusPoints, setPlusPoints] = useState(0);
+    const [MinusPoints, setMinusPoints] = useState(0);
+    let [response, setResponse] = useState();
 
 
     useEffect(() => {
         fetchUserProfile();
-        fetchStats();
+        fetchAllUsers();
     }, [])
+
     const fetchUserProfile = async () => {
         const { data, error } = await supabase
             .from('profiles')
@@ -52,6 +46,23 @@ export default function LandingPage( {userData} ): JSX.Element {
                 }
             }
         }
+
+        const fetchAllUsers = async () => {
+            const { data, error } = await supabase
+                .from('profiles')
+                .select()
+                .order('plus', { ascending: false })
+
+                if (error) {
+                    console.log("ERROR");
+                }
+                if (data) {
+                    setResponse(data);
+                }
+            }
+
+
+
     const createDefaultData= async () => {
         const { error } = await supabase
             .from('profiles')
@@ -62,37 +73,44 @@ export default function LandingPage( {userData} ): JSX.Element {
                 console.log("ERROR");
             }
         }
-        
 
 
 
-        const fetchStats = async () => {
-            const { data, error } = await supabase
-                .from('profiles')
-                .select('username, plus, minus')
-    
-                if (error) {
-                    console.log("ERROR");
-                }
-                if (data) {
-                    statsData = data;
-                }
-            }
 
 
+            function WriteBestHelpers() {
 
-            function WriteBestHelpers({nick}) {
-                return (
-                    <div className="w-full flex inline-block pb-2">
-                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-xl">{nick}</a>
+                return(
+                    <div>    
+                        <div className="w-full flex inline-block pb-2">
+                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                                <a className="text-xl">{response[0].username}</a>
+                            </div>
+                            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                            <a className="text-2xl text-green-600">+{response[0].plus}</a>
+                            </div>
+                        </div>
+
+                        <div className="w-full flex inline-block pb-2">
+                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                                <a className="text-xl">{response[1].username}</a>
+                            </div>
+                            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                                <a className="text-2xl text-green-600">+{response[1].plus}</a>
+                            </div>
+                        </div>
+
+                        <div className="w-full flex inline-block pb-2">
+                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                                <a className="text-xl">{response[2].username}</a>
+                            </div>
+                            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                                <a className="text-2xl text-green-600">+{response[2].plus}</a>
+                            </div>
+                        </div>
                     </div>
-                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-2xl text-green-600">+23</a>
-                    </div>
-                </div>
                 )
-              }
+            }
 
 
 
@@ -113,11 +131,11 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <a className="text-2xl">Tvoje body:</a>
                     </div>
                     <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
-                        <a className="text-green-500 text-2xl">+8</a> 
+                        <a className="text-green-500 text-2xl">+8</a>
                     </div>
                     <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
                         <a className="text-red-500 text-2xl">-2</a>
-                    </div>    
+                    </div>
                 </div>
                 <div className="place-content-end flex justify-end w-2/12 h-20 items-stretch right-10 pr-10">
                     <button className="text-2xl text-white text-center"flex-end onClick={handleLogOut}>Odhlásiť</button>
@@ -125,7 +143,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     <img src="src/assets/steve.png" className="w-20 h-20 rounded-full"></img>
                 </div>
             </div>
-        
+
             <div className="flex-col absolute right-20">
                 <a className="text-4xl text-cyan-600">{prefix}</a>
             </div>
@@ -172,9 +190,11 @@ export default function LandingPage( {userData} ): JSX.Element {
                                 <a className="text-2xl text-red-600">-1</a>
                             </div>
                         </div>
-                        
+
                         </div>
-                    </div>     
+                    </div>
+
+
 
 
                 <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7" id="leaderboard">
@@ -184,10 +204,10 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <hr/>
                         </div>
 
-                    {userNames.map(nick => <WriteBestHelpers nick={nick}/>)}
+                    {response ? <WriteBestHelpers /> : null}
 
-                </div>       
-            </div>   
+                </div>
+            </div>
 
 
 
@@ -296,7 +316,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
                     </div>
                 </div>
-            </div>    
+            </div>
         </div>
     )
 }
