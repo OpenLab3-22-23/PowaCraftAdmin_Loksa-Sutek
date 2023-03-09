@@ -18,6 +18,8 @@ export default function LandingPage( {userData} ): JSX.Element {
     let [response, setResponse] = useState();
 
 
+
+    //** Fetching data **/
     useEffect(() => {
         fetchUserProfile();
         fetchAllUsers();
@@ -29,12 +31,9 @@ export default function LandingPage( {userData} ): JSX.Element {
             .select()
             .eq('id', userData.user.id)
 
-            if (error) {
-                console.log("ERROR");
-            }
             if (data) {
                 setUsername(data[0].username);
-                if (data[0].prefix == "")
+                if (data[0].prefix == null)
                 {
                     createDefaultData();
                 }
@@ -47,23 +46,20 @@ export default function LandingPage( {userData} ): JSX.Element {
             }
         }
 
-        const fetchAllUsers = async () => {
-            const { data, error } = await supabase
-                .from('profiles')
-                .select()
-                .order('plus', { ascending: false })
-
-                if (error) {
-                    console.log("ERROR");
-                }
-                if (data) {
-                    setResponse(data);
-                }
+    const fetchAllUsers = async () => {
+        const { data, error } = await supabase
+            .from('profiles')
+            .select()
+            .order('plus', { ascending: false })
+            
+            if (data) {
+                setResponse(data);
             }
+        }
 
 
 
-    const createDefaultData= async () => {
+    const createDefaultData = async () => {
         const { error } = await supabase
             .from('profiles')
             .update({prefix: "Akademik", plus: 0, minus: 0})
@@ -77,54 +73,33 @@ export default function LandingPage( {userData} ): JSX.Element {
 
 
 
+    //** Other functions **/
+    function WriteBestHelpers({userNumber}) {
 
-            function WriteBestHelpers() {
-
-                return(
-                    <div>    
-                        <div className="w-full flex inline-block pb-2">
-                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-xl">{response[0].username}</a>
-                            </div>
-                            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                            <a className="text-2xl text-green-600">+{response[0].plus}</a>
-                            </div>
-                        </div>
-
-                        <div className="w-full flex inline-block pb-2">
-                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-xl">{response[1].username}</a>
-                            </div>
-                            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-2xl text-green-600">+{response[1].plus}</a>
-                            </div>
-                        </div>
-
-                        <div className="w-full flex inline-block pb-2">
-                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-xl">{response[2].username}</a>
-                            </div>
-                            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-2xl text-green-600">+{response[2].plus}</a>
-                            </div>
-                        </div>
+        return(
+                <div className="w-full flex inline-block pb-2">
+                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-xl">{response[userNumber].username}</a>
                     </div>
-                )
-              }
-            
-            function MyButton(){
-                function popup() {
-                    alert('u clicked me');
-                }
-                    return (
-                        <button className="absolute right-5" onClick={popup}>
-                            Click me
-                        </button>
-                    );
-            }
+                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                    <a className="text-2xl text-green-600">+{response[userNumber].plus}</a>
+                    </div>
+                </div>
+        )}
+    
+    function MyButton(){
+        function popup() {
+            alert('u clicked me');
+        }
+            return (
+                <button className="absolute right-5" onClick={popup}>
+                    Click me
+                </button>
+            );
+    }
 
 
-
+    //** HTML **/
     return (
         <div className="h-full w-full bg-[url('/src/assets/bg.png')]">
             <div className="flex items-center pl-5 w-full ">
@@ -205,7 +180,6 @@ export default function LandingPage( {userData} ): JSX.Element {
 
 
 
-
                 <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7" id="leaderboard">
 
                         <div className="justify-center flex pb-3 pt-2 bg-amber-500/40 rounded-lg mb-2">
@@ -213,7 +187,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <hr/>
                         </div>
 
-                    {response ? <WriteBestHelpers /> : null}
+                    {response ? <WriteBestHelpers userNumber = {0}/> : null}
+                    {response ? <WriteBestHelpers userNumber = {1}/> : null}
+                    {response ? <WriteBestHelpers userNumber = {2}/> : null}  
                     <MyButton></MyButton>
                 </div>
             </div>
