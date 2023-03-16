@@ -15,7 +15,8 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [prefix, setPrefix] = useState("");
     const [plusPoints, setPlusPoints] = useState(0);
     const [minusPoints, setMinusPoints] = useState(0);
-    let [response, setResponse] = useState();
+    let [usersResponse, setUsersResponse] = useState();
+    let [pointsResponse, setPointsResponse] = useState();    
 
 
 
@@ -23,6 +24,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     useEffect(() => {
         fetchUserProfile();
         fetchAllUsers();
+        fetchLastPoints();
     }, [])
 
     const fetchUserProfile = async () => {
@@ -33,16 +35,10 @@ export default function LandingPage( {userData} ): JSX.Element {
 
             if (data) {
                 setUsername(data[0].username);
-                if (data[0].prefix == null)
-                {
-                    createDefaultData();
-                }
-                else
-                {
-                    setPrefix(data[0].prefix);
-                    setPlusPoints(data[0].plus);
-                    setMinusPoints(data[0].minus);
-                }
+                setPrefix(data[0].prefix);
+                setPlusPoints(data[0].plus);
+                setMinusPoints(data[0].minus);
+                createDefaultData();
             }
         }
 
@@ -53,36 +49,73 @@ export default function LandingPage( {userData} ): JSX.Element {
             .order('plus', { ascending: false })
             
             if (data) {
-                setResponse(data);
+                setUsersResponse(data);
             }
         }
+    const fetchLastPoints = async () => {
+        const { data, error } = await supabase
+            .from('last_points')
+            .select()
+            .eq('id', userData.user.id)
+            
+            if (data) {
+                setPointsResponse(data);
+                console.log(data);
+            }
+        }        
 
 
 
     const createDefaultData = async () => {
         const { error } = await supabase
-            .from('profiles')
-            .update({prefix: "Akademik", plus: 0, minus: 0})
-            .eq('id', userData.user.id)
-
-            if (error) {
-                console.log("ERROR");
-            }
+            .from('last_points')
+            .insert({ id: userData.user.id})
         }
 
 
 
 
     //** Other functions **/
+
+    function WriteLastPoints({pointNumber}) {
+
+        if (pointsResponse[pointNumber].points > 0)
+        {
+            return(
+                <div className="w-full flex items-center">
+                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-xl">{pointsResponse[0].task_name}</a>
+                    </div>
+                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-2xl text-green-600">+{pointsResponse[0].points}</a>
+                    </div>
+                </div> 
+                )              
+        }
+        else
+        {
+            return(
+                <div className="w-full flex items-center">
+                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-xl">{pointsResponse[pointNumber].task_name}</a>
+                    </div>
+                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-2xl text-red-600">{pointsResponse[pointNumber].points}</a>
+                    </div>
+                </div>    
+            )
+        }
+    }    
+
     function WriteBestHelpers({userNumber}) {
 
         return(
                 <div className="w-full flex inline-block pb-2">
                     <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-xl">{response[userNumber].username}</a>
+                        <a className="text-xl">{usersResponse[userNumber].username}</a>
                     </div>
                     <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                    <a className="text-2xl text-green-600">+{response[userNumber].plus}</a>
+                    <a className="text-2xl text-green-600">+{usersResponse[userNumber].plus}</a>
                     </div>
                 </div>
         )}
@@ -147,36 +180,11 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <a className="text-2xl text-white">Tvoje posledné body</a>
                         <hr/>
                     </div>
+
                     <div className="sticky">
-                        <div className="w-full flex items-center pb-2">
-                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-xl">Pomoc hráčovi</a>
-                            </div>
-                            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-2xl text-green-600">+1</a>
-                            </div>
-                        </div>
-
-                        <div className="w-full flex items-center pb-2">
-                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-xl">Nahlásenie hráča</a>
-                            </div>
-                            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-2xl text-green-600">+2</a>
-                            </div>
-                        </div>
-
-                        <div className="w-full flex items-center">
-                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-xl">Porušenie pravidiel</a>
-                            </div>
-                            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                                <a className="text-2xl text-red-600">-1</a>
-                            </div>
-                        </div>
-
-                        </div>
+                     {pointsResponse ? <WriteLastPoints pointNumber = {0}/> : null}
                     </div>
+                </div>
 
 
 
@@ -187,9 +195,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <hr/>
                         </div>
 
-                    {response ? <WriteBestHelpers userNumber = {0}/> : null}
-                    {response ? <WriteBestHelpers userNumber = {1}/> : null}
-                    {response ? <WriteBestHelpers userNumber = {2}/> : null}  
+                    {usersResponse ? <WriteBestHelpers userNumber = {0}/> : null}
+                    {usersResponse ? <WriteBestHelpers userNumber = {1}/> : null}
+                    {usersResponse ? <WriteBestHelpers userNumber = {2}/> : null}  
                     <MyButton></MyButton>
                 </div>
             </div>
