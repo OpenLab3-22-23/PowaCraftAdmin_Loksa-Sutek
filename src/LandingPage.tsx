@@ -15,8 +15,10 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [prefix, setPrefix] = useState("");
     const [plusPoints, setPlusPoints] = useState(0);
     const [minusPoints, setMinusPoints] = useState(0);
-    let [usersResponse, setUsersResponse] = useState();
-    let [pointsResponse, setPointsResponse] = useState();    
+
+    const [userResponse, setUserResponse] = useState();
+    const [allUsersResponse, setUsersResponse] = useState();
+    const [pointsList, setPointsList] = useState();    
 
 
 
@@ -24,7 +26,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     useEffect(() => {
         fetchUserProfile();
         fetchAllUsers();
-        fetchLastPoints();
+        fetchPointsList();
     }, [])
 
     const fetchUserProfile = async () => {
@@ -34,11 +36,11 @@ export default function LandingPage( {userData} ): JSX.Element {
             .eq('id', userData.user.id)
 
             if (data) {
+                setUserResponse(data);
                 setUsername(data[0].username);
                 setPrefix(data[0].prefix);
                 setPlusPoints(data[0].plus);
                 setMinusPoints(data[0].minus);
-                createDefaultData();
             }
         }
 
@@ -52,70 +54,48 @@ export default function LandingPage( {userData} ): JSX.Element {
                 setUsersResponse(data);
             }
         }
-    const fetchLastPoints = async () => {
-        const { data, error } = await supabase
-            .from('last_points')
-            .select()
-            .eq('id', userData.user.id)
-            
-            if (data) {
-                setPointsResponse(data);
-                console.log(data);
-            }
-        }        
-
-
-
-    const createDefaultData = async () => {
-        const { error } = await supabase
-            .from('last_points')
-            .insert({ id: userData.user.id})
-        }
+        
+        const fetchPointsList = async () => {
+            const { data, error } = await supabase
+                .from('points_list')
+                .select()
+                .order('id', { ascending: true })
+                
+                if (data) {
+                    setPointsList(data);
+                }
+            }    
 
 
 
 
     //** Other functions **/
 
-    function WriteLastPoints({pointNumber}) {
+    function WriteLastPoints({actionID}) {
 
-        if (pointsResponse[pointNumber].points > 0)
-        {
-            return(
-                <div className="w-full flex items-center">
-                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-xl">{pointsResponse[0].task_name}</a>
-                    </div>
-                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-2xl text-green-600">+{pointsResponse[0].points}</a>
-                    </div>
-                </div> 
-                )              
-        }
-        else
-        {
-            return(
-                <div className="w-full flex items-center">
-                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-xl">{pointsResponse[pointNumber].task_name}</a>
-                    </div>
-                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-2xl text-red-600">{pointsResponse[pointNumber].points}</a>
-                    </div>
-                </div>    
-            )
-        }
+        return(
+
+            <div className="w-full flex inline-block pb-2">
+                <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                    <a className="text-xl">{pointsList[actionID-1].action_name}</a>
+                </div>
+                <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                    <a className="text-2xl text-green-600">+{pointsList[actionID-1].points}</a>
+                </div>
+            </div> 
+            
+        )  
     }    
 
     function WriteBestHelpers({userNumber}) {
-
+        
         return(
                 <div className="w-full flex inline-block pb-2">
                     <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-xl">{usersResponse[userNumber].username}</a>
+                        <a className="text-xl">{allUsersResponse[userNumber].username}</a>
                     </div>
                     <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                    <a className="text-2xl text-green-600">+{usersResponse[userNumber].plus}</a>
+                    <a className="text-2xl text-green-600">+{allUsersResponse[userNumber].plus}</a>
                     </div>
                 </div>
         )}
@@ -181,9 +161,10 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <hr/>
                     </div>
 
-                    <div className="sticky">
-                     {pointsResponse ? <WriteLastPoints pointNumber = {0}/> : null}
-                    </div>
+                    {pointsList && userResponse ? <WriteLastPoints actionID = {userResponse[0].last_point1}/> : null}
+                    {pointsList && userResponse ? <WriteLastPoints actionID = {userResponse[0].last_point2}/> : null}
+                    {pointsList && userResponse ? <WriteLastPoints actionID = {userResponse[0].last_point3}/> : null}                    
+
                 </div>
 
 
@@ -195,9 +176,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <hr/>
                         </div>
 
-                    {usersResponse ? <WriteBestHelpers userNumber = {0}/> : null}
-                    {usersResponse ? <WriteBestHelpers userNumber = {1}/> : null}
-                    {usersResponse ? <WriteBestHelpers userNumber = {2}/> : null}  
+                    {allUsersResponse ? <WriteBestHelpers userNumber = {0}/> : null}
+                    {allUsersResponse ? <WriteBestHelpers userNumber = {1}/> : null}
+                    {allUsersResponse ? <WriteBestHelpers userNumber = {2}/> : null}  
                     <MyButton></MyButton>
                 </div>
             </div>
