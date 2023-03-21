@@ -75,7 +75,6 @@ export default function LandingPage( {userData} ): JSX.Element {
             
             if (data) {
                 setQuestList(data);
-                console.log(data);
             }
         }         
         
@@ -87,18 +86,35 @@ export default function LandingPage( {userData} ): JSX.Element {
 
     function WriteLastPoints({actionID}) {
 
-        return(
+        if (pointsList[actionID-1].points > 0)
+        {
+            return(
 
-            <div className="w-full flex inline-block pb-2">
-                <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                    <a className="text-xl">{pointsList[actionID-1].action_name}</a>
-                </div>
-                <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                    <a className="text-2xl text-green-600">+{pointsList[actionID-1].points}</a>
-                </div>
-            </div> 
-            
-        )}    
+                <div className="w-full flex inline-block pb-2">
+                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-xl">{pointsList[actionID-1].action_name}</a>
+                    </div>
+                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-2xl text-green-600">+{pointsList[actionID-1].points}</a>
+                    </div>
+                </div> 
+            )
+        }
+        else
+        {
+            return(
+
+                <div className="w-full flex inline-block pb-2">
+                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-xl">{pointsList[actionID-1].action_name}</a>
+                    </div>
+                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                        <a className="text-2xl text-red-600">{pointsList[actionID-1].points}</a>
+                    </div>
+                </div> 
+            )
+        }
+    }    
 
     function WriteBestHelpers({userNumber}) {
         
