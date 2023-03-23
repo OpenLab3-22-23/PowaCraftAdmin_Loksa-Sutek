@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import "./App.css";
 import { useAuth } from "./auth/Auth";
-import LandingPage from "./LandingPage";
+import LandingPage from "./userpanel/LandingPage";
 
 function App() {
   const { session } = useAuth();

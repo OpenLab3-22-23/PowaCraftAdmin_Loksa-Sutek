@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "./auth/Auth";
-import { supabase } from "./supabase/supabaseClient";
+import { useAuth } from "../auth/Auth";
+import { supabase } from "../supabase/supabaseClient";
+
+import WriteUserRank from "./UserRank";
+import WriteLastPoints from "./LastPoints";
+import WriteBestHelpers from "./BestHelpers";
+import WriteQuests from "./Quests";
 
 
 export default function LandingPage( {userData} ): JSX.Element {
@@ -12,7 +17,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     }
 
     const [username, setUsername] = useState("");
-    const [prefix, setPrefix] = useState("");
+    const [rank, setRank] = useState("");
     const [plusPoints, setPlusPoints] = useState(0);
     const [minusPoints, setMinusPoints] = useState(0);
 
@@ -23,7 +28,8 @@ export default function LandingPage( {userData} ): JSX.Element {
 
 
 
-    //** Fetching data **/
+    //** Data fetching **/
+
     useEffect(() => {
         fetchUserProfile();
         fetchAllUsers();
@@ -40,7 +46,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             if (data) {
                 setUserResponse(data);
                 setUsername(data[0].username);
-                setPrefix(data[0].prefix);
+                setRank(data[0].rank);
                 setPlusPoints(data[0].plus);
                 setMinusPoints(data[0].minus);
             }
@@ -81,81 +87,8 @@ export default function LandingPage( {userData} ): JSX.Element {
 
 
 
-
     //** Other functions **/
 
-    function WriteLastPoints({actionID}) {
-
-        if (pointsList[actionID-1].points > 0)
-        {
-            return(
-
-                <div className="w-full flex inline-block pb-2">
-                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-xl">{pointsList[actionID-1].action_name}</a>
-                    </div>
-                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-2xl text-green-600">+{pointsList[actionID-1].points}</a>
-                    </div>
-                </div> 
-            )
-        }
-        else
-        {
-            return(
-
-                <div className="w-full flex inline-block pb-2">
-                    <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-xl">{pointsList[actionID-1].action_name}</a>
-                    </div>
-                    <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                        <a className="text-2xl text-red-600">{pointsList[actionID-1].points}</a>
-                    </div>
-                </div> 
-            )
-        }
-    }    
-
-    function WriteBestHelpers({userNumber}) {
-        
-        return(
-            <div className="w-full flex inline-block pb-2">
-                <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                    <a className="text-xl">{allUsersResponse[userNumber].username}</a>
-                </div>
-                <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
-                <a className="text-2xl text-green-600">+{allUsersResponse[userNumber].plus}</a>
-                </div>
-            </div>
-        )}
-
-        
-    function WriteQuests() {
-
-        return(
-            <div>
-            {
-                questList.map((quest, index) => 
-
-                <div className="w-full flex inline-block pb-5">
-                    <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                        <a className="text-2xl">{++index}.</a> 
-                    </div>
-                    <div className="box-content h-4 w-9/12 p-4 bg-zinc-700/60 rounded-lg items-center flex">
-                        <div>
-                            <a className="text-2xl text-white">{quest.quest_name}</a>
-                        </div>
-                    </div>
-                    <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
-                        <div>
-                            <a className="text-green-600 text-2xl">+{quest.points}</a>
-                        </div>
-                    </div>
-                </div>
-            )}
-            </div>
-        )}    
-    
     function ATListButton(){
         function popup() {
             alert('u clicked me');
@@ -168,7 +101,9 @@ export default function LandingPage( {userData} ): JSX.Element {
     }
 
 
+
     //** HTML **/
+
     return (
         <div className="h-full w-full bg-[url('/src/assets/bg.png')]">
 
@@ -202,7 +137,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
 
                     <div className="place-content-end flex justify-end pr-10 pt-2">
-                        <a className="text-4xl text-cyan-600">{prefix}</a>
+                        <WriteUserRank rank={rank} />
                     </div>
                 </div>
 
@@ -224,9 +159,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <hr/>
                     </div>
 
-                    {pointsList && userResponse ? <WriteLastPoints actionID = {userResponse[0].last_point1}/> : null}
-                    {pointsList && userResponse ? <WriteLastPoints actionID = {userResponse[0].last_point2}/> : null}
-                    {pointsList && userResponse ? <WriteLastPoints actionID = {userResponse[0].last_point3}/> : null}                    
+                    {pointsList && userResponse ? <WriteLastPoints actionName={pointsList[userResponse[0].last_point1].action_name} points={pointsList[userResponse[0].last_point1].points}/> : null}
+                    {pointsList && userResponse ? <WriteLastPoints actionName={pointsList[userResponse[0].last_point2].action_name} points={pointsList[userResponse[0].last_point2].points}/> : null}
+                    {pointsList && userResponse ? <WriteLastPoints actionName={pointsList[userResponse[0].last_point3].action_name} points={pointsList[userResponse[0].last_point3].points}/> : null}                 
 
                 </div>
 
@@ -239,9 +174,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <hr/>
                     </div>
 
-                    {allUsersResponse ? <WriteBestHelpers userNumber = {0}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers userNumber = {1}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers userNumber = {2}/> : null}  
+                    {allUsersResponse ? <WriteBestHelpers username = {allUsersResponse[0].username} plus = {allUsersResponse[0].plus}/> : null}
+                    {allUsersResponse ? <WriteBestHelpers username = {allUsersResponse[1].username} plus = {allUsersResponse[1].plus}/> : null}
+                    {allUsersResponse ? <WriteBestHelpers username = {allUsersResponse[2].username} plus = {allUsersResponse[2].plus}/> : null}
                     <ATListButton />
                 </div>
             </div>
@@ -259,7 +194,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
 
-                    {questList ? <WriteQuests /> : null}
+                    {questList ? <WriteQuests questList = {questList} /> : null}
 
                 </div>
             </div>
