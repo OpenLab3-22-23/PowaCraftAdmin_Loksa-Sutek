@@ -102,7 +102,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     <div>
                         Content of the popup.
                     </div>
-                    <button onClick={() => setIsOpen(falce)}>
+                    <button onClick={() => setIsOpen(false)}>
                     Close popup
                     </button>
                 </div>
