@@ -90,17 +90,26 @@ export default function LandingPage( {userData} ): JSX.Element {
     //** Other functions **/
 
     function ATListButton(){
-        function popup() {
-            alert('u clicked me');
-        }
+        const [isOpen, setIsOpen] = useState(false);
             return (
-                <button className="absolute right-5" onClick={popup}>
+                <div>
+                <button className="absolute right-5" onClick={() => setIsOpen(true)}>
                     Celý zoznam členov AT
                 </button>
+
+            {isOpen && (
+                <div className="h-full w-full bg-white">
+                    <div>
+                        Content of the popup.
+                    </div>
+                    <button onClick={() => setIsOpen(falce)}>
+                    Close popup
+                    </button>
+                </div>
+            )}
+            </div>
             );
     }
-
-
 
     //** HTML **/
 
