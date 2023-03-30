@@ -184,12 +184,25 @@ export default function LandingPage( {userData} ): JSX.Element {
 
 
 
-            <div className="flex items-center pl-5 mt-8">
-                <div className="box-content h-1/2 w-3/6 bg-zinc-700/80 rounded-lg">
+            <div className="pl-5 mt-8">
+                <div className="h-1/2 w-3/6 bg-zinc-700/80 rounded-lg">
 
-                    <div className="justify-center flex pb-3 pt-2">
-                        <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam úloh</a>
-                        <hr/>
+                    <div className="inline-block flex items-center justify-between p-2">
+                        <div>
+                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center  flex">
+                                Zmazať úlohu
+                            </div>
+                        </div>
+
+                        <div>
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam úloh</a>
+                        </div>
+
+                        <div>
+                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center  flex">
+                                Pridať úlohu
+                            </div>
+                        </div>
                     </div>
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
