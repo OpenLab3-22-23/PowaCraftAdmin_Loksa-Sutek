@@ -24,7 +24,20 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [userResponse, setUserResponse] = useState();
     const [allUsersResponse, setUsersResponse] = useState();
     const [pointsList, setPointsList] = useState();    
-    const [questList, setQuestList] = useState();    
+    const [questList, setQuestList] = useState();   
+
+    const [show, setShow] = useState(true)
+    const Modal = props => {
+        if (!props.show) {
+            return null;
+        }
+
+        return (
+        <div onClick={() => setShow(false)} className="px-80 py-60 bg-white box-content rounded-lg items-center justify-center flex">                
+                <a className="">AHOJJ</a>
+        </div>
+        )
+    } 
 
 
 
@@ -110,11 +123,18 @@ export default function LandingPage( {userData} ): JSX.Element {
             </div>
             );
     }
+        
 
     //** HTML **/
 
     return (
         <div className="h-full w-full bg-[url('/src/assets/bg.png')]">
+
+            <div className="absolute right-1/3 top-20">
+                <div className="">
+                    <Modal show={show}/>
+                </div>
+            </div>
 
             <div className="flex items-center">
                 
@@ -126,7 +146,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
                 </div>
 
-                <div className=" place-content-end flex h-20 items-center space-x-6 mr-12">
+                <div className="flex h-20 items-center space-x-6 mr-12">
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
                         <a className="text-2xl">Tvoje body:</a>
                     </div>
@@ -152,8 +172,6 @@ export default function LandingPage( {userData} ): JSX.Element {
 
             </div>
 
-
-
             <div className="pl-5">
                 <a className="text-7xl text-white">Vitaj, {username}</a>
             </div>
@@ -174,7 +192,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 </div>
 
-
+                
 
                 <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7">
 
@@ -198,9 +216,9 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                     <div className="inline-block flex items-center justify-between p-2">
                         <div>
-                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center  flex">
+                            <button onClick={() => setShow(true)} className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
                                 Zmazať úlohu
-                            </div>
+                            </button>
                         </div>
 
                         <div>
@@ -208,9 +226,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
 
                         <div>
-                            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center  flex">
+                            <button className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
                                 Pridať úlohu
-                            </div>
+                            </button>
                         </div>
                     </div>
 
