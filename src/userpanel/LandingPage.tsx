@@ -26,6 +26,9 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [pointsList, setPointsList] = useState();    
     const [questList, setQuestList] = useState();   
 
+    const [newTaskText, setTaskText] = useState("");    
+    const [newTaskPoints, setTaskPoints] = useState("");   
+
     const [show, setShow] = useState(false)
     const Modal = props => {
         if (!props.show) {
@@ -34,9 +37,31 @@ export default function LandingPage( {userData} ): JSX.Element {
 
         return (
         <div className="bg-white box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/70">      
-            <div className="w-1/3 h-96 bg-white rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/steve.png')]"> 
-                <a className="text-2xl">Pridanie úlohy</a>
-                <input className="border border-green-300 rounded"></input>
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-3 border"> 
+                <a className="text-3xl text-white">Pridanie úlohy</a><br/>
+
+                <a className="text-white text-xl pb-2">Názov úlohy</a>
+                <input 
+                    value={newTaskText}
+                    onChange={(e) => setTaskText(e.target.value)} 
+                    type="text"
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
+                    maxlength="40"
+                    placeholder="Stručný opis úlohy (max. 40 znakov)"
+                    autoFocus>
+                </input><br/>
+
+                <a className="text-white text-xl pb-2">Počet bodov</a>
+                <input 
+                    value={newTaskPoints}
+                    onInput={(e) => e.target.value = e.target.value.slice(0, 1)}
+                    onChange={(e) => setTaskPoints(e.target.value)}
+                    type="number" 
+                    className="border border-green-300 rounded-2xl w-1/6 h-11 text-center" 
+                    placeholder="0">
+                </input><br/>
+
+                <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">VYTVORIŤ</button>
             </div>      
             <button onClick={() => setShow(false)} className="border border-white/50 border-2 absolute bottom-20 bg-red-800 p-4 rounded-2xl text-white/80">ZATVORIŤ</button>
         </div>
@@ -127,7 +152,22 @@ export default function LandingPage( {userData} ): JSX.Element {
             </div>
             );
     }
+
+    //** Data push functions **/
         
+    const sendNewTask = async () => {
+        const { error } = await supabase
+            .from('quest_list')
+            .insert({quest_name: newTaskText, points: newTaskPoints})
+
+            if (error) {
+                console.log("ERROR");
+            }
+            setShow(false);
+            fetchQuestList();
+        }
+        
+
 
     //** HTML **/
 
