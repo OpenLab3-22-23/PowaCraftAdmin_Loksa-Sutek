@@ -26,15 +26,19 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [pointsList, setPointsList] = useState();    
     const [questList, setQuestList] = useState();   
 
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
     const Modal = props => {
         if (!props.show) {
             return null;
         }
 
         return (
-        <div onClick={() => setShow(false)} className="px-80 py-60 bg-white box-content rounded-lg items-center justify-center flex">                
-                <a className="">AHOJJ</a>
+        <div className="bg-white box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/70">      
+            <div className="w-1/3 h-96 bg-white rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/steve.png')]"> 
+                <a className="text-2xl">Pridanie úlohy</a>
+                <input className="border border-green-300 rounded"></input>
+            </div>      
+            <button onClick={() => setShow(false)} className="border border-white/50 border-2 absolute bottom-20 bg-red-800 p-4 rounded-2xl text-white/80">ZATVORIŤ</button>
         </div>
         )
     } 
@@ -130,11 +134,9 @@ export default function LandingPage( {userData} ): JSX.Element {
     return (
         <div className="h-full w-full bg-[url('/src/assets/bg.png')]">
 
-            <div className="absolute right-1/3 top-20">
-                <div className="">
-                    <Modal show={show}/>
-                </div>
-            </div>
+            {show && <div className="z-10 w-full h-full absolute">
+                <Modal show={show}/>
+            </div>}
 
             <div className="flex items-center">
                 
@@ -159,13 +161,13 @@ export default function LandingPage( {userData} ): JSX.Element {
                 </div>
 
                 <div>
-                    <div className="place-content-end flex justify-end items-stretch right-10 pr-10">
+                    <div className="flex justify-end items-stretch right-10 pr-10">
                         <button className="text-2xl text-white text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
                         <div className="flex w-5"></div>
                         <img src="src/assets/steve.png" className="w-20 h-20 rounded-full"></img>
                     </div>
 
-                    <div className="place-content-end flex justify-end pr-10 pt-2">
+                    <div className="flex justify-end pr-10 pt-2">
                         <WriteUserRank rank={rank} />
                     </div>
                 </div>
@@ -217,7 +219,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     <div className="inline-block flex items-center justify-between p-2">
                         <div>
                             <button onClick={() => setShow(true)} className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
-                                Zmazať úlohu
+                                Pridať úlohu
                             </button>
                         </div>
 
@@ -227,7 +229,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                         <div>
                             <button className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
-                                Pridať úlohu
+                                Zmazať úlohu
                             </button>
                         </div>
                     </div>
