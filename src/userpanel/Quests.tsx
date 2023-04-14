@@ -1,11 +1,11 @@
-export default function WriteQuests({questList}) {
+export default function WriteQuests({questList, deleteShown}) {
 
     return(
         <div>
         {
             questList.map((quest, index) => 
 
-            <div className="w-full flex inline-block pb-5">
+            <div className="w-full flex inline-block pb-5 items-center">
                 <div className="box-content h-4 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
                     <a className="text-2xl">{++index}.</a> 
                 </div>
@@ -19,6 +19,7 @@ export default function WriteQuests({questList}) {
                         <a className="text-green-600 text-2xl">+{quest.points}</a>
                     </div>
                 </div>
+                <button style={{ display: deleteShown ? "block" : "none" }} className="bg-red-500 w-12 h-12 rounded-lg text-white mr-8 text-2xl hidden">X</button>
             </div>
         )}
         </div>

@@ -29,16 +29,20 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [newTaskText, setTaskText] = useState("");    
     const [newTaskPoints, setTaskPoints] = useState("");   
 
+    const [deleteShown, setDeleteShown] = useState(false);   
     const [show, setShow] = useState(false)
     const Modal = props => {
         if (!props.show) {
             return null;
         }
-
         return (
         <div className="bg-white box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/70">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-3 border"> 
-                <a className="text-3xl text-white">Pridanie úlohy</a><br/>
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
+
+                <div className="inline-block flex relative w-full justify-center pb-5">
+                    <a className="text-3xl text-white">Pridanie úlohy</a><br/>
+                    <button onClick={() => setShow(false)} className="absolute right-1 text-white text-4xl">X</button>
+                </div>
 
                 <a className="text-white text-xl pb-2">Názov úlohy</a>
                 <input 
@@ -63,7 +67,6 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">VYTVORIŤ</button>
             </div>      
-            <button onClick={() => setShow(false)} className="border border-white/50 border-2 absolute bottom-20 bg-red-800 p-4 rounded-2xl text-white/80">ZATVORIŤ</button>
         </div>
         )
     } 
@@ -165,6 +168,8 @@ export default function LandingPage( {userData} ): JSX.Element {
             }
             setShow(false);
             fetchQuestList();
+            setTaskText("");
+            setTaskPoints("");
         }
         
 
@@ -268,7 +273,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
 
                         <div>
-                            <button className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
+                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
                                 Zmazať úlohu
                             </button>
                         </div>
@@ -276,7 +281,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
 
-                    {questList ? <WriteQuests questList = {questList} /> : null}
+                    {questList ? <WriteQuests questList={questList} deleteShown={deleteShown}/> : null}
 
                 </div>
             </div>
