@@ -30,13 +30,14 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [newTaskPoints, setTaskPoints] = useState("");   
 
     const [deleteShown, setDeleteShown] = useState(false);   
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
     const Modal = props => {
         if (!props.show) {
             return null;
         }
         return (
-        <div className="bg-white box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
@@ -70,6 +71,27 @@ export default function LandingPage( {userData} ): JSX.Element {
         </div>
         )
     } 
+
+const Open = props => {
+    if (!props.show) {
+        return null;
+    }
+    return (
+    <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+        <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
+        <div className="inline-block flex relative w-full justify-center pb-5">
+                    <a className="text-3xl text-white">Členovia Admin Teamu</a><br/>
+                    <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
+                </div>    
+                <div>
+                    <div className="">
+                        
+                    </div>
+                </div>
+        </div>
+    </div>
+    )
+}
 
 
 
@@ -134,33 +156,6 @@ export default function LandingPage( {userData} ): JSX.Element {
 
     //** Other functions **/
 
-    function ATListButton(){
-        const [isOpen, setIsOpen] = useState(false);
-            return (
-                <div>
-                <button className="absolute right-5" onClick={() => setIsOpen(true)}>
-                    Celý zoznam členov AT
-                </button>
-
-            {isOpen && (
-                <div className="h-full w-full bg-white">
-                    <div>
-                        Content of the popup.
-                    </div>
-                    <button onClick={() => setIsOpen(false)}>
-                    Close popup
-                    </button>
-                </div>
-            )}
-            </div>
-            );
-    }
-    function RefreshQuests()
-    {
-        setDeleteShown(!deleteShown);
-        fetchQuestList();
-    }
-
     //** Data push functions **/
         
     const sendNewTask = async () => {
@@ -186,6 +181,9 @@ export default function LandingPage( {userData} ): JSX.Element {
 
             {show && <div className="z-10 w-full h-full absolute">
                 <Modal show={show}/>
+            </div>}
+            {isOpen && <div className="z-10 w-full h-full absolute">
+                <Open show={isOpen}/>
             </div>}
 
             <div className="flex items-center">
@@ -256,7 +254,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     {allUsersResponse ? <WriteBestHelpers username = {allUsersResponse[0].username} plus = {allUsersResponse[0].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username = {allUsersResponse[1].username} plus = {allUsersResponse[1].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username = {allUsersResponse[2].username} plus = {allUsersResponse[2].plus}/> : null}
-                    <ATListButton />
+                    <button className="absolute right-5 text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
                 </div>
             </div>
 
