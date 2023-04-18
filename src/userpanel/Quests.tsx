@@ -1,4 +1,16 @@
-export default function WriteQuests({questList, deleteShown}) {
+import { supabase } from "../supabase/supabaseClient";
+
+export default function WriteQuests({questList, deleteShown, onDelete}) {
+
+    const deleteQuest = async (quest_id) => {
+        const { error } = await supabase
+        .from('quest_list')
+        .delete()
+        .eq('id', quest_id)
+        
+        onDelete();
+    }
+
 
     return(
         <div>
@@ -19,7 +31,7 @@ export default function WriteQuests({questList, deleteShown}) {
                         <a className="text-green-600 text-2xl">+{quest.points}</a>
                     </div>
                 </div>
-                <button style={{ display: deleteShown ? "block" : "none" }} className="bg-red-500 w-12 h-12 rounded-lg text-white mr-8 text-2xl hidden">X</button>
+                <button onClick={() => deleteQuest(quest.id) } style={{ display: deleteShown ? "block" : "none" }} className="bg-red-500 w-12 h-12 rounded-lg text-white mr-8 text-2xl hidden">X</button>
             </div>
         )}
         </div>

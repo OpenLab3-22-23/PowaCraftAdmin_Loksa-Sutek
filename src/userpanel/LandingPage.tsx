@@ -30,13 +30,13 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [newTaskPoints, setTaskPoints] = useState("");   
 
     const [deleteShown, setDeleteShown] = useState(false);   
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
     const Modal = props => {
         if (!props.show) {
             return null;
         }
         return (
-        <div className="bg-white box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/70">      
+        <div className="bg-white box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
@@ -154,6 +154,11 @@ export default function LandingPage( {userData} ): JSX.Element {
             )}
             </div>
             );
+    }
+    function RefreshQuests()
+    {
+        setDeleteShown(!deleteShown);
+        fetchQuestList();
     }
 
     //** Data push functions **/
@@ -281,7 +286,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
 
-                    {questList ? <WriteQuests questList={questList} deleteShown={deleteShown}/> : null}
+                    {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
 
                 </div>
             </div>
