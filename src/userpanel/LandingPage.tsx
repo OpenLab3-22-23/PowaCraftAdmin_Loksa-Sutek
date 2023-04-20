@@ -78,14 +78,14 @@ const Open = props => {
     }
     return (
     <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-        <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
+        <div className="w-2/5 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
         <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">Členovia Admin Teamu</a><br/>
+                    <a className="text-3xl text-white">Členovia AT</a><br/>
                     <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
                 </div>    
                 <div>
-                    <div className="">
-                        
+                    <div>
+                        {allUsersResponse ? <WriteBestHelpers response={allUsersResponse}/> : null}
                     </div>
                 </div>
         </div>
@@ -255,10 +255,6 @@ const Open = props => {
                         <a className="text-2xl text-white">Najlepší helperi</a>
                         <hr/>
                     </div>
-
-                    {allUsersResponse ? <WriteBestHelpers username = {allUsersResponse[0].username} plus = {allUsersResponse[0].plus}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers username = {allUsersResponse[1].username} plus = {allUsersResponse[1].plus}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers username = {allUsersResponse[2].username} plus = {allUsersResponse[2].plus}/> : null}
                     <button className="absolute right-5 text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
                 </div>
             </div>
