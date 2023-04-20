@@ -30,7 +30,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [newTaskPoints, setTaskPoints] = useState("");   
 
     const [deleteShown, setDeleteShown] = useState(false);   
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const Modal = props => {
         if (!props.show) {
@@ -155,6 +155,11 @@ const Open = props => {
 
 
     //** Other functions **/
+    function RefreshQuests()
+    {
+        setDeleteShown(!deleteShown);
+        fetchQuestList();
+    }
 
     //** Data push functions **/
         
