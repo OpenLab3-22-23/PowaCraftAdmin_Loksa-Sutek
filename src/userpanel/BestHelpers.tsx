@@ -1,39 +1,13 @@
-import WriteUserRank from "./UserRank";
-
-export default function WriteBestHelpers({response}) {
+export default function WriteBestHelpers({username, plus}) {
         
     return(
-        <div>
-            <div className="bg-white rounded-2xl flex justify-center items-center h-12 w-full my-5">
-                <a className="mx-6">0.</a>
-                <a className="mx-6">username</a>
-                <a className="mx-6">rank</a>
-                <a className="mx-6">plus b.</a>
-                <a className="mx-6">minus b.</a>
+        <div className="w-full flex inline-block pb-2">
+            <div className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+                <a className="text-xl">{username}</a>
             </div>
-        {
-            response.map((user, index) => 
-
-            <div className="w-full flex inline-block pb-5 items-center">
-                <div className="items-center flex bg-white rounded-2xl box-content h-12 w-full ">
-                    <div className="mx-6">
-                    <a className="text-2xl">{++index}.</a> 
-                    </div>
-                    <div className="mx-6">
-                        <a className="text-2xl text-black">{user.username}</a>
-                    </div>
-                    <div className="mx-6 text-2xl">
-                        <WriteUserRank rank={user.rank}/>
-                    </div>
-                    <div className="mx-6">
-                        <a className="text-green-600 text-2xl">+{user.plus}</a>
-                    </div>
-                    <div className="mx-6">
-                        <a className="text-red-600 text-2xl">-{user.plus}</a>
-                    </div>
-                </div>    
+            <div className="box-content h-4 w-1/6 p-4 bg-white rounded-lg mx-2 items-center justify-center flex">
+            <a className="text-2xl text-green-600">+{plus}</a>
             </div>
-        )}
         </div>
     )
 }

@@ -5,6 +5,7 @@ import { supabase } from "../supabase/supabaseClient";
 import WriteUserRank from "./UserRank";
 import WriteLastPoints from "./LastPoints";
 import WriteBestHelpers from "./BestHelpers";
+import ATList from "./ATList";
 import WriteQuests from "./Quests";
 
 
@@ -85,7 +86,7 @@ const Open = props => {
                 </div>    
                 <div>
                     <div>
-                        {allUsersResponse ? <WriteBestHelpers response={allUsersResponse}/> : null}
+                        {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
                     </div>
                 </div>
         </div>
@@ -221,7 +222,7 @@ const Open = props => {
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
-                        <WriteUserRank rank={rank} />
+                        <a className="text-4xl"><WriteUserRank rank={rank} /></a>
                     </div>
                 </div>
 
@@ -255,6 +256,9 @@ const Open = props => {
                         <a className="text-2xl text-white">Najlepší helperi</a>
                         <hr/>
                     </div>
+                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[0].username} plus={allUsersResponse[0].plus}/> : null}
+                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[1].username} plus={allUsersResponse[1].plus}/> : null}
+                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null}
                     <button className="absolute right-5 text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
                 </div>
             </div>
