@@ -5,11 +5,11 @@ export default function ATList({response}) {
     return(
         <div>
             <div className="bg-white rounded-2xl flex justify-center items-center h-12 w-full my-5">
-                <a className="mx-6">0.</a>
-                <a className="mx-6">username</a>
-                <a className="mx-6">rank</a>
-                <a className="mx-6">plus b.</a>
-                <a className="mx-6">minus b.</a>
+                <a className="mx-7"></a>
+                <a className="mx-6 text-xl">username</a>
+                <a className="mx-6 text-xl">rank</a>
+                <a className="mx-6 text-xl">plus b.</a>
+                <a className="mx-6 text-xl">minus b.</a>
             </div>
         {
             response.map((user, index) => 
@@ -28,8 +28,8 @@ export default function ATList({response}) {
                     <div className="mx-6">
                         <a className="text-green-600 text-2xl">+{user.plus}</a>
                     </div>
-                    <div className="mx-6">
-                        <a className="text-red-600 text-2xl">-{user.plus}</a>
+                    <div className="mx-7">
+                        <a className="text-red-600 text-2xl">-{user.minus}</a>
                     </div>
                 </div>    
             </div>

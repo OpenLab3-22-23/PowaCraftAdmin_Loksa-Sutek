@@ -83,11 +83,9 @@ const Open = props => {
         <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Členovia AT</a><br/>
                     <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
-                </div>    
-                <div>
+                </div>                 
                     <div>
                         {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
-                    </div>
                 </div>
         </div>
     </div>
@@ -267,7 +265,7 @@ const Open = props => {
 
 
             <div className="pl-5 mt-8">
-                <div className="h-1/2 w-3/6 bg-zinc-700/80 rounded-lg">
+                <div className="h-1/2 w-3/6 bg-zinc-700/80 rounded-lg overflow-auto">
 
                     <div className="inline-block flex items-center justify-between p-2">
                         <div>
