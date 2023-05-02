@@ -3,13 +3,11 @@ import { useAuth } from "../auth/Auth";
 import { supabase } from "../supabase/supabaseClient";
 
 import WriteUserRank from "./UserRank";
-import WriteLastPoints from "./LastPoints";
-import WriteBestHelpers from "./BestHelpers";
-import ATList from "./ATList";
+import OwnerATList from "./OwnerATList";
 import WriteQuests from "./Quests";
 
 
-export default function LandingPage( {userData} ): JSX.Element {
+export default function OwnerPanel( {userData} ): JSX.Element {
 
     const {signOut} = useAuth()
 
@@ -17,7 +15,6 @@ export default function LandingPage( {userData} ): JSX.Element {
         signOut();
     }
 
-    const [username, setUsername] = useState("");
     const [rank, setRank] = useState("");
     const [plusPoints, setPlusPoints] = useState(0);
     const [minusPoints, setMinusPoints] = useState(0);
@@ -73,26 +70,6 @@ export default function LandingPage( {userData} ): JSX.Element {
         )
     } 
 
-const Open = props => {
-    if (!props.show) {
-        return null;
-    }
-    return (
-    <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-        <div className="w-2/5 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
-        <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">Členovia AT</a><br/>
-                    <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
-                </div>    
-                <div>
-                    {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
-                </div>
-        </div>
-    </div>
-    )
-}
-
-
 
     //** Data fetching **/
 
@@ -111,7 +88,6 @@ const Open = props => {
 
             if (data) {
                 setUserResponse(data);
-                setUsername(data[0].username);
                 setRank(data[0].rank);
                 setPlusPoints(data[0].plus);
                 setMinusPoints(data[0].minus);
@@ -159,6 +135,11 @@ const Open = props => {
         setDeleteShown(!deleteShown);
         fetchQuestList();
     }
+    function RefreshPlusPoints()
+    {
+        setPlusPoints(plusPoints+1);
+        fetchUserProfile();
+    }
 
     //** Data push functions **/
         
@@ -181,7 +162,7 @@ const Open = props => {
     //** HTML **/
 
     return (
-        <div className="h-full w-full bg-[url('/src/assets/bg.png')]">
+        <div className="h-full w-full bg-[url('/src/assets/owner-bg.png')]">
 
             {show && <div className="z-10 w-full h-full absolute">
                 <Modal show={show}/>
@@ -226,42 +207,28 @@ const Open = props => {
 
             </div>
 
-            <div className="pl-5">
-                <a className="text-7xl text-white">Vitaj, {username}</a>
-            </div>
 
+            <div className="pl-5 mt-8 px-5 absolute right-0 w-1/2">
+                <div className="bg-zinc-700/80 rounded-lg px-8">
 
-            <div className="flex-col absolute right-10 w-1/4">
-
-                <div className="box-content bg-zinc-700/80 rounded-lg mb-6 p-2">
-
-                    <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2">
-                        <a className="text-2xl text-white">Tvoje posledné body</a>
-                        <hr/>
+                    <div className="inline-block flex items-center justify-center p-2">
+                        <div>
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam členov AT</a>
+                        </div>
                     </div>
 
-                    {pointsList && userResponse ? <WriteLastPoints actionName={pointsList[userResponse[0].last_point1].action_name} points={pointsList[userResponse[0].last_point1].points}/> : null}
-                    {pointsList && userResponse ? <WriteLastPoints actionName={pointsList[userResponse[0].last_point2].action_name} points={pointsList[userResponse[0].last_point2].points}/> : null}
-                    {pointsList && userResponse ? <WriteLastPoints actionName={pointsList[userResponse[0].last_point3].action_name} points={pointsList[userResponse[0].last_point3].points}/> : null}                 
+                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
 
-                </div>
-
-                
-
-                <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7">
-
-                    <div className="justify-center flex pb-2 pt-2 bg-amber-500/40 rounded-lg mb-2">
-                        <a className="text-2xl text-white">Najlepší helperi</a>
-                        <hr/>
+                    <div>
+                        {allUsersResponse ? <OwnerATList response={allUsersResponse} onPlusAdd={RefreshPlusPoints} onMinusAdd={() => setMinusPoints(minusPoints+1)}/> : null}
                     </div>
-                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[0].username} plus={allUsersResponse[0].plus}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[1].username} plus={allUsersResponse[1].plus}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null}
-                    <button className="absolute right-5 text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
+                    <div className="flex inline-block pb-5 mt-5">
+                        <button className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-5 items-center flex justify-center">Pridať účet</button>
+                        <button className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-5 items-center flex justify-center">Zmazať účet</button>
+                    </div>
+
                 </div>
             </div>
-
-
 
 
             <div className="pl-5 mt-8">
@@ -269,17 +236,17 @@ const Open = props => {
 
                     <div className="inline-block flex items-center justify-between p-2">
                         <div>
-                            <button onClick={() => setShow(true)} className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
+                            <button onClick={() => setShow(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-2 items-center flex">
                                 Pridať úlohu
                             </button>
-                        </div>
+                        </div>                     
 
                         <div>
                             <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam úloh</a>
                         </div>
 
                         <div>
-                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
+                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-2 items-center flex">
                                 Zmazať úlohu
                             </button>
                         </div>
@@ -291,6 +258,7 @@ const Open = props => {
 
                 </div>
             </div>
+
         </div>
     )
 }

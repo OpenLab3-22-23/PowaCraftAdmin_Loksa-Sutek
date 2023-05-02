@@ -29,7 +29,7 @@ export default function ATList({response}) {
                         <a className="text-green-600 text-2xl">+{user.plus}</a>
                     </div>
                     <div className="mx-6">
-                        <a className="text-red-600 text-2xl">-{user.plus}</a>
+                        <a className="text-red-600 text-2xl">-{user.minus}</a>
                     </div>
                 </div>    
             </div>
