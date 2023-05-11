@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "./Auth";
+import { supabase } from "../supabase/supabaseClient";
 
 
 export default function SignUp() {
@@ -8,9 +9,37 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [nick, setNick] = useState("");
   const [correct, setCorrect] = useState("");
-  
+  const [emailEnabled, setEmailEnabled] = useState(false);  
+  const [allowedMailResponse, setMailResponse] = useState("");  
 
   const { signUp, session } = useAuth();
+
+
+  useEffect(() => {
+    fetchAllowedMails();
+}, [])
+
+  const fetchAllowedMails = async () => {
+    const { data, error } = await supabase
+        .from('allowed_mails')
+        .select()
+        
+        if (data) {
+          setMailResponse(data);
+        }
+    } 
+
+  function checkEmail()
+  {
+    if (allowedMailResponse.some(item => item.mail === email))
+    {
+      setEmailEnabled(true);
+    }
+    else
+    {
+      setEmailEnabled(false);
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,7 +66,7 @@ export default function SignUp() {
           type="text"
           placeholder="Nickname"
           value={nick}
-          onChange={(e) => setNick(e.target.value)}
+          onChange={(e) => setNick(e.target.value) }
           className="w-96 my-2 bg-gray-200 rounded-full"
         />
         <p className="text-2xl">Email</p>
@@ -46,7 +75,7 @@ export default function SignUp() {
           type="email"
           placeholder="email@gmail.com"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => { setEmail(e.target.value); checkEmail(); }}
           className="w-96 my-2 bg-gray-200 rounded-full"
         />
         <p className="text-2xl">Heslo</p>
@@ -72,7 +101,7 @@ export default function SignUp() {
           type="submit"
           value="Registrovať"
           className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-500 disabled:bg-green-600/40 disabled:text-black/40"
-          disabled={password != correct || password == ""}
+          disabled={password != correct || password == "" || !emailEnabled}
         />
       </form>
     </div>

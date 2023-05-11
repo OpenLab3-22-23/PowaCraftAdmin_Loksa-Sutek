@@ -2,7 +2,7 @@ import WriteUserRank from "./UserRank";
 import { useState} from "react";
 import { supabase } from "../supabase/supabaseClient";
 
-export default function OwnerATList({response, onPlusAdd, onMinusAdd}) {
+export default function OwnerATList({response, onRefresh}) {
         
 
     const addPoint = async (user) => {
@@ -10,8 +10,9 @@ export default function OwnerATList({response, onPlusAdd, onMinusAdd}) {
         .from('profiles')
         .update({plus: user.plus+1})
         .eq('id', user.id)
-        
-        onPlusAdd();
+
+        user.plus++;
+        onRefresh();
     }
 
     const removePoint = async (user) => {
@@ -20,7 +21,8 @@ export default function OwnerATList({response, onPlusAdd, onMinusAdd}) {
         .update({minus: user.minus+1})
         .eq('id', user.id)
 
-        onMinusAdd();
+        user.minus++;
+        onRefresh();
     }
 
 
@@ -28,10 +30,10 @@ export default function OwnerATList({response, onPlusAdd, onMinusAdd}) {
     return(
         <div>
         {
-            response.map((user, index) => 
+            response.map((user) => 
 
             <div className="w-full flex inline-block pb-5 items-center">
-                <div className="items-center flex bg-white rounded-2xl box-content h-12 w-full ">
+                <div className="items-center flex bg-white rounded-2xl box-content h-12 w-full w-9/12 ">
                     <div className="mx-6">
                         <a className="text-2xl text-black">{user.username}</a>
                     </div>
