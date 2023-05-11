@@ -4,7 +4,7 @@ export default function ATList({response}) {
         
     return(
         <div>
-            <div className="bg-white rounded-2xl flex justify-center items-center h-12 w-full my-5">
+            <div className="bg-white rounded-2xl flex justify-center items-center h-12 w-full my-4 ">
                 <a className="mx-7"></a>
                 <a className="mx-6 text-xl">username</a>
                 <a className="mx-6 text-xl">rank</a>
@@ -15,7 +15,7 @@ export default function ATList({response}) {
             response.map((user, index) => 
 
             <div className="w-full flex inline-block pb-5 items-center">
-                <div className="items-center flex bg-white rounded-2xl box-content h-12 w-full ">
+                <div className="items-center flex bg-white rounded-2xl box-content h-12 w-full  ">
                     <div className="mx-6">
                     <a className="text-2xl">{++index}.</a> 
                     </div>

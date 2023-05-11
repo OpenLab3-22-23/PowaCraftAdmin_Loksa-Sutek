@@ -79,7 +79,7 @@ const Open = props => {
     }
     return (
     <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-        <div className="w-2/5 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
+        <div className="w-2/4 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
         <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Členovia AT</a><br/>
                     <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
@@ -194,7 +194,7 @@ const Open = props => {
                 
                 <div className="flex items-center w-8/12 ">
                     <img src="src/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
-                    <a className="text-4xl text-white">PowaCraft</a>
+                    <a className="text-4xl text-white" href="https://powacraft.sk/">PowaCraft</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400">Admin</a>
                     </div>
@@ -265,7 +265,7 @@ const Open = props => {
 
 
             <div className="pl-5 mt-8">
-                <div className="h-1/2 w-3/6 bg-zinc-700/80 rounded-lg overflow-auto">
+                <div className="h-1/2 w-3/6 bg-zinc-700/80 rounded-lg">
 
                     <div className="inline-block flex items-center justify-between p-2">
                         <div>
@@ -286,9 +286,9 @@ const Open = props => {
                     </div>
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-
+                    <div className="w-full h-3/6 overflow-auto">
                     {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
-
+                    </div>
                 </div>
             </div>
         </div>
