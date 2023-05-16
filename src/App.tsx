@@ -10,7 +10,7 @@ function App() {
   return (
   <div className="w-screen h-screen">
     {session ? (
-      <LandingPage userData={session}/> 
+      <OwnerPanel userData={session}/> 
     ) : <Navigate to="/login" />}
   </div>
 
