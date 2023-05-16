@@ -230,10 +230,9 @@ const Open = props => {
                 <a className="text-7xl text-white">Vitaj, {username}</a>
             </div>
 
+            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-screen gap-5 px-5 py-5">
 
-            <div className="flex-col absolute right-10 w-1/4">
-
-                <div className="box-content bg-zinc-700/80 rounded-lg mb-6 p-2">
+                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
                     <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2">
                         <a className="text-2xl text-white">Tvoje posledné body</a>
@@ -248,7 +247,7 @@ const Open = props => {
 
                 
 
-                <div className="box-content bg-zinc-700/80 rounded-lg mb-10 p-2 pb-7">
+                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 row-start-2 w-3/5 justify-self-end">
 
                     <div className="justify-center flex pb-2 pt-2 bg-amber-500/40 rounded-lg mb-2">
                         <a className="text-2xl text-white">Najlepší helperi</a>
@@ -256,16 +255,16 @@ const Open = props => {
                     </div>
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[0].username} plus={allUsersResponse[0].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[1].username} plus={allUsersResponse[1].plus}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null}
-                    <button className="absolute right-5 text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
+                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null}                  
                 </div>
-            </div>
+                <div className="row-start-2 col-start-2 ">
+                    <button className="text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
+                </div>
 
 
 
-
-            <div className="pl-5 mt-8">
-                <div className="h-1/2 w-3/6 bg-zinc-700/80 rounded-lg">
+            <div className="row-span-2 col-start-1 row-start-1">
+                <div className="h-full w-full bg-zinc-700/80 rounded-lg">
 
                     <div className="inline-block flex items-center justify-between p-2">
                         <div>
@@ -286,11 +285,12 @@ const Open = props => {
                     </div>
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                    <div className="w-full h-3/6 overflow-auto">
+                    <div className="w-full h-4/5 overflow-auto">
                     {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     )
 }
