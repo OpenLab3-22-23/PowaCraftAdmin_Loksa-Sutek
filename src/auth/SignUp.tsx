@@ -10,7 +10,7 @@ export default function SignUp() {
   const [nick, setNick] = useState("");
   const [correct, setCorrect] = useState("");
   const [emailEnabled, setEmailEnabled] = useState(false);  
-  const [allowedMailResponse, setMailResponse] = useState("");  
+  const [allowedMailResponse, setMailResponse] = useState<{ id: number; mail: string }[] | undefined>();
 
   const { signUp, session } = useAuth();
 
@@ -27,11 +27,13 @@ export default function SignUp() {
         if (data) {
           setMailResponse(data);
         }
+        console.log(data);
     } 
 
-  function checkEmail()
+  function checkEmail(currentMail: string)
   {
-    if (allowedMailResponse.some(item => item.mail === email))
+
+    if (allowedMailResponse?.some(item => item.mail === currentMail))
     {
       setEmailEnabled(true);
     }
@@ -39,6 +41,8 @@ export default function SignUp() {
     {
       setEmailEnabled(false);
     }
+    console.log(allowedMailResponse?.some(item => item.mail === email));   
+    console.log(currentMail); 
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -75,7 +79,7 @@ export default function SignUp() {
           type="email"
           placeholder="email@gmail.com"
           value={email}
-          onChange={(e) => { setEmail(e.target.value); checkEmail(); }}
+          onChange={(e) => { setEmail(e.target.value); checkEmail(e.target.value); }}
           className="w-96 my-2 bg-gray-200 rounded-full"
         />
         <p className="text-2xl">Heslo</p>

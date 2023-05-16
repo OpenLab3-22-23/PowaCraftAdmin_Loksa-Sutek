@@ -4,6 +4,7 @@ import { supabase } from "../supabase/supabaseClient";
 
 import WriteUserRank from "./UserRank";
 import OwnerATList from "./OwnerATList";
+import ATList from "./ATList";
 import WriteQuests from "./Quests";
 
 
@@ -31,6 +32,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [deleteShown, setDeleteShown] = useState(false);   
     const [addQuestShown, setAddQuestVisibility] = useState(false);
     const [addAccountShown, setAddAccountVisibility] = useState(false);
+    const [delAccountShown, setDelAccountVisibility] = useState(false); 
 
     const AddQuest = props => {
         if (!props.show) {
@@ -104,6 +106,39 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     } 
 
 
+    const DeleteAccount = props => {
+        if (!props.show) {
+            return null;
+        }
+        return (
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
+
+                <div className="inline-block flex relative w-full justify-center pb-5">
+                    <a className="text-3xl text-white">Zmazanie účtu</a><br/>
+                    <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
+                </div>
+
+                {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
+
+                <a className="text-white text-xl pb-2">Meno používateľa, ktorého chceš vymazať</a>
+                <input 
+                    value={newMailText}
+                    onChange={(e) => setNewMailText(e.target.value)} 
+                    type="text"
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
+                    maxlength="40"
+                    placeholder="Nick"
+                    autoFocus>
+                </input><br/>
+
+                <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">ZMAZAŤ</button>
+            </div>      
+        </div>
+        )
+    } 
+
+
     //** Data fetching **/
 
     useEffect(() => {
@@ -136,6 +171,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             if (data) {
                 setUsersResponse(data);
             }
+            console.log(data);
         }
         
     const fetchPointsList = async () => {
@@ -199,6 +235,17 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             }
             setAddAccountVisibility(false);
         }
+
+    const delAccount = async () => {
+        const { error } = await supabase
+            .from('allowed_mails')
+            .insert({mail: newMailText })
+
+            if (error) {
+                console.log("ERROR");
+            }
+            setAddAccountVisibility(false);
+        }        
     
 
 
@@ -213,6 +260,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             
             {addAccountShown && <div className="z-10 w-full h-full absolute">
                 <AddAccount show={addAccountShown}/>
+            </div>}
+
+            {delAccountShown && <div className="z-10 w-full h-full absolute">
+                <DeleteAccount show={delAccountShown}/>
             </div>}
 
             <div className="flex items-center">
@@ -253,7 +304,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
 
             <div className="pl-5 mt-8 px-5 absolute right-0 w-1/2">
-                <div className="bg-zinc-700/80 rounded-lg px-8">
+                <div className="bg-zinc-700/80 rounded-lg px-3">
 
                     <div className="inline-block flex items-center justify-center p-2">
                         <div>
@@ -268,7 +319,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
                     <div className="flex inline-block pb-5 mt-5">
                         <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-5 items-center flex justify-center">Pridať účet</button>
-                        <button className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-5 items-center flex justify-center">Zmazať účet</button>
+                        <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-5 items-center flex justify-center">Zmazať účet</button>
                     </div>
 
                 </div>
@@ -276,7 +327,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
 
             <div className="pl-5 mt-8">
-                <div className="h-1/2 w-3/6 bg-zinc-700/80 rounded-lg">
+                <div className="h-1/2 w-3/6 bg-zinc-700/80 rounded-lg px-3">
 
                     <div className="inline-block flex items-center justify-between p-2">
                         <div>
