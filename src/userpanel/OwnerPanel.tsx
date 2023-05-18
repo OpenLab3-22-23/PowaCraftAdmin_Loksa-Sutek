@@ -90,10 +90,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <input 
                     value={newMailText}
                     onChange={(e) => setNewMailText(e.target.value)} 
-                    type="text"
+                    type="email"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
                     maxlength="40"
-                    placeholder="email@email.com"
+                    placeholder="email@gmail.com"
                     autoFocus>
                 </input><br/>
 
