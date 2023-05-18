@@ -92,10 +92,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <input 
                     value={newMailText}
                     onChange={(e) => setNewMailText(e.target.value)} 
-                    type="text"
+                    type="email"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
                     maxlength="40"
-                    placeholder="email@email.com"
+                    placeholder="email@gmail.com"
                     autoFocus>
                 </input><br/>
 
@@ -112,7 +112,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
+            <div className="w-2/4 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Zmazanie účtu</a><br/>

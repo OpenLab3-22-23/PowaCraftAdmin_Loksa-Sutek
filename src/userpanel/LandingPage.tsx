@@ -255,11 +255,12 @@ const Open = props => {
                     </div>
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[0].username} plus={allUsersResponse[0].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[1].username} plus={allUsersResponse[1].plus}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null}                  
+                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null} 
+                    <div className="row-start-2 col-start-2 bg-zinc-700/80 rounded-b-lg flex justify-center w-44">
+                        <button className="text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
+                    </div>                 
                 </div>
-                <div className="row-start-2 col-start-2 ">
-                    <button className="text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
-                </div>
+                
 
 
 
