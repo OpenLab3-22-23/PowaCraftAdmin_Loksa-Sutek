@@ -20,9 +20,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [plusPoints, setPlusPoints] = useState(0);
     const [minusPoints, setMinusPoints] = useState(0);
 
-    const [userResponse, setUserResponse] = useState();
     const [allUsersResponse, setUsersResponse] = useState();
-    const [pointsList, setPointsList] = useState();    
     const [questList, setQuestList] = useState();   
 
     const [newTaskText, setTaskText] = useState("");    
@@ -112,7 +110,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
+            <div className="w-1/2 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Zmazanie účtu</a><br/>
