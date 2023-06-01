@@ -109,17 +109,16 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/2 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
-
-                <div className="inline-block flex relative w-full justify-center pb-5">
+        <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
+            <div className="w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
+                <div className="inline-block flex w-full justify-center pb-5">
                     <a className="text-3xl text-white">Zmazanie účtu</a><br/>
-                    <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
+                    <button onClick={() => setDelAccountVisibility(false)} className="flex right-1 text-white text-4xl">X</button>
                 </div>
-
+                <div className="flex h-3/5">
                 {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
-
-                <a className="text-white text-xl pb-2">Meno používateľa, ktorého chceš vymazať</a>
+                </div>
+                <a className="text-white text-xl pb-2 pt-2">Meno používateľa, ktorého chceš vymazať</a>
                 <input 
                     value={newMailText}
                     onChange={(e) => setNewMailText(e.target.value)} 
@@ -299,35 +298,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
 
             </div>
+        
+        <div className="grid grid-cols-2 h-4/5 pl-5 pr-5 gap-4">
+                <div className="bg-zinc-700/80 rounded-lg px-3 mt-8 h-3/5">
 
-
-            <div className="pl-5 mt-8 px-5 absolute right-0 w-1/2">
-                <div className="bg-zinc-700/80 rounded-lg px-3">
-
-                    <div className="inline-block flex items-center justify-center p-2">
-                        <div>
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam členov AT</a>
-                        </div>
-                    </div>
-
-                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
-
-                    <div>
-                        {allUsersResponse ? <OwnerATList response={allUsersResponse} onRefresh={RefreshPoints}/> : null}
-                    </div>
-                    <div className="flex inline-block pb-5 mt-5">
-                        <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-5 items-center flex justify-center">Pridať účet</button>
-                        <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-5 items-center flex justify-center">Zmazať účet</button>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div className="pl-5 mt-8">
-                <div className="h-1/2 w-3/6 bg-zinc-700/80 rounded-lg px-3">
-
-                    <div className="inline-block flex items-center justify-between p-2">
+                    <div className="inline-block flex items-center justify-between p-2 flex">
                         <div>
                             <button onClick={() => setAddQuestVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-2 items-center flex">
                                 Pridať úlohu
@@ -346,12 +321,33 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-
+                    <div className="flex h-5/6 w-full overflow-auto">
                     {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
+                    </div>
+                </div>
 
+
+            <div className="mt-8 h-3/5 flex">
+                <div className="bg-zinc-700/80 rounded-lg">
+
+                    <div className="inline-block flex items-center justify-center p-2">
+                        <div>
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam členov AT</a>
+                        </div>
+                    </div>
+
+                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
+
+                    <div className="h-4/6 overflow-auto">
+                        {allUsersResponse ? <OwnerATList response={allUsersResponse} onRefresh={RefreshPoints}/> : null}
+                    </div>
+                    <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
+                        <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">Pridať účet</button>
+                        <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">Zmazať účet</button>
+                    </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     )
 }

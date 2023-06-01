@@ -3,14 +3,8 @@ import WriteUserRank from "./UserRank";
 export default function ATList({response}) {
         
     return(
-        <div>
-            <div className="bg-white rounded-2xl flex justify-center items-center h-12 w-full my-4 ">
-                <a className="mx-7"></a>
-                <a className="mx-6 text-xl">username</a>
-                <a className="mx-6 text-xl">rank</a>
-                <a className="mx-6 text-xl">plus b.</a>
-                <a className="mx-6 text-xl">minus b.</a>
-            </div>
+        <div className=" overflow-auto h-full">
+            
         {
             response.map((user, index) => 
 

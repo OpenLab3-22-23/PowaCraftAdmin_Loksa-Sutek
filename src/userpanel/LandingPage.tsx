@@ -78,13 +78,20 @@ const Open = props => {
         return null;
     }
     return (
-    <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+    <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
         <div className="w-2/4 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
         <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Členovia AT</a><br/>
                     <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
-                </div>                 
-                    <div>
+                </div>
+                <div className="text-white rounded-2xl w-3/4">
+                <a className="mx-7"></a>
+                <a className="mx-6 text-xl">username</a>
+                <a className="mx-6 text-xl">rank</a>
+                <a className="mx-6 text-xl">plus b.</a>
+                <a className="mx-6 text-xl">minus b.</a>
+            </div>                 
+                    <div className="pt-5 h-3/4">
                         {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
                 </div>
         </div>
@@ -230,7 +237,7 @@ const Open = props => {
                 <a className="text-7xl text-white">Vitaj, {username}</a>
             </div>
 
-            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-screen gap-5 px-5 py-5">
+            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-screen gap-1 px-5 py-5">
 
                 <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
