@@ -299,7 +299,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             </div>
         
-        <div className="grid grid-cols-2 h-4/5 pl-5 pr-5 gap-4">
+        <div className="grid grid-cols-2 h-3/5 pl-5 pr-5 gap-4">
                 <div className="bg-zinc-700/80 rounded-lg px-3 mt-8 h-3/5">
 
                     <div className="inline-block flex items-center justify-between p-2 flex">
@@ -328,7 +328,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
 
             <div className="mt-8 h-3/5 flex">
-                <div className="bg-zinc-700/80 rounded-lg">
+                <div className="bg-zinc-700/80 rounded-lg w-full">
 
                     <div className="inline-block flex items-center justify-center p-2">
                         <div>
@@ -338,7 +338,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
 
-                    <div className="h-4/6 overflow-auto">
+                    <div className="h-4/6 w-full overflow-auto">
                         {allUsersResponse ? <OwnerATList response={allUsersResponse} onRefresh={RefreshPoints}/> : null}
                     </div>
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">

@@ -237,7 +237,7 @@ const Open = props => {
                 <a className="text-7xl text-white">Vitaj, {username}</a>
             </div>
 
-            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-screen gap-1 px-5 py-5">
+            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-full gap-1 px-5 py-5">
 
                 <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
@@ -263,8 +263,8 @@ const Open = props => {
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[0].username} plus={allUsersResponse[0].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[1].username} plus={allUsersResponse[1].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null} 
-                    <div className="row-start-2 col-start-2 bg-zinc-700/80 rounded-b-lg flex justify-center w-44">
-                        <button className="text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
+                    <div className="row-start-2 col-start-2 bg-zinc-700/80 rounded-md flex justify-center ">
+                        <button className="text-white/80 w-full" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
                     </div>                 
                 </div>
                 
