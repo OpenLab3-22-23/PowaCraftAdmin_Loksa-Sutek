@@ -19,6 +19,6 @@ export default function WriteUserRank({rank})
         case "Helper":
             return <a className="text-yellow-600">{rank}</a>            
         case "Akademik":
-            return <a className="text-cyan-600">{rank}</a>                                                                                
+            return <a className="text-cyan-600">{rank}</a>                                                                     
     }
 }

@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../auth/Auth";
 import { supabase } from "../supabase/supabaseClient";
@@ -12,13 +13,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     const {signOut} = useAuth()
 
-    function handleLogOut(): void {
+    const handleLogOut = () => {
         signOut();
-    }
+    };
 
     const [rank, setRank] = useState("");
-    const [plusPoints, setPlusPoints] = useState(0);
-    const [minusPoints, setMinusPoints] = useState(0);
 
     const [allUsersResponse, setUsersResponse] = useState();
     const [questList, setQuestList] = useState();   
@@ -80,7 +79,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
-
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie účtu</a><br/>
                     <button onClick={() => setAddAccountVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
@@ -111,14 +109,16 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         return (
         <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
             <div className="w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
-                <div className="inline-block flex w-full justify-center pb-5">
+                <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Zmazanie účtu</a><br/>
-                    <button onClick={() => setDelAccountVisibility(false)} className="flex right-1 text-white text-4xl">X</button>
+                    <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
+
                 <div className="flex h-3/5">
-                {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
+                    {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
                 </div>
-                <a className="text-white text-xl pb-2 pt-2">Meno používateľa, ktorého chceš vymazať</a>
+
+                <a className="text-white text-xl pb-2 pt-8">Meno používateľa, ktorého chceš vymazať</a>
                 <input 
                     value={newMailText}
                     onChange={(e) => setNewMailText(e.target.value)} 
@@ -141,7 +141,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     useEffect(() => {
         fetchUserProfile();
         fetchAllUsers();
-        fetchPointsList();
         fetchQuestList();
     }, [])
 
@@ -152,10 +151,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .eq('id', userData.user.id)
 
             if (data) {
-                setUserResponse(data);
                 setRank(data[0].rank);
-                setPlusPoints(data[0].plus);
-                setMinusPoints(data[0].minus);
             }
         }
 
@@ -171,17 +167,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             console.log(data);
         }
         
-    const fetchPointsList = async () => {
-        const { data, error } = await supabase
-            .from('points_list')
-            .select()
-            .order('id', { ascending: true })
-            
-            if (data) {
-                setPointsList(data);
-            }
-        }  
-        
     const fetchQuestList = async () => {
         const { data, error } = await supabase
             .from('quest_list')
@@ -194,17 +179,20 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         
 
 
-
     //** Other functions **/
     function RefreshQuests()
     {
         setDeleteShown(!deleteShown);
         fetchQuestList();
     }
+    
     function RefreshPoints()
     {
-        fetchUserProfile();
+        fetchAllUsers();
+        fetchQuestList();
     }
+
+
 
     //** Data push functions **/
         
@@ -235,16 +223,17 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     const delAccount = async () => {
         const { error } = await supabase
-            .from('allowed_mails')
-            .insert({mail: newMailText })
-
+            .from('profiles')
+            .delete()
+            .eq('id', "15926752-71fd-4fdb-adec-865bfa51b613")
             if (error) {
                 console.log("ERROR");
             }
-            setAddAccountVisibility(false);
-        }        
-    
 
+            setDelAccountVisibility(false);
+        }   
+
+    
 
     //** HTML **/
 
@@ -265,7 +254,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             <div className="flex items-center">
                 
-                <div className="flex items-center w-8/12 ">
+                <div className="flex items-center w-full ">
                     <img src="src/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
                     <a className="text-4xl text-white">PowaCraft</a>
                     <div className="h-14 flex items-end">
@@ -273,17 +262,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
                 </div>
 
-                <div className="flex h-20 items-center space-x-6 mr-12">
-                    <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
-                        <a className="text-2xl">Tvoje body:</a>
-                    </div>
-                    <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
-                        <a className="text-green-500 text-2xl">+{plusPoints}</a> 
-                    </div>
-                    <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
-                        <a className="text-red-500 text-2xl">-{minusPoints}</a>
-                    </div>    
-                </div>
 
                 <div>
                     <div className="flex justify-end items-stretch right-10 pr-10">
@@ -293,14 +271,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
-                        <a className="text-4xl"><WriteUserRank rank={rank} /></a>
+                        <div className="text-4xl"><WriteUserRank rank={rank} /></div>
                     </div>
                 </div>
-
             </div>
         
-        <div className="grid grid-cols-2 h-4/5 pl-5 pr-5 gap-4">
-                <div className="bg-zinc-700/80 rounded-lg px-3 mt-8 h-3/5">
+        <div className="grid grid-cols-2 h-3/4 pl-5 pr-5 gap-4">
+                <div className="bg-zinc-700/80 rounded-lg px-3 mt-8 h-3/4">
 
                     <div className="inline-block flex items-center justify-between p-2 flex">
                         <div>
@@ -321,13 +298,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                    <div className="flex h-5/6 w-full overflow-auto">
-                    {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
+                    <div className="h-5/6 overflow-auto">
+                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
                     </div>
                 </div>
 
 
-            <div className="mt-8 h-3/5 flex">
+            <div className="mt-8 h-3/4 flex">
                 <div className="bg-zinc-700/80 rounded-lg">
 
                     <div className="inline-block flex items-center justify-center p-2">
@@ -338,7 +315,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
 
-                    <div className="h-4/6 overflow-auto">
+                    <div className="h-3/4 overflow-auto">
                         {allUsersResponse ? <OwnerATList response={allUsersResponse} onRefresh={RefreshPoints}/> : null}
                     </div>
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">

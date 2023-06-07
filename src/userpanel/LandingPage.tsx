@@ -84,14 +84,8 @@ const Open = props => {
                     <a className="text-3xl text-white">Členovia AT</a><br/>
                     <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
-                <div className="text-white rounded-2xl w-3/4">
-                <a className="mx-7"></a>
-                <a className="mx-6 text-xl">username</a>
-                <a className="mx-6 text-xl">rank</a>
-                <a className="mx-6 text-xl">plus b.</a>
-                <a className="mx-6 text-xl">minus b.</a>
-            </div>                 
-                    <div className="pt-5 h-3/4">
+
+                <div className="pt-5 h-3/4">
                         {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
                 </div>
         </div>

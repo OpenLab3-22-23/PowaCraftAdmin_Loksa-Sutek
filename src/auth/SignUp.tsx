@@ -27,8 +27,18 @@ export default function SignUp() {
         if (data) {
           setMailResponse(data);
         }
-        console.log(data);
     } 
+
+    const deleteMail = async () => {
+      const { error } = await supabase
+          .from('allowed_mails')
+          .delete()
+          .eq('mail', email)
+          if (error) {
+              console.log("ERROR");
+          }
+      }   
+
 
   function checkEmail(currentMail: string)
   {
@@ -41,15 +51,14 @@ export default function SignUp() {
     {
       setEmailEnabled(false);
     }
-    console.log(allowedMailResponse?.some(item => item.mail === email));   
-    console.log(currentMail); 
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try{
       const { error } = await signUp(email, password, nick);  
-      if (error) throw error;
+      if (error) { throw error; }
+      else { deleteMail(); }
     }
     catch(error: any) {
       alert(error.error_description || error.message);

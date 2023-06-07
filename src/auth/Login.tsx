@@ -18,7 +18,8 @@ export default function LogIn() {
     }
   }
 
-  return !session ? (
+  
+  return !session? (
     <div className="w-screen h-screen flex flex-col justify-center bg-[url('/src/assets/bg.png')]">
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
       <img src="src/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
