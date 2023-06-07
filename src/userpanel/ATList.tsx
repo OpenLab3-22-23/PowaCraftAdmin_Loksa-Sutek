@@ -3,7 +3,7 @@ import WriteUserRank from "./UserRank";
 export default function ATList({response}) {
         
     return(
-        <div className=" overflow-auto h-full">
+        <div className=" overflow-auto h-full w-full">
             
         {
             response.map((user, index) => 

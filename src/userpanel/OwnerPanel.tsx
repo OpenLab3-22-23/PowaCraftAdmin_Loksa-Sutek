@@ -303,13 +303,24 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
                 </div>
 
+                    <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-self-end">
 
             <div className="mt-8 h-3/4 flex">
                 <div className="bg-zinc-700/80 rounded-lg">
+                        <div className="inline-block flex items-center justify-center p-2">
+                            <div>
+                                <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam členov AT</a>
+                            </div>
+                        </div>
 
-                    <div className="inline-block flex items-center justify-center p-2">
-                        <div>
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam členov AT</a>
+                        <div className="h-0.5 bg-cyan-400 mb-4"></div>
+
+                        <div className="h-4/6 w-full overflow-auto">
+                            {allUsersResponse ? <OwnerATList response={allUsersResponse} onRefresh={RefreshPoints}/> : null}
+                        </div>
+                        <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
+                            <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">Pridať účet</button>
+                            <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">Zmazať účet</button>
                         </div>
                     </div>
 

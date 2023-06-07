@@ -79,7 +79,7 @@ const Open = props => {
     }
     return (
     <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
-        <div className="w-2/4 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
+        <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
         <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Členovia AT</a><br/>
                     <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
@@ -214,7 +214,7 @@ const Open = props => {
                 </div>
 
                 <div>
-                    <div className="flex justify-end items-stretch right-10 pr-10">
+                    <div className="flex justify-end items-stretch right-10 pr-10 pt-11">
                         <button className="text-2xl text-white text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
                         <div className="flex w-5"></div>
                         <img src="src/assets/steve.png" className="w-20 h-20 rounded-full"></img>
@@ -231,7 +231,7 @@ const Open = props => {
                 <a className="text-7xl text-white">Vitaj, {username}</a>
             </div>
 
-            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-screen gap-1 px-5 py-5">
+            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-full gap-1 px-5 py-5">
 
                 <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
@@ -248,7 +248,7 @@ const Open = props => {
 
                 
 
-                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 row-start-2 w-3/5 justify-self-end">
+                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 row-start-2 w-3/5 h-full justify-self-end">
 
                     <div className="justify-center flex pb-2 pt-2 bg-amber-500/40 rounded-lg mb-2">
                         <a className="text-2xl text-white">Najlepší helperi</a>
@@ -257,9 +257,9 @@ const Open = props => {
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[0].username} plus={allUsersResponse[0].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[1].username} plus={allUsersResponse[1].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null} 
-                    <div className="row-start-2 col-start-2 bg-zinc-700/80 rounded-b-lg flex justify-center w-44">
-                        <button className="text-white/80" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
-                    </div>                 
+                    <div className="flex w-full justify-center">
+                    <button className="text-white/80 w-full" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>     
+                    </div>            
                 </div>
                 
 
