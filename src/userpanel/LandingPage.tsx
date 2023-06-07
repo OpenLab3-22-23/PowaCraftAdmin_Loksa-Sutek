@@ -79,19 +79,19 @@ const Open = props => {
     }
     return (
     <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
-        <div className="w-2/4 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
+        <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
         <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Členovia AT</a><br/>
                     <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
-                <div className="text-white rounded-2xl w-3/4">
-                <a className="mx-7"></a>
-                <a className="mx-6 text-xl">username</a>
-                <a className="mx-6 text-xl">rank</a>
-                <a className="mx-6 text-xl">plus b.</a>
-                <a className="mx-6 text-xl">minus b.</a>
+                <div className="text-black rounded-2xl w-full text-xl flex justify-center gap-2 pr-3">
+                <a className="bg-white rounded-2xl h-12 w-16 flex items-center justify-center">0.</a>
+                <a className="bg-white rounded-2xl h-12 w-64 flex items-center justify-center">username</a>
+                <a className="bg-white rounded-2xl h-12 w-36 flex items-center justify-center">rank</a>
+                <a className="bg-white rounded-2xl h-12 w-16 flex items-center justify-center">plus</a>
+                <a className="bg-white rounded-2xl h-12 w-16 flex items-center justify-center">minus</a>
             </div>                 
-                    <div className="pt-5 h-3/4">
+                    <div className="pt-5 h-3/4 w-6/7">
                         {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
                 </div>
         </div>
@@ -220,7 +220,7 @@ const Open = props => {
                 </div>
 
                 <div>
-                    <div className="flex justify-end items-stretch right-10 pr-10">
+                    <div className="flex justify-end items-stretch right-10 pr-10 pt-11">
                         <button className="text-2xl text-white text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
                         <div className="flex w-5"></div>
                         <img src="src/assets/steve.png" className="w-20 h-20 rounded-full"></img>
@@ -254,7 +254,7 @@ const Open = props => {
 
                 
 
-                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 row-start-2 w-3/5 justify-self-end">
+                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 row-start-2 w-3/5 h-full justify-self-end">
 
                     <div className="justify-center flex pb-2 pt-2 bg-amber-500/40 rounded-lg mb-2">
                         <a className="text-2xl text-white">Najlepší helperi</a>
@@ -263,9 +263,9 @@ const Open = props => {
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[0].username} plus={allUsersResponse[0].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[1].username} plus={allUsersResponse[1].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null} 
-                    <div className="row-start-2 col-start-2 bg-zinc-700/80 rounded-md flex justify-center ">
-                        <button className="text-white/80 w-full" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>
-                    </div>                 
+                    <div className="flex w-full justify-center">
+                    <button className="text-white/80 w-full" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>     
+                    </div>            
                 </div>
                 
 
