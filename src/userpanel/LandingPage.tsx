@@ -188,7 +188,7 @@ const Open = props => {
     //** HTML **/
 
     return (
-        <div className="h-full w-full bg-[url('/src/assets/bg.png')]">
+        <div className="h-full w-full bg-[url('/src/assets/bg.png')] bg-cover bg-no-repeat">
 
             {show && <div className="z-10 w-full h-full absolute">
                 <Modal show={show}/>

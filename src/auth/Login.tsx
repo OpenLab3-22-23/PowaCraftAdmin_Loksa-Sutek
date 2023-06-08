@@ -20,7 +20,7 @@ export default function LogIn() {
 
   
   return !session? (
-    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/src/assets/bg.png')]">
+    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/src/assets/bg.png')] bg-cover bg-no-repeat">
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
       <img src="src/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
         <h2 className="text-7xl text-white">Prihlásenie do panelu</h2>

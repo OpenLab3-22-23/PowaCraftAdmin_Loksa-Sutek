@@ -24,7 +24,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     const [newTaskText, setTaskText] = useState("");    
     const [newTaskPoints, setTaskPoints] = useState("");   
-    const [newMailText, setNewMailText] = useState("");     
+    const [newMailText, setNewMailText] = useState("");    
+    const [nickToDelete, setNickToDelete] = useState("");         
 
     const [deleteShown, setDeleteShown] = useState(false);   
     const [addQuestShown, setAddQuestVisibility] = useState(false);
@@ -120,8 +121,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <a className="text-white text-xl pb-2 pt-8">Meno používateľa, ktorého chceš vymazať</a>
                 <input 
-                    value={newMailText}
-                    onChange={(e) => setNewMailText(e.target.value)} 
+                    value={nickToDelete}
+                    onChange={(e) => setNickToDelete(e.target.value)} 
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
                     maxlength="40"
@@ -192,6 +193,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchQuestList();
     }
 
+    const getIDByUsername = (username) => {
+        const user = allUsersResponse.find((user) => user.username === username);
+        return user ? user.id : null;
+      };
+
 
 
     //** Data push functions **/
@@ -225,12 +231,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         const { error } = await supabase
             .from('profiles')
             .delete()
-            .eq('id', "15926752-71fd-4fdb-adec-865bfa51b613")
+            .eq('id', getIDByUsername(nickToDelete))
             if (error) {
                 console.log("ERROR");
             }
 
             setDelAccountVisibility(false);
+            fetchAllUsers();
         }   
 
     
@@ -238,7 +245,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     //** HTML **/
 
     return (
-        <div className="h-full w-full bg-[url('/src/assets/owner-bg.png')]">
+        <div className="h-full w-full bg-[url('/src/assets/owner-bg.png')] bg-cover bg-no-repeat">
 
             {addQuestShown && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={addQuestShown}/>

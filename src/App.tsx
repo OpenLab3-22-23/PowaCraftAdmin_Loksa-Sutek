@@ -28,6 +28,12 @@ function App() {
     }
   }, [canRedirect]);
 
+  useEffect(() => {
+    if (session) {
+      fetchUserProfile();
+    }
+  }, [session]);
+
   const fetchUserProfile = async () => {
     console.log("fetchujem...");
     try {
