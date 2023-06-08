@@ -18,7 +18,7 @@ export default function ATList({response}) {
                     </div>
                 </div>
 
-                <div className="items-center justify-center flex bg-white rounded-2xl box-content h-12 w-52 mx-2 overflow-hidden">
+                <div className="items-center justify-center flex bg-white rounded-2xl box-content h-12 w-56 mx-2 overflow-hidden">
                     <div className="mx-6">
                         <a className="text-2xl text-black">{user.username}</a>
                     </div>
