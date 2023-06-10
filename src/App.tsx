@@ -1,41 +1,21 @@
-import { Navigate } from "react-router-dom";
-import "./App.css";
-import { useAuth } from "./auth/Auth";
-import { useState, useEffect } from 'react';
-import { supabase } from "./supabase/supabaseClient";
-import LandingPage from "./userpanel/LandingPage";
-import OwnerPanel from "./userpanel/OwnerPanel";
-import AccountDeletedPage from "./userpanel/AccountDeletedPage";
+import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import './App.css';
+import { useAuth } from './auth/Auth';
+import { supabase } from './supabase/supabaseClient';
+import AccountDeletedPage from './userpanel/AccountDeletedPage';
+import LandingPage from './userpanel/LandingPage';
+import OwnerPanel from './userpanel/OwnerPanel';
 
 function App() {
   const { session } = useAuth();
-  const [accountDeleted, setAccountDeleted] = useState(false);
-  const [canRedirect, setCanRedirect] = useState(false);
-  const [renderedPage, setRenderedPage] = useState(null);
-
-  console.log("SPUSTAM!!");
-  console.log(session);
+  const [pageToRender, setPageToRender] = useState('');
 
   useEffect(() => {
-    if (session) {
-      fetchUserProfile();
-    }
+    if (session) getUser();
   }, [session]);
 
-  useEffect(() => {
-    if (canRedirect) {
-      setRenderedPage(checkSession());
-    }
-  }, [canRedirect]);
-
-  useEffect(() => {
-    if (session) {
-      fetchUserProfile();
-    }
-  }, [session]);
-
-  const fetchUserProfile = async () => {
-    console.log("fetchujem...");
+  const getUser = async () => {
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -44,61 +24,37 @@ function App() {
 
       if (data) {
         if (data.length === 0) {
-          console.log("DATA X");
-          signOut();
-          setAccountDeleted(true);
+          setPageToRender('banned');
+        } else if (session.user.id == 'd6be1352-f1d8-4ab8-9993-3a62d5431637') {
+          setPageToRender('admin');
         } else {
-          console.log("DATA!");
+          setPageToRender('user');
         }
+      } else {
+        throw new Error(error.message);
       }
     } catch (error) {
       console.log('Nastala chyba pri načítaní profilu:', error);
     }
-    setCanRedirect(true);
   };
 
-  const signOut = async () => {
-    const {} = await supabase.auth.signOut();
-  };
-
-  function checkSession() {
-    if (!session)
-    {
-      console.log("LOGIN PAGE REDIRECT");
-      return <Navigate to="/login" />;
-    }
-    else if (accountDeleted)
-    {
-      console.log("DELETED ACCOUNT REDIRECT");
+  function renderPage(pageName: string) {
+    if (pageName === 'banned') {
       return <AccountDeletedPage />;
-    }
-    else
-    {
-      console.log("LANDING PAGE REDIRECT");
-      if (session.user.id == "d6be1352-f1d8-4ab8-9993-3a62d5431637")
-      {
+    } else {
+      if (pageName === 'admin') {
         return <OwnerPanel userData={session} />;
-      }
-      else
-      {
+      } else if (pageName === 'user') {
         return <LandingPage userData={session} />;
+      } else {
+        return null;
       }
     }
   }
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!canRedirect) {
-        setCanRedirect(true);
-      }
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [canRedirect]);
-
   return (
-    <div className="w-screen h-screen">
-      {renderedPage}
+    <div className='w-screen h-screen'>
+      {session ? renderPage(pageToRender) : <Navigate to='/login' />}
     </div>
   );
 }
