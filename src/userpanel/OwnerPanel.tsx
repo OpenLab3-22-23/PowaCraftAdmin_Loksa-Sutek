@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../auth/Auth";
 import { supabase } from "../supabase/supabaseClient";
@@ -31,6 +30,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [addQuestShown, setAddQuestVisibility] = useState(false);
     const [addAccountShown, setAddAccountVisibility] = useState(false);
     const [delAccountShown, setDelAccountVisibility] = useState(false); 
+
 
     const AddQuest = props => {
         if (!props.show) {
@@ -72,7 +72,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         )
     } 
 
-
     const AddAccount = props => {
         if (!props.show) {
             return null;
@@ -101,7 +100,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         </div>
         )
     } 
-
 
     const DeleteAccount = props => {
         if (!props.show) {
@@ -146,7 +144,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }, [])
 
     const fetchUserProfile = async () => {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from('profiles')
             .select()
             .eq('id', userData.user.id)
@@ -156,20 +154,33 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             }
         }
 
+
     const fetchAllUsers = async () => {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from('profiles')
             .select()
             .order('plus', { ascending: false })
-            
-            if (data) {
-                setUsersResponse(data);
+
+            if (data)
+            {
+                let accounts = [];
+
+                for (let i = 0; i < data.length; i++)
+                {
+                    for (let x = 0; x < data.length; x++)
+                    {
+                        if (data[x].rank == GetRankByNumber(i))
+                        {
+                            accounts[accounts.length] = data[x]; 
+                        }
+                    }
+                }   
+                setUsersResponse(accounts);
             }
-            console.log(data);
         }
         
     const fetchQuestList = async () => {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from('quest_list')
             .select()
             
@@ -178,7 +189,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             }
         }         
         
-
 
     //** Other functions **/
     function RefreshQuests()
@@ -196,8 +206,32 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const getIDByUsername = (username) => {
         const user = allUsersResponse.find((user) => user.username === username);
         return user ? user.id : null;
-      };
+    };
 
+    function GetRankByNumber(number)
+    {
+        switch (number)
+        {
+            case 0:
+                return "Majiteľ";
+            case 1:
+                return "Developer"
+            case 2:
+                return "Hl.Admin"
+            case 3:
+                return "Hl.Builder"    
+            case 4:
+                return "Admin"
+            case 5:
+                return "Builder" 
+            case 6:
+                return "Hl.Helper"    
+            case 7:
+                return "Helper"       
+            case 8:
+                return "Akademik"                                                    
+        }
+    }
 
 
     //** Data push functions **/

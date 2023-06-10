@@ -17,6 +17,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         signOut();
     }
 
+
     const [username, setUsername] = useState("");
     const [rank, setRank] = useState("");
     const [plusPoints, setPlusPoints] = useState(0);
@@ -31,9 +32,11 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [newTaskPoints, setTaskPoints] = useState("");   
 
     const [deleteShown, setDeleteShown] = useState(false);   
-    const [show, setShow] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const Modal = props => {
+    const [isAddQuestOpened, setAddQuestOpened] = useState(false);
+    const [isMemberListOpened, setMembersListOpened] = useState(false);
+
+
+    const AddQuest = props => {
         if (!props.show) {
             return null;
         }
@@ -43,7 +46,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie úlohy</a><br/>
-                    <button onClick={() => setShow(false)} className="absolute right-1 text-white text-4xl">X</button>
+                    <button onClick={() => setAddQuestOpened(false)} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">Názov úlohy</a>
@@ -73,32 +76,31 @@ export default function LandingPage( {userData} ): JSX.Element {
         )
     } 
 
-const Open = props => {
-    if (!props.show) {
-        return null;
-    }
-    return (
-    <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
-        <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
-        <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">Členovia AT</a><br/>
-                    <button onClick={() => setIsOpen(false)} className="absolute right-1 text-white text-4xl">X</button>
+    const MembersList = props => {
+        if (!props.show) {
+            return null;
+        }
+        return (
+        <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
+            <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
+                <div className="inline-block flex relative w-full justify-center pb-5">
+                        <a className="text-3xl text-white">Členovia AT</a><br/>
+                        <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
                 <div className="text-black rounded-2xl w-full text-xl flex justify-center gap-4 pr-3">
-                <a className="bg-white rounded-2xl h-12 w-12 flex items-center justify-center">-</a>
-                <a className="bg-white rounded-2xl h-12 w-56 flex items-center justify-center">username</a>
-                <a className="bg-white rounded-2xl h-12 w-44 flex items-center justify-center">rank</a>
-                <a className="bg-white rounded-2xl h-12 w-14 flex items-center justify-center">plus</a>
-                <a className="bg-white rounded-2xl h-12 w-14 flex items-center justify-center">minus</a>
-            </div>
+                    <a className="bg-white rounded-2xl h-12 w-12 flex items-center justify-center">-</a>
+                    <a className="bg-white rounded-2xl h-12 w-56 flex items-center justify-center">username</a>
+                    <a className="bg-white rounded-2xl h-12 w-44 flex items-center justify-center">rank</a>
+                    <a className="bg-white rounded-2xl h-12 w-14 flex items-center justify-center">plus</a>
+                    <a className="bg-white rounded-2xl h-12 w-14 flex items-center justify-center">minus</a>
+                </div>
                 <div className="pt-5 h-3/4">
                         {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
                 </div>
+            </div>
         </div>
-    </div>
-    )
-}
-
+        )
+    }
 
 
     //** Data fetching **/
@@ -126,18 +128,31 @@ const Open = props => {
         }
 
     const fetchAllUsers = async () => {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from('profiles')
             .select()
             .order('plus', { ascending: false })
-            
-            if (data) {
-                setUsersResponse(data);
+
+            if (data)
+            {
+                let accounts = [];
+
+                for (let i = 0; i < data.length; i++)
+                {
+                    for (let x = 0; x < data.length; x++)
+                    {
+                        if (data[x].rank == GetRankByNumber(i))
+                        {
+                            accounts[accounts.length] = data[x]; 
+                        }
+                    }
+                }   
+                setUsersResponse(accounts);
             }
         }
         
     const fetchPointsList = async () => {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from('points_list')
             .select()
             .order('id', { ascending: true })
@@ -148,7 +163,7 @@ const Open = props => {
         }  
         
     const fetchQuestList = async () => {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from('quest_list')
             .select()
             
@@ -156,8 +171,6 @@ const Open = props => {
                 setQuestList(data);
             }
         }         
-        
-
 
 
     //** Other functions **/
@@ -167,6 +180,32 @@ const Open = props => {
         fetchQuestList();
     }
 
+    function GetRankByNumber(number)
+    {
+        switch (number)
+        {
+            case 0:
+                return "Majiteľ";
+            case 1:
+                return "Developer"
+            case 2:
+                return "Hl.Admin"
+            case 3:
+                return "Hl.Builder"    
+            case 4:
+                return "Admin"
+            case 5:
+                return "Builder" 
+            case 6:
+                return "Hl.Helper"    
+            case 7:
+                return "Helper"       
+            case 8:
+                return "Akademik"                                                    
+        }
+    }
+
+    
     //** Data push functions **/
         
     const sendNewTask = async () => {
@@ -190,11 +229,11 @@ const Open = props => {
     return (
         <div className="h-full w-full bg-[url('/src/assets/bg.png')] bg-cover bg-no-repeat">
 
-            {show && <div className="z-10 w-full h-full absolute">
-                <Modal show={show}/>
+            {isAddQuestOpened && <div className="z-10 w-full h-full absolute">
+                <AddQuest show={isAddQuestOpened}/>
             </div>}
-            {isOpen && <div className="z-10 w-full h-full absolute">
-                <Open show={isOpen}/>
+            {isMemberListOpened && <div className="z-10 w-full h-full absolute">
+                <MembersList show={isMemberListOpened}/>
             </div>}
 
             <div className="flex items-center">
@@ -264,7 +303,7 @@ const Open = props => {
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[1].username} plus={allUsersResponse[1].plus}/> : null}
                     {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null} 
                     <div className="flex w-full justify-center">
-                    <button className="text-white/80 w-full" onClick={() => setIsOpen(true)}>Celý zoznam členov AT</button>     
+                    <button className="text-white/80 w-full" onClick={() => setMembersListOpened(true)}>Celý zoznam členov AT</button>     
                     </div>            
                 </div>
                 
@@ -276,7 +315,7 @@ const Open = props => {
 
                     <div className="inline-block flex items-center justify-between p-2">
                         <div>
-                            <button onClick={() => setShow(true)} className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
+                            <button onClick={() => setAddQuestOpened(true)} className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
                                 Pridať úlohu
                             </button>
                         </div>
