@@ -298,7 +298,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="flex items-center">
                 
                 <div className="flex items-center w-full ">
-                    <img src="src/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
+                    <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
                     <a className="text-4xl text-white">PowaCraft</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400">Admin</a>
@@ -310,7 +310,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="flex justify-end items-stretch right-10 pr-10">
                         <button className="text-2xl text-white text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
                         <div className="flex w-5"></div>
-                        <img src="src/assets/steve.png" className="w-20 h-20 rounded-full"></img>
+                        <img src="/assets/steve.png" className="w-20 h-20 rounded-full"></img>
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
