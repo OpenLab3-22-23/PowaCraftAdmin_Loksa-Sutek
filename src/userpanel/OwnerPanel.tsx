@@ -53,8 +53,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     onChange={(e) => setTaskText(e.target.value)} 
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    maxlength="40"
-                    placeholder="Stručný opis úlohy (max. 40 znakov)"
+                    maxlength="35"
+                    placeholder="Stručný opis úlohy (max. 35 znakov)"
                     autoFocus>
                 </input><br/>
 
@@ -162,21 +162,23 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .select()
             .order('plus', { ascending: false })
 
+            console.log(data);
             if (data)
             {
                 let accounts = [];
 
-                for (let i = 0; i < data.length; i++)
+                for (let i = 0; i < 9; i++)
                 {
                     for (let x = 0; x < data.length; x++)
                     {
                         if (data[x].rank == GetRankByNumber(i))
                         {
-                            accounts[accounts.length] = data[x]; 
+                            accounts.push(data[x]); 
                         }
                     }
                 }   
                 setUsersResponse(accounts);
+                console.log(accounts);
             }
         }
         
@@ -294,7 +296,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <DeleteAccount show={delAccountShown}/>
             </div>}
 
-            <div className="flex items-center">
+            <div className="flex items-center mb-5">
                 
                 <div className="flex items-center w-full ">
                     <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
@@ -323,7 +325,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
                         <div className="flex bg-gray-600 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
-                            <button onClick={() => setAddQuestVisibility(true)} className="box-content">
+                            <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
                                 Pridať úlohu
                             </button>
                         </div>                     
@@ -333,7 +335,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>
 
                         <div className="flex bg-gray-600 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
-                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content">
+                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full">
                                 Zmazať úlohu
                             </button>
                         </div>
@@ -356,8 +358,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             {allUsersResponse ? <OwnerATList response={allUsersResponse} onRefresh={RefreshPoints}/> : null}
                         </div>
                         <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
-                            <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">Pridať účet</button>
-                            <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">Zmazať účet</button>
+                            <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Pridať účet</button>
+                            <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Zmazať účet</button>
                         </div>
                     </div>
                     </div>

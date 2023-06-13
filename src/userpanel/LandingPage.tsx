@@ -24,9 +24,11 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [rank, setRank] = useState("");
     const [plusPoints, setPlusPoints] = useState(0);
     const [minusPoints, setMinusPoints] = useState(0);
+    const [isHelper, setIsHelper] = useState(false);   
 
     const [userResponse, setUserResponse] = useState();
     const [allUsersResponse, setUsersResponse] = useState();
+    const [usersResponseByPlus, setUsersResponseByPlus] = useState();
     const [pointsList, setPointsList] = useState();    
     const [questList, setQuestList] = useState();   
 
@@ -57,8 +59,8 @@ export default function LandingPage( {userData} ): JSX.Element {
                     onChange={(e) => setTaskText(e.target.value)} 
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    maxlength="40"
-                    placeholder="Stručný opis úlohy (max. 40 znakov)"
+                    maxlength="35"
+                    placeholder="Stručný opis úlohy (max. 35 znakov)"
                     autoFocus>
                 </input><br/>
 
@@ -119,6 +121,11 @@ export default function LandingPage( {userData} ): JSX.Element {
                 setRank(data[0].rank);
                 setPlusPoints(data[0].plus);
                 setMinusPoints(data[0].minus);
+
+                if (data[0].rank == "Akademik" || data[0].rank == "Helper")
+                {
+                    setIsHelper(true);
+                }
             }
         }
 
@@ -127,12 +134,14 @@ export default function LandingPage( {userData} ): JSX.Element {
             .from('profiles')
             .select()
             .order('plus', { ascending: false })
+            
+            setUsersResponseByPlus(data);
 
             if (data)
             {
                 let accounts = [];
 
-                for (let i = 0; i < data.length; i++)
+                for (let i = 0; i < 9; i++)
                 {
                     for (let x = 0; x < data.length; x++)
                     {
@@ -231,7 +240,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <MembersList show={isMemberListOpened}/>
             </div>}
 
-            <div className="flex items-center">
+            <div className="flex justify-between items-center">
                 
                 <div className="flex items-center w-8/12 ">
                     <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
@@ -241,7 +250,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
                 </div>
 
-                <div className="flex h-20 items-center space-x-6 mr-12">
+                <div className="h-20 items-center space-x-6 mr-12" style={{ display: isHelper ? "flex" : "none" }}>
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
                         <a className="text-2xl">Tvoje body:</a>
                     </div>
@@ -254,7 +263,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 </div>
 
                 <div>
-                    <div className="flex justify-end items-stretch right-10 pr-10 pt-11">
+                    <div className="flex justify-end items-stretch pr-10 pt-10">
                         <button className="text-2xl text-white text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
                         <div className="flex w-5"></div>
                         <img src="/assets/steve.png" className="w-20 h-20 rounded-full"></img>
@@ -294,9 +303,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <a className="text-2xl text-white">Najlepší helperi</a>
                         <hr/>
                     </div>
-                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[0].username} plus={allUsersResponse[0].plus}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[1].username} plus={allUsersResponse[1].plus}/> : null}
-                    {allUsersResponse ? <WriteBestHelpers username={allUsersResponse[2].username} plus={allUsersResponse[2].plus}/> : null} 
+                    {usersResponseByPlus && usersResponseByPlus.length > 0 ? <WriteBestHelpers username={usersResponseByPlus[0].username} plus={usersResponseByPlus[0].plus}/> : null}
+                    {usersResponseByPlus && usersResponseByPlus.length > 1 ? <WriteBestHelpers username={usersResponseByPlus[1].username} plus={usersResponseByPlus[1].plus}/> : null}
+                    {usersResponseByPlus && usersResponseByPlus.length > 2 ? <WriteBestHelpers username={usersResponseByPlus[2].username} plus={usersResponseByPlus[2].plus}/> : null} 
                     <div className="flex w-full justify-center">
                     <button className="text-white/80 w-full" onClick={() => setMembersListOpened(true)}>Celý zoznam členov AT</button>     
                     </div>            
@@ -310,7 +319,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                     <div className="inline-block flex items-center justify-between p-4">
                         <div className="flex bg-white rounded-lg w-1/5 h-full justify-center">
-                            <button onClick={() => setAddQuestOpened(true)} className="box-content">
+                            <button onClick={() => setAddQuestOpened(true)} className="box-content w-full h-full">
                                 Pridať úlohu
                             </button>
                         </div>
@@ -320,7 +329,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
 
                         <div className="flex bg-white rounded-lg w-1/5 h-full justify-center">
-                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content">
+                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full disabled:bg-gray-600/60 disabled:text-white/60" disabled = { isHelper }>
                                 Zmazať úlohu
                             </button>
                         </div>
