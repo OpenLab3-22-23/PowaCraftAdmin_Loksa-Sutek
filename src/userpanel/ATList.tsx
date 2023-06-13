@@ -3,14 +3,12 @@ import WriteUserRank from "./UserRank";
 export default function ATList({response}) {
         
     return(
-        <div className=" overflow-auto h-full w-full">
+        <div className=" overflow-auto h-5/6 w-full">
             
         {
             response.map((user, index) => 
 
-            <div className="w-full flex inline-block pb-5 items-center w-full overflow-hidden">
-
-
+            <div className="w-full flex inline-block pb-5 items-center overflow-hidden">
 
                 <div className="items-center justify-center flex bg-white rounded-2xl box-content h-12 w-12 mx-2">
                     <div className="mx-6">

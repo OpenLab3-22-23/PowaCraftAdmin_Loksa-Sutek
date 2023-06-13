@@ -83,18 +83,11 @@ export default function LandingPage( {userData} ): JSX.Element {
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
             <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border">      
-                <div className="inline-block flex relative w-full justify-center pb-5">
+                <div className="flex relative justify-center items-center w-full my-2">
                         <a className="text-3xl text-white">Členovia AT</a><br/>
                         <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
-                <div className="text-black rounded-2xl w-full text-xl flex justify-center gap-4 pr-3">
-                    <a className="bg-white rounded-2xl h-12 w-12 flex items-center justify-center">-</a>
-                    <a className="bg-white rounded-2xl h-12 w-56 flex items-center justify-center">username</a>
-                    <a className="bg-white rounded-2xl h-12 w-44 flex items-center justify-center">rank</a>
-                    <a className="bg-white rounded-2xl h-12 w-14 flex items-center justify-center">plus</a>
-                    <a className="bg-white rounded-2xl h-12 w-14 flex items-center justify-center">minus</a>
-                </div>
-                <div className="pt-5 h-3/4">
+                <div className="pt-5 h-full">
                         {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
                 </div>
             </div>
@@ -280,7 +273,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
-                    <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2">
+                    <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2 h-1/5 items-center flex flex-col">
                         <a className="text-2xl text-white">Tvoje posledné body</a>
                         <hr/>
                     </div>
@@ -293,9 +286,9 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 
 
-                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 row-start-2 w-3/5 h-full justify-self-end">
+                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 row-start-2 w-3/5 h-full justify-self-end flex flex-col">
 
-                    <div className="justify-center flex pb-2 pt-2 bg-amber-500/40 rounded-lg mb-2">
+                    <div className="justify-center flex pb-2 pt-2 bg-amber-500/40 rounded-lg mb-2 h-1/6 items-center">
                         <a className="text-2xl text-white">Najlepší helperi</a>
                         <hr/>
                     </div>
@@ -311,7 +304,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
 
             <div className="row-span-2 col-start-1 row-start-1">
-                <div className="h-full w-full bg-zinc-700/80 rounded-lg">
+                <div className="h-full w-full bg-zinc-700/80 rounded-lg flex flex-col">
 
                     <div className="inline-block flex items-center justify-between p-2">
                         <div>
@@ -332,7 +325,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                    <div className="w-full h-4/5 overflow-auto">
+                    <div className="w-full h-full mb-4 overflow-auto">
                     {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
                     </div>
                 </div>

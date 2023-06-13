@@ -318,7 +318,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div>
         
         <div className="flex w-full h-3/4 gap-7">
-                <div className="bg-zinc-700/80 rounded-lg flex flex-col ml-5">
+                <div className="bg-zinc-700/80 rounded-lg flex flex-col ml-5 w-full">
 
                     <div className="inline-block flex items-center justify-between p-2 flex">
                         <div>
@@ -327,8 +327,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </button>
                         </div>                     
 
-                        <div>
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam úloh</a>
+                        <div className="flex justify-center">
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">Zoznam úloh</a>
                         </div>
 
                         <div>
@@ -339,19 +339,19 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                    <div className="h-4/5 overflow-auto">
+                    <div className="h-full overflow-auto mb-4">
                         {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
                     </div>
                 </div>
 
-                    <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-self-end">
+                    <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-self-end mr-5 w-full">
                         <div className="inline-block flex items-center justify-center p-2">
                             <div>
                                 <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam členov AT</a>
                             </div>
                         </div>
 
-                        <div className="h-0.5 bg-cyan-400 mb-4"></div>
+                        <div className="h-0.5 bg-cyan-400 mb-4 "></div>
 
                         <div className="h-full w-full overflow-auto">
                             {allUsersResponse ? <OwnerATList response={allUsersResponse} onRefresh={RefreshPoints}/> : null}
