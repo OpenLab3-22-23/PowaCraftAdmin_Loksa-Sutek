@@ -47,7 +47,7 @@ function App() {
       if (pageName === 'admin') {
         return <OwnerPanel userData={session} />;
       } else if (pageName === 'user') {
-        return <OwnerPanel userData={session} />;
+        return <LandingPage userData={session} />;
       } else {
         return null;
       }
