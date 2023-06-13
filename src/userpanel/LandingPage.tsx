@@ -44,7 +44,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/public/assets/popup_background.png')] p-2 border"> 
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie úlohy</a><br/>
@@ -84,7 +84,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
-            <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/public/assets/popup_background.png')] p-2 border">      
+            <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                         <a className="text-3xl text-white">Členovia AT</a><br/>
                         <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white text-4xl">X</button>
