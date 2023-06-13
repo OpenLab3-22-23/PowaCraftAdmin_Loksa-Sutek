@@ -20,9 +20,9 @@ export default function LogIn() {
 
   
   return !session? (
-    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/src/assets/bg.png')] bg-cover bg-no-repeat">
+    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
-      <img src="/static/images/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
+      <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
         <h2 className="text-7xl text-white">Prihlásenie do panelu</h2>
         <h3 className="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
         <p className="text-2xl">Email</p>
