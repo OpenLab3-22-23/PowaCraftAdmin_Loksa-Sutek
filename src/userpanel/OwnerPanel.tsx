@@ -115,22 +115,21 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
 
-                <div className="flex h-3/5">
+                <div className="flex flex-col h-full justify-center items-center pb-12">
                     {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
-                </div>
-
-                <a className="text-white text-xl pb-2 pt-8">Meno používateľa, ktorého chceš vymazať</a>
+                <a className="text-white text-xl my-2">Meno používateľa, ktorého chceš vymazať</a>
                 <input 
                     value={nickToDelete}
                     onChange={(e) => setNickToDelete(e.target.value)} 
                     type="text"
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
+                    className="border border-green-300 rounded-2xl w-4/5 text-center" 
                     maxlength="40"
                     placeholder="Nick"
                     autoFocus>
                 </input><br/>
 
                 <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">ZMAZAŤ</button>
+                </div>
             </div>      
         </div>
         )
@@ -322,19 +321,19 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         <div className="flex w-full h-3/4 gap-7">
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col ml-5 w-full">
 
-                    <div className="inline-block flex items-center justify-between p-2 flex">
-                        <div>
-                            <button onClick={() => setAddQuestVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-2 items-center flex">
+                    <div className="inline-block flex items-center justify-between p-4 flex">
+                        <div className="flex bg-gray-600 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
+                            <button onClick={() => setAddQuestVisibility(true)} className="box-content">
                                 Pridať úlohu
                             </button>
                         </div>                     
 
                         <div className="flex justify-center">
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">Zoznam úloh</a>
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam úloh</a>
                         </div>
 
-                        <div>
-                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg mx-2 items-center flex">
+                        <div className="flex bg-gray-600 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
+                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content">
                                 Zmazať úlohu
                             </button>
                         </div>
@@ -346,15 +345,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
                 </div>
 
-                    <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-self-end mr-5 w-full">
-                        <div className="inline-block flex items-center justify-center p-2">
-                            <div>
+                    <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-center items-centzer mr-5 w-full">
+                        <div>
+                            <div className="flex justify-center p-4">
                                 <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam členov AT</a>
                             </div>
-                        </div>
-
                         <div className="h-0.5 bg-cyan-400 mb-4 "></div>
-
+                        </div>
                         <div className="h-full w-full overflow-auto">
                             {allUsersResponse ? <OwnerATList response={allUsersResponse} onRefresh={RefreshPoints}/> : null}
                         </div>

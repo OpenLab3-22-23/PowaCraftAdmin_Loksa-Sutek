@@ -84,7 +84,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
-            <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popup_background.png')] p-2 border">      
+            <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('public/assets/popup_background.png')] p-2 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                         <a className="text-3xl text-white">Členovia AT</a><br/>
                         <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white text-4xl">X</button>
@@ -275,7 +275,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
-                    <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2 h-1/5 items-center flex flex-col">
+                    <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2 h-1/5 items-center flex-col">
                         <a className="text-2xl text-white">Tvoje posledné body</a>
                         <hr/>
                     </div>
@@ -308,19 +308,19 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="row-span-2 col-start-1 row-start-1">
                 <div className="h-full w-full bg-zinc-700/80 rounded-lg flex flex-col">
 
-                    <div className="inline-block flex items-center justify-between p-2">
-                        <div>
-                            <button onClick={() => setAddQuestOpened(true)} className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
+                    <div className="inline-block flex items-center justify-between p-4">
+                        <div className="flex bg-white rounded-lg w-1/5 h-full justify-center">
+                            <button onClick={() => setAddQuestOpened(true)} className="box-content">
                                 Pridať úlohu
                             </button>
                         </div>
 
                         <div>
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam úloh</a>
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full">Zoznam úloh</a>
                         </div>
 
-                        <div>
-                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content h-4 w-8/12 p-4 bg-white rounded-lg mx-2 items-center flex">
+                        <div className="flex bg-white rounded-lg w-1/5 h-full justify-center">
+                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content">
                                 Zmazať úlohu
                             </button>
                         </div>
