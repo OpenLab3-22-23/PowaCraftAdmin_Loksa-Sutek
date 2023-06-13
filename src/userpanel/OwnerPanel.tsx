@@ -40,7 +40,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/public/assets/popup_background.png')] p-2 border"> 
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/owner-bg.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie úlohy</a><br/>
