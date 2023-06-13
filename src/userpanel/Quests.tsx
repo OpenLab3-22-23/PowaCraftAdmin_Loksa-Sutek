@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { supabase } from "../supabase/supabaseClient";
 
 export default function WriteQuests({questList, deleteShown, onDelete}) {

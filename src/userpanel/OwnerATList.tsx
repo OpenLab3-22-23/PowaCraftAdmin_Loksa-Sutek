@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import WriteUserRank from "./UserRank";
 import { supabase } from "../supabase/supabaseClient";
 

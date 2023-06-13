@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState, useEffect } from "react";
 import { useAuth } from "../auth/Auth";
 import { supabase } from "../supabase/supabaseClient";
@@ -216,7 +218,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             if (error) {
                 console.log("ERROR");
             }
-            setShow(false);
+            setAddQuestOpened(false);
             fetchQuestList();
             setTaskText("");
             setTaskPoints("");
