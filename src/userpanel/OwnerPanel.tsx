@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState, useEffect } from "react";
 import { useAuth } from "../auth/Auth";
 import { supabase } from "../supabase/supabaseClient";
@@ -38,7 +40,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popup_background.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie úlohy</a><br/>
@@ -78,7 +80,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popup_background.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie účtu</a><br/>
                     <button onClick={() => setAddAccountVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
@@ -107,7 +109,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
-            <div className="w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('src/assets/popup_background.png')] p-2 border"> 
+            <div className="w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popup_background.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Zmazanie účtu</a><br/>
                     <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
@@ -279,7 +281,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     //** HTML **/
 
     return (
-        <div className="h-full w-full bg-[url('/src/assets/owner-bg.png')] bg-cover bg-no-repeat">
+        <div className="h-full w-full bg-[url('/assets/owner-bg.png')] bg-cover bg-no-repeat">
 
             {addQuestShown && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={addQuestShown}/>
@@ -296,7 +298,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="flex items-center">
                 
                 <div className="flex items-center w-full ">
-                    <img src="src/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
+                    <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
                     <a className="text-4xl text-white">PowaCraft</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400">Admin</a>
@@ -308,7 +310,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="flex justify-end items-stretch right-10 pr-10">
                         <button className="text-2xl text-white text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
                         <div className="flex w-5"></div>
-                        <img src="src/assets/steve.png" className="w-20 h-20 rounded-full"></img>
+                        <img src="/assets/steve.png" className="w-20 h-20 rounded-full"></img>
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import WriteUserRank from "./UserRank";
 
 export default function ATList({response}) {

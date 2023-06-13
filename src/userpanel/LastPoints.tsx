@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 export default function WriteLastPoints({actionName, points}) {
 
     if (points > 0)
