@@ -71,7 +71,7 @@ export default function SignUp() {
     <div className="w-screen h-screen flex justify-center bg-[url('/assets/bg.png')]">
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400 mt-6"></img>
-      <h2 className="text-7xl text-white">Prihlásenie do panelu</h2>
+      <h2 className="text-7xl text-white">Registrácia do panelu</h2>
         <h3 className="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
     <div className="grid grid-cols-2 gap-36">
       <div className="">
