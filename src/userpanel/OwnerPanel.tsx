@@ -22,16 +22,25 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     const [allUsersResponse, setUsersResponse] = useState();
     const [questList, setQuestList] = useState();   
+    const [pointsList, setPointsList] = useState();       
 
     const [newTaskText, setTaskText] = useState("");    
     const [newTaskPoints, setTaskPoints] = useState("");   
     const [newMailText, setNewMailText] = useState("");    
-    const [nickToDelete, setNickToDelete] = useState("");         
+    const [nickToDelete, setNickToDelete] = useState("");  
+
+    const [addPlusTask, setAddPlusTask] = useState(1);       
+    const [addMinusTask, setAddMinusTask] = useState(7);      
+    const [activeUserID, setActiveUserID] = useState();           
+
+
 
     const [deleteShown, setDeleteShown] = useState(false);   
     const [addQuestShown, setAddQuestVisibility] = useState(false);
     const [addAccountShown, setAddAccountVisibility] = useState(false);
     const [delAccountShown, setDelAccountVisibility] = useState(false); 
+    const [addPlusShown, setAddPlusShown] = useState(false);     
+    const [addMinusShown, setAddMinusShown] = useState(false);         
 
 
     const AddQuest = props => {
@@ -135,6 +144,77 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         )
     } 
 
+    const AddPlus = props => {
+        if (!props.show) {
+            return null;
+        }
+        return (
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+
+                <div className="inline-block flex relative w-full justify-center pb-5">
+                    <a className="text-3xl text-white">Pridanie plusového bodu</a><br/>
+                    <button onClick={() => setAddPlusShown(false)} className="absolute right-1 text-white text-4xl">X</button>
+                </div>
+
+                <a className="text-white text-xl pb-2">Názov úlohy</a>
+                <select
+                    value={addPlusTask}
+                    onChange={(e) => setAddPlusTask(e.target.value)} 
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
+                    autoFocus>
+                    {pointsList.map((point) => (
+                        point.points > 0 ? (
+                            <option key={point.id} value={point.id}>
+                                {point.action_name} | {point.points}+
+                            </option>
+                        ) : null
+                    ))}
+                </select><br/>
+
+                <button onClick={savePlusPoints} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">PRIPÍSAŤ</button>
+            </div>      
+        </div>
+        )
+    } 
+
+    const AddMinus = props => {
+        if (!props.show) {
+            return null;
+        }
+        return (
+            <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+
+                <div className="inline-block flex relative w-full justify-center pb-5">
+                    <a className="text-3xl text-white">Pridanie mínusového bodu</a><br/>
+                    <button onClick={() => setAddMinusShown(false)} className="absolute right-1 text-white text-4xl">X</button>
+                </div>
+
+                <a className="text-white text-xl pb-2">Názov úlohy</a>
+                <select
+                    value={addMinusTask}
+                    onChange={(e) => setAddMinusTask(e.target.value)} 
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
+                    autoFocus>
+                    {pointsList.map((point) => (
+                        point.points < 0 ? (
+                            <option key={point.id} value={point.id}>
+                                {point.action_name} | {point.points}+
+                            </option>
+                        ) : null
+                    ))}
+                </select><br/>
+
+                <button onClick={saveMinusPoints} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">PRIPÍSAŤ</button>
+            </div>      
+        </div>
+        )
+    } 
+
+
+
+
 
     //** Data fetching **/
 
@@ -142,6 +222,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchUserProfile();
         fetchAllUsers();
         fetchQuestList();
+        fetchPointsList();
     }, [])
 
     const fetchUserProfile = async () => {
@@ -162,7 +243,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .select()
             .order('plus', { ascending: false })
 
-            console.log(data);
             if (data)
             {
                 let accounts = [];
@@ -178,7 +258,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     }
                 }   
                 setUsersResponse(accounts);
-                console.log(accounts);
             }
         }
         
@@ -190,19 +269,24 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             if (data) {
                 setQuestList(data);
             }
-        }         
+        }       
+
+    const fetchPointsList = async () => {
+        const { data } = await supabase
+            .from('points_list')
+            .select()
+            .order('id', { ascending: true })
+            
+            if (data) {
+                setPointsList(data);
+            }
+        }      
         
 
     //** Other functions **/
     function RefreshQuests()
     {
         setDeleteShown(!deleteShown);
-        fetchQuestList();
-    }
-    
-    function RefreshPoints()
-    {
-        fetchAllUsers();
         fetchQuestList();
     }
 
@@ -235,6 +319,73 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 return "Akademik"                                                    
         }
     }
+
+    function openAddPlusPoint(id)
+    {
+        setActiveUserID(id);
+        setAddPlusShown(true);
+    }
+    function openAddMinusPoint(id)
+    {
+        setActiveUserID(id);
+        setAddMinusShown(true);
+    }
+
+    const savePlusPoints = async () => {
+
+        let partialData;
+
+        const { data } = await supabase
+        .from('profiles')
+        .select('plus, last_point1, last_point2, last_point3')
+        .eq('id', activeUserID)
+            
+            if (data) {
+                partialData = data;
+            }
+
+            const { error } = await supabase
+            .from('profiles')
+            .update({plus: partialData[0].plus + pointsList[addPlusTask].points, last_point1: addPlusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
+            .eq('id', activeUserID)
+            if (error) {
+                console.log(error);
+            }
+            setAddPlusShown(false);
+
+        fetchAllUsers();
+    } 
+
+    const saveMinusPoints = async () => {
+
+        let partialData;
+
+        const { data } = await supabase
+        .from('profiles')
+        .select('minus, last_point1, last_point2, last_point3')
+        .eq('id', activeUserID)
+            
+            if (data) {
+                partialData = data;
+            }
+            console.log("t"); 
+            console.log(addMinusTask);
+            console.log(pointsList[addMinusTask].points);
+            console.log("tt");
+
+            const { error } = await supabase
+            .from('profiles')
+            .update({minus: partialData[0].minus - pointsList[addMinusTask].points, last_point1: addMinusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
+            .eq('id', activeUserID)
+            if (error) {
+                console.log(error);
+            }
+            setAddMinusShown(false);
+
+        fetchAllUsers();
+    } 
+        
+    
 
 
     //** Data push functions **/
@@ -296,6 +447,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <DeleteAccount show={delAccountShown}/>
             </div>}
 
+            {addPlusShown && <div className="z-10 w-full h-full absolute">
+                <AddPlus show={addPlusShown}/>
+            </div>}
+
+            {addMinusShown && <div className="z-10 w-full h-full absolute">
+                <AddMinus show={addMinusShown}/>
+            </div>}
+
             <div className="flex items-center mb-5">
                 
                 <div className="flex items-center w-full ">
@@ -355,7 +514,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-0.5 bg-cyan-400 mb-4 "></div>
                         </div>
                         <div className="h-full w-full overflow-auto">
-                            {allUsersResponse ? <OwnerATList response={allUsersResponse} onRefresh={RefreshPoints}/> : null}
+                            {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint}/> : null}
                         </div>
                         <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
                             <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Pridať účet</button>

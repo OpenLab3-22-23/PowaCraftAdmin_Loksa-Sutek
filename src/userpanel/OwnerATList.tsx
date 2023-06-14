@@ -1,32 +1,9 @@
 // @ts-nocheck
 
 import WriteUserRank from "./UserRank";
-import { supabase } from "../supabase/supabaseClient";
 
-export default function OwnerATList({response, onRefresh}) {
+export default function OwnerATList({response, addPlusPoint, addMinusPoint}) {
         
-    //console.log(response);
-    const addPlusPoint = async (user) => {
-        const { } = await supabase
-        .from('profiles')
-        .update({plus: user.plus+1})
-        .eq('id', user.id)
-
-        user.plus++;
-        onRefresh();
-    }
-
-    const addMinusPoint = async (user) => {
-        const { } = await supabase
-        .from('profiles')
-        .update({minus: user.minus+1})
-        .eq('id', user.id)
-
-        user.minus++;
-        onRefresh();
-    }
-
-
 
     return (
         <div>
@@ -34,10 +11,8 @@ export default function OwnerATList({response, onRefresh}) {
             <div key={index} className="w- flex inline-block pb-5 items-center justify-center">
               {(user.rank === "Akademik" || user.rank === "Helper") && (
                 <button
-                  onClick={() => addPlusPoint(user)}
-                  className="box-content h-4 w-max p-4 bg-gray-600 border-slate-500 border-2 text-green-600 rounded-lg mx-6 items-center flex">
-                  +1
-                </button>
+                  onClick={() => addPlusPoint(user.id)}
+                  className="box-content h-4 w-max p-4 bg-gray-600 border-slate-500 border-2 text-green-600 text-2xl rounded-lg mx-6 items-center flex">+</button>
               )}
       
 
@@ -90,10 +65,8 @@ export default function OwnerATList({response, onRefresh}) {
       
               {(user.rank === "Akademik" || user.rank === "Helper") && (
                 <button
-                  onClick={() => addMinusPoint(user)}
-                  className="box-content h-4 w-max p-4 bg-gray-600 border-slate-500 border-2 text-red-600 rounded-lg mx-8 items-center flex justify-center">
-                  -1
-                </button>
+                  onClick={() => addMinusPoint(user.id)}
+                  className="box-content h-4 w-max p-4 bg-gray-600 border-slate-500 border-2 text-red-600 text-2xl rounded-lg mx-6 items-center flex justify-center">-</button>
               )}
             </div>
           ))}
