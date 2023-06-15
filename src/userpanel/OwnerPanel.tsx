@@ -19,6 +19,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     };
 
     const [rank, setRank] = useState("");
+    const [username, setUsername] = useState("");    
 
     const [allUsersResponse, setUsersResponse] = useState();
     const [questList, setQuestList] = useState();   
@@ -233,6 +234,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             if (data) {
                 setRank(data[0].rank);
+                setUsername(data[0].username);
             }
         }
 
