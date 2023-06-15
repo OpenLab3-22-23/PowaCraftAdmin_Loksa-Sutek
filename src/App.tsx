@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div className='w-screen h-screen'>
-      {session ? renderPage(pageToRender) : <Navigate to='/signup' />}
+      {session ? renderPage(pageToRender) : <Navigate to='/login' />}
     </div>
   );
 }

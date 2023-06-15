@@ -68,7 +68,7 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-screen h-screen flex justify-center bg-[url('/assets/bg.png')]">
+    <div className="w-screen h-screen flex justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400 mt-6"></img>
       <h2 className="text-7xl text-white">Registrácia do panelu</h2>

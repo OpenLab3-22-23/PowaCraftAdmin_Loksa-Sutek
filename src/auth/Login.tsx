@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { useAuth } from "./Auth";
 
 export default function LogIn() {
@@ -49,6 +49,7 @@ export default function LogIn() {
           value="Prihlásiť"
           className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl"
         />
+        <Link to="/signup" className="text-white text-xl">Zaregistrovať sa</Link>
       </form>
     </div>
   ) : (
