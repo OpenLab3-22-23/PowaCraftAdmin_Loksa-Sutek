@@ -89,7 +89,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                         <a className="text-3xl text-white">Členovia AT</a><br/>
-                        <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white text-4xl">X</button>
+                        <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
                 <div className="pt-5 h-full">
                         {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
@@ -264,7 +264,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 <div>
                     <div className="flex justify-end items-stretch pr-10 pt-10">
-                        <button className="text-2xl text-white text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
+                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
                         <div className="flex w-5"></div>
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
                     </div>
@@ -307,7 +307,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     {usersResponseByPlus && usersResponseByPlus.length > 1 ? <WriteBestHelpers username={usersResponseByPlus[1].username} plus={usersResponseByPlus[1].plus}/> : null}
                     {usersResponseByPlus && usersResponseByPlus.length > 2 ? <WriteBestHelpers username={usersResponseByPlus[2].username} plus={usersResponseByPlus[2].plus}/> : null} 
                     <div className="flex w-full justify-center">
-                    <button className="text-white/80 w-full" onClick={() => setMembersListOpened(true)}>Celý zoznam členov AT</button>     
+                    <button className="text-white hover:text-gray-300 w-full" onClick={() => setMembersListOpened(true)}>Celý zoznam členov AT</button>     
                     </div>            
                 </div>
                 
@@ -318,7 +318,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <div className="h-full w-full bg-zinc-700/80 rounded-lg flex flex-col">
 
                     <div className="inline-block flex items-center justify-between p-4">
-                        <div className="flex bg-white rounded-lg w-1/5 h-full justify-center">
+                        <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-full justify-center">
                             <button onClick={() => setAddQuestOpened(true)} className="box-content w-full h-full">
                                 Pridať úlohu
                             </button>
@@ -328,7 +328,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full">Zoznam úloh</a>
                         </div>
 
-                        <div className="flex bg-white rounded-lg w-1/5 h-full justify-center">
+                        <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-full justify-center">
                             <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full disabled:bg-gray-600/60 disabled:text-white/60" disabled = { isHelper }>
                                 Zmazať úlohu
                             </button>

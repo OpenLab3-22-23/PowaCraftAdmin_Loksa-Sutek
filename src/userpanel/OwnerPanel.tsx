@@ -54,7 +54,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie úlohy</a><br/>
-                    <button onClick={() => setAddQuestVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
+                    <button onClick={() => setAddQuestVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">Názov úlohy</a>
@@ -78,7 +78,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     placeholder="0">
                 </input><br/>
 
-                <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">VYTVORIŤ</button>
+                <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">VYTVORIŤ</button>
             </div>      
         </div>
         )
@@ -93,7 +93,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie účtu</a><br/>
-                    <button onClick={() => setAddAccountVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
+                    <button onClick={() => setAddAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">E-Mail používateľa</a>
@@ -107,7 +107,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     autoFocus>
                 </input><br/>
 
-                <button onClick={addNewMail} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">PRIDAŤ</button>
+                <button onClick={addNewMail} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">PRIDAŤ</button>
             </div>      
         </div>
         )
@@ -122,7 +122,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Zmazanie účtu</a><br/>
-                    <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white text-4xl">X</button>
+                    <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <div className="flex flex-col h-full justify-center items-center pb-12">
@@ -138,7 +138,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     autoFocus>
                 </input><br/>
 
-                <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">ZMAZAŤ</button>
+                <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">ZMAZAŤ</button>
                 </div>
             </div>      
         </div>
@@ -155,7 +155,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie plusového bodu</a><br/>
-                    <button onClick={() => setAddPlusShown(false)} className="absolute right-1 text-white text-4xl">X</button>
+                    <button onClick={() => setAddPlusShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">Názov úlohy</a>
@@ -173,7 +173,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     ))}
                 </select><br/>
 
-                <button onClick={savePlusPoints} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">PRIPÍSAŤ</button>
+                <button onClick={savePlusPoints} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">PRIPÍSAŤ</button>
             </div>      
         </div>
         )
@@ -189,7 +189,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">Pridanie mínusového bodu</a><br/>
-                    <button onClick={() => setAddMinusShown(false)} className="absolute right-1 text-white text-4xl">X</button>
+                    <button onClick={() => setAddMinusShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">Názov úlohy</a>
@@ -470,7 +470,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div>
                     <div className="flex justify-end items-stretch right-10 pr-10">
-                        <button className="text-2xl text-white text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
+                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
                         <div className="flex w-5"></div>
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
                     </div>
@@ -485,7 +485,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col ml-5 w-full">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
-                        <div className="flex bg-gray-600 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
+                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
                             <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
                                 Pridať úlohu
                             </button>
@@ -495,7 +495,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam úloh</a>
                         </div>
 
-                        <div className="flex bg-gray-600 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
+                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
                             <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full">
                                 Zmazať úlohu
                             </button>
@@ -519,8 +519,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint}/> : null}
                         </div>
                         <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
-                            <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Pridať účet</button>
-                            <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Zmazať účet</button>
+                            <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Pridať účet</button>
+                            <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Zmazať účet</button>
                         </div>
                     </div>
                     </div>

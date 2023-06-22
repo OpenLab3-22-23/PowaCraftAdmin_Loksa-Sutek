@@ -49,7 +49,7 @@ export default function LogIn() {
           value="Prihlásiť"
           className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-400/80"
         />
-        <Link to="/signup" className="text-white text-xl">Zaregistrovať sa</Link>
+        <Link to="/signup" className="text-white hover:text-gray-300 text-xl">Zaregistrovať sa</Link>
       </form>
     </div>
   ) : (
