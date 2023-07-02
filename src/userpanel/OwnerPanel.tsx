@@ -247,9 +247,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             if (data)
             {
+                console.log(data);
                 let accounts = [];
 
-                for (let i = 0; i < 9; i++)
+                for (let i = 0; i < 10; i++)
                 {
                     for (let x = 0; x < data.length; x++)
                     {
@@ -260,6 +261,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     }
                 }   
                 setUsersResponse(accounts);
+                console.log(accounts);
             }
         }
         
@@ -306,18 +308,20 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             case 1:
                 return "Developer"
             case 2:
-                return "Hl.Admin"
+                return "Vedenie"                
             case 3:
-                return "Hl.Builder"    
+                return "Hl.Admin"
             case 4:
-                return "Admin"
+                return "Hl.Builder"    
             case 5:
-                return "Builder" 
+                return "Admin"
             case 6:
-                return "Hl.Helper"    
+                return "Builder" 
             case 7:
-                return "Helper"       
+                return "Hl.Helper"    
             case 8:
+                return "Helper"       
+            case 9:
                 return "Akademik"                                                    
         }
     }

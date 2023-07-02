@@ -7,7 +7,9 @@ export default function WriteUserRank({rank})
         case "Majiteľ":
             return <a className="text-blue-700">{rank}</a>
         case "Developer":
-            return <a className="text-red-700">{rank}</a>            
+            return <a className="text-red-700">{rank}</a>        
+        case "Vedenie":
+            return <a className="text-red-600">{rank}</a>                     
         case "Hl.Admin":
             return <a className="text-lime-600">{rank}</a>           
         case "Hl.Builder":

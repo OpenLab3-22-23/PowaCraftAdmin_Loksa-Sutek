@@ -27,7 +27,7 @@ function App() {
       if (data) {
         if (data.length === 0) {
           setPageToRender('banned');
-        } else if (session.user.id == 'd6be1352-f1d8-4ab8-9993-3a62d5431637') {
+        } else if (data[0].rank == 'Majiteľ' || data[0].rank == 'Vedenie') {
           setPageToRender('admin');
         } else {
           setPageToRender('user');
