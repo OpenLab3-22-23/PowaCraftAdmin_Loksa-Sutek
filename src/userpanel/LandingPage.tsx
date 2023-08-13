@@ -33,11 +33,13 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [questList, setQuestList] = useState();   
 
     const [newTaskText, setTaskText] = useState("");    
-    const [newTaskPoints, setTaskPoints] = useState("");   
+    const [newTaskPoints, setTaskPoints] = useState("");
+    const [newUsername, setNewUsername] = useState("");      
 
     const [deleteShown, setDeleteShown] = useState(false);   
     const [isAddQuestOpened, setAddQuestOpened] = useState(false);
     const [isMemberListOpened, setMembersListOpened] = useState(false);
+    const [isSetUsernameOpened, setSetUsernameOpened] = useState(false);
 
 
     const AddQuest = props => {
@@ -99,6 +101,33 @@ export default function LandingPage( {userData} ): JSX.Element {
         )
     }
 
+    const SetUsername = props => {
+        if (!props.show) {
+            return null;
+        }
+        return (
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+
+                <div className="inline-block flex relative w-full justify-center pb-5">
+                    <a className="text-3xl text-white">Nastavenie hráčskeho mena</a><br/>
+                </div>
+
+                <a className="text-white text-xl pb-2">Tvoj herný nick</a>
+                <input 
+                    value={newUsername}
+                    onChange={(e) => setNewUsername(e.target.value)} 
+                    type="text"
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
+                    autoFocus>
+                </input><br/>
+
+                <button onClick={saveNewUsername} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">NASTAVIŤ</button>
+            </div>      
+        </div>
+        )
+    } 
+
 
     //** Data fetching **/
 
@@ -125,6 +154,11 @@ export default function LandingPage( {userData} ): JSX.Element {
                 if (data[0].rank == "Akademik" || data[0].rank == "Helper")
                 {
                     setIsHelper(true);
+                }
+
+                if(data[0].username === null)
+                {
+                    setSetUsernameOpened(true);
                 }
             }
         }
@@ -225,6 +259,22 @@ export default function LandingPage( {userData} ): JSX.Element {
             setTaskText("");
             setTaskPoints("");
         }
+
+    const saveNewUsername = async () => {
+
+        setSetUsernameOpened(false);
+        console.log(userData.user.id);
+
+        const { error } = await supabase
+            .from('profiles')
+            .update({username: newUsername})
+            .eq('id', userData.user.id)
+
+            if (error) {
+                console.log("ERROR");
+            }
+            fetchUserProfile();
+        }    
         
 
 
@@ -238,6 +288,9 @@ export default function LandingPage( {userData} ): JSX.Element {
             </div>}
             {isMemberListOpened && <div className="z-10 w-full h-full absolute">
                 <MembersList show={isMemberListOpened}/>
+            </div>}
+            {isSetUsernameOpened && <div className="z-10 w-full h-full absolute">
+                <SetUsername show={isSetUsernameOpened}/>
             </div>}
 
             <div className="flex justify-between items-center">

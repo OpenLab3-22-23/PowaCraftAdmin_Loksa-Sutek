@@ -12,21 +12,54 @@ import OwnerPanel from './userpanel/OwnerPanel';
 function App() {
   const { session } = useAuth();
   const [pageToRender, setPageToRender] = useState('');
+  const [allowedMailResponse, setMailResponse] = useState<{ id: number; mail: string }[] | undefined>();
 
   useEffect(() => {
-    if (session) getUser();
+    if (session) fetchAllowedMails();
   }, [session]);
 
-  const getUser = async () => {
+  useEffect(() => {
+    if (allowedMailResponse) getUserData();
+  }, [allowedMailResponse]);
+  
+
+
+  const getUserData = async () => {
     try {
       const { data, error } = await supabase
         .from('profiles')
         .select()
         .eq('id', session?.user.id);
+        
 
       if (data) {
         if (data.length === 0) {
-          setPageToRender('banned');
+          if (allowedMailResponse?.some(item => item.mail === session.user.email))
+          {
+            const { error } = await supabase
+            .from('profiles')
+            .insert({id: session?.user.id})
+
+            if (error) {
+                console.log("ERROR");
+            }
+            else
+            {
+              const { error } = await supabase
+              .from('allowed_mails')
+              .delete()
+              .eq('mail', session.user.email)
+              if (error) {
+                  console.log("ERROR");
+              }
+
+              setPageToRender('user');
+            }
+          }
+          else
+          {
+            setPageToRender('banned');
+          }
         } else if (data[0].rank == 'Majiteľ' || data[0].rank == 'Vedenie') {
           setPageToRender('admin');
         } else {
@@ -39,6 +72,16 @@ function App() {
       console.log('Nastala chyba pri načítaní profilu:', error);
     }
   };
+
+  const fetchAllowedMails = async () => {
+    const { data, error } = await supabase
+        .from('allowed_mails')
+        .select()
+        
+        if (data) {
+          setMailResponse(data);
+        }
+    } 
 
   function renderPage(pageName: string) {
     if (pageName === 'banned') {

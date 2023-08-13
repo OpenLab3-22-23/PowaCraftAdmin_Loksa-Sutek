@@ -29,6 +29,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [newTaskPoints, setTaskPoints] = useState("");   
     const [newMailText, setNewMailText] = useState("");    
     const [nickToDelete, setNickToDelete] = useState("");  
+    const [newUserRank, setNewUserRank] = useState("");  
+    const [shouldResetPoints, setShouldResetPoints] = useState(false);  
 
     const [addPlusTask, setAddPlusTask] = useState(1);       
     const [addMinusTask, setAddMinusTask] = useState(7);      
@@ -41,7 +43,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [addAccountShown, setAddAccountVisibility] = useState(false);
     const [delAccountShown, setDelAccountVisibility] = useState(false); 
     const [addPlusShown, setAddPlusShown] = useState(false);     
-    const [addMinusShown, setAddMinusShown] = useState(false);         
+    const [addMinusShown, setAddMinusShown] = useState(false);     
+    const [changeRankShown, setChangeRankShown] = useState(false);       
 
 
     const AddQuest = props => {
@@ -102,7 +105,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     onChange={(e) => setNewMailText(e.target.value)} 
                     type="email"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    maxlength="40"
                     placeholder="email@gmail.com"
                     autoFocus>
                 </input><br/>
@@ -127,7 +129,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div className="flex flex-col h-full justify-center items-center pb-12">
                     {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
-                <a className="text-white text-xl my-2">Meno používateľa, ktorého chceš vymazať</a>
+                <br />
+                <a className="text-white text-xl my-2">Meno používateľa, ktorého si prajete vymazať</a>
                 <input 
                     value={nickToDelete}
                     onChange={(e) => setNickToDelete(e.target.value)} 
@@ -214,7 +217,52 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     } 
 
 
+    const ChangeRank = props => {
+        if (!props.show) {
+            return null;
+        }
+        return (
+            <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
+                <div className="inline-block flex relative w-full justify-center pb-5">
+                    <a className="text-3xl text-white">Zmeniť rank hráča</a><br/>
+                    <button onClick={() => setChangeRankShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                </div>
+
+                <a className="text-white text-xl pb-2">Nový rank</a>
+                <select
+                    value={newUserRank}
+                    onChange={(e) => setNewUserRank(e.target.value)} 
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center">
+
+                    <option value="Akademik">Akademik</option>
+                    <option value="Helper">Helper</option>
+                    <option value="Hl.Helper">Hl.Helper</option>
+                    <option value="Builder">Builder</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Hl.Builder">Hl.Builder</option>
+                    <option value="Hl.Admin">Hl.Admin</option>
+                    <option value="Vedenie">Vedenie</option>
+                    <option value="Developer">Developer</option>
+                    <option value="Majiteľ">Majiteľ</option>
+                </select>
+                <br/>
+
+                <a className="text-white text-xl pb-2">Prajete si resetovať hráčové body?</a>
+                <input 
+                    checked={shouldResetPoints}
+                    type="checkbox" 
+                    className="border border-green-300 rounded-2xl h-10 w-10"
+                    onChange={(e) => setShouldResetPoints(e.target.checked)}>
+                </input>
+                <br />
+
+                <button onClick={changeUserRank} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">PREPÍSAŤ</button>
+            </div>      
+        </div>
+        )
+    } 
 
 
     //** Data fetching **/
@@ -247,7 +295,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             if (data)
             {
-                console.log(data);
                 let accounts = [];
 
                 for (let i = 0; i < 10; i++)
@@ -261,7 +308,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     }
                 }   
                 setUsersResponse(accounts);
-                console.log(accounts);
             }
         }
         
@@ -336,6 +382,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         setActiveUserID(id);
         setAddMinusShown(true);
     }
+    function openChangeRank(id)
+    {
+        setActiveUserID(id);
+        setChangeRankShown(true);
+        setNewUserRank("Akademik");
+        setShouldResetPoints(false);
+    }
 
     const savePlusPoints = async () => {
 
@@ -374,10 +427,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             if (data) {
                 partialData = data;
             }
-            console.log("t"); 
-            console.log(addMinusTask);
-            console.log(pointsList[addMinusTask].points);
-            console.log("tt");
 
             const { error } = await supabase
             .from('profiles')
@@ -389,6 +438,31 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             setAddMinusShown(false);
 
         fetchAllUsers();
+    } 
+
+    const changeUserRank = async () => {
+   
+        setChangeRankShown(false);
+        const { error } = await supabase
+        .from('profiles')
+        .update({rank: newUserRank})
+        .eq('id', activeUserID)
+        if (error) {
+            console.log(error);
+        }
+
+        if (shouldResetPoints)
+        {
+            const { error } = await supabase
+            .from('profiles')
+            .update({plus: 0, minus : 0})
+            .eq('id', activeUserID)
+            if (error) {
+                console.log(error);
+            }
+        }
+        fetchAllUsers();
+        setAddMinusShown(false);
     } 
         
     
@@ -461,6 +535,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <AddMinus show={addMinusShown}/>
             </div>}
 
+            {changeRankShown && <div className="z-10 w-full h-full absolute">
+                <ChangeRank show={changeRankShown}/>
+            </div>}
+
+
             <div className="flex items-center mb-5">
                 
                 <div className="flex items-center w-full ">
@@ -520,7 +599,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-0.5 bg-cyan-400 mb-4 "></div>
                         </div>
                         <div className="h-full w-full overflow-auto">
-                            {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint}/> : null}
+                            {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} /> : null}
                         </div>
                         <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
                             <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Pridať účet</button>
