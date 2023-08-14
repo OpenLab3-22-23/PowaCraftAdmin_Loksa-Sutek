@@ -225,21 +225,21 @@ export default function LandingPage( {userData} ): JSX.Element {
             case 0:
                 return "Majiteľ";
             case 1:
-                return "Technik"                
+                return "Developer"
             case 2:
-                return "Moderátor"
+                return "Hl.Admin"
             case 3:
-                return "Hl. Builder"    
+                return "Hl.Builder"    
             case 4:
-                return "Zákl. Builder"
+                return "Admin"
             case 5:
-                return "Junior Builder" 
+                return "Builder" 
             case 6:
-                return "Senior Helper"    
+                return "Hl.Helper"    
             case 7:
-                return "Zákl. Helper"       
+                return "Helper"       
             case 8:
-                return "Junior Helper"                                                    
+                return "Akademik"                                                    
         }
     }
 
@@ -297,7 +297,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 
                 <div className="flex items-center w-8/12 ">
                     <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
-                    <a className="text-4xl text-white" href="">Project Wave</a>
+                    <a className="text-4xl text-white" href="https://powacraft.sk/">PowaCraft</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400">Admin</a>
                     </div>
