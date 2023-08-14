@@ -6,23 +6,21 @@ export default function WriteUserRank({rank})
     {
         case "Majiteľ":
             return <a className="text-blue-700">{rank}</a>
-        case "Developer":
-            return <a className="text-red-700">{rank}</a>        
-        case "Vedenie":
+        case "Technik":
             return <a className="text-red-600">{rank}</a>                     
-        case "Hl.Admin":
+        case "Moderátor":
             return <a className="text-lime-600">{rank}</a>           
-        case "Hl.Builder":
+        case "Hl. Builder":
             return <a className="text-violet-700">{rank}</a>         
-        case "Admin":
+        case "Zákl. Builder":
             return <a className="text-lime-600">{rank}</a>               
-        case "Builder":
+        case "Junior Builder":
             return <a className="text-violet-700">{rank}</a>       
-        case "Hl.Helper":
+        case "Senior Helper":
             return <a className="text-yellow-600">{rank}</a>            
-        case "Helper":
+        case "Zákl. Helper":
             return <a className="text-yellow-600">{rank}</a>            
-        case "Akademik":
+        case "Junior Helper":
             return <a className="text-cyan-600">{rank}</a>                                                                     
     }
 }

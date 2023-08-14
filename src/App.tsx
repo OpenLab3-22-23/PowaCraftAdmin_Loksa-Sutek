@@ -60,7 +60,7 @@ function App() {
           {
             setPageToRender('banned');
           }
-        } else if (data[0].rank == 'Majiteľ' || data[0].rank == 'Vedenie') {
+        } else if (data[0].rank == 'Majiteľ' || data[0].rank == 'Senior Helper') {
           setPageToRender('admin');
         } else {
           setPageToRender('user');

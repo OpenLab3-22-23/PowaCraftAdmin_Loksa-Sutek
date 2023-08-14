@@ -297,7 +297,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             {
                 let accounts = [];
 
-                for (let i = 0; i < 10; i++)
+                for (let i = 0; i < 9; i++)
                 {
                     for (let x = 0; x < data.length; x++)
                     {
@@ -352,23 +352,21 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             case 0:
                 return "Majiteľ";
             case 1:
-                return "Developer"
+                return "Technik"                
             case 2:
-                return "Vedenie"                
+                return "Moderátor"
             case 3:
-                return "Hl.Admin"
+                return "Hl. Builder"    
             case 4:
-                return "Hl.Builder"    
+                return "Zákl. Builder"
             case 5:
-                return "Admin"
+                return "Junior Builder" 
             case 6:
-                return "Builder" 
+                return "Senior Helper"    
             case 7:
-                return "Hl.Helper"    
+                return "Zákl. Helper"       
             case 8:
-                return "Helper"       
-            case 9:
-                return "Akademik"                                                    
+                return "Junior Helper"                                                    
         }
     }
 
@@ -543,8 +541,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="flex items-center mb-5">
                 
                 <div className="flex items-center w-full ">
-                    <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
-                    <a className="text-4xl text-white">PowaCraft</a>
+                    <img src="/assets/logo.png" width="150" height="150" className="rounded-full" alt="obrazok"></img>
+                    <a className="text-4xl text-white">Project Wave</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400">Admin</a>
                     </div>
