@@ -354,20 +354,18 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             case 1:
                 return "Developer"
             case 2:
-                return "Vedenie"                
-            case 3:
                 return "Hl.Admin"
-            case 4:
+            case 3:
                 return "Hl.Builder"    
-            case 5:
+            case 4:
                 return "Admin"
-            case 6:
+            case 5:
                 return "Builder" 
-            case 7:
+            case 6:
                 return "Hl.Helper"    
-            case 8:
+            case 7:
                 return "Helper"       
-            case 9:
+            case 8:
                 return "Akademik"                                                    
         }
     }
@@ -387,7 +385,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         setActiveUserID(id);
         setChangeRankShown(true);
         setNewUserRank("Akademik");
-        setShouldResetPoints(false);
+        setShouldResetPoints(true);
     }
 
     const savePlusPoints = async () => {
