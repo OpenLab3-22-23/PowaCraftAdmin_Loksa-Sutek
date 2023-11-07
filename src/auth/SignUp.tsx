@@ -68,49 +68,49 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-full bg-black flex justify-center lg:bg-[url('/assets/bg.png')] lg:bg-cover lg:bg-no-repeat pb-3">
+    <div className="w-full h-full lg:h-screen bg-black flex justify-center lg:bg-[url('/assets/bg.png')] lg:bg-cover lg:bg-no-repeat pb-3">
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400 mt-9"></img>
-      <h2 className="text-7xl text-white text-center">Registrácia do panelu</h2>
-        <h3 className="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
+      <h2 className="text-5xl lg:text-7xl text-white text-center">Registrácia do panelu</h2>
+        <h3 className="text-3xl lg:text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
     <div className="lg:grid lg:grid-cols-2 gap-36 text-center">
-      <div className="">
-        <p className="text-2xl">Nickname</p>
+      <div>
+        <p className="text-2xl text-white">Nickname</p>
         <input
           id="nick"
           type="text"
           placeholder="Nickname"
           value={nick}
           onChange={(e) => setNick(e.target.value) }
-          className="w-96 my-2 bg-gray-200 rounded-full"
+          className="w-80 lg:w-96 my-2 bg-gray-200 rounded-full"
         />
-        <p className="text-2xl">Email</p>
+        <p className="text-2xl text-white">Email</p>
         <input
           id="email"
           type="email"
           placeholder="email@gmail.com"
           value={email}
           onChange={(e) => { setEmail(e.target.value); checkEmail(e.target.value); }}
-          className="w-96 my-2 bg-gray-200 rounded-full"
+          className="w-80 lg:w-96 my-2 bg-gray-200 rounded-full"
         />
         </div>
         <div>
-        <p className="text-2xl">Heslo</p>
+        <p className="text-2xl text-white">Heslo</p>
         <input
           id="password"
           type="password"
           placeholder="*****"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-96 my-2 bg-gray-200 rounded-full "
+          className="w-80 lg:w-96 my-2 bg-gray-200 rounded-full "
         />
-        <p className="text-2xl">Znovu Heslo</p>
+        <p className="text-2xl text-white">Znovu Heslo</p>
         <input
         id="correct"
         type="password"
         placeholder="*****"
         onChange={(e) => setCorrect(e.target.value)}
-        className="w-96 my-2 bg-gray-200 rounded-full"
+        className="w-80 lg:w-96 my-2 bg-gray-200 rounded-full"
         />
     </div>
         </div>

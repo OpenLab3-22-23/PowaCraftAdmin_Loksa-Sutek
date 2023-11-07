@@ -20,29 +20,33 @@ export default function LogIn() {
 
   
   return !session? (
-    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat pb-5">
+    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
-        <h2 className="text-7xl text-white text-center">Prihlásenie do panelu</h2>
-        <h3 className="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
-        <p className="text-2xl">Email</p>
+        <h2 className="text-5xl lg:text-7xl text-white text-center">Prihlásenie do panelu</h2>
+        <h3 className="text-3xl lg:text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
+  
+        <p className="text-2xl text-white">Email</p>
         <input
           id="email"
           type="email"
           placeholder="email@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-96  bg-gray-200 rounded-full"
+          className="w-80 lg:w-96 bg-gray-200 rounded-full"
         />
-        <p className="text-2xl">Heslo</p>
+        <p className="text-2xl text-white">Heslo</p>
         <input
           id="password"
           type="password"
           placeholder="*****"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-96 my-2 bg-gray-200 rounded-full"
-        />
+          className="w-80 lg:w-96 my-2 bg-gray-200 rounded-full"   
+        />        
+
+        
+       
         <br/>
         <input
           type="submit"
