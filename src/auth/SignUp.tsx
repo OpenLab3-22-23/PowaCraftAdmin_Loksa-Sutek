@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { useAuth } from "./Auth";
 import { supabase } from "../supabase/supabaseClient";
 
@@ -68,12 +68,12 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-screen h-screen flex justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
+    <div className="w-full h-full bg-black flex justify-center lg:bg-[url('/assets/bg.png')] lg:bg-cover lg:bg-no-repeat pb-3">
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
-      <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400 mt-6"></img>
-      <h2 className="text-7xl text-white">Registrácia do panelu</h2>
+      <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400 mt-9"></img>
+      <h2 className="text-7xl text-white text-center">Registrácia do panelu</h2>
         <h3 className="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
-    <div className="grid grid-cols-2 gap-36">
+    <div className="lg:grid lg:grid-cols-2 gap-36 text-center">
       <div className="">
         <p className="text-2xl">Nickname</p>
         <input
@@ -122,6 +122,7 @@ export default function SignUp() {
           className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-400/80 disabled:bg-green-600/40 disabled:text-black/40"
           disabled={password != correct || password == "" || !emailEnabled}
         />
+        <Link to="/login" className="text-white hover:text-gray-300 text-xl">Prihlásiť sa</Link>
       </form>
     </div>
   ) : (

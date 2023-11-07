@@ -283,7 +283,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     //** HTML **/
 
     return (
-        <div className="h-full w-full bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
+        <div className=" h-screen w-screen lg:bg-[url('/assets/bg.png')] lg:bg-cover lg:bg-no-repeat overflow-x-hidden">
 
             {isAddQuestOpened && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={isAddQuestOpened}/>
@@ -295,6 +295,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <SetUsername show={isSetUsernameOpened}/>
             </div>}
 
+        <div className="invisible absolute w-0 lg:visible lg:static lg:w-full">
             <div className="flex justify-between items-center">
                 
                 <div className="flex items-center w-8/12 ">
@@ -394,6 +395,97 @@ export default function LandingPage( {userData} ): JSX.Element {
                     <div className="w-full h-full mb-4 overflow-auto">
                     {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
                     </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+{/* MOBILE HTML */}
+        <div className="visible static lg:invisible lg:fixed bg-black pb-10">
+                <div className="flex content-center items-stretch pt-3 pl-3 w-full">
+                    <div className="flex w-full">
+                        <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
+                        <div className="self-center pl-3"><WriteUserRank rank={rank} /></div>
+                    </div>
+                    <div className="flex pr-3">
+                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť sa</button>
+                    </div>
+                </div>
+                <div className="h-20 items-center justify-center space-x-6" style={{ display: isHelper ? "flex" : "none" }}>
+                    <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
+                        <a className="text-2xl">Tvoje body:</a>
+                    </div>
+                    <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
+                        <a className="text-green-500 text-2xl">+{plusPoints}</a> 
+                    </div>
+                    <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
+                        <a className="text-red-500 text-2xl">-{minusPoints}</a>
+                    </div>    
+                </div>
+
+            <div className="flex justify-center mb-5">
+                <a className="text-7xl text-white">Vitaj, {username}</a>
+            </div>
+
+            <div className="pr-3 pl-3 space-y-3">
+                <div className="flex h-96">
+                    <div className="h-full w-full bg-zinc-700/80 rounded-lg flex flex-col">
+
+                        <div className="inline-block flex items-center justify-between p-4">
+                            <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-2/3 justify-center">
+                                <button onClick={() => setAddQuestOpened(true)} className="box-content w-full h-full">
+                                    Pridať úlohu
+                                </button>
+                            </div>
+
+                            <div className="text-center">
+                                <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full ">Zoznam úloh</a>
+                            </div>
+
+                            <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-2/3 justify-center">
+                                <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full disabled:bg-gray-600/60 disabled:text-white/60" disabled = { isHelper }>
+                                    Zmazať úlohu
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="h-0.5 bg-cyan-400 mb-4"></div>
+                        <div className="w-full h-full mb-4 overflow-auto">
+                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="box-content bg-zinc-700/80 rounded-lg h-64">
+
+                    <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2 h-1/5 items-center flex-col">
+                        <a className="text-2xl text-white">Tvoje posledné body</a>
+                        <hr/>
+                    </div>
+                    <div className="h-full pl-5 pr-5">
+                    {pointsList && userResponse ? <WriteLastPoints actionName={pointsList[userResponse[0].last_point1].action_name} points={pointsList[userResponse[0].last_point1].points}/> : null}
+                    {pointsList && userResponse ? <WriteLastPoints actionName={pointsList[userResponse[0].last_point2].action_name} points={pointsList[userResponse[0].last_point2].points}/> : null}
+                    {pointsList && userResponse ? <WriteLastPoints actionName={pointsList[userResponse[0].last_point3].action_name} points={pointsList[userResponse[0].last_point3].points}/> : null}                 
+                    </div>
+
+                </div>
+
+                
+
+                <div className="box-content bg-zinc-700/80 rounded-lg h-64 pb-5">
+
+                    <div className="justify-center flex pb-2 pt-2 bg-amber-500/40 rounded-lg mb-2 h-1/6 items-center">
+                        <a className="text-2xl text-white">Najlepší helperi</a>
+                        <hr/>
+                    </div>
+                    <div className="h-full pl-5 pr-5">
+                    {usersResponseByPlus && usersResponseByPlus.length > 0 ? <WriteBestHelpers username={usersResponseByPlus[0].username} plus={usersResponseByPlus[0].plus}/> : null}
+                    {usersResponseByPlus && usersResponseByPlus.length > 1 ? <WriteBestHelpers username={usersResponseByPlus[1].username} plus={usersResponseByPlus[1].plus}/> : null}
+                    {usersResponseByPlus && usersResponseByPlus.length > 2 ? <WriteBestHelpers username={usersResponseByPlus[2].username} plus={usersResponseByPlus[2].plus}/> : null} 
+                    <div className="flex w-full justify-center">
+                    <button className="text-white hover:text-gray-300 w-full" onClick={() => setMembersListOpened(true)}>Celý zoznam členov AT</button>     
+                    </div> 
+                    </div>             
                 </div>
             </div>
         </div>

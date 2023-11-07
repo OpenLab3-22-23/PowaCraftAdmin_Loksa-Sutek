@@ -20,10 +20,10 @@ export default function LogIn() {
 
   
   return !session? (
-    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
+    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat pb-5">
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
-        <h2 className="text-7xl text-white">Prihlásenie do panelu</h2>
+        <h2 className="text-7xl text-white text-center">Prihlásenie do panelu</h2>
         <h3 className="text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
         <p className="text-2xl">Email</p>
         <input
@@ -32,7 +32,7 @@ export default function LogIn() {
           placeholder="email@email.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-96 my-2 bg-gray-200 rounded-full"
+          className="w-96  bg-gray-200 rounded-full"
         />
         <p className="text-2xl">Heslo</p>
         <input

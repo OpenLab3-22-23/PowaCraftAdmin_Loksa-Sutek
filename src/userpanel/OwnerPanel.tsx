@@ -559,13 +559,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
-                        <div className="text-4xl"><WriteUserRank rank={rank} /></div>
+                        <div><WriteUserRank rank={rank} /></div>
                     </div>
                 </div>
             </div>
         
         <div className="flex w-full h-3/4 gap-7">
-                <div className="bg-zinc-700/80 rounded-lg flex flex-col ml-5 w-full">
+                <div className="bg-zinc-700/80 rounded-lg flex flex-col ml-5">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
