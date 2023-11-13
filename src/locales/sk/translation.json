@@ -1,0 +1,101 @@
+{
+    "login": {
+        "header": "Prihlásenie do panelu",
+        "subheader": "pre Admin-Team", 
+        "email": "Email",
+        "password": "Heslo",
+        "login": "Prihlásiť",
+        "register": "Zaregistrovať sa"
+    },
+    "register": {
+        "header": "Registrácia do panelu",
+        "subheader": "pre Admin-Team", 
+        "nick": "Herné meno",
+        "email": "Email",
+        "password": "Heslo",
+        "passwordrepeat": "Znovu heslo",         
+        "register": "Registrovať",               
+        "login": "Prihlásiť sa"
+    },
+    "userpanel": {
+        "yourpoints": "Tvoje body",
+        "logout": "Odhlásiť",
+        "welcome": "Vitaj",
+        "lastpoints": {
+            "header": "Tvoje posledné body"
+        },
+        "besthelpers": {
+            "header": "Najlepší helperi",
+            "memberlist": "Celý zoznam členov AT"
+        },
+        "questlist": {
+            "header": "Zoznam úloh",
+            "addquest": "Pridať úlohu",
+            "remquest": "Zmazať úlohu"
+        },
+        "addquest": {
+            "header": "Pridanie úlohy",
+            "questdesc": "Popis úlohy",
+            "questplaceholder": "Stručný opis úlohy (max. 35 znakov)",
+            "points": "Počet bodov",
+            "create": "VYTVORIŤ"
+        },
+        "memberslist": {
+            "header": "Členovia AT"
+        },
+        "setusername": {
+            "header": "Nastavenie hráčskeho mena",
+            "yournick": "Tvoje herné meno",
+            "nick": "Herné meno",
+            "set": "NASTAVIŤ"
+        }
+    },
+    "ownerpanel": {
+        "logout": "Odhlásiť",
+        "questlist": {
+            "header": "Zoznam úloh",
+            "addquest": "Pridať úlohu",
+            "remquest": "Zmazať úlohu"
+        },
+        "memberslist": {
+            "header": "Zoznam členov AT",
+            "addaccount": "Pridať účet",
+            "delaccount": "Zmazať účet"
+        },
+        "addquest": {
+            "header": "Pridanie úlohy",
+            "questdesc": "Popis úlohy",
+            "questplaceholder": "Stručný opis úlohy (max. 35 znakov)",
+            "points": "Počet bodov",
+            "create": "VYTVORIŤ"
+        },
+        "addaccount": {
+            "header": "Pridanie účtu",
+            "useremail": "E-Mail používateľa",
+            "mailplaceholder": "email@gmail.com",
+            "add": "PRIDAŤ"
+        },
+        "delaccount": {
+            "header": "Zmazanie účtu",
+            "nicktodelete": "Meno používateľa, ktorého si prajete vymazať",
+            "nickplaceholder": "Herné meno",
+            "delete": "ZMAZAŤ"
+        },
+        "addplus": {
+            "header": "Pridanie plusového bodu",
+            "questname": "Názov úlohy",
+            "add": "PRIPÍSAŤ"
+        },
+        "addminus": {
+            "header": "Pridanie mínusového bodu",
+            "questname": "Názov úlohy",
+            "add": "PRIPÍSAŤ"
+        },
+        "changerank": {
+            "header": "Zmeniť rank hráča",
+            "newrank": "Nový rank",
+            "resetpoints": "Prajete si resetovať hráčové body?",
+            "change": "ZMENIŤ"
+        }
+    }
+}

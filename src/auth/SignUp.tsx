@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useAuth } from "./Auth";
 import { supabase } from "../supabase/supabaseClient";
+import { useTranslation } from 'react-i18next'
 
 
 export default function SignUp() {
@@ -11,7 +12,7 @@ export default function SignUp() {
   const [correct, setCorrect] = useState("");
   const [emailEnabled, setEmailEnabled] = useState(false);  
   const [allowedMailResponse, setMailResponse] = useState<{ id: number; mail: string }[] | undefined>();
-
+  const { t } = useTranslation();
   const { signUp, session } = useAuth();
 
 
@@ -71,11 +72,11 @@ export default function SignUp() {
     <div className="w-full h-full lg:h-screen bg-black flex justify-center lg:bg-[url('/assets/bg.png')] lg:bg-cover lg:bg-no-repeat pb-3">
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400 mt-9"></img>
-      <h2 className="text-5xl lg:text-7xl text-white text-center">Registrácia do panelu</h2>
-        <h3 className="text-3xl lg:text-5xl text-amber-400">pre Admin-Team</h3><br/><br/>
+      <h2 className="text-5xl lg:text-7xl text-white text-center">{t("register.header")}</h2>
+        <h3 className="text-3xl lg:text-5xl text-amber-400">{t("register.subheader")}</h3><br/><br/>
     <div className="lg:grid lg:grid-cols-2 gap-36 text-center">
       <div>
-        <p className="text-2xl text-white">Nickname</p>
+        <p className="text-2xl text-white">{t("register.nick")}</p>
         <input
           id="nick"
           type="text"
@@ -84,7 +85,7 @@ export default function SignUp() {
           onChange={(e) => setNick(e.target.value) }
           className="w-80 lg:w-96 my-2 bg-gray-200 rounded-full"
         />
-        <p className="text-2xl text-white">Email</p>
+        <p className="text-2xl text-white">{t("register.email")}</p>
         <input
           id="email"
           type="email"
@@ -95,7 +96,7 @@ export default function SignUp() {
         />
         </div>
         <div>
-        <p className="text-2xl text-white">Heslo</p>
+        <p className="text-2xl text-white">{t("register.password")}</p>
         <input
           id="password"
           type="password"
@@ -104,7 +105,7 @@ export default function SignUp() {
           onChange={(e) => setPassword(e.target.value)}
           className="w-80 lg:w-96 my-2 bg-gray-200 rounded-full "
         />
-        <p className="text-2xl text-white">Znovu Heslo</p>
+        <p className="text-2xl text-white">{t("register.passwordrepeat")}</p>
         <input
         id="correct"
         type="password"
@@ -118,11 +119,11 @@ export default function SignUp() {
         <input
           id="submitbtn"
           type="submit"
-          value="Registrovať"
+          value={t("register.register")}
           className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-400/80 disabled:bg-green-600/40 disabled:text-black/40"
           disabled={password != correct || password == "" || !emailEnabled}
         />
-        <Link to="/login" className="text-white hover:text-gray-300 text-xl">Prihlásiť sa</Link>
+        <Link to="/login" className="text-white hover:text-gray-300 text-xl">{t("register.login")}</Link>
       </form>
     </div>
   ) : (

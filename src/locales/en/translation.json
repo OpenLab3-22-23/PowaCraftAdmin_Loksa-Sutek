@@ -1,0 +1,110 @@
+{
+    "login": {
+        "header": "Login to the panel",
+        "subheader": "for Admin-Team", 
+        "email": "Email",
+        "password": "Password",
+        "login": "Log in",
+        "register": "Register"
+    },
+    "register": {
+        "header": "Login to the panel",
+        "subheader": "for Admin-Team", 
+        "nick": "Nickname",
+        "email": "Email",
+        "password": "Password",
+        "passwordrepeat": "Repeat password",         
+        "register": "Register",               
+        "login": "Log in"
+    },
+    "userpanel": {
+        "yourpoints": "Your points",
+        "logout": "Log out",
+        "welcome": "Hello",
+        "lastpoints": {
+            "header": "Your last points"
+        },
+        "besthelpers": {
+            "header": "Best helpers",
+            "memberlist": "Entire list of AT members"
+        },
+        "questlist": {
+            "header": "Quest list",
+            "addquest": "Add quest",
+            "remquest": "Delete quest"
+        },
+        "addquest": {
+            "header": "Quest creation",
+            "questdesc": "Quest description",
+            "questplaceholder": "Brief description of the task (max. 35 chars)",
+            "points": "Points",
+            "create": "CREATE"
+        },
+        "memberslist": {
+            "header": "AT members"
+        },
+        "setusername": {
+            "header": "Set up your in-game nickname",
+            "yournick": "Your nickname",
+            "nick": "Nickname",
+            "set": "SET"
+        }
+    },
+
+
+
+
+
+
+
+
+    "ownerpanel": {
+        "logout": "Log out",
+        "questlist": {
+            "header": "Quest list",
+            "addquest": "Add quest",
+            "remquest": "Delete quest"
+        },
+        "memberslist": {
+            "header": "AT members list",
+            "addaccount": "Add account",
+            "delaccount": "Remove account"
+        },
+        "addquest": {
+            "header": "Quest creation",
+            "questdesc": "Quest description",
+            "questplaceholder": "Brief description of the task (max. 35 chars)",
+            "points": "Points",
+            "create": "CREATE"
+        },
+        "addaccount": {
+            "header": "Account creation",
+            "useremail": "E-Mail of user",
+            "mailplaceholder": "email@gmail.com",
+            "add": "ADD"
+        },
+        "delaccount": {
+            "header": "Account deletion",
+            "nicktodelete": "Name of the user you want to delete",
+            "nickplaceholder": "Nickname",
+            "delete": "DELETE"
+        },
+        "addplus": {
+            "header": "Plus point addition",
+            "questname": "Quest name",
+            "add": "ADD"
+        },
+        "addminus": {
+            "header": "Minus point addition",
+            "questname": "Quest name",
+            "add": "ADD"
+        },
+        "changerank": {
+            "header": "Change user rank",
+            "newrank": "New rank",
+            "resetpoints": "Do you want to reset player points?",
+            "change": "CHANGE"
+        }
+    }    
+
+}

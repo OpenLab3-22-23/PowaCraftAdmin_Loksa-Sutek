@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../auth/Auth";
 import { supabase } from "../supabase/supabaseClient";
-
+import { useTranslation } from 'react-i18next'
 import WriteUserRank from "./UserRank";
 import OwnerATList from "./OwnerATList";
 import ATList from "./ATList";
@@ -13,6 +13,7 @@ import WriteQuests from "./Quests";
 export default function OwnerPanel( {userData} ): JSX.Element {
 
     const {signOut} = useAuth()
+    const { t } = useTranslation();
 
     const handleLogOut = () => {
         signOut();
@@ -56,22 +57,22 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">Pridanie úlohy</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.addquest.header")}</a><br/>
                     <button onClick={() => setAddQuestVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
-                <a className="text-white text-xl pb-2">Názov úlohy</a>
+                <a className="text-white text-xl pb-2">{t("ownerpanel.addquest.questdesc")}</a>
                 <input 
                     value={newTaskText}
                     onChange={(e) => setTaskText(e.target.value)} 
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
                     maxlength="35"
-                    placeholder="Stručný opis úlohy (max. 35 znakov)"
+                    placeholder={t("ownerpanel.addquest.questplaceholder")}
                     autoFocus>
                 </input><br/>
 
-                <a className="text-white text-xl pb-2">Počet bodov</a>
+                <a className="text-white text-xl pb-2">{t("ownerpanel.addquest.points")}</a>
                 <input 
                     value={newTaskPoints}
                     onInput={(e) => e.target.value = e.target.value.slice(0, 1)}
@@ -81,7 +82,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     placeholder="0">
                 </input><br/>
 
-                <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">VYTVORIŤ</button>
+                <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addquest.create")}</button>
             </div>      
         </div>
         )
@@ -95,21 +96,21 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">Pridanie účtu</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.addaccount.header")}</a><br/>
                     <button onClick={() => setAddAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
-                <a className="text-white text-xl pb-2">E-Mail používateľa</a>
+                <a className="text-white text-xl pb-2">{t("ownerpanel.addaccount.useremail")}</a>
                 <input 
                     value={newMailText}
                     onChange={(e) => setNewMailText(e.target.value)} 
                     type="email"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    placeholder="email@gmail.com"
+                    placeholder={t("ownerpanel.addaccount.mailplaceholder")}
                     autoFocus>
                 </input><br/>
 
-                <button onClick={addNewMail} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">PRIDAŤ</button>
+                <button onClick={addNewMail} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addaccount.add")}</button>
             </div>      
         </div>
         )
@@ -123,25 +124,25 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
             <div className="w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">Zmazanie účtu</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a><br/>
                     <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <div className="flex flex-col h-full justify-center items-center pb-12">
                     {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
                 <br />
-                <a className="text-white text-xl my-2">Meno používateľa, ktorého si prajete vymazať</a>
+                <a className="text-white text-xl my-2">{t("ownerpanel.delaccount.nicktodelete")}</a>
                 <input 
                     value={nickToDelete}
                     onChange={(e) => setNickToDelete(e.target.value)} 
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 text-center" 
                     maxlength="40"
-                    placeholder="Nick"
+                    placeholder={t("ownerpanel.delaccount.nickplaceholder")}
                     autoFocus>
                 </input><br/>
 
-                <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">ZMAZAŤ</button>
+                <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.delaccount.delete")}</button>
                 </div>
             </div>      
         </div>
@@ -157,11 +158,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">Pridanie plusového bodu</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.addplus.header")}</a><br/>
                     <button onClick={() => setAddPlusShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
-                <a className="text-white text-xl pb-2">Názov úlohy</a>
+                <a className="text-white text-xl pb-2">{t("ownerpanel.addplus.questname")}</a>
                 <select
                     value={addPlusTask}
                     onChange={(e) => setAddPlusTask(e.target.value)} 
@@ -176,7 +177,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     ))}
                 </select><br/>
 
-                <button onClick={savePlusPoints} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">PRIPÍSAŤ</button>
+                <button onClick={savePlusPoints} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addplus.add")}</button>
             </div>      
         </div>
         )
@@ -191,11 +192,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">Pridanie mínusového bodu</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.addminus.header")}</a><br/>
                     <button onClick={() => setAddMinusShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
-                <a className="text-white text-xl pb-2">Názov úlohy</a>
+                <a className="text-white text-xl pb-2">{t("ownerpanel.addminus.questname")}</a>
                 <select
                     value={addMinusTask}
                     onChange={(e) => setAddMinusTask(e.target.value)} 
@@ -210,7 +211,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     ))}
                 </select><br/>
 
-                <button onClick={saveMinusPoints} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">PRIPÍSAŤ</button>
+                <button onClick={saveMinusPoints} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addminus.add")}</button>
             </div>      
         </div>
         )
@@ -226,11 +227,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">Zmeniť rank hráča</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.changerank.header")}</a><br/>
                     <button onClick={() => setChangeRankShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
-                <a className="text-white text-xl pb-2">Nový rank</a>
+                <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.newrank")}</a>
                 <select
                     value={newUserRank}
                     onChange={(e) => setNewUserRank(e.target.value)} 
@@ -249,7 +250,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </select>
                 <br/>
 
-                <a className="text-white text-xl pb-2">Prajete si resetovať hráčové body?</a>
+                <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.resetpoints")}</a>
                 <input 
                     checked={shouldResetPoints}
                     type="checkbox" 
@@ -258,7 +259,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </input>
                 <br />
 
-                <button onClick={changeUserRank} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">PREPÍSAŤ</button>
+                <button onClick={changeUserRank} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.changerank.change")}</button>
             </div>      
         </div>
         )
@@ -553,7 +554,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div>
                     <div className="flex justify-end items-stretch right-10 pr-10">
-                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
+                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-3"flex-end onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
                         <div className="flex w-5"></div>
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
                     </div>
@@ -570,17 +571,17 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="inline-block flex items-center justify-between p-4 flex">
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
                             <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
-                                Pridať úlohu
+                                {t("ownerpanel.questlist.addquest")}
                             </button>
                         </div>                     
 
                         <div className="flex justify-center">
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam úloh</a>
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.questlist.header")}</a>
                         </div>
 
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
                             <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full">
-                                Zmazať úlohu
+                            {t("ownerpanel.questlist.remquest")}
                             </button>
                         </div>
                     </div>
@@ -594,7 +595,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-center items-centzer mr-5 w-full">
                         <div>
                             <div className="flex justify-center p-4">
-                                <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">Zoznam členov AT</a>
+                                <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.memberslist.header")}</a>
                             </div>
                         <div className="h-0.5 bg-cyan-400 mb-4 "></div>
                         </div>
@@ -602,8 +603,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} /> : null}
                         </div>
                         <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
-                            <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Pridať účet</button>
-                            <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">Zmazať účet</button>
+                            <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>
+                            <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.delaccount")}</button>
                         </div>
                     </div>
                     </div>
