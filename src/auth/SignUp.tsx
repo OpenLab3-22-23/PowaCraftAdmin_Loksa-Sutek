@@ -72,7 +72,7 @@ export default function SignUp() {
     <div className="w-full h-full lg:h-screen bg-black flex justify-center lg:bg-[url('/assets/bg.png')] lg:bg-cover lg:bg-no-repeat pb-3">
       <div className="absolute top-10 left-10">
         <Link to="/login" className="inline-block flex items-center gap-4">
-          <img src="dist/assets/arrow.png" className="w-10 h-10"></img>
+          <img src="/assets/arrow.png" className="w-10 h-10"></img>
           <a className="text-white text-4xl">{t("register.back")}</a>
           </Link>
       </div>
