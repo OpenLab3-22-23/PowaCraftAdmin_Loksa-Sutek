@@ -19,7 +19,7 @@ export default function SignUp() {
 
   useEffect(() => {
     fetchAllowedMails();
-    changeLanguage();
+    setLanguageIcon();
 }, [])
 
   const fetchAllowedMails = async () => {
@@ -52,6 +52,18 @@ export default function SignUp() {
       else
       {
         setEmailEnabled(false);
+      }
+    }
+
+    function setLanguageIcon()
+    {
+      if (i18n.language == "sk")
+      {
+        setLanguageIconSource("/assets/sk.png")
+      }
+      else
+      {
+        setLanguageIconSource("/assets/en.png")
       }
     }
 

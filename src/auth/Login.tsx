@@ -12,7 +12,7 @@ export default function LogIn() {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    changeLanguage();
+    setLanguageIcon();
   }, [])
 
   async function handleLogIn(e: React.FormEvent<HTMLFormElement>) {
@@ -23,6 +23,18 @@ export default function LogIn() {
     } catch (error: any) {
       alert(error.error_description || error.message);
     } finally {
+    }
+  }
+
+  function setLanguageIcon()
+  {
+    if (i18n.language == "sk")
+    {
+      setLanguageIconSource("/assets/sk.png")
+    }
+    else
+    {
+      setLanguageIconSource("/assets/en.png")
     }
   }
 
