@@ -17,7 +17,8 @@
         "password": "Heslo",
         "passwordrepeat": "Znovu heslo",         
         "register": "Registrovať",               
-        "login": "Prihlásiť sa"
+        "login": "Prihlásiť sa",
+        "warning": "Tvoj prednastavený jazyk panelu bude po registrácií ten, ktorý máš aktuálne nastavený!"
     },
     "userpanel": {
         "yourpoints": "Tvoje body",

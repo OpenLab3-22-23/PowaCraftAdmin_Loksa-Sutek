@@ -138,7 +138,6 @@ export default function LandingPage( {userData} ): JSX.Element {
         fetchAllUsers();
         fetchPointsList();
         fetchQuestList();
-        changeLanguage();
     }, [])
 
     const fetchUserProfile = async () => {
@@ -153,6 +152,15 @@ export default function LandingPage( {userData} ): JSX.Element {
                 setRank(data[0].rank);
                 setPlusPoints(data[0].plus);
                 setMinusPoints(data[0].minus);
+                i18n.changeLanguage(data[0].language)
+                if (i18n.language == "sk")
+                {
+                  setLanguageIconSource("/assets/sk.png")
+                }
+                else
+                {
+                  setLanguageIconSource("/assets/en.png")
+                }
 
                 if (data[0].rank == "Akademik" || data[0].rank == "Helper")
                 {

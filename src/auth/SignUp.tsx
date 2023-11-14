@@ -72,7 +72,7 @@ export default function SignUp() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try{
-      const { error } = await signUp(email, password, nick);  
+      const { error } = await signUp(email, password, nick, i18n.language);  
       if (error) { throw error; }
       else { deleteMail(); }
     }
@@ -148,6 +148,8 @@ export default function SignUp() {
           disabled={password != correct || password == "" || !emailEnabled}
         />
         <Link to="/login" className="text-white hover:text-gray-300 text-xl">{t("register.login")}</Link>
+
+        <a className="text-white absolute bottom-10 text-2xl">{t("register.warning")}</a>
       </form>
     </div>
   ) : (

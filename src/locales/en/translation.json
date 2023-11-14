@@ -17,7 +17,8 @@
         "password": "Password",
         "passwordrepeat": "Repeat password",         
         "register": "Register",               
-        "login": "Log in"
+        "login": "Log in",
+        "warning": "Your pre-set language in panel will be the one you have currently selected!"
     },
     "userpanel": {
         "yourpoints": "Your points",

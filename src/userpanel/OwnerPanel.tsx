@@ -273,7 +273,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchAllUsers();
         fetchQuestList();
         fetchPointsList();
-        changeLanguage();
     }, [])
 
     const fetchUserProfile = async () => {
@@ -285,6 +284,15 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             if (data) {
                 setRank(data[0].rank);
                 setUsername(data[0].username);
+                i18n.changeLanguage(data[0].language)
+                if (i18n.language == "sk")
+                {
+                  setLanguageIconSource("/assets/sk.png")
+                }
+                else
+                {
+                  setLanguageIconSource("/assets/en.png")
+                }
             }
         }
 
