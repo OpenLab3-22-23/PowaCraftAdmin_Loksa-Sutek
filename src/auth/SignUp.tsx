@@ -60,12 +60,12 @@ export default function SignUp() {
       if (i18n.language == "sk")
       {
         i18n.changeLanguage("en")
-        setLanguageIconSource("dist/assets/en.png")
+        setLanguageIconSource("/assets/en.png")
       }
       else
       {
         i18n.changeLanguage("sk")
-        setLanguageIconSource("dist/assets/sk.png")
+        setLanguageIconSource("/assets/sk.png")
       }
     }
 
