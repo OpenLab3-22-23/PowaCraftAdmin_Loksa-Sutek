@@ -14,24 +14,6 @@ const resources = {
 };
 
 
-// Získání polohy uživatele
-if ("geolocation" in navigator) {
-  navigator.geolocation.getCurrentPosition(async position => {
-    const { latitude, longitude } = position.coords;
-
-    // Volání Geonames API pro získání informací o poloze
-    const response = await fetch(`http://api.geonames.org/countryCodeJSON?lat=${latitude}&lng=${longitude}&username=powiss`);
-    const data = await response.json();
-
-    console.log("Skratka tvojej krajiny: ", data.countryCode);
-  }, error => {
-    console.error("Chyba při získávání polohy:", error.message);
-  });
-} else {
-  console.error("Geolocation není podporováno v tomto prohlížeči.");
-}
-
-
 i18n
   .use(initReactI18next) 
   .init({

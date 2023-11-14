@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
 import { useAuth } from "./Auth";
 import { useTranslation } from 'react-i18next'
 
+
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [languageIconSource, setLanguageIconSource] = useState("");
   const { signIn, session } = useAuth();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    changeLanguage();
+  }, [])
 
   async function handleLogIn(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,6 +26,19 @@ export default function LogIn() {
     }
   }
 
+  function changeLanguage()
+  {
+    if (i18n.language == "sk")
+    {
+      i18n.changeLanguage("en")
+      setLanguageIconSource("dist/assets/en.png")
+    }
+    else
+    {
+      i18n.changeLanguage("sk")
+      setLanguageIconSource("dist/assets/sk.png")
+    }
+  }
   
   return !session? (
     <div className="w-screen h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
@@ -29,6 +48,9 @@ export default function LogIn() {
           <span className="text-white text-4xl">{t("login.back")}</span>
         </a>
       </div>
+
+      <img src={languageIconSource} className="w-14 h-14 absolute top-10 right-10 cursor-pointer" onClick={changeLanguage}></img>
+
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
         <h2 className="text-5xl lg:text-7xl text-white text-center">{t("login.header")}</h2>
@@ -53,7 +75,6 @@ export default function LogIn() {
           className="w-80 lg:w-96 my-2 bg-gray-200 rounded-full"   
         />        
 
-        
        
         <br/>
         <input

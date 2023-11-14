@@ -12,12 +12,14 @@ export default function SignUp() {
   const [correct, setCorrect] = useState("");
   const [emailEnabled, setEmailEnabled] = useState(false);  
   const [allowedMailResponse, setMailResponse] = useState<{ id: number; mail: string }[] | undefined>();
-  const { t } = useTranslation();
+  const [languageIconSource, setLanguageIconSource] = useState("dist/assets/sk.png");
+  const { t, i18n } = useTranslation();
   const { signUp, session } = useAuth();
 
 
   useEffect(() => {
     fetchAllowedMails();
+    changeLanguage();
 }, [])
 
   const fetchAllowedMails = async () => {
@@ -30,29 +32,42 @@ export default function SignUp() {
         }
     } 
 
-    const deleteMail = async () => {
-      const { error } = await supabase
-          .from('allowed_mails')
-          .delete()
-          .eq('mail', email)
-          if (error) {
-              console.log("ERROR");
-          }
-      }   
+  const deleteMail = async () => {
+    const { error } = await supabase
+        .from('allowed_mails')
+        .delete()
+        .eq('mail', email)
+        if (error) {
+            console.log("ERROR");
+        }
+    }   
 
-
-  function checkEmail(currentMail: string)
-  {
-
-    if (allowedMailResponse?.some(item => item.mail === currentMail))
+    function checkEmail(currentMail: string)
     {
-      setEmailEnabled(true);
+  
+      if (allowedMailResponse?.some(item => item.mail === currentMail))
+      {
+        setEmailEnabled(true);
+      }
+      else
+      {
+        setEmailEnabled(false);
+      }
     }
-    else
+
+    function changeLanguage()
     {
-      setEmailEnabled(false);
+      if (i18n.language == "sk")
+      {
+        i18n.changeLanguage("en")
+        setLanguageIconSource("dist/assets/en.png")
+      }
+      else
+      {
+        i18n.changeLanguage("sk")
+        setLanguageIconSource("dist/assets/sk.png")
+      }
     }
-  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -76,6 +91,9 @@ export default function SignUp() {
           <span className="text-white text-4xl">{t("register.back")}</span>
           </Link>
       </div>
+
+      <img src={languageIconSource} className="w-14 h-14 absolute top-10 right-10 cursor-pointer" onClick={changeLanguage}></img>
+
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400 mt-9"></img>
       <h2 className="text-5xl lg:text-7xl text-white text-center">{t("register.header")}</h2>

@@ -13,14 +13,16 @@ import WriteQuests from "./Quests";
 export default function OwnerPanel( {userData} ): JSX.Element {
 
     const {signOut} = useAuth()
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const handleLogOut = () => {
         signOut();
+        changeLanguage();
     };
 
     const [rank, setRank] = useState("");
     const [username, setUsername] = useState("");    
+    const [languageIconSource, setLanguageIconSource] = useState("");
 
     const [allUsersResponse, setUsersResponse] = useState();
     const [questList, setQuestList] = useState();   
@@ -36,8 +38,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [addPlusTask, setAddPlusTask] = useState(1);       
     const [addMinusTask, setAddMinusTask] = useState(7);      
     const [activeUserID, setActiveUserID] = useState();           
-
-
 
     const [deleteShown, setDeleteShown] = useState(false);   
     const [addQuestShown, setAddQuestVisibility] = useState(false);
@@ -273,6 +273,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchAllUsers();
         fetchQuestList();
         fetchPointsList();
+        changeLanguage();
     }, [])
 
     const fetchUserProfile = async () => {
@@ -465,6 +466,20 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchAllUsers();
         setAddMinusShown(false);
     } 
+
+    function changeLanguage()
+    {
+      if (i18n.language == "sk")
+      {
+        i18n.changeLanguage("en")
+        setLanguageIconSource("dist/assets/en.png")
+      }
+      else
+      {
+        i18n.changeLanguage("sk")
+        setLanguageIconSource("dist/assets/sk.png")
+      }
+    }
         
     
 
@@ -551,6 +566,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
                 </div>
 
+                <img src={languageIconSource} className="w-14 h-14 absolute top-10 inset-1/2 cursor-pointer" onClick={changeLanguage}></img>
 
                 <div>
                     <div className="flex justify-end items-stretch right-10 pr-10">

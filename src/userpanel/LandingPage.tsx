@@ -14,15 +14,16 @@ import WriteQuests from "./Quests";
 export default function LandingPage( {userData} ): JSX.Element {
 
     const {signOut} = useAuth()
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     function handleLogOut(): void {
         signOut();
     }
-
+    
 
     const [username, setUsername] = useState("");
     const [rank, setRank] = useState("");
+    const [languageIconSource, setLanguageIconSource] = useState("");
     const [plusPoints, setPlusPoints] = useState(0);
     const [minusPoints, setMinusPoints] = useState(0);
     const [isHelper, setIsHelper] = useState(false);   
@@ -41,7 +42,6 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [isAddQuestOpened, setAddQuestOpened] = useState(false);
     const [isMemberListOpened, setMembersListOpened] = useState(false);
     const [isSetUsernameOpened, setSetUsernameOpened] = useState(false);
-
 
     const AddQuest = props => {
         if (!props.show) {
@@ -138,6 +138,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         fetchAllUsers();
         fetchPointsList();
         fetchQuestList();
+        changeLanguage();
     }, [])
 
     const fetchUserProfile = async () => {
@@ -248,6 +249,21 @@ export default function LandingPage( {userData} ): JSX.Element {
     }
 
     
+    function changeLanguage()
+    {
+      if (i18n.language == "sk")
+      {
+        i18n.changeLanguage("en")
+        setLanguageIconSource("dist/assets/en.png")
+      }
+      else
+      {
+        i18n.changeLanguage("sk")
+        setLanguageIconSource("dist/assets/sk.png")
+      }
+    }
+
+    
     //** Data push functions **/
         
     const sendNewTask = async () => {
@@ -307,6 +323,8 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <a className="text-xl text-amber-400">Admin</a>
                     </div>
                 </div>
+
+                <img src={languageIconSource} className="w-14 h-14 absolute top-10 inset-1/2 cursor-pointer" onClick={changeLanguage}></img>
 
                 <div className="h-20 items-center space-x-6 mr-12" style={{ display: isHelper ? "flex" : "none" }}>
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
@@ -415,6 +433,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-3"flex-end onClick={handleLogOut}>{t("userpanel.logout")}</button>
                     </div>
                 </div>
+
+                <img src={languageIconSource} className="w-14 h-14 absolute top-10 inset-1/2 cursor-pointer" onClick={changeLanguage}></img>
+
                 <div className="h-20 items-center justify-center space-x-6" style={{ display: isHelper ? "flex" : "none" }}>
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
                         <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
