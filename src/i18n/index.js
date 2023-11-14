@@ -20,7 +20,7 @@ i18n
     resources, 
     lng: "sk", 
     debug: false,
-    fallbackLng: "en", 
+    fallbackLng: "sk", 
     interpolation: {
       escapeValue: false
     },
