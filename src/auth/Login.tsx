@@ -23,6 +23,12 @@ export default function LogIn() {
   
   return !session? (
     <div className="w-screen h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
+      <div className="absolute top-10 left-10">
+        <a className="inline-block flex items-center gap-4" href="https://powacraft.sk/">
+          <img src="dist/assets/arrow.png" className="w-10 h-10"></img>
+          <a className="text-white text-4xl">{t("login.back")}</a>
+        </a>
+      </div>
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
         <h2 className="text-5xl lg:text-7xl text-white text-center">{t("login.header")}</h2>

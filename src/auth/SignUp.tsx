@@ -70,6 +70,12 @@ export default function SignUp() {
 
   return !session ? (
     <div className="w-full h-full lg:h-screen bg-black flex justify-center lg:bg-[url('/assets/bg.png')] lg:bg-cover lg:bg-no-repeat pb-3">
+      <div className="absolute top-10 left-10">
+        <Link to="/login" className="inline-block flex items-center gap-4">
+          <img src="dist/assets/arrow.png" className="w-10 h-10"></img>
+          <a className="text-white text-4xl">{t("register.back")}</a>
+          </Link>
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
       <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400 mt-9"></img>
       <h2 className="text-5xl lg:text-7xl text-white text-center">{t("register.header")}</h2>

@@ -1,5 +1,6 @@
 {
     "login": {
+        "back": "Back",
         "header": "Login to the panel",
         "subheader": "for Admin-Team", 
         "email": "Email",
@@ -8,6 +9,7 @@
         "register": "Register"
     },
     "register": {
+        "back": "Back",
         "header": "Login to the panel",
         "subheader": "for Admin-Team", 
         "nick": "Nickname",
@@ -50,14 +52,6 @@
             "set": "SET"
         }
     },
-
-
-
-
-
-
-
-
     "ownerpanel": {
         "logout": "Log out",
         "questlist": {

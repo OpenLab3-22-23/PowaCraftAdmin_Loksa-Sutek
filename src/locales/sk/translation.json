@@ -1,5 +1,6 @@
 {
     "login": {
+        "back": "Späť",
         "header": "Prihlásenie do panelu",
         "subheader": "pre Admin-Team", 
         "email": "Email",
@@ -8,6 +9,7 @@
         "register": "Zaregistrovať sa"
     },
     "register": {
+        "back": "Späť",
         "header": "Registrácia do panelu",
         "subheader": "pre Admin-Team", 
         "nick": "Herné meno",
