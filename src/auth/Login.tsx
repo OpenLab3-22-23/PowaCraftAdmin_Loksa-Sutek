@@ -30,11 +30,11 @@ export default function LogIn() {
   {
     if (i18n.language == "sk")
     {
-      setLanguageIconSource("/assets/sk.png")
+      setLanguageIconSource("/assets/en.png")
     }
     else
     {
-      setLanguageIconSource("/assets/en.png")
+      setLanguageIconSource("/assets/sk.png")
     }
   }
 
@@ -43,12 +43,12 @@ export default function LogIn() {
     if (i18n.language == "sk")
     {
       i18n.changeLanguage("en")
-      setLanguageIconSource("/assets/en.png")
+      setLanguageIconSource("/assets/sk.png")
     }
     else
     {
       i18n.changeLanguage("sk")
-      setLanguageIconSource("/assets/sk.png")
+      setLanguageIconSource("/assets/en.png")
     }
   }
   

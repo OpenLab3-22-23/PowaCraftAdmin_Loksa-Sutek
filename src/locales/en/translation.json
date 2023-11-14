@@ -1,8 +1,8 @@
 {
     "login": {
         "back": "Back",
-        "header": "Login to the panel",
-        "subheader": "for Admin-Team", 
+        "header": "Log into the panel",
+        "subheader": "for staff", 
         "email": "Email",
         "password": "Password",
         "login": "Log in",
@@ -10,41 +10,41 @@
     },
     "register": {
         "back": "Back",
-        "header": "Login to the panel",
-        "subheader": "for Admin-Team", 
+        "header": "Log into the panel",
+        "subheader": "for staff", 
         "nick": "Nickname",
         "email": "Email",
         "password": "Password",
         "passwordrepeat": "Repeat password",         
         "register": "Register",               
         "login": "Log in",
-        "warning": "Your pre-set language in panel will be the one you have currently selected!"
+        "warning": "Your default language in the panel will be the one that's currently selected!"
     },
     "userpanel": {
         "yourpoints": "Your points",
         "logout": "Log out",
         "welcome": "Hello",
         "lastpoints": {
-            "header": "Your last points"
+            "header": "Your most recent points"
         },
         "besthelpers": {
             "header": "Best helpers",
-            "memberlist": "Entire list of AT members"
+            "memberlist": "List of all staff members"
         },
         "questlist": {
-            "header": "Quest list",
-            "addquest": "Add quest",
-            "remquest": "Delete quest"
+            "header": "Task list",
+            "addquest": "Add task",
+            "remquest": "Delete task"
         },
         "addquest": {
-            "header": "Quest creation",
-            "questdesc": "Quest description",
+            "header": "Create task",
+            "questdesc": "Task description",
             "questplaceholder": "Brief description of the task (max. 35 chars)",
             "points": "Points",
             "create": "CREATE"
         },
         "memberslist": {
-            "header": "AT members"
+            "header": "Staff members"
         },
         "setusername": {
             "header": "Set up your in-game nickname",
@@ -56,48 +56,48 @@
     "ownerpanel": {
         "logout": "Log out",
         "questlist": {
-            "header": "Quest list",
-            "addquest": "Add quest",
-            "remquest": "Delete quest"
+            "header": "Task list",
+            "addquest": "Add task",
+            "remquest": "Delete task"
         },
         "memberslist": {
-            "header": "AT members list",
+            "header": "Staff member list",
             "addaccount": "Add account",
             "delaccount": "Remove account"
         },
         "addquest": {
-            "header": "Quest creation",
-            "questdesc": "Quest description",
+            "header": "Create task",
+            "questdesc": "Task description",
             "questplaceholder": "Brief description of the task (max. 35 chars)",
             "points": "Points",
             "create": "CREATE"
         },
         "addaccount": {
-            "header": "Account creation",
-            "useremail": "E-Mail of user",
+            "header": "Add account",
+            "useremail": "User E-Mail",
             "mailplaceholder": "email@gmail.com",
             "add": "ADD"
         },
         "delaccount": {
-            "header": "Account deletion",
+            "header": "Delete account",
             "nicktodelete": "Name of the user you want to delete",
             "nickplaceholder": "Nickname",
             "delete": "DELETE"
         },
         "addplus": {
-            "header": "Plus point addition",
-            "questname": "Quest name",
+            "header": "Add plus points",
+            "questname": "Task name",
             "add": "ADD"
         },
         "addminus": {
-            "header": "Minus point addition",
-            "questname": "Quest name",
+            "header": "Add minus points",
+            "questname": "Task name",
             "add": "ADD"
         },
         "changerank": {
             "header": "Change user rank",
             "newrank": "New rank",
-            "resetpoints": "Do you want to reset player points?",
+            "resetpoints": "Do you wish to reset the player's points?",
             "change": "CHANGE"
         }
     }    
