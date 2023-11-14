@@ -25,7 +25,7 @@ export default function LogIn() {
     <div className="w-screen h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
       <div className="absolute top-10 left-10">
         <a className="inline-block flex items-center gap-4" href="https://powacraft.sk/">
-          <img src="dist/assets/arrow.png" className="w-10 h-10"></img>
+          <img src="/assets/arrow.png" className="w-10 h-10"></img>
           <a className="text-white text-4xl">{t("login.back")}</a>
         </a>
       </div>
