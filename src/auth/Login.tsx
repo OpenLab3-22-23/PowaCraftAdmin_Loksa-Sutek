@@ -26,7 +26,7 @@ export default function LogIn() {
       <div className="absolute top-10 left-10">
         <a className="inline-block flex items-center gap-4" href="https://powacraft.sk/">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>
-          <a className="text-white text-4xl">{t("login.back")}</a>
+          <span className="text-white text-4xl">{t("login.back")}</span>
         </a>
       </div>
       <form onSubmit={handleLogIn} className="flex flex-col items-center">

@@ -73,7 +73,7 @@ export default function SignUp() {
       <div className="absolute top-10 left-10">
         <Link to="/login" className="inline-block flex items-center gap-4">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>
-          <a className="text-white text-4xl">{t("register.back")}</a>
+          <span className="text-white text-4xl">{t("register.back")}</span>
           </Link>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
