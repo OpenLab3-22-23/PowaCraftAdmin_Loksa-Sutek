@@ -309,7 +309,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     //** HTML **/
 
     return (
-        <div className=" h-screen w-screen bg-[url('/assets/bg.png')] bg-cover bg-no-repeat overflow-x-hidden">
+        <div className=" h-max lg:h-screen w-screen bg-[url('/assets/bg.png')] bg-cover bg-no-repeat bg-fixed">
 
             {isAddQuestOpened && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={isAddQuestOpened}/>
@@ -332,7 +332,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
                 </div>
 
-                <div className="h-20 items-center space-x-6" style={{ display: isHelper ? "flex" : "none" }}>
+                <div className="h-20 items-center space-x-6 mr-12 " style={{ display: isHelper ? "flex" : "none" }}>
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
                         <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                     </div>
@@ -363,9 +363,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <a className="text-7xl text-white">{t("userpanel.welcome")}, {username}</a>
             </div>
 
-            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-full gap-1 px-5 py-5 absolute lg:static">
+            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-full gap-1 px-5 py-5">
 
-                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end ">
+                <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
                     <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2 h-1/5 items-center flex-col">
                         <a className="text-2xl text-white">{t("userpanel.lastpoints.header")}</a>
@@ -397,8 +397,8 @@ export default function LandingPage( {userData} ): JSX.Element {
 
 
 
-            <div className="row-span-2 col-start-1 row-start-1 absolute lg:static">
-                <div className="h-full w-full bg-zinc-700/80 rounded-lg flex flex-col absolute lg:static">
+            <div className="row-span-2 col-start-1 row-start-1">
+                <div className="h-full w-full bg-zinc-700/80 rounded-lg flex flex-col">
 
                     <div className="inline-block flex items-center justify-between p-4">
                         <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-full justify-center">
