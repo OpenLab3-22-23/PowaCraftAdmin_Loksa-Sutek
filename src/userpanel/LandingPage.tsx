@@ -309,7 +309,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     //** HTML **/
 
     return (
-        <div className=" h-screen w-screen lg:bg-[url('/assets/bg.png')] lg:bg-cover lg:bg-no-repeat overflow-x-hidden">
+        <div className=" h-screen w-screen bg-[url('/assets/bg.png')] bg-cover bg-no-repeat overflow-x-hidden">
 
             {isAddQuestOpened && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={isAddQuestOpened}/>
@@ -332,8 +332,6 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
                 </div>
 
-                <img src={languageIconSource} className="w-14 h-14 absolute top-10 inset-1/2 cursor-pointer" onClick={changeLanguage}></img>
-
                 <div className="h-20 items-center space-x-6 mr-12" style={{ display: isHelper ? "flex" : "none" }}>
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
                         <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
@@ -343,7 +341,8 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
                     <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
                         <a className="text-red-500 text-2xl">-{minusPoints}</a>
-                    </div>    
+                    </div> 
+                    <img src={languageIconSource} className="w-14 h-14 cursor-pointer" onClick={changeLanguage}></img>   
                 </div>
 
                 <div>
@@ -431,7 +430,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         </div>
 
 {/* MOBILE HTML */}
-        <div className="visible static lg:invisible lg:fixed bg-black pb-10">
+        <div className="visible static lg:invisible lg:fixed pb-10">
                 <div className="flex content-center items-stretch pt-3 pl-3 w-full">
                     <div className="flex w-full">
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
@@ -442,7 +441,6 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
                 </div>
 
-                <img src={languageIconSource} className="w-14 h-14 absolute top-10 inset-1/2 cursor-pointer" onClick={changeLanguage}></img>
 
                 <div className="h-20 items-center justify-center space-x-6" style={{ display: isHelper ? "flex" : "none" }}>
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
@@ -453,7 +451,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
                     <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
                         <a className="text-red-500 text-2xl">-{minusPoints}</a>
-                    </div>    
+                    </div> 
+                    <img src={languageIconSource} className="w-14 h-14 cursor-pointer" onClick={changeLanguage}></img>
+   
                 </div>
 
             <div className="flex justify-center mb-5">

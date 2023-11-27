@@ -7,13 +7,9 @@ import { useTranslation } from 'react-i18next'
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [languageIconSource, setLanguageIconSource] = useState("");
+  const [language, setLanguage] = useState("");
   const { signIn, session } = useAuth();
   const { t, i18n } = useTranslation();
-
-  useEffect(() => {
-    setLanguageIcon();
-  }, [])
 
   async function handleLogIn(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,34 +22,26 @@ export default function LogIn() {
     }
   }
 
-  function setLanguageIcon()
-  {
-    if (i18n.language == "sk")
-    {
-      setLanguageIconSource("/assets/en.png")
-    }
-    else
-    {
-      setLanguageIconSource("/assets/sk.png")
-    }
-  }
+  useEffect(() => {
+    changeLanguage()
+}, [])
 
   function changeLanguage()
   {
     if (i18n.language == "sk")
     {
       i18n.changeLanguage("en")
-      setLanguageIconSource("/assets/sk.png")
+      setLanguage("SK")
     }
     else
     {
       i18n.changeLanguage("sk")
-      setLanguageIconSource("/assets/en.png")
+      setLanguage("EN")
     }
   }
   
   return !session? (
-    <div className="w-screen h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-cover bg-no-repeat">
+    <div className="w-full h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-fixed bg-cover bg-no-repeat">
       <div className="absolute top-10 left-10">
         <a className="inline-block flex items-center gap-4" href="https://powacraft.sk/">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>
@@ -61,11 +49,11 @@ export default function LogIn() {
         </a>
       </div>
 
-      <img src={languageIconSource} className="w-14 h-14 absolute top-10 right-10 cursor-pointer" onClick={changeLanguage}></img>
+      <a onClick={changeLanguage} className="w-14 h-14 absolute top-10 right-10 text-2xl text-white cursor-pointer" >{language}</a>
 
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
-      <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400"></img>
-        <h2 className="text-5xl lg:text-7xl text-white text-center">{t("login.header")}</h2>
+      <img src="/assets/logo.svg" width="200" height="200" className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative"></img>
+        <h2 className="text-5xl lg:text-7xl text-white text-center lg:mt-0 mt-32">{t("login.header")}</h2>
         <h3 className="text-3xl lg:text-5xl text-amber-400">{t("login.subheader")}</h3><br/><br/>
   
         <p className="text-2xl text-white">{t("login.email")}</p>
@@ -94,7 +82,7 @@ export default function LogIn() {
           value={t("login.login")}
           className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-400/80"
         />
-        <Link to="/signup" className="text-white hover:text-gray-300 text-xl">{t("login.register")}</Link>
+        <Link to="/signup" className="text-white hover:text-gray-300 text-2xl">{t("login.register")}</Link>
       </form>
     </div>
   ) : (

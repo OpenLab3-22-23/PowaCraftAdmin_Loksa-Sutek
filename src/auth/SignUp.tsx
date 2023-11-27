@@ -12,14 +12,14 @@ export default function SignUp() {
   const [correct, setCorrect] = useState("");
   const [emailEnabled, setEmailEnabled] = useState(false);  
   const [allowedMailResponse, setMailResponse] = useState<{ id: number; mail: string }[] | undefined>();
-  const [languageIconSource, setLanguageIconSource] = useState("dist/assets/sk.png");
+  const [language, setLanguage] = useState("")
   const { t, i18n } = useTranslation();
   const { signUp, session } = useAuth();
 
 
   useEffect(() => {
     fetchAllowedMails();
-    setLanguageIcon();
+    setLanguage("SK")
 }, [])
 
   const fetchAllowedMails = async () => {
@@ -55,29 +55,17 @@ export default function SignUp() {
       }
     }
 
-    function setLanguageIcon()
-    {
-      if (i18n.language == "sk")
-      {
-        setLanguageIconSource("/assets/en.png")
-      }
-      else
-      {
-        setLanguageIconSource("/assets/sk.png")
-      }
-    }
-
     function changeLanguage()
     {
       if (i18n.language == "sk")
       {
         i18n.changeLanguage("en")
-        setLanguageIconSource("/assets/sk.png")
+        setLanguage("SK")
       }
       else
       {
         i18n.changeLanguage("sk")
-        setLanguageIconSource("/assets/en.png")
+        setLanguage("EN")
       }
     }
 
@@ -96,7 +84,7 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-full lg:h-screen bg-black flex justify-center lg:bg-[url('/assets/bg.png')] lg:bg-cover lg:bg-no-repeat pb-3">
+    <div className="w-full h-max lg:h-screen flex justify-center bg-[url('/assets/bg.png')] bg-cover bg-fixed bg-no-repeat pb-3">
       <div className="absolute top-10 left-10">
         <Link to="/login" className="inline-block flex items-center gap-4">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>
@@ -104,13 +92,13 @@ export default function SignUp() {
           </Link>
       </div>
 
-      <img src={languageIconSource} className="w-14 h-14 absolute top-10 right-10 cursor-pointer" onClick={changeLanguage}></img>
+      <a className="w-14 h-14 absolute top-10 right-10 cursor-pointer text-2xl text-white" onClick={changeLanguage}>{language}</a>
 
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
-      <img src="/assets/logo.svg" width="200" height="200" className="rounded-full border-4 border-amber-400 mt-9"></img>
-      <h2 className="text-5xl lg:text-7xl text-white text-center">{t("register.header")}</h2>
-        <h3 className="text-3xl lg:text-5xl text-amber-400">{t("register.subheader")}</h3><br/><br/>
-    <div className="lg:grid lg:grid-cols-2 gap-36 text-center">
+      <img src="/assets/logo.svg" width="200" height="200" className="rounded-full flex border-4 border-amber-400 invisible mt-9 absolute xl:visible xl:static"></img>
+      <h2 className="text-5xl lg:text-7xl text-white text-center xl:mt-0 lg:mt-16 mt-32">{t("register.header")}</h2>
+        <h3 className="text-3xl lg:text-5xl text-amber-400">{t("register.subheader")}</h3>
+    <div className="lg:grid lg:grid-cols-2 gap-36 text-center mt-6">
       <div>
         <p className="text-2xl text-white">{t("register.nick")}</p>
         <input
@@ -156,12 +144,12 @@ export default function SignUp() {
           id="submitbtn"
           type="submit"
           value={t("register.register")}
-          className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-400/80 disabled:bg-green-600/40 disabled:text-black/40"
+          className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-3 text-2xl hover:bg-green-400/80 disabled:bg-green-600/40 disabled:text-black/40"
           disabled={password != correct || password == "" || !emailEnabled}
         />
-        <Link to="/login" className="text-white hover:text-gray-300 text-xl">{t("register.login")}</Link>
+        <Link to="/login" className="text-white hover:text-gray-300 text-2xl mb-3">{t("register.login")}</Link>
 
-        <a className="text-white absolute bottom-10 text-2xl">{t("register.warning")}</a>
+        <a className="text-white text-4xl text-center border-4 border-red-700 pb-1 px-2">{t("register.warning")}</a>
       </form>
     </div>
   ) : (
