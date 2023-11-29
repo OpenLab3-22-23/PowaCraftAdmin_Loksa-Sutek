@@ -5,7 +5,7 @@ import WriteUserRank from "./UserRank";
 export default function ATList({response}) {
         
     return(
-        <div className=" overflow-auto h-5/6 w-full">
+        <div className="overflow-auto h-5/6 w-full">
             
         {
             response.map((user, index) => 
@@ -24,7 +24,7 @@ export default function ATList({response}) {
                     </div>
                 </div> 
 
-                <div className="items-center justify-center flex bg-white rounded-2xl box-content h-12 w-44 mx-2 overflow-hidden">   
+                <div className="invisible absolute md:visible md:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-44 mx-2 overflow-hidden">   
                     <div className="mx-6 text-2xl">
                         <WriteUserRank rank={user.rank}/>
                     </div>
@@ -39,14 +39,14 @@ export default function ATList({response}) {
                             </div>
                         </div>
 
-                        <div className="items-center justify-center flex bg-white rounded-2xl box-content h-12 w-14 mx-2 overflow-hidden">
+                        <div className="invisible absolute md:visible md:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-14 mx-2 overflow-hidden">
                             <div className="mx-7">
                                 <a className="text-red-600 text-2xl">-{user.minus}</a>
                             </div>
                         </div>  
                     </div>
                 ) : (
-                    <div className="items-center justify-center flex bg-white rounded-2xl box-content h-12 w-32 mx-2 overflow-hidden">
+                    <div className=" invisible absolute md:visible md:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-32 mx-2 overflow-hidden">
                         <div className="mx-6">
                             <a className="text-yellow-600 text-2xl">-</a>
                         </div>
