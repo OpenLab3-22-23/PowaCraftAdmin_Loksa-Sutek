@@ -48,8 +48,8 @@ export default function LandingPage( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+        <div className="items-center justify-center flex w-screen h-screen bg-black/80">      
+            <div className="lg:w-1/3 w-full rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("userpanel.addquest.header")}</a><br/>
@@ -89,7 +89,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
-            <div className="w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border">      
+            <div className="lg:w-1/2 w-full h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                         <a className="text-3xl text-white">{t("userpanel.memberslist.header")}</a><br/>
                         <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -442,7 +442,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 </div>
 
 
-                <div className="h-20 items-center justify-center space-x-4" style={{ display: isHelper ? "flex" : "none" }}>
+                <div className="h-20 items-center justify-center space-x-3 px-1" style={{ display: isHelper ? "flex" : "none" }}>
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
                         <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                     </div>
@@ -455,10 +455,15 @@ export default function LandingPage( {userData} ): JSX.Element {
                     <img src={languageIconSource} className="w-14 h-14 cursor-pointer" onClick={changeLanguage}></img>
    
                 </div>
-
-            <div className="flex justify-center mb-5">
-                <a className="text-7xl text-white">{t("userpanel.welcome")}, {username}</a>
-            </div>
+                <div className="pl-2 pb-4">
+                    <div className="flex">
+                        <a className="text-7xl text-white">{t("userpanel.welcome")},</a>
+                    </div>
+                    <div>
+                        <a className="text-7xl text-white truncate">{username}</a>
+                    </div>
+                </div>
+            
 
             <div className="pr-3 pl-3 space-y-3">
                 <div className="flex h-96">
