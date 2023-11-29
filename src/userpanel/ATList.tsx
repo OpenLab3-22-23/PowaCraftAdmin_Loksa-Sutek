@@ -32,15 +32,15 @@ export default function ATList({response}) {
 
                 {(user.rank == "Akademik" || user.rank == "Helper") ? (
 
-                    <div className="inline-block flex space-x-2">
+                    <div className="inline-block flex">
                         <div className="items-center justify-center flex bg-white rounded-2xl box-content h-12 w-14 overflow-hidden">
-                            <div className="mx-6">
+                            <div>
                                 <a className="text-green-600 text-2xl">+{user.plus}</a>
                             </div>
                         </div>
 
-                        <div className="invisible absolute md:visible md:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-14 overflow-hidden">
-                            <div className="mx-7">
+                        <div className="invisible absolute md:visible md:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-14 overflow-hidden ml-2">
+                            <div>
                                 <a className="text-red-600 text-2xl">-{user.minus}</a>
                             </div>
                         </div>  
