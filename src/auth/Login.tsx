@@ -41,7 +41,7 @@ export default function LogIn() {
   }
   
   return !session? (
-    <div className="w-full h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-fixed bg-cover bg-no-repeat">
+    <div className="w-full h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-fixed bg-no-repeat">
       <div className="absolute top-10 left-10">
         <a className="inline-block flex items-center gap-4" href="https://powacraft.sk/">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>

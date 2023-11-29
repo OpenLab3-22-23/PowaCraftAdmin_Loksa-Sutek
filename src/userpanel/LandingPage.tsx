@@ -309,7 +309,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     //** HTML **/
 
     return (
-        <div className=" h-max lg:h-screen w-screen bg-[url('/assets/bg.png')] bg-cover bg-no-repeat bg-fixed">
+        <div className=" h-max lg:h-screen w-screen bg-[url('/assets/bg.png')] bg-no-repeat bg-fixed">
 
             {isAddQuestOpened && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={isAddQuestOpened}/>
@@ -363,7 +363,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <a className="text-7xl text-white">{t("userpanel.welcome")}, {username}</a>
             </div>
 
-            <div className="grid grid-cols-2 grid-rows-2 h-4/6 w-full gap-1 px-5 py-5">
+            <div className="flex grid grid-cols-2 grid-rows-2 h-4/6 w-full gap-1 px-5 py-5">
 
                 <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
@@ -479,7 +479,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                             <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-2/3 justify-center">
                                 <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full disabled:bg-gray-600/60 disabled:text-white/60" disabled = { isHelper }>
-                                    {t("userpanel.besthelpers.remquest")}
+                                    {t("userpanel.questlist.remquest")}
                                 </button>
                             </div>
                         </div>

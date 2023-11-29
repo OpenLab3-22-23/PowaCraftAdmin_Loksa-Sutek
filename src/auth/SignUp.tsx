@@ -84,7 +84,7 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-max lg:h-screen flex justify-center bg-[url('/assets/bg.png')] bg-cover bg-fixed bg-no-repeat pb-3">
+    <div className="w-full h-max lg:h-screen flex justify-center bg-[url('/assets/bg.png')] bg-fixed bg-no-repeat pb-3">
       <div className="absolute top-10 left-10">
         <Link to="/login" className="inline-block flex items-center gap-4">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>
