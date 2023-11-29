@@ -332,7 +332,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
                 </div>
 
-                <div className="h-20 items-center space-x-6 mr-12 " style={{ display: isHelper ? "flex" : "none" }}>
+                <div className="absolute lg:static h-20 items-center space-x-6 mr-12 " style={{ display: isHelper ? "flex" : "none" }}>
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
                         <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                     </div>
