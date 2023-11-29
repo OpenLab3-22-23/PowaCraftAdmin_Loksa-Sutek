@@ -408,7 +408,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
 
                         <div>
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full">
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full items-center">
                                 {t("userpanel.questlist.header")}
                             </a>
                         </div>
