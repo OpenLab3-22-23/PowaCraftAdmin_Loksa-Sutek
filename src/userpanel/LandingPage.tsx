@@ -49,7 +49,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="items-center justify-center flex w-screen h-screen bg-black/80">      
-            <div className="lg:w-1/3 w-full mr-1 lg:mr-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div className="lg:w-1/3 w-full mx-1 lg:mx-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] md:p-2 pt-1 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("userpanel.addquest.header")}</a><br/>
@@ -89,7 +89,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
-            <div className="lg:w-1/2 w-full h-2/3 mr-1 lg:mr-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border">      
+            <div className="lg:w-1/2 w-full h-2/3 mx-1 lg:mx-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] md:p-2 pt-1 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                         <a className="text-3xl text-white">{t("userpanel.memberslist.header")}</a><br/>
                         <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -432,12 +432,12 @@ export default function LandingPage( {userData} ): JSX.Element {
 {/* MOBILE HTML */}
         <div className="visible static lg:invisible lg:fixed pb-10">
                 <div className="flex content-center items-stretch pt-1 px-1 w-full">
-                    <div className="flex w-full">
+                    <div className="flex w-screen">
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full"></img>
                         <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} /></div>
                     </div>
                     <div className="flex">
-                        <button className="text-2xl text-white hover:text-gray-300 text-center"flex-end onClick={handleLogOut}>{t("userpanel.logout")}</button>
+                        <button className="text-2xl text-white hover:text-gray-300 text-center"onClick={handleLogOut}>{t("userpanel.logout")}</button>
                     </div>
                 </div>
 
