@@ -472,7 +472,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                             </div>
 
                             <div className="text-center">
-                                <a className="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full ">
+                                <a className="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full overflow-auto">
                                     {t("userpanel.questlist.header")}
                                 </a>
                             </div>
