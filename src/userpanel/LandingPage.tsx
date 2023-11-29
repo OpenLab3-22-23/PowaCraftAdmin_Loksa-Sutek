@@ -421,7 +421,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                    <div className="w-full h-full mb-4">
+                    <div className="w-full h-full mb-4 overflow-auto">
                     {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
                     </div>
                 </div>
@@ -431,10 +431,10 @@ export default function LandingPage( {userData} ): JSX.Element {
 
 {/* MOBILE HTML */}
         <div className="visible static lg:invisible lg:fixed pb-10">
-                <div className="flex content-center p-1 w-full">
+                <div className="flex content-center items-stretch pt-3 pl-3 w-full">
                     <div className="flex w-full">
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full"></img>
-                        <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} /></div>
+                        <div className="self-center ml-3 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} /></div>
                     </div>
                     <div className="flex pr-3">
                         <button className="text-2xl text-white hover:text-gray-300 text-center"flex-end onClick={handleLogOut}>{t("userpanel.logout")}</button>

@@ -22,7 +22,7 @@ export default function WriteQuests({questList, deleteShown, onDelete}) {
                 <div className="box-content h-8 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
                     <a className="text-2xl">{++index}.</a> 
                 </div>
-                <div className="box-content h-8 w-9/12  bg-zinc-500/40 rounded-lg items-center flex pl-4 pt-10 overflow-auto">
+                <div className="box-content h-8 w-9/12 p-4 bg-zinc-500/40 rounded-lg items-center flex">
                         <a className="text-2xl text-white flex">{quest.quest_name}</a>
                 </div>
                 <div className="box-content h-8 w-1/12 p-4 bg-white rounded-lg mx-8 items-center justify-center flex">
