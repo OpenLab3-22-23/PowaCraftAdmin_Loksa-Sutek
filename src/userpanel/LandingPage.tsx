@@ -353,7 +353,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
-                        <a className="text-4xl"><WriteUserRank rank={rank} /></a>
+                        <a className="text-4xl ml-3 border-4 border-gray-400 rounded-full px-2 bg-white"><WriteUserRank rank={rank} /></a>
                     </div>
                 </div>
 
@@ -421,7 +421,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                    <div className="w-full h-full mb-4 overflow-auto">
+                    <div className="w-full h-full mb-4">
                     {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
                     </div>
                 </div>
@@ -433,16 +433,16 @@ export default function LandingPage( {userData} ): JSX.Element {
         <div className="visible static lg:invisible lg:fixed pb-10">
                 <div className="flex content-center items-stretch pt-3 pl-3 w-full">
                     <div className="flex w-full">
-                        <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
-                        <div className="self-center pl-3"><WriteUserRank rank={rank} /></div>
+                        <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full"></img>
+                        <div className="self-center ml-3 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} /></div>
                     </div>
                     <div className="flex pr-3">
-                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-3"flex-end onClick={handleLogOut}>{t("userpanel.logout")}</button>
+                        <button className="text-2xl text-white hover:text-gray-300 text-center"flex-end onClick={handleLogOut}>{t("userpanel.logout")}</button>
                     </div>
                 </div>
 
 
-                <div className="h-20 items-center justify-center space-x-6" style={{ display: isHelper ? "flex" : "none" }}>
+                <div className="h-20 items-center justify-center space-x-4" style={{ display: isHelper ? "flex" : "none" }}>
                     <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
                         <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                     </div>
@@ -465,19 +465,19 @@ export default function LandingPage( {userData} ): JSX.Element {
                     <div className="h-full w-full bg-zinc-700/80 rounded-lg flex flex-col">
 
                         <div className="inline-block flex items-center justify-between p-4">
-                            <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-2/3 justify-center">
+                            <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-full justify-center">
                                 <button onClick={() => setAddQuestOpened(true)} className="box-content w-full h-full">
                                     {t("userpanel.questlist.addquest")}
                                 </button>
                             </div>
 
                             <div className="text-center">
-                                <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full ">
+                                <a className="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full ">
                                     {t("userpanel.questlist.header")}
                                 </a>
                             </div>
 
-                            <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-2/3 justify-center">
+                            <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-full justify-center">
                                 <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full disabled:bg-gray-600/60 disabled:text-white/60" disabled = { isHelper }>
                                     {t("userpanel.questlist.remquest")}
                                 </button>
