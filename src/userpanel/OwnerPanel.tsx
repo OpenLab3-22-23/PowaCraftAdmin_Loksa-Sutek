@@ -53,8 +53,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80 ">      
+            <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addquest.header")}</a><br/>
@@ -94,7 +94,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addaccount.header")}</a><br/>
                     <button onClick={() => setAddAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -122,7 +122,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
-            <div className="w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div className="w-4/5 lg:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a><br/>
                     <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -131,7 +131,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="flex flex-col h-full justify-center items-center pb-12">
                     {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
                 <br />
-                <a className="text-white text-xl my-2">{t("ownerpanel.delaccount.nicktodelete")}</a>
+                <a className="text-white text-xl my-2 text-center">{t("ownerpanel.delaccount.nicktodelete")}</a>
                 <input 
                     value={nickToDelete}
                     onChange={(e) => setNickToDelete(e.target.value)} 
@@ -534,10 +534,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     
 
-    //** HTML **/
+//** HTML **/
 
     return (
-        <div className="h-full w-full bg-[url('/assets/owner-bg.png')] bg-cover bg-no-repeat">
+// PC HTML
+        <div className=" h-max lg:h-screen w-screen bg-[url('/assets/owner-bg.png')] bg-cover bg-no-repeat bg-fixed">
 
             {addQuestShown && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={addQuestShown}/>
@@ -564,22 +565,22 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div>}
 
 
-            <div className="flex items-center mb-5">
+            <div className="invisible absolute lg:visible lg:static flex items-center mb-5">
                 
                 <div className="flex items-center w-full ">
                     <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
                     <a className="text-4xl text-white">PowaCraft</a>
-                    <div className="h-14 flex items-end">
-                        <a className="text-xl text-amber-400">Admin</a>
+                    <div className="h-14 flex items-end absolute lg:static">
+                        <a className="text-xl text-amber-400 ">Admin</a>
                     </div>
+                    <img src={languageIconSource} className="w-14 h-14 inset-1/2 cursor-pointer ml-6 absolute lg:static" onClick={changeLanguage}></img>
                 </div>
 
-                <img src={languageIconSource} className="w-14 h-14 absolute top-10 inset-1/2 cursor-pointer" onClick={changeLanguage}></img>
+                
 
-                <div>
+                <div className="absolute lg:static">
                     <div className="flex justify-end items-stretch right-10 pr-10">
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-3"flex-end onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
-                        <div className="flex w-5"></div>
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
                     </div>
 
@@ -589,8 +590,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
             </div>
         
-        <div className="flex w-full h-3/4 gap-7">
-                <div className="bg-zinc-700/80 rounded-lg flex flex-col ml-5">
+            <div className="invisible absolute lg:visible lg:static flex w-full h-3/4 gap-7 justify-center">
+                <div className="bg-zinc-700/80 rounded-lg flex flex-col">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
@@ -600,7 +601,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>                     
 
                         <div className="flex justify-center">
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.questlist.header")}</a>
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.questlist.header")}</a>
                         </div>
 
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
@@ -616,22 +617,74 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
                 </div>
 
-                    <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-center items-centzer mr-5 w-full">
-                        <div>
-                            <div className="flex justify-center p-4">
-                                <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.memberslist.header")}</a>
-                            </div>
-                        <div className="h-0.5 bg-cyan-400 mb-4 "></div>
+                <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-center w-3/5 justify-self-end absolute lg:static">
+                    <div>
+                        <div className="flex justify-center p-4">
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.memberslist.header")}</a>
                         </div>
-                        <div className="h-full w-full overflow-auto">
-                            {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} /> : null}
-                        </div>
-                        <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
-                            <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>
-                            <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.delaccount")}</button>
-                        </div>
+                    <div className="h-0.5 bg-cyan-400 mb-4 "></div>
                     </div>
+                    <div className="h-full w-full overflow-auto">
+                        {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} /> : null}
+                    </div>
+                    <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
+                        <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>
+                        <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.delaccount")}</button>
                     </div>
                 </div>
+                </div>
+{/* MOBILE HTML */}
+        <div className="lg:invisible lg:fixed">
+            <div className="flex content-center items-stretch p-2 w-full ">
+                <div className="flex w-screen">
+                    <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full"></img>
+                    <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} /></div>
+                </div>
+                    <button className="text-2xl text-white hover:text-gray-300 text-center pr-1"onClick={handleLogOut}>{t("userpanel.logout")}</button>
+            </div>
+            <img src={languageIconSource} className="w-14 h-14 cursor-pointer m-2" onClick={changeLanguage}></img>
+
+            <div className="bg-zinc-700/80 rounded-lg mx-2">
+                <div className="inline-block flex items-center justify-between p-4 ">
+                    <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-12 justify-center border-slate-500 border-2 text-white">
+                        <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
+                            {t("ownerpanel.questlist.addquest")}
+                        </button>
+                    </div>                     
+
+                    <div className="flex justify-center">
+                        <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.questlist.header")}</a>
+                    </div>
+
+                    <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-12 justify-center border-slate-500 border-2 text-white">
+                        <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full">
+                        {t("ownerpanel.questlist.remquest")}
+                        </button>
+                    </div>
+                </div>
+
+                <div className="h-0.5 bg-cyan-400 mb-4"></div>
+                <div className="h-full overflow-auto mb-4">
+                    {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
+                </div>
+            </div>
+
+            <div className="bg-zinc-700/80 rounded-lg flex flex-col h-3/4 mx-2">
+                <div>
+                    <div className="flex justify-center p-4">
+                        <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.memberslist.header")}</a>
+                    </div>
+                    <div className="h-0.5 bg-cyan-400 mb-4 "></div>
+                </div>
+                <div className="h-full w-full overflow-auto">
+                    {allUsersResponse ? <OwnerATList response={allUsersResponse}  addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} addPlusPoint={openAddPlusPoint}/> : null}
+                </div>
+                <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
+                    <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>
+                    <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.delaccount")}</button>
+                </div>
+            </div>
+        </div>
+        </div>
     )
 }

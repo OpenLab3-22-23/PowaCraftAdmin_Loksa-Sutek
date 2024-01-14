@@ -89,7 +89,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
-            <div className="lg:w-1/2 w-full h-2/3 mx-1 lg:mx-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] md:p-2 pt-1 border">      
+            <div className="lg:w-1/2 w-full h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] md:p-2 pt-1 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                         <a className="text-3xl text-white">{t("userpanel.memberslist.header")}</a><br/>
                         <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -349,7 +349,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     <div className="flex justify-end items-stretch pr-10 pt-10">
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-3" onClick={handleLogOut}>{t("userpanel.logout")}</button>
                         <div className="flex w-5"></div>
-                        <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
+                        <img id="drobbox" src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
@@ -466,7 +466,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             
 
             <div className="pr-3 pl-3 space-y-3">
-                <div className="flex h-96">
+                <div className="flex">
                     <div className="h-full w-full bg-zinc-700/80 rounded-lg flex flex-col">
 
                         <div className="inline-block flex items-center justify-between p-4">

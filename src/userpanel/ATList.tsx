@@ -10,7 +10,7 @@ export default function ATList({response}) {
         {
             response.map((user, index) => 
 
-            <div className="w-full flex inline-block pb-5 items-center overflow-hidden space-x-2">
+            <div className="w-full flex inline-block pb-5 items-center justify-center overflow-hidden space-x-2">
 
                 <div className="items-center justify-center flex bg-white rounded-2xl box-content h-12 w-12">
                     <div>
