@@ -17,7 +17,7 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
       
 
               {user.rank === "Akademik" || user.rank === "Helper" ? (
-                <div className="items-center flex bg-white rounded-2xl box-content h-12 w-1/4 lg:justify-center mx-1 lg:mx-2">
+                <div className="items-center flex bg-white rounded-2xl box-content h-12 w-2/5 lg:justify-center mx-1 lg:mx-2">
                   <div className="mx-6 truncate">
                     <a className="text-2xl text-black">{user.username}</a>
                   </div>
@@ -34,7 +34,7 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
               {user.rank === "Akademik" || user.rank === "Helper" ? (
                 <button 
                   onClick={() => changeRank(user.id)}
-                  className="items-center flex bg-gray-800 border-slate-500 border-2 rounded-2xl box-content h-12 lg:justify-center w-1/3 mx-1 lg:mx-2 truncate md:text-clip">
+                  className="items-center flex bg-gray-800 border-slate-500 border-2 rounded-2xl box-content h-12 lg:justify-center w-1/3 mx-1 lg:mx-2 truncate md:text-clip invisible absolute md:visible md:static">
                   <div className="mx-1 lg:mx-6 text-2xl">
                     <WriteUserRank rank={user.rank} />
                   </div>
@@ -48,7 +48,7 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
               ) : (
                 <button
                   onClick={() => changeRank(user.id)}
-                  className="items-center flex bg-gray-800 border-slate-500 border-2 rounded-2xl box-content h-12 justify-center w-1/3 mx-2">
+                  className="items-center flex bg-gray-800 border-slate-500 border-2 rounded-2xl box-content h-12 justify-center w-1/3 mx-2 ">
                   <div className="mx-6 text-2xl truncate">
                     <WriteUserRank rank={user.rank} />
                   </div>
