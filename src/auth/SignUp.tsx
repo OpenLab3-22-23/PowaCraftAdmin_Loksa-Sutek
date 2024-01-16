@@ -13,6 +13,7 @@ export default function SignUp() {
   const [emailEnabled, setEmailEnabled] = useState(false);  
   const [allowedMailResponse, setMailResponse] = useState<{ id: number; mail: string }[] | undefined>();
   const [language, setLanguage] = useState("")
+  const [backgroundImage, setBackgroundImage] = useState("");
   const { t, i18n } = useTranslation();
   const { signUp, session } = useAuth();
 
@@ -20,7 +21,15 @@ export default function SignUp() {
   useEffect(() => {
     fetchAllowedMails();
     setLanguage("SK")
+    fetchBackground()
 }, [])
+
+  const fetchBackground = async () => {
+    const { data } = await supabase.storage
+        .from('backgrounds')
+        .getPublicUrl('bg.png');
+    setBackgroundImage(data.publicUrl);
+  }
 
   const fetchAllowedMails = async () => {
     const { data, error } = await supabase
@@ -84,7 +93,7 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-max lg:h-screen flex justify-center bg-[url('/assets/bg.png')] bg-fixed bg-no-repeat pb-3">
+    <div className="w-full h-max lg:h-screen flex justify-center bg-fixed bg-no-repeat pb-3" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="absolute top-10 left-10">
         <Link to="/login" className="inline-block flex items-center gap-4">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>

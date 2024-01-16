@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
+import { supabase } from "../supabase/supabaseClient";
 import { useAuth } from "./Auth";
 import { useTranslation } from 'react-i18next'
 
@@ -8,8 +9,10 @@ export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [language, setLanguage] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState("");
   const { signIn, session } = useAuth();
   const { t, i18n } = useTranslation();
+  
 
   async function handleLogIn(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,7 +27,15 @@ export default function LogIn() {
 
   useEffect(() => {
     changeLanguage()
+    fetchBackground()
 }, [])
+
+  const fetchBackground = async () => {
+    const { data } = await supabase.storage
+        .from('backgrounds')
+        .getPublicUrl('bg.png');
+    setBackgroundImage(data.publicUrl);
+  }
 
   function changeLanguage()
   {
@@ -41,7 +52,7 @@ export default function LogIn() {
   }
   
   return !session? (
-    <div className="w-full h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-fixed bg-no-repeat">
+    <div className="w-full h-screen flex flex-col justify-center bg-fixed bg-no-repeat" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="absolute top-10 left-10">
         <a className="inline-block flex items-center gap-4" href="https://powacraft.eu/">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>

@@ -27,6 +27,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [plusPoints, setPlusPoints] = useState(0);
     const [minusPoints, setMinusPoints] = useState(0);
     const [isHelper, setIsHelper] = useState(false);   
+    const [backgroundImage, setBackgroundImage] = useState();
 
     const [userResponse, setUserResponse] = useState();
     const [allUsersResponse, setUsersResponse] = useState();
@@ -134,11 +135,19 @@ export default function LandingPage( {userData} ): JSX.Element {
     //** Data fetching **/
 
     useEffect(() => {
+        fetchBackground();
         fetchUserProfile();
         fetchAllUsers();
         fetchPointsList();
         fetchQuestList();
     }, [])
+
+    const fetchBackground = async () => {
+        const { data } = await supabase.storage
+            .from('backgrounds')
+            .getPublicUrl('bg.png');
+        setBackgroundImage(data.publicUrl);
+    }
 
     const fetchUserProfile = async () => {
         const { data, error } = await supabase
@@ -309,7 +318,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     //** HTML **/
 
     return (
-        <div className=" h-max lg:h-screen w-screen bg-[url('/assets/bg.png')] bg-no-repeat bg-fixed">
+        <div className=" h-max lg:h-screen w-screen bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
             {isAddQuestOpened && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={isAddQuestOpened}/>
