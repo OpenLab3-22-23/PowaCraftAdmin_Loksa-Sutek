@@ -18,13 +18,13 @@ export default function ATList({response}) {
                     </div>
                 </div>
 
-                <div className="items-center md:justify-center flex bg-white rounded-2xl box-content h-12 md:w-56 w-32 truncate overflow-hidden pl-2 pr-8">
+                <div className="items-center lg:justify-center flex bg-white rounded-2xl box-content h-12 lg:w-56 w-32 truncate overflow-hidden pl-2 pr-8">
                     <div>
                         <a className="text-2xl text-black">{user.username}</a>
                     </div>
                 </div> 
 
-                <div className="invisible absolute md:visible md:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-44 overflow-hidden">   
+                <div className="invisible absolute lg:visible lg:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-44 overflow-hidden">   
                     <div className="text-2xl">
                         <WriteUserRank rank={user.rank}/>
                     </div>
@@ -39,7 +39,7 @@ export default function ATList({response}) {
                             </div>
                         </div>
 
-                        <div className="invisible absolute md:visible md:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-14 overflow-hidden ml-2">
+                        <div className="invisible absolute lg:visible lg:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-14 overflow-hidden ml-2">
                             <div>
                                 <a className="text-red-600 text-2xl">-{user.minus}</a>
                             </div>

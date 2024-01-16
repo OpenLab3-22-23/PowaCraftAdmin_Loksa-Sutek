@@ -122,7 +122,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
-            <div className="w-4/5 lg:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div className="w-full lg:w-2/3 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a><br/>
                     <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
