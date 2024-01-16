@@ -23,6 +23,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [rank, setRank] = useState("");
     const [username, setUsername] = useState("");    
     const [languageIconSource, setLanguageIconSource] = useState("");
+    const [backgroundImage, setBackgroundImage] = useState();
 
     const [allUsersResponse, setUsersResponse] = useState();
     const [questList, setQuestList] = useState();   
@@ -122,7 +123,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
-            <div className="w-full lg:w-2/3 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div className="w-4/5 lg:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a><br/>
                     <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -269,11 +270,20 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     //** Data fetching **/
 
     useEffect(() => {
+        fetchBackground();
         fetchUserProfile();
         fetchAllUsers();
         fetchQuestList();
         fetchPointsList();
     }, [])
+
+    const fetchBackground = async () => {
+        const { data } = await supabase.storage
+            .from('public/backgrounds')
+            .download('owner-bg.jpg');
+        setBackgroundImage(data);
+        console.log(data);
+    }
 
     const fetchUserProfile = async () => {
         const { data } = await supabase
@@ -538,7 +548,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     return (
 // PC HTML
-        <div className=" h-max lg:h-screen w-screen bg-[url('/assets/owner-bg.png')] bg-cover bg-no-repeat bg-fixed">
+        <div className=" h-max lg:h-screen w-screen bg-cover bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
             {addQuestShown && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={addQuestShown}/>
