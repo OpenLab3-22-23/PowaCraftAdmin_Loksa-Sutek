@@ -28,6 +28,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [minusPoints, setMinusPoints] = useState(0);
     const [isHelper, setIsHelper] = useState(false);   
     const [backgroundImage, setBackgroundImage] = useState();
+    const [logo, setLogo] = useState();
 
     const [userResponse, setUserResponse] = useState();
     const [allUsersResponse, setUsersResponse] = useState();
@@ -136,6 +137,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
     useEffect(() => {
         fetchBackground();
+        fetchLogo();
         fetchUserProfile();
         fetchAllUsers();
         fetchPointsList();
@@ -147,6 +149,12 @@ export default function LandingPage( {userData} ): JSX.Element {
             .from('backgrounds')
             .getPublicUrl('bg.png');
         setBackgroundImage(data.publicUrl);
+    }
+    const fetchLogo = async () => {
+        const { data } = await supabase.storage
+            .from('images')
+            .getPublicUrl('logo.png');
+        setLogo(data.publicUrl);
     }
 
     const fetchUserProfile = async () => {
@@ -318,7 +326,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     //** HTML **/
 
     return (
-        <div className=" h-max lg:h-screen w-screen bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <div className="h-max lg:h-screen w-screen bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
             {isAddQuestOpened && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={isAddQuestOpened}/>
@@ -334,7 +342,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="flex justify-between items-center">
                 
                 <div className="flex items-center w-8/12 ">
-                    <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
+                    <div className="rounded-full h-40 w-40 bg-center bg-contain" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white" href="https://powacraft.sk/">PowaCraft</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400">Admin</a>

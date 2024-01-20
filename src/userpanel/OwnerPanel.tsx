@@ -24,6 +24,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [username, setUsername] = useState("");    
     const [languageIconSource, setLanguageIconSource] = useState("");
     const [backgroundImage, setBackgroundImage] = useState();
+    const [logo, setLogo] = useState();
 
     const [allUsersResponse, setUsersResponse] = useState();
     const [questList, setQuestList] = useState();   
@@ -271,6 +272,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     useEffect(() => {
         fetchBackground();
+        fetchLogo();
         fetchUserProfile();
         fetchAllUsers();
         fetchQuestList();
@@ -282,6 +284,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .from('backgrounds')
             .getPublicUrl('owner-bg.png');
         setBackgroundImage(data.publicUrl);
+    }
+    const fetchLogo = async () => {
+        const { data } = await supabase.storage
+            .from('images')
+            .getPublicUrl('logo.png');
+        setLogo(data.publicUrl);
     }
 
     const fetchUserProfile = async () => {
@@ -577,7 +585,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="invisible absolute lg:visible lg:static flex items-center mb-5">
                 
                 <div className="flex items-center w-full ">
-                    <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
+                <div className="rounded-full h-40 w-40 bg-center bg-contain" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white">PowaCraft</a>
                     <div className="h-14 flex items-end absolute lg:static">
                         <a className="text-xl text-amber-400 ">Admin</a>

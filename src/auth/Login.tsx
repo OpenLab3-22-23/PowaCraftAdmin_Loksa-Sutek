@@ -10,6 +10,7 @@ export default function LogIn() {
   const [password, setPassword] = useState("");
   const [language, setLanguage] = useState("");
   const [backgroundImage, setBackgroundImage] = useState("");
+  const [logo, setLogo] = useState("");
   const { signIn, session } = useAuth();
   const { t, i18n } = useTranslation();
   
@@ -28,6 +29,7 @@ export default function LogIn() {
   useEffect(() => {
     changeLanguage()
     fetchBackground()
+    fetchLogo()
 }, [])
 
   const fetchBackground = async () => {
@@ -35,6 +37,12 @@ export default function LogIn() {
         .from('backgrounds')
         .getPublicUrl('bg.png');
     setBackgroundImage(data.publicUrl);
+  }
+  const fetchLogo = async () => {
+    const { data } = await supabase.storage
+        .from('images')
+        .getPublicUrl('logo.png');
+    setLogo(data.publicUrl);
   }
 
   function changeLanguage()
@@ -63,7 +71,7 @@ export default function LogIn() {
       <a onClick={changeLanguage} className="w-14 h-14 absolute top-10 right-10 text-2xl text-white cursor-pointer" >{language}</a>
 
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
-      <img src="/assets/logo.svg" width="200" height="200" className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative"></img>
+      <img className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative bg-contain bg-no-repeat h-60 w-60" style={{ backgroundImage: `url(${logo})` }}></img>
         <h2 className="text-5xl lg:text-7xl text-white text-center lg:mt-0 mt-32">{t("login.header")}</h2>
         <h3 className="text-3xl lg:text-5xl text-amber-400">{t("login.subheader")}</h3><br/><br/>
   

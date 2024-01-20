@@ -14,14 +14,16 @@ export default function SignUp() {
   const [allowedMailResponse, setMailResponse] = useState<{ id: number; mail: string }[] | undefined>();
   const [language, setLanguage] = useState("")
   const [backgroundImage, setBackgroundImage] = useState("");
+  const [logo, setLogo] = useState("");  
   const { t, i18n } = useTranslation();
   const { signUp, session } = useAuth();
 
 
   useEffect(() => {
     fetchAllowedMails();
-    setLanguage("SK")
-    fetchBackground()
+    setLanguage("SK");
+    fetchBackground();
+    fetchLogo();
 }, [])
 
   const fetchBackground = async () => {
@@ -29,6 +31,12 @@ export default function SignUp() {
         .from('backgrounds')
         .getPublicUrl('bg.png');
     setBackgroundImage(data.publicUrl);
+  }
+  const fetchLogo = async () => {
+    const { data } = await supabase.storage
+        .from('images')
+        .getPublicUrl('logo.png');
+    setLogo(data.publicUrl);
   }
 
   const fetchAllowedMails = async () => {
@@ -104,7 +112,7 @@ export default function SignUp() {
       <a className="w-14 h-14 absolute top-10 right-10 cursor-pointer text-2xl text-white" onClick={changeLanguage}>{language}</a>
 
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
-      <img src="/assets/logo.svg" width="200" height="200" className="rounded-full flex border-4 border-amber-400 invisible mt-9 absolute xl:visible xl:static"></img>
+      <img className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative bg-contain bg-no-repeat mt-9 h-52 w-52" style={{ backgroundImage: `url(${logo})` }}></img>
       <h2 className="text-5xl lg:text-7xl text-white text-center xl:mt-0 lg:mt-16 mt-32">{t("register.header")}</h2>
         <h3 className="text-3xl lg:text-5xl text-amber-400">{t("register.subheader")}</h3>
     <div className="lg:grid lg:grid-cols-2 gap-36 text-center mt-6">
