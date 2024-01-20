@@ -10,7 +10,7 @@
     },
     "register": {
         "back": "Back",
-        "header": "Log into the panel",
+        "header": "Register into the panel",
         "subheader": "for staff", 
         "nick": "Nickname",
         "email": "Email",
