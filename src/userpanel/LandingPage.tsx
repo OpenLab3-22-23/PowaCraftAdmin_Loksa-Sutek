@@ -29,6 +29,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [isHelper, setIsHelper] = useState(false);   
     const [backgroundImage, setBackgroundImage] = useState();
     const [logo, setLogo] = useState();
+    const [panelName, setPanelName] = useState("");
 
     const [userResponse, setUserResponse] = useState();
     const [allUsersResponse, setUsersResponse] = useState();
@@ -138,6 +139,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     useEffect(() => {
         fetchBackground();
         fetchLogo();
+        fetchPanelData();
         fetchUserProfile();
         fetchAllUsers();
         fetchPointsList();
@@ -155,6 +157,12 @@ export default function LandingPage( {userData} ): JSX.Element {
             .from('images')
             .getPublicUrl('logo.png');
         setLogo(data.publicUrl);
+    }
+    const fetchPanelData = async () => {
+        const { data } = await supabase
+            .from('paneldata')
+            .select()
+            setPanelName(data[0].data);
     }
 
     const fetchUserProfile = async () => {
@@ -343,7 +351,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 
                 <div className="flex items-center w-8/12 ">
                     <div className="rounded-full h-40 w-40 bg-center bg-contain" style={{ backgroundImage: `url(${logo})` }}></div>
-                    <a className="text-4xl text-white" href="https://powacraft.sk/">PowaCraft</a>
+                    <a className="text-4xl text-white" href="https://powacraft.sk/">{panelName}</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400">Admin</a>
                     </div>
