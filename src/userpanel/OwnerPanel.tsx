@@ -23,6 +23,9 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [rank, setRank] = useState("");
     const [username, setUsername] = useState("");    
     const [languageIconSource, setLanguageIconSource] = useState("");
+    const [backgroundImage, setBackgroundImage] = useState();
+    const [logo, setLogo] = useState();
+    const [panelName, setPanelName] = useState("");
 
     const [allUsersResponse, setUsersResponse] = useState();
     const [questList, setQuestList] = useState();   
@@ -137,7 +140,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
-            <div className="w-full lg:w-2/3 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div className="w-4/5 lg:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a><br/>
                     <button onClick={() => closeDeleteAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -281,11 +284,33 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     //** Data fetching **/
 
     useEffect(() => {
+        fetchBackground();
+        fetchLogo();
+        fetchPanelData();
         fetchUserProfile();
         fetchAllUsers();
         fetchQuestList();
         fetchPointsList();
     }, [])
+
+    const fetchBackground = async () => {
+        const { data } = await supabase.storage
+            .from('backgrounds')
+            .getPublicUrl('owner-bg.png');
+        setBackgroundImage(data.publicUrl);
+    }
+    const fetchLogo = async () => {
+        const { data } = await supabase.storage
+            .from('images')
+            .getPublicUrl('logo.png');
+        setLogo(data.publicUrl);
+    }
+    const fetchPanelData = async () => {
+        const { data } = await supabase
+            .from('paneldata')
+            .select()
+            setPanelName(data[0].data);
+    }
 
     const fetchUserProfile = async () => {
         const { data } = await supabase
@@ -554,7 +579,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     return (
 // PC HTML
-        <div className=" h-max lg:h-screen w-screen bg-[url('/assets/owner-bg.png')] bg-cover bg-no-repeat bg-fixed">
+        <div className=" h-max lg:h-screen w-screen bg-cover bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
             {addQuestShown && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={addQuestShown}/>
@@ -584,8 +609,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="invisible absolute lg:visible lg:static flex items-center mb-5">
                 
                 <div className="flex items-center w-full ">
-                    <img src="/assets/logo.svg" width="150" height="150" className="rounded-full" alt="obrazok"></img>
-                    <a className="text-4xl text-white">PowaCraft</a>
+                <div className="rounded-full h-40 w-40 bg-center bg-contain" style={{ backgroundImage: `url(${logo})` }}></div>
+                    <a className="text-4xl text-white">{panelName}</a>
                     <div className="h-14 flex items-end absolute lg:static">
                         <a className="text-xl text-amber-400 ">Admin</a>
                     </div>
@@ -650,57 +675,57 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
                 </div>
 {/* MOBILE HTML */}
-        <div className="lg:invisible lg:fixed">
-            <div className="flex content-center items-stretch p-2 w-full ">
-                <div className="flex w-screen">
-                    <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full"></img>
-                    <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} /></div>
+            <div className="lg:invisible lg:fixed">
+                <div className="flex content-center items-stretch p-2 w-full ">
+                    <div className="flex w-screen">
+                        <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full"></img>
+                        <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} /></div>
+                    </div>
+                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-1"onClick={handleLogOut}>{t("userpanel.logout")}</button>
                 </div>
-                    <button className="text-2xl text-white hover:text-gray-300 text-center pr-1"onClick={handleLogOut}>{t("userpanel.logout")}</button>
-            </div>
-            <img src={languageIconSource} className="w-14 h-14 cursor-pointer m-2" onClick={changeLanguage}></img>
+                <img src={languageIconSource} className="w-14 h-14 cursor-pointer m-2" onClick={changeLanguage}></img>
 
-            <div className="bg-zinc-700/80 rounded-lg mx-2">
-                <div className="inline-block flex items-center justify-between p-4 ">
-                    <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-12 justify-center border-slate-500 border-2 text-white">
-                        <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
-                            {t("ownerpanel.questlist.addquest")}
-                        </button>
-                    </div>                     
+                <div className="bg-zinc-700/80 rounded-lg mx-2">
+                    <div className="inline-block flex items-center justify-between p-4 ">
+                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-12 justify-center border-slate-500 border-2 text-white">
+                            <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
+                                {t("ownerpanel.questlist.addquest")}
+                            </button>
+                        </div>                     
 
-                    <div className="flex justify-center">
-                        <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.questlist.header")}</a>
+                        <div className="flex justify-center">
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.questlist.header")}</a>
+                        </div>
+
+                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-12 justify-center border-slate-500 border-2 text-white">
+                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full">
+                            {t("ownerpanel.questlist.remquest")}
+                            </button>
+                        </div>
                     </div>
 
-                    <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-12 justify-center border-slate-500 border-2 text-white">
-                        <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full">
-                        {t("ownerpanel.questlist.remquest")}
-                        </button>
+                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
+                    <div className="h-full overflow-auto mb-4">
+                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
                     </div>
                 </div>
 
-                <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                <div className="h-full overflow-auto mb-4">
-                    {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
-                </div>
-            </div>
-
-            <div className="bg-zinc-700/80 rounded-lg flex flex-col h-3/4 mx-2">
-                <div>
-                    <div className="flex justify-center p-4">
-                        <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.memberslist.header")}</a>
+                <div className="bg-zinc-700/80 rounded-lg flex flex-col h-3/4 mx-2">
+                    <div>
+                        <div className="flex justify-center p-4">
+                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.memberslist.header")}</a>
+                        </div>
+                        <div className="h-0.5 bg-cyan-400 mb-4 "></div>
                     </div>
-                    <div className="h-0.5 bg-cyan-400 mb-4 "></div>
-                </div>
-                <div className="h-full w-full overflow-auto">
-                    {allUsersResponse ? <OwnerATList response={allUsersResponse}  addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} addPlusPoint={openAddPlusPoint}/> : null}
-                </div>
-                <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
-                    <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>
-                    <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.delaccount")}</button>
+                    <div className="h-full w-full overflow-auto">
+                        {allUsersResponse ? <OwnerATList response={allUsersResponse}  addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} addPlusPoint={openAddPlusPoint}/> : null}
+                    </div>
+                    <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
+                        <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>
+                        <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.delaccount")}</button>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     )
 }

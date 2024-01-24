@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navigate, Link } from "react-router-dom";
+import { supabase } from "../supabase/supabaseClient";
 import { useAuth } from "./Auth";
 import { useTranslation } from 'react-i18next'
 
@@ -8,8 +9,11 @@ export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [language, setLanguage] = useState("");
+  const [backgroundImage, setBackgroundImage] = useState("");
+  const [logo, setLogo] = useState("");
   const { signIn, session } = useAuth();
   const { t, i18n } = useTranslation();
+  
 
   async function handleLogIn(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,7 +28,22 @@ export default function LogIn() {
 
   useEffect(() => {
     changeLanguage()
+    fetchBackground()
+    fetchLogo()
 }, [])
+
+  const fetchBackground = async () => {
+    const { data } = await supabase.storage
+        .from('backgrounds')
+        .getPublicUrl('bg.png');
+    setBackgroundImage(data.publicUrl);
+  }
+  const fetchLogo = async () => {
+    const { data } = await supabase.storage
+        .from('images')
+        .getPublicUrl('logo.png');
+    setLogo(data.publicUrl);
+  }
 
   function changeLanguage()
   {
@@ -41,7 +60,7 @@ export default function LogIn() {
   }
   
   return !session? (
-    <div className="w-full h-screen flex flex-col justify-center bg-[url('/assets/bg.png')] bg-fixed bg-no-repeat">
+    <div className="w-full h-screen flex flex-col justify-center bg-fixed bg-no-repeat" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <div className="absolute top-10 left-10">
         <a className="inline-block flex items-center gap-4" href="https://powacraft.eu/">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>
@@ -52,7 +71,7 @@ export default function LogIn() {
       <a onClick={changeLanguage} className="w-14 h-14 absolute top-10 right-10 text-2xl text-white cursor-pointer" >{language}</a>
 
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
-      <img src="/assets/logo.svg" width="200" height="200" className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative"></img>
+      <img className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative bg-contain bg-no-repeat h-60 w-60" style={{ backgroundImage: `url(${logo})` }}></img>
         <h2 className="text-5xl lg:text-7xl text-white text-center lg:mt-0 mt-32">{t("login.header")}</h2>
         <h3 className="text-3xl lg:text-5xl text-amber-400">{t("login.subheader")}</h3><br/><br/>
   
