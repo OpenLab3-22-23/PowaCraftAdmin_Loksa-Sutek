@@ -11,7 +11,7 @@ import WriteQuests from "./Quests";
 
 
 export default function OwnerPanel( {userData} ): JSX.Element {
-
+    document.body.classList.remove('overflow-hidden');
     const {signOut} = useAuth()
     const { t, i18n } = useTranslation();
 
@@ -47,8 +47,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [addMinusShown, setAddMinusShown] = useState(false);     
     const [changeRankShown, setChangeRankShown] = useState(false);       
 
-
+    const closeQuestTab = () => {
+        setAddQuestVisibility(false);
+        document.body.classList.remove('overflow-hidden');
+    }
     const AddQuest = props => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
@@ -58,7 +63,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addquest.header")}</a><br/>
-                    <button onClick={() => setAddQuestVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button onClick={() => closeQuestTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addquest.questdesc")}</a>
@@ -68,8 +73,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
                     maxlength="35"
-                    placeholder={t("ownerpanel.addquest.questplaceholder")}
-                    autoFocus>
+                    placeholder={t("ownerpanel.addquest.questplaceholder")}>
                 </input><br/>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addquest.points")}</a>
@@ -88,7 +92,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         )
     } 
 
+    const closeAddAccountTab = () => {
+        setAddAccountVisibility(false);
+        document.body.classList.remove('overflow-hidden');
+    }
     const AddAccount = props => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
@@ -97,7 +107,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addaccount.header")}</a><br/>
-                    <button onClick={() => setAddAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button onClick={() => closeAddAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addaccount.useremail")}</a>
@@ -106,8 +116,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     onChange={(e) => setNewMailText(e.target.value)} 
                     type="email"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    placeholder={t("ownerpanel.addaccount.mailplaceholder")}
-                    autoFocus>
+                    placeholder={t("ownerpanel.addaccount.mailplaceholder")}>
                 </input><br/>
 
                 <button onClick={addNewMail} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addaccount.add")}</button>
@@ -116,7 +125,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         )
     } 
 
+    const closeDeleteAccountTab = () => {
+        setDelAccountVisibility(false);
+        document.body.classList.remove('overflow-hidden');
+    }
     const DeleteAccount = props => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
@@ -125,7 +140,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-full lg:w-2/3 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a><br/>
-                    <button onClick={() => setDelAccountVisibility(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button onClick={() => closeDeleteAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <div className="flex flex-col h-full justify-center items-center pb-12">
@@ -138,8 +153,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 text-center" 
                     maxlength="40"
-                    placeholder={t("ownerpanel.delaccount.nickplaceholder")}
-                    autoFocus>
+                    placeholder={t("ownerpanel.delaccount.nickplaceholder")}>
                 </input><br/>
 
                 <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.delaccount.delete")}</button>
@@ -166,8 +180,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <select
                     value={addPlusTask}
                     onChange={(e) => setAddPlusTask(e.target.value)} 
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    autoFocus>
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" >
                     {pointsList.map((point) => (
                         point.points > 0 ? (
                             <option key={point.id} value={point.id}>
@@ -200,8 +213,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <select
                     value={addMinusTask}
                     onChange={(e) => setAddMinusTask(e.target.value)} 
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    autoFocus>
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" >
                     {pointsList.map((point) => (
                         point.points < 0 ? (
                             <option key={point.id} value={point.id}>
@@ -495,6 +507,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     //** Data push functions **/
         
     const sendNewTask = async () => {
+        
         const { error } = await supabase
             .from('quest_list')
             .insert({quest_name: newTaskText, points: newTaskPoints})
@@ -506,6 +519,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             fetchQuestList();
             setTaskText("");
             setTaskPoints("");
+            document.body.classList.remove('overflow-hidden');
         }
 
     const addNewMail = async () => {
@@ -517,6 +531,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 console.log("ERROR");
             }
             setAddAccountVisibility(false);
+            document.body.classList.remove('overflow-hidden');
         }
 
     const delAccount = async () => {
@@ -530,6 +545,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             setDelAccountVisibility(false);
             fetchAllUsers();
+            document.body.classList.remove('overflow-hidden');
         }   
 
     
