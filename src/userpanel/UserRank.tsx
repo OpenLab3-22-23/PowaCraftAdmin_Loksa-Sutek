@@ -5,7 +5,7 @@ export default function WriteUserRank({rank, rankList})
     if (rankList != null)
     {
         const result = rankList.map((rankFromRankList, index) => {
-            if (rank == rankFromRankList)
+            if (rank == rankFromRankList.rank)
             {
                 return <a key={index} className={`text-4xl`} style={{ color: rankFromRankList.colour }}>{rank}</a>
             }
