@@ -12,7 +12,7 @@ import WriteQuests from "./Quests";
 
 
 export default function LandingPage( {userData} ): JSX.Element {
-
+    document.body.classList.remove('overflow-hidden');
     const {signOut} = useAuth()
     const { t, i18n } = useTranslation();
 
@@ -47,7 +47,13 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [isMemberListOpened, setMembersListOpened] = useState(false);
     const [isSetUsernameOpened, setSetUsernameOpened] = useState(false);
 
+    const CloseAddQuest = () => {
+        setAddQuestOpened(false);
+        document.body.classList.remove('overflow-hidden');
+    }
     const AddQuest = props => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
@@ -57,7 +63,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("userpanel.addquest.header")}</a><br/>
-                    <button onClick={() => setAddQuestOpened(false)} className="absolute right-1 text-white text-4xl">X</button>
+                    <button onClick={() => CloseAddQuest()} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("userpanel.addquest.questdesc")}</a>
@@ -67,8 +73,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
                     maxlength="35"
-                    placeholder={t("userpanel.addquest.questplaceholder")}
-                    autoFocus>
+                    placeholder={t("userpanel.addquest.questplaceholder")}>
                 </input><br/>
 
                 <a className="text-white text-xl pb-2">{t("userpanel.addquest.points")}</a>
@@ -87,7 +92,13 @@ export default function LandingPage( {userData} ): JSX.Element {
         )
     } 
 
+    const CloseMemberList = () => {
+        setMembersListOpened(false);
+        document.body.classList.remove('overflow-hidden');
+    }
     const MembersList = props => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
@@ -96,7 +107,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="lg:w-1/2 w-full h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] md:p-2 pt-1 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                         <a className="text-3xl text-white">{t("userpanel.memberslist.header")}</a><br/>
-                        <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                        <button onClick={() => CloseMemberList()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
                 <div className="pt-5 h-full">
                         {allUsersResponse ? <ATList response={allUsersResponse} rankList={rankList}/> : null}
@@ -124,8 +135,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     onChange={(e) => setNewUsername(e.target.value)} 
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    placeholder={t("userpanel.setusername.nick")}
-                    autoFocus>
+                    placeholder={t("userpanel.setusername.nick")}>
                 </input><br/>
 
                 <button onClick={saveNewUsername} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">{t("userpanel.setusername.set")}</button>
@@ -293,6 +303,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             if (error) {
                 console.log("ERROR");
             }
+            document.body.classList.remove('overflow-hidden');
             setAddQuestOpened(false);
             fetchQuestList();
             setTaskText("");
