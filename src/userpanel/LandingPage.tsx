@@ -30,6 +30,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [backgroundImage, setBackgroundImage] = useState();
     const [logo, setLogo] = useState();
     const [panelName, setPanelName] = useState("");
+    const [rankList, setRankList] = useState();   
 
     const [userResponse, setUserResponse] = useState();
     const [allUsersResponse, setUsersResponse] = useState();
@@ -98,7 +99,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <button onClick={() => setMembersListOpened(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
                 <div className="pt-5 h-full">
-                        {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
+                        {allUsersResponse ? <ATList response={allUsersResponse} rankList={rankList}/> : null}
                 </div>
             </div>
         </div>
@@ -140,11 +141,17 @@ export default function LandingPage( {userData} ): JSX.Element {
         fetchBackground();
         fetchLogo();
         fetchPanelData();
+        fetchRankList();
         fetchUserProfile();
-        fetchAllUsers();
         fetchPointsList();
         fetchQuestList();
     }, [])
+    useEffect(() => {
+        if (rankList != undefined)
+        {
+            fetchAllUsers();
+        }   
+    }, [rankList]);
 
     const fetchBackground = async () => {
         const { data } = await supabase.storage
@@ -163,6 +170,12 @@ export default function LandingPage( {userData} ): JSX.Element {
             .from('paneldata')
             .select()
             setPanelName(data[0].data);
+    }
+    const fetchRankList = async () => {
+        const { data } = await supabase
+            .from('ranks')
+            .select()
+            setRankList(data);
     }
 
     const fetchUserProfile = async () => {
@@ -211,11 +224,11 @@ export default function LandingPage( {userData} ): JSX.Element {
             {
                 let accounts = [];
 
-                for (let i = 0; i < 10; i++)
+                for (let i = 0; i < rankList.length; i++)
                 {
                     for (let x = 0; x < data.length; x++)
                     {
-                        if (data[x].rank == GetRankByNumber(i))
+                        if (data[x].rank == rankList[i].rank)
                         {
                             accounts[accounts.length] = data[x]; 
                         }
@@ -252,33 +265,6 @@ export default function LandingPage( {userData} ): JSX.Element {
     {
         setDeleteShown(!deleteShown);
         fetchQuestList();
-    }
-
-    function GetRankByNumber(number)
-    {
-        switch (number)
-        {
-            case 0:
-                return "Majiteľ";
-            case 1:
-                return "Vedenie";                
-            case 2:
-                return "Developer";
-            case 3:
-                return "Hl.Admin";
-            case 4:
-                return "Hl.Builder"; 
-            case 5:
-                return "Admin";
-            case 6:
-                return "Builder"; 
-            case 7:
-                return "Hl.Helper";    
-            case 8:
-                return "Helper";       
-            case 9:
-                return "Akademik";                                                    
-        }
     }
 
     
@@ -378,7 +364,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
-                        <a className="text-4xl ml-3 border-4 border-gray-400 rounded-full px-2 bg-white"><WriteUserRank rank={rank} /></a>
+                        <a className="text-4xl ml-3 border-4 border-gray-400 rounded-full px-2 bg-white"><WriteUserRank rank={rank} rankList={rankList} /></a>
                     </div>
                 </div>
 
@@ -459,7 +445,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <div className="flex content-center items-stretch pt-1 px-1 w-full">
                     <div className="flex w-screen">
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full"></img>
-                        <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} /></div>
+                        <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} rankList={rankList} /></div>
                     </div>
                     <div className="flex">
                         <button className="text-2xl text-white hover:text-gray-300 text-center"onClick={handleLogOut}>{t("userpanel.logout")}</button>

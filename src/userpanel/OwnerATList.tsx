@@ -2,9 +2,8 @@
 
 import WriteUserRank from "./UserRank";
 
-export default function OwnerATList({response, addPlusPoint, addMinusPoint, changeRank}) {
+export default function OwnerATList({response, addPlusPoint, addMinusPoint, changeRank, rankList}) {
         
-
     return (
         <div>
           {response.map((user, index) => (
@@ -36,13 +35,13 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
                   onClick={() => changeRank(user.id)}
                   className="items-center flex bg-gray-800 border-slate-500 border-2 rounded-2xl box-content h-12 lg:justify-center w-1/3 lg-2/3 mx-1 lg:mx-2 truncate md:text-clip invisible absolute lg:visible lg:static">
                   <div className="mx-1 lg:mx-6 text-2xl">
-                    <WriteUserRank rank={user.rank} />
+                    <WriteUserRank rank={user.rank} rankList={rankList} />
                   </div>
                 </button>
               ) : user.rank === "Majiteľ" ? (
               <div className="items-center flex bg-white border-2 border-yellow-600 rounded-2xl box-content h-12 justify-center w-1/3 mx-2">
                 <div className="mx-6 text-2xl">
-                  <WriteUserRank rank={user.rank} />
+                  <WriteUserRank rank={user.rank} rankList={rankList} />
                 </div>
               </div>  
               ) : (
@@ -50,7 +49,7 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
                   onClick={() => changeRank(user.id)}
                   className="items-center flex bg-gray-800 border-slate-500 border-2 rounded-2xl box-content h-12 justify-center w-1/3 mx-2 ">
                   <div className="mx-6 text-2xl truncate">
-                    <WriteUserRank rank={user.rank} />
+                    <WriteUserRank rank={user.rank} rankList={rankList} />
                   </div>
                 </button>
               )}

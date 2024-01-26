@@ -18,7 +18,7 @@ export default function AccountDeletedPage( ): JSX.Element {
                 <a className="text-2xl">Tvoj účet bol zmazaný, bol si vyhodený z AT!</a>
             </div>
             <br/>
-            <button className="text-4xl text-center pr-3"flex-end onClick={handleLogOut}>Odhlásiť</button>
+            <button className="text-4xl text-center pr-3" onClick={handleLogOut}>Odhlásiť</button>
         </div>
     )
 }

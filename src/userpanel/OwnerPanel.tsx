@@ -26,6 +26,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [backgroundImage, setBackgroundImage] = useState();
     const [logo, setLogo] = useState();
     const [panelName, setPanelName] = useState("");
+    const [rankList, setRankList] = useState();   
 
     const [allUsersResponse, setUsersResponse] = useState();
     const [questList, setQuestList] = useState();   
@@ -56,7 +57,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80 ">      
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
             <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
@@ -240,16 +241,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     onChange={(e) => setNewUserRank(e.target.value)} 
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center">
 
-                    <option value="Akademik">Akademik</option>
-                    <option value="Helper">Helper</option>
-                    <option value="Hl.Helper">Hl.Helper</option>
-                    <option value="Builder">Builder</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Hl.Builder">Hl.Builder</option>
-                    <option value="Hl.Admin">Hl.Admin</option>
-                    <option value="Vedenie">Vedenie</option>
-                    <option value="Developer">Developer</option>
-                    <option value="Majiteľ">Majiteľ</option>
+                    {rankList.map((rank, index) => (
+                        <option key={index} value={rank.rank}>
+                            {rank.rank}
+                        </option>
+                    ))}
                 </select>
                 <br/>
 
@@ -275,11 +271,17 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchBackground();
         fetchLogo();
         fetchPanelData();
+        fetchRankList();
         fetchUserProfile();
-        fetchAllUsers();
         fetchQuestList();
         fetchPointsList();
     }, [])
+    useEffect(() => {
+        if (rankList != undefined)
+        {
+            fetchAllUsers();
+        }   
+    }, [rankList]);
 
     const fetchBackground = async () => {
         const { data } = await supabase.storage
@@ -298,6 +300,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .from('paneldata')
             .select()
             setPanelName(data[0].data);
+    }
+    const fetchRankList = async () => {
+        const { data } = await supabase
+            .from('ranks')
+            .select()
+            .order('id', { ascending: true })
+            setRankList(data);
     }
 
     const fetchUserProfile = async () => {
@@ -331,12 +340,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             if (data)
             {
                 let accounts = [];
-
-                for (let i = 0; i < 10; i++)
+                for (let i = 0; i < rankList.length; i++)
                 {
                     for (let x = 0; x < data.length; x++)
                     {
-                        if (data[x].rank == GetRankByNumber(i))
+                        if (data[x].rank == rankList[i].rank)
                         {
                             accounts.push(data[x]); 
                         }
@@ -379,33 +387,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         const user = allUsersResponse.find((user) => user.username === username);
         return user ? user.id : null;
     };
-
-    function GetRankByNumber(number)
-    {
-        switch (number)
-        {
-            case 0:
-                return "Majiteľ";
-            case 1:
-                return "Vedenie";                
-            case 2:
-                return "Developer";
-            case 3:
-                return "Hl.Admin";
-            case 4:
-                return "Hl.Builder"; 
-            case 5:
-                return "Admin";
-            case 6:
-                return "Builder"; 
-            case 7:
-                return "Hl.Helper";    
-            case 8:
-                return "Helper";       
-            case 9:
-                return "Akademik";                                                     
-        }
-    }
 
     function openAddPlusPoint(id)
     {
@@ -605,12 +586,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div className="absolute lg:static">
                     <div className="flex justify-end items-stretch right-10 pr-10">
-                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-3"flex-end onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
+                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-3" onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
-                        <div><WriteUserRank rank={rank} /></div>
+                        <div><WriteUserRank rank={rank} rankList={rankList} /></div>
                     </div>
                 </div>
             </div>
@@ -647,10 +628,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="flex justify-center p-4">
                             <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.memberslist.header")}</a>
                         </div>
-                    <div className="h-0.5 bg-cyan-400 mb-4 "></div>
+                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
                     </div>
                     <div className="h-full w-full overflow-auto">
-                        {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} /> : null}
+                        {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} rankList={rankList} /> : null}
                     </div>
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
                         <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>
@@ -660,10 +641,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
 {/* MOBILE HTML */}
             <div className="lg:invisible lg:fixed">
-                <div className="flex content-center items-stretch p-2 w-full ">
+                <div className="flex content-center items-stretch p-2 w-full">
                     <div className="flex w-screen">
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full"></img>
-                        <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} /></div>
+                        <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} rankList={rankList} /></div>
                     </div>
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-1"onClick={handleLogOut}>{t("userpanel.logout")}</button>
                 </div>

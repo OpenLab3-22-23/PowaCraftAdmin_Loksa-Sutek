@@ -1,28 +1,15 @@
 // @ts-nocheck
 
-export default function WriteUserRank({rank})
+export default function WriteUserRank({rank, rankList})
 {
-    switch (rank)
+    if (rankList != null)
     {
-        case "Majiteľ":
-            return <a className="text-blue-700 text-4xl">{rank}</a>
-        case "Developer":
-            return <a className="text-red-700 text-4xl">{rank}</a>        
-        case "Vedenie":
-            return <a className="text-red-600 text-4xl">{rank}</a>                     
-        case "Hl.Admin":
-            return <a className="text-lime-600 text-4xl">{rank}</a>           
-        case "Hl.Builder":
-            return <a className="text-violet-700 text-4xl">{rank}</a>         
-        case "Admin":
-            return <a className="text-lime-600 text-4xl">{rank}</a>               
-        case "Builder":
-            return <a className="text-violet-700 text-4xl">{rank}</a>       
-        case "Hl.Helper":
-            return <a className="text-yellow-600 text-4xl">{rank}</a>            
-        case "Helper":
-            return <a className="text-yellow-600 text-4xl">{rank}</a>            
-        case "Akademik":
-            return <a className="text-cyan-600 text-4xl">{rank}</a>                                                                     
+        const result = rankList.map((ranq, index) => {
+            if (rank == ranq.rank)
+            {
+                return <a key={index} className={`text-4xl`} style={{ color: ranq.colour }}>{rank}</a>
+            }
+        });
+        return result.length > 0 ? result : <a className="text-gray-500 text-4xl">UNKNOWN</a>;
     }
 }

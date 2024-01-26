@@ -2,7 +2,7 @@
 
 import WriteUserRank from "./UserRank";
 
-export default function ATList({response}) {
+export default function ATList({response, rankList}) {
         
     return(
         <div className="overflow-auto h-5/6 w-full mr-2">
@@ -26,7 +26,7 @@ export default function ATList({response}) {
 
                 <div className="invisible absolute lg:visible lg:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-44 overflow-hidden">   
                     <div className="text-2xl">
-                        <WriteUserRank rank={user.rank}/>
+                        <WriteUserRank rank={user.rank} rankList={rankList} />
                     </div>
                 </div>
 
