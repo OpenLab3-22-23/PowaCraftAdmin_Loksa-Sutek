@@ -210,7 +210,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                   setLanguageIconSource("/assets/sk.png")
                 }
 
-                if (data[0].rank == "Akademik" || data[0].rank == "Helper")
+                if (getPermissionLevel(data[0].rank) == 1)
                 {
                     setIsHelper(true);
                 }
@@ -290,6 +290,12 @@ export default function LandingPage( {userData} ): JSX.Element {
         i18n.changeLanguage("sk")
         setLanguageIconSource("/assets/en.png")
       }
+    }
+
+    function getPermissionLevel(userRank)
+    {
+      var rank = rankList.find(obj => obj.rank == userRank);
+      return (rank.permissionLevel);
     }
 
     

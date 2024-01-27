@@ -414,7 +414,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     {
         setActiveUserID(id);
         setChangeRankShown(true);
-        setNewUserRank("Akademik");
+        setNewUserRank(rankList[rankList.length - 1].rank);
         setShouldResetPoints(true);
     }
 
@@ -699,7 +699,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-0.5 bg-cyan-400 mb-4 "></div>
                     </div>
                     <div className="h-full w-full overflow-auto">
-                        {allUsersResponse ? <OwnerATList response={allUsersResponse}  addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} addPlusPoint={openAddPlusPoint}/> : null}
+                        {allUsersResponse ? <OwnerATList response={allUsersResponse}  addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} addPlusPoint={openAddPlusPoint} rankList={rankList}/> : null}
                     </div>
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
                         <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>

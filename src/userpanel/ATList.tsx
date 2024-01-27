@@ -4,9 +4,14 @@ import WriteUserRank from "./UserRank";
 
 export default function ATList({response, rankList}) {
         
+    function getPermissionLevel(userRank)
+    {
+      var rank = rankList.find(obj => obj.rank == userRank);
+      return (rank.permissionLevel);
+    }
+
     return(
-        <div className="overflow-auto h-5/6 w-full mr-2">
-            
+        <div className="overflow-auto h-5/6 w-full mr-2">         
         {
             response.map((user, index) => 
 
@@ -30,7 +35,7 @@ export default function ATList({response, rankList}) {
                     </div>
                 </div>
 
-                {(user.rank == "Akademik" || user.rank == "Helper") ? (
+                {(getPermissionLevel(user.rank) == 1) ? (
 
                     <div className="inline-block flex">
                         <div className="items-center justify-center flex bg-white rounded-2xl box-content h-12 w-14 overflow-hidden">

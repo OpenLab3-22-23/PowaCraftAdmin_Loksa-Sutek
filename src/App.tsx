@@ -12,6 +12,7 @@ import OwnerPanel from './userpanel/OwnerPanel';
 function App() {
   const { session } = useAuth();
   const [pageToRender, setPageToRender] = useState('');
+  const [rankList, setRankList] = useState();  
   const [allowedMailResponse, setMailResponse] = useState<{ id: number; mail: string }[] | undefined>();
 
   useEffect(() => {
@@ -19,10 +20,25 @@ function App() {
   }, [session]);
 
   useEffect(() => {
-    if (allowedMailResponse) getUserData();
+    if (allowedMailResponse) fetchRankList();
   }, [allowedMailResponse]);
-  
 
+  useEffect(() => {
+    if (rankList) getUserData();
+  }, [rankList]);
+  
+  const fetchRankList = async () => {
+    const { data } = await supabase
+        .from('ranks')
+        .select()
+        .order('id', { ascending: true })
+        setRankList(data);
+}
+  function getPermissionLevel(userRank)
+  {
+    var rank = rankList.find(obj => obj.rank == userRank);
+    return (rank.permissionLevel);
+  }
 
   const getUserData = async () => {
     try {
@@ -60,7 +76,7 @@ function App() {
           {
             setPageToRender('banned');
           }
-        } else if (data[0].rank == 'Majiteľ' || data[0].rank == 'Vedenie') {
+        } else if (getPermissionLevel(data[0].rank) >= 3) {
           setPageToRender('admin');
         } else {
           setPageToRender('user');
@@ -74,7 +90,7 @@ function App() {
   };
 
   const fetchAllowedMails = async () => {
-    const { data, error } = await supabase
+    const { data } = await supabase
         .from('allowed_mails')
         .select()
         
