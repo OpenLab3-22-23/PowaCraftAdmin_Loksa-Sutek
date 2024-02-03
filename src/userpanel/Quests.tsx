@@ -1,16 +1,58 @@
 // @ts-nocheck
-
 import { supabase } from "../supabase/supabaseClient";
+import { useTranslation } from 'react-i18next'
 
-export default function WriteQuests({questList, deleteShown, onDelete}) {
+export default function WriteQuests({questList, deleteShown, onDelete, username, fetchQuests}) {
+
+    const { t } = useTranslation();
 
     const deleteQuest = async (quest_id) => {
-        const { error } = await supabase
+        const { } = await supabase
         .from('quest_list')
         .delete()
         .eq('id', quest_id)
         
         onDelete();
+    }
+
+    const assignQuest = async (quest_id) => {
+        const { } = await supabase
+        .from('quest_list')
+        .update({ assigned: username })
+        .eq('id', quest_id)
+
+        fetchQuests();
+    }
+
+    function getQuestObject(quest)
+    {
+        switch(quest.assigned)
+        {
+            case "general_task": 
+                return (
+                <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto">
+                    <a className="text-2xl text-white">{quest.quest_name}</a>
+                    <a className="text-base text-white">{t("questcomponent.generaltask")}</a>
+                </div>)
+            case null:
+                return (
+                <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto  hover:bg-zinc-400/60 hover:cursor-pointer " onClick={() => assignQuest(quest.id)}>
+                    <a className="text-2xl text-white">{quest.quest_name}</a>
+                    <a className="text-base text-green-500">{t("questcomponent.freetask")}</a>
+                </div>)
+            case username:
+                return (
+                <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto  outline outline-3 outline-green-600">
+                    <a className="text-2xl text-white">{quest.quest_name}</a>
+                    <a className="text-base text-white">{t("questcomponent.assignedtask")} {quest.assigned}</a>
+                </div>)
+            default:
+                return (
+                <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto">
+                    <a className="text-2xl text-white">{quest.quest_name}</a>
+                    <a className="text-base text-white">{t("questcomponent.assignedtask")} {quest.assigned}</a>
+                </div>)
+        }
     }
 
 
@@ -22,11 +64,9 @@ export default function WriteQuests({questList, deleteShown, onDelete}) {
                 <div className="box-content h-8 w-1/12 p-4 bg-white rounded-lg mx-4 items-center justify-center flex">
                     <a className="text-2xl">{++index}.</a> 
                 </div>
-                <div className="box-content h-8 w-9/12 px-4 pb-8 bg-zinc-500/40 rounded-lg flex overflow-auto lg:place-content-center">
-                        <a className="text-2xl text-white flex">{quest.quest_name}</a>
-                </div>
+                {getQuestObject(quest)}
                 <div className="box-content h-8 w-1/12 p-4 bg-white rounded-lg mx-4 items-center justify-center flex">
-                        <a className="text-green-600 text-2xl">+{quest.points}</a>
+                    <a className="text-green-600 text-2xl">+{quest.points}</a>
                 </div>
                 <button onClick={() => deleteQuest(quest.id) } style={{ display: deleteShown ? "block" : "none" }} className="bg-red-500 hover:bg-red-500/70 w-12 h-12 rounded-lg text-white mr-8 text-2xl hidden">X</button>
             </div>

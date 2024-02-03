@@ -40,6 +40,8 @@
             "header": "Create task",
             "questdesc": "Task description",
             "questplaceholder": "Brief description of the task (max. 35 chars)",
+            "generaltask": "Creating general task?",
+            "generaltasksubtext": "(for all players)",
             "points": "Points",
             "create": "CREATE"
         },
@@ -69,6 +71,8 @@
             "header": "Create task",
             "questdesc": "Task description",
             "questplaceholder": "Brief description of the task (max. 35 chars)",
+            "generaltask": "Creating general task?",
+            "generaltasksubtext": "(for all players)",
             "points": "Points",
             "create": "CREATE"
         },
@@ -100,6 +104,10 @@
             "resetpoints": "Do you wish to reset the player's points?",
             "change": "CHANGE"
         }
-    }    
-
+    } ,
+    "questcomponent": {
+        "generaltask": "General task",  
+        "freetask": "Free task - (accept with click)",  
+        "assignedtask": "Assigned to:"
+    }
 }

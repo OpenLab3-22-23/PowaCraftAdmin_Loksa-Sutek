@@ -38,6 +38,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [nickToDelete, setNickToDelete] = useState("");  
     const [newUserRank, setNewUserRank] = useState("");  
     const [shouldResetPoints, setShouldResetPoints] = useState(false);  
+    const [generalTask, setGeneralTask] = useState(false);  
 
     const [addPlusTask, setAddPlusTask] = useState(1);       
     const [addMinusTask, setAddMinusTask] = useState(7);      
@@ -89,6 +90,15 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     className="border border-green-300 rounded-2xl w-1/6 h-11 text-center" 
                     placeholder="0">
                 </input><br/>
+
+                <a className="text-white text-xl">{t("ownerpanel.addquest.generaltask")}</a>
+                <a className="text-white text-sm pb-2">{t("ownerpanel.addquest.generaltasksubtext")}</a>
+                <input 
+                    checked={generalTask}
+                    type="checkbox" 
+                    className="border border-green-300 rounded-2xl h-10 w-10"
+                    onChange={(e) => setGeneralTask(e.target.checked)}>
+                </input>
 
                 <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addquest.create")}</button>
             </div>      
@@ -284,13 +294,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchLogo();
         fetchPanelData();
         fetchRankList();
-        fetchUserProfile();
         fetchQuestList();
         fetchPointsList();
     }, [])
     useEffect(() => {
         if (rankList != undefined)
         {
+            fetchUserProfile();
             fetchAllUsers();
         }   
     }, [rankList]);
@@ -514,9 +524,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         
     const sendNewTask = async () => {
         
+        let taskType = null;
+        if (generalTask) { taskType = "general_task"}
+
         const { error } = await supabase
             .from('quest_list')
-            .insert({quest_name: newTaskText, points: newTaskPoints})
+            .insert({quest_name: newTaskText, points: newTaskPoints, assigned: taskType, creator: username})
 
             if (error) {
                 console.log("ERROR");
@@ -525,6 +538,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             fetchQuestList();
             setTaskText("");
             setTaskPoints("");
+            setGeneralTask(false);
             document.body.classList.remove('overflow-hidden');
         }
 
@@ -635,7 +649,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
                     <div className="h-full overflow-auto mb-4">
-                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
+                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests} username={username} fetchQuests={() => fetchQuestList()} /> : null}
                     </div>
                 </div>
 
@@ -687,7 +701,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
                     <div className="h-full overflow-auto mb-4">
-                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
+                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests} username={username} fetchQuests={() => fetchQuestList()}/> : null}
                     </div>
                 </div>
 

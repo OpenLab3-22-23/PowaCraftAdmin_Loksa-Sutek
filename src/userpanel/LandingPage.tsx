@@ -37,6 +37,8 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [usersResponseByPlus, setUsersResponseByPlus] = useState();
     const [pointsList, setPointsList] = useState();    
     const [questList, setQuestList] = useState();   
+    const [generalTask, setGeneralTask] = useState(false);  
+
 
     const [newTaskText, setTaskText] = useState("");    
     const [newTaskPoints, setTaskPoints] = useState("");
@@ -85,6 +87,15 @@ export default function LandingPage( {userData} ): JSX.Element {
                     className="border border-green-300 rounded-2xl w-1/6 h-11 text-center" 
                     placeholder="0">
                 </input><br/>
+
+                <a className="text-white text-xl">{t("ownerpanel.addquest.generaltask")}</a>
+                <a className="text-white text-sm pb-2">{t("ownerpanel.addquest.generaltasksubtext")}</a>
+                <input 
+                    checked={generalTask}
+                    type="checkbox" 
+                    className="border border-green-300 rounded-2xl h-10 w-10"
+                    onChange={(e) => setGeneralTask(e.target.checked)}>
+                </input>
 
                 <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">{t("userpanel.addquest.create")}</button>
             </div>      
@@ -152,13 +163,13 @@ export default function LandingPage( {userData} ): JSX.Element {
         fetchLogo();
         fetchPanelData();
         fetchRankList();
-        fetchUserProfile();
         fetchPointsList();
         fetchQuestList();
     }, [])
     useEffect(() => {
         if (rankList != undefined)
         {
+            fetchUserProfile();
             fetchAllUsers();
         }   
     }, [rankList]);
@@ -189,7 +200,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     }
 
     const fetchUserProfile = async () => {
-        const { data, error } = await supabase
+        const { data } = await supabase
             .from('profiles')
             .select()
             .eq('id', userData.user.id)
@@ -294,17 +305,21 @@ export default function LandingPage( {userData} ): JSX.Element {
 
     function getPermissionLevel(userRank)
     {
-      var rank = rankList.find(obj => obj.rank == userRank);
-      return (rank.permissionLevel);
+        var rank = rankList.find(obj => obj.rank == userRank);
+        return (rank.permissionLevel);
     }
 
     
     //** Data push functions **/
         
     const sendNewTask = async () => {
+        
+        let taskType = null;
+        if (generalTask) { taskType = "general_task"}
+
         const { error } = await supabase
             .from('quest_list')
-            .insert({quest_name: newTaskText, points: newTaskPoints})
+            .insert({quest_name: newTaskText, points: newTaskPoints, assigned: taskType, creator: username})
 
             if (error) {
                 console.log("ERROR");
@@ -314,6 +329,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             fetchQuestList();
             setTaskText("");
             setTaskPoints("");
+            setGeneralTask(false);
         }
 
     const saveNewUsername = async () => {
@@ -450,7 +466,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
                     <div className="w-full h-full mb-4 overflow-auto">
-                    {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
+                    {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests} username={username} fetchQuests={() => fetchQuestList()} /> : null}
                     </div>
                 </div>
             </div>
@@ -519,7 +535,7 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                         <div className="h-0.5 bg-cyan-400 mb-4"></div>
                         <div className="w-full h-full mb-4 overflow-auto">
-                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests}/> : null}
+                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests} username={username} fetchQuests={() => fetchQuestList()} /> : null}
                         </div>
                     </div>
                 </div>

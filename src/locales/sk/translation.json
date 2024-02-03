@@ -40,6 +40,8 @@
             "header": "Pridanie úlohy",
             "questdesc": "Popis úlohy",
             "questplaceholder": "Stručný opis úlohy (max. 35 znakov)",
+            "generaltask": "Vytvárate všeobecnú úlohu?",
+            "generaltasksubtext": "(pre všetkých hráčov)",
             "points": "Počet bodov",
             "create": "VYTVORIŤ"
         },
@@ -69,6 +71,8 @@
             "header": "Pridanie úlohy",
             "questdesc": "Popis úlohy",
             "questplaceholder": "Stručný opis úlohy (max. 35 znakov)",
+            "generaltask": "Vytvárate všeobecnú úlohu?",
+            "generaltasksubtext": "(pre všetkých hráčov)",
             "points": "Počet bodov",
             "create": "VYTVORIŤ"
         },
@@ -100,5 +104,10 @@
             "resetpoints": "Prajete si resetovať hráčové body?",
             "change": "ZMENIŤ"
         }
+    },
+    "questcomponent": {
+        "generaltask": "Všeobecná úloha",  
+        "freetask": "Voľná úloha - (prijmi kliknutím)",  
+        "assignedtask": "Priradené hráčovi:"
     }
 }
