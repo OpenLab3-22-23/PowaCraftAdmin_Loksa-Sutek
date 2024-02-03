@@ -158,19 +158,19 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
 
                 <div className="flex flex-col h-full justify-center items-center pb-12">
-                    {allUsersResponse ? <ATList response={allUsersResponse}/> : null}
-                <br />
-                <a className="text-white text-xl my-2 text-center">{t("ownerpanel.delaccount.nicktodelete")}</a>
-                <input 
-                    value={nickToDelete}
-                    onChange={(e) => setNickToDelete(e.target.value)} 
-                    type="text"
-                    className="border border-green-300 rounded-2xl w-4/5 text-center" 
-                    maxlength="40"
-                    placeholder={t("ownerpanel.delaccount.nickplaceholder")}>
-                </input><br/>
+                    {allUsersResponse && rankList ? <ATList response={allUsersResponse} rankList={rankList} /> : null}
+                    <br />
+                    <a className="text-white text-xl my-2 text-center">{t("ownerpanel.delaccount.nicktodelete")}</a>
+                    <input 
+                        value={nickToDelete}
+                        onChange={(e) => setNickToDelete(e.target.value)} 
+                        type="text"
+                        className="border border-green-300 rounded-2xl w-4/5 text-center" 
+                        maxlength="40"
+                        placeholder={t("ownerpanel.delaccount.nickplaceholder")}>
+                    </input><br/>
 
-                <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.delaccount.delete")}</button>
+                    <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.delaccount.delete")}</button>
                 </div>
             </div>      
         </div>
