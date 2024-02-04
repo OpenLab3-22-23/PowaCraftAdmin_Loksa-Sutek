@@ -183,7 +183,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const fetchLogo = async () => {
         const { data } = await supabase.storage
             .from('images')
-            .getPublicUrl('logo.png');
+            .getPublicUrl('logo.svg');
         setLogo(data.publicUrl);
     }
     const fetchPanelData = async () => {
