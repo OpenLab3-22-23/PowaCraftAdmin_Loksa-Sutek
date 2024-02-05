@@ -9,7 +9,7 @@ import WriteLastPoints from "./LastPoints";
 import WriteBestHelpers from "./BestHelpers";
 import ATList from "./ATList";
 import WriteQuests from "./Quests";
-
+import { TypeAnimation } from 'react-type-animation';
 
 export default function LandingPage( {userData} ): JSX.Element {
     document.body.classList.remove('overflow-hidden');
@@ -397,14 +397,14 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
-                        <a className="text-4xl ml-3 border-4 border-gray-400 rounded-full px-2 bg-white"><WriteUserRank rank={rank} rankList={rankList} /></a>
+                        <a className="text-4xl w-48 border-4 border-gray-400 rounded-full px-2 bg-white text-center"><WriteUserRank rank={rank} rankList={rankList} /></a>
                     </div>
                 </div>
 
             </div>
 
             <div className="pl-5">
-                <a className="text-7xl text-white">{t("userpanel.welcome")}, {username}</a>
+                <a className="text-7xl text-white">{t("userpanel.welcome")},{username}</a>
             </div>
 
             <div className="flex grid grid-cols-2 grid-rows-2 h-4/6 w-full gap-1 px-5 py-5">
@@ -412,7 +412,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
                     <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2 h-1/5 items-center flex-col">
-                        <a className="text-2xl text-white">{t("userpanel.lastpoints.header")}</a>
+                        <a className="text-2xl text-white">{t("userpanel.lastpoints.header")},{username}</a>
                         <hr/>
                     </div>
 

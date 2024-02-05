@@ -308,7 +308,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         value={null}
                         onChange={null} 
                         type="text"
-                        className="border border-green-300 rounded-2xl w-4/5 text-center" 
+                        className="border-2 border-green-300 rounded-2xl w-4/5 text-center" 
                         maxlength="30"
                         placeholder={panelName}>
                     </input> <br/>
@@ -316,7 +316,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="h-min w-full flex flex-col items-center">
                     <a className="text-white text-xl pb-2">Logo panelu (png, jpg, svg)</a>
                     <input type="file" accept="image/png, image/jpeg, image/svg"></input>
-                    <div className="rounded-full h-20 w-20 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
+                    <div className="rounded-full h-20 w-20 bg-center bg-contain bg-no-repeat border-4 border-green-500" style={{ backgroundImage: `url(${logo})` }}></div>
                 </div> <br />
 
                 <div className="h-min w-full flex flex-col items-center">
@@ -342,7 +342,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <a className="text-white text-xl pb-2">Ukážka zoznamu AT rankov</a>
                     <select
                     value={rankList[0].rank}
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" >
+                    className="border-2 border-green-300 rounded-2xl w-4/5 h-11 text-center" >
                     {rankList.map((rank) => (
                         <option key={rank.rank} value={rank.rank}>
                             {rank.rank}
@@ -357,10 +357,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         value={null}
                         onChange={null} 
                         type="text"
-                        className="border border-green-300 rounded-2xl w-full text-center" 
+                        className="border-2 border-green-300 rounded-2xl w-full text-center" 
                         placeholder="Rank">
                     </input><br/>
-                    <button className="border border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 mx-2">ZMAZAŤ</button>
+                    <button className="border-2 border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 mx-2">ZMAZAŤ</button>
                 </div>
                 <br />
 
@@ -370,22 +370,22 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         value={null}
                         onChange={null} 
                         type="text"
-                        className="border border-green-300 rounded-2xl w-2/3 text-center" 
+                        className="border-2 border-green-300 rounded-2xl w-2/3 text-center" 
                         placeholder="Rank">
                     </input><br/>
                     <input 
                         value={null}
                         onChange={null} 
                         type="text"
-                        className="border border-green-300 rounded-2xl w-1/3 text-center ml-2" 
+                        className="border-2 border-green-300 rounded-2xl w-1/3 text-center ml-2" 
                         placeholder="#FF00FF">
                     </input><br/>
-                    <button className="border border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2">PRIDAŤ</button>
+                    <button className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2">PRIDAŤ</button>
                 </div>
                 <select
                     value={null}
                     onChange={null} 
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center mt-2" >
+                    className="border-2 border-green-300 rounded-2xl w-4/5 h-11 text-center mt-2 mb-6" >
                     <option>Permission level 1 (Basic access)</option>
                     <option>Permission level 2 (Basic access with access to task deletion)</option>
                     <option>Permission level 3 (Full access to owner panel)</option>
@@ -394,7 +394,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="h-min w-full flex flex-col items-center">
                         <div className="bg-white h-px w-full"></div>
                     </div>
-                <br />
                 
 
 
@@ -406,7 +405,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <a className="text-white text-xl pb-2">Ukážka zoznamu úloh</a>
                     <select
                     value={1}
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" >
+                    className="border-2 border-green-300 rounded-2xl w-4/5 h-11 text-center" >
                     {pointsList.map((point, index) => (
                         point.points > 0 ? (
                             <option key={point.id} value={point.id} className="text-green-700">
@@ -430,17 +429,17 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         value={null}
                         onChange={null} 
                         type="text"
-                        className="border border-green-300 rounded-2xl w-2/3 text-center" 
+                        className="border-2 border-green-300 rounded-2xl w-2/3 text-center" 
                         placeholder="Uloha">
                     </input><br/>
                     <input 
                         value={null}
                         onChange={null} 
                         type="text"
-                        className="border border-green-300 rounded-2xl w-1/3 text-center ml-2" 
+                        className="border-2 border-green-300 rounded-2xl w-1/3 text-center ml-2" 
                         placeholder="+1 / -1">
                     </input><br/>
-                    <button className="border border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2">PRIDAŤ</button>
+                    <button className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2">PRIDAŤ</button>
                 </div><br />
 
                 <a className="text-white text-xl pb-2">Zmazanie úlohy</a>
@@ -449,7 +448,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         value={null}
                         onChange={null} 
                         type="text"
-                        className="border border-green-300 rounded-2xl w-full text-center" 
+                        className="border-2 border-green-300 rounded-2xl w-full text-center" 
                         placeholder="Pozícia úlohy - z ukážky úloh!! (číslo)">
                     </input><br/>
                     <button className="border border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 mx-2">ZMAZAŤ</button>
@@ -458,7 +457,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 
 
-                <button className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-5">ZATVORIŤ</button>
+                <button onClick={() => setPanelSettingsShown(false)} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-5">ZATVORIŤ</button>
             </div>      
         </div>
         )
@@ -810,7 +809,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
-                        <div><WriteUserRank rank={rank} rankList={rankList} /></div>
+                        <a className="text-4xl w-48 border-4 border-amber-500 rounded-full px-2 bg-white text-center"><WriteUserRank rank={rank} rankList={rankList} /></a>
                     </div>
                 </div>
             </div>
