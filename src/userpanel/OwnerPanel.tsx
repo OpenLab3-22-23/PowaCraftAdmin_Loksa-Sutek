@@ -52,7 +52,15 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [addPlusShown, setAddPlusShown] = useState(false);     
     const [addMinusShown, setAddMinusShown] = useState(false);     
     const [changeRankShown, setChangeRankShown] = useState(false);     
-    const [panelSettingsShown, setPanelSettingsShown] = useState(false);        
+    const [panelSettingsShown, setPanelSettingsShown] = useState(false);
+    
+    //Panel settings variables
+    const [settings_newPanelName, settings_setNewPanelName] = useState("");
+    const [settings_newPanelLogo, settings_setNewPanelLogo] = useState("");
+    const [settings_newAction, settings_setNewAction] = useState("");
+    const [settings_newActionPoints, settings_setNewActionPoints] = useState();
+    const [settings_actionToRemove, settings_setActionToRemove] = useState();
+
 
     const closeQuestTab = () => {
         setAddQuestVisibility(false);
@@ -304,19 +312,24 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
 
                 <a className="text-white text-xl pb-2">Názov serveru</a>
-                <input 
-                        value={null}
-                        onChange={null} 
+                <div className="flex flex-row w-full">
+                    <input 
+                        value={settings_newPanelName}
+                        onChange={(e) => settings_setNewPanelName(e.target.value)} 
                         type="text"
-                        className="border-2 border-green-300 rounded-2xl w-4/5 text-center" 
+                        className="border-2 border-green-300 rounded-2xl w-full text-center" 
                         maxlength="30"
                         placeholder={panelName}>
-                    </input> <br/>
+                    </input> 
+                    <button onClick={() => setNewPanelName()} className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
+                </div><br/>
 
                 <div className="h-min w-full flex flex-col items-center">
                     <a className="text-white text-xl pb-2">Logo panelu (png, jpg, svg)</a>
-                    <input type="file" accept="image/png, image/jpeg, image/svg"></input>
-                    <div className="rounded-full h-20 w-20 bg-center bg-contain bg-no-repeat border-4 border-green-500" style={{ backgroundImage: `url(${logo})` }}></div>
+                    <input onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
+                    <div className="rounded-full h-20 w-20 bg-center bg-contain bg-no-repeat border-4 border-green-500" style={{ backgroundImage: `url(${settings_newPanelLogo})` }}></div>
+
+                    <button onClick={() => setNewLogo()} className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
                 </div> <br />
 
                 <div className="h-min w-full flex flex-col items-center">
@@ -351,19 +364,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </select><br/>            
                 </div> <br />
                         
-                <a className="text-white text-xl pb-2">Zmazanie ranku</a>
-                <div className="flex inline-block w-full">
-                    <input 
-                        value={null}
-                        onChange={null} 
-                        type="text"
-                        className="border-2 border-green-300 rounded-2xl w-full text-center" 
-                        placeholder="Rank">
-                    </input><br/>
-                    <button className="border-2 border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 mx-2">ZMAZAŤ</button>
-                </div>
-                <br />
-
                 <a className="text-white text-xl pb-2">Pridanie nového ranku</a>
                 <div className="flex inline-block w-full">
                     <input 
@@ -380,7 +380,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         className="border-2 border-green-300 rounded-2xl w-1/3 text-center ml-2" 
                         placeholder="#FF00FF">
                     </input><br/>
-                    <button className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2">PRIDAŤ</button>
+                    <button className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">PRIDAŤ</button>
                 </div>
                 <select
                     value={null}
@@ -389,11 +389,24 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <option>Permission level 1 (Basic access)</option>
                     <option>Permission level 2 (Basic access with access to task deletion)</option>
                     <option>Permission level 3 (Full access to owner panel)</option>
-                    </select><br/>     
+                </select><br/>  
 
-                    <div className="h-min w-full flex flex-col items-center">
-                        <div className="bg-white h-px w-full"></div>
-                    </div>
+                <a className="text-white text-xl pb-2">Zmazanie ranku</a>
+                <div className="flex inline-block w-full">
+                    <input 
+                        value={null}
+                        onChange={null} 
+                        type="text"
+                        className="border-2 border-green-300 rounded-2xl w-full text-center" 
+                        placeholder="Rank">
+                    </input><br/>
+                    <button className="border-2 border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 mx-2 px-2">ZMAZAŤ</button>
+                </div>
+                <br />   
+
+                <div className="h-min w-full flex flex-col items-center">
+                    <div className="bg-white h-px w-full"></div>
+                </div>
                 
 
 
@@ -402,14 +415,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <a className="text-4xl text-white">Nastavenia bodovania</a><br/>
 
                 <div className="h-min w-full flex flex-col items-center">
-                    <a className="text-white text-xl pb-2">Ukážka zoznamu úloh</a>
+                    <a className="text-white text-xl pb-2">Ukážka zoznamu akcií</a>
                     <select
                     value={1}
                     className="border-2 border-green-300 rounded-2xl w-4/5 h-11 text-center" >
-                    {pointsList.map((point, index) => (
+                    {pointsList.map((point) => (
                         point.points > 0 ? (
                             <option key={point.id} value={point.id} className="text-green-700">
-                                {index + "."} {point.action_name} | {point.points}+
+                                {point.id + "."} {point.action_name} | {point.points}+
                             </option>
                         ) : null
                     ))}    
@@ -423,41 +436,38 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </select><br/>            
                 </div> <br />
      
-                <a className="text-white text-xl pb-2">Pridanie novej úlohy</a>
+                <a className="text-white text-xl pb-2">Pridanie novej akcie</a>
                 <div className="flex inline-block w-full">
                     <input 
-                        value={null}
-                        onChange={null} 
+                        value={settings_newAction}
+                        onChange={(e) => settings_setNewAction(e.target.value)} 
                         type="text"
                         className="border-2 border-green-300 rounded-2xl w-2/3 text-center" 
                         placeholder="Uloha">
                     </input><br/>
                     <input 
-                        value={null}
-                        onChange={null} 
-                        type="text"
+                        value={settings_newActionPoints}
+                        onChange={(e) => settings_setNewActionPoints(e.target.value)} 
+                        type="number"
+                        maxLength="2"
                         className="border-2 border-green-300 rounded-2xl w-1/3 text-center ml-2" 
-                        placeholder="+1 / -1">
+                        placeholder="1,2 / -1,-2..">
                     </input><br/>
-                    <button className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2">PRIDAŤ</button>
+                    <button onClick={() => addNewAction()} className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">PRIDAŤ</button>
                 </div><br />
 
-                <a className="text-white text-xl pb-2">Zmazanie úlohy</a>
+                <a className="text-white text-xl pb-2">Zmazanie akcie</a>
                 <div className="flex inline-block w-full">
                     <input 
-                        value={null}
-                        onChange={null} 
-                        type="text"
+                        value={settings_actionToRemove}
+                        onChange={(e) => settings_setActionToRemove(e.target.value)} 
+                        type="number"
                         className="border-2 border-green-300 rounded-2xl w-full text-center" 
                         placeholder="Pozícia úlohy - z ukážky úloh!! (číslo)">
                     </input><br/>
-                    <button className="border border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 mx-2">ZMAZAŤ</button>
+                    <button onClick={() => removeAction()} className="border border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 mx-2 px-2">ZMAZAŤ</button>
                 </div>
                 <br />
-
-                
-
-                <button onClick={() => setPanelSettingsShown(false)} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-5">ZATVORIŤ</button>
             </div>      
         </div>
         )
@@ -752,6 +762,43 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             document.body.classList.remove('overflow-hidden');
         }   
 
+    //** Settings data push functions **/
+
+    const setNewPanelName = async () => {
+        const { } = await supabase
+            .from('paneldata')
+            .update({data: settings_newPanelName})
+            .eq('id', 0)
+            fetchPanelData();
+        }
+
+    const setNewLogo = async () => {
+        const { } = await supabase.storage
+            .from('images')
+            .upload(settings_newPanelLogo, avatarFile, {
+                cacheControl: '3600',
+                upsert: true
+              })
+    }
+
+    const addNewAction = async () => {
+        const { } = await supabase
+            .from('points_list')
+            .insert({action_name: settings_newAction, points: settings_newActionPoints })
+            fetchPointsList();
+            settings_setNewAction("");
+            settings_setNewActionPoints();
+        }
+
+    const removeAction = async () => {
+        const { } = await supabase
+            .from('points_list')
+            .delete()
+            .eq('id', settings_actionToRemove)
+            fetchPointsList();
+            settings_setActionToRemove();
+        }
+
     
 
 //** HTML **/
@@ -866,7 +913,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-1"onClick={handleLogOut}>{t("userpanel.logout")}</button>
                 </div>
-                <img src={languageIconSource} className="w-14 h-14 cursor-pointer m-2" onClick={changeLanguage}></img>
+
+                <div className="flex justify-center">
+                    <img src={languageIconSource} className="w-14 h-14 cursor-pointer m-2" onClick={changeLanguage}></img>
+                </div>
 
                 <div className="bg-zinc-700/80 rounded-lg mx-2">
                     <div className="inline-block flex items-center justify-between p-4 ">

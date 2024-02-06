@@ -108,6 +108,6 @@
     "questcomponent": {
         "generaltask": "Všeobecná úloha",  
         "freetask": "Voľná úloha - (prijmi kliknutím)",  
-        "assignedtask": "Priradené hráčovi:"
+        "assignedtask": "Priradené:"
     }
 }
