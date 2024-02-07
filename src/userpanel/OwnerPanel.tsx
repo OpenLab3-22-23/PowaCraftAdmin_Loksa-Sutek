@@ -321,27 +321,28 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         maxlength="30"
                         placeholder={panelName}>
                     </input> 
-                    <button onClick={() => setNewPanelName()} className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
+                    <button onClick={() => setNewPanelName()} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
                 </div><br/>
 
                 <div className="h-min w-full flex flex-col items-center">
-                    <a className="text-white text-xl pb-2">Logo panelu (png, jpg, svg)</a>
+                    <a className="text-white text-xl pb-2">Logo panelu (png / jpg)</a>
                     <input onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
-                    <div className="rounded-full h-20 w-20 bg-center bg-contain bg-no-repeat border-4 border-green-500" style={{ backgroundImage: `url(${settings_newPanelLogo})` }}></div>
-
-                    <button onClick={() => setNewLogo()} className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
+                    <div className="rounded-full h-20 w-20 bg-center bg-contain bg-no-repeat border-4 border-green-500" style={{ backgroundImage: `url(${logo})` }}></div>
+                    <button onClick={() => setNewLogo()} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
                 </div> <br />
 
                 <div className="h-min w-full flex flex-col items-center">
-                    <a className="text-white text-xl pb-2">Pozadie používateľského panelu (png, jpg, svg)</a>
+                    <a className="text-white text-xl pb-2">Pozadie používateľského panelu (png / jpg)</a>
                     <input type="file" accept="image/png, image/jpeg, image/svg"></input>
-                    <div className="h-20 w-20 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${userPanelBackgroundImage})` }}></div>
+                    <div className="w-32 h-16 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${userPanelBackgroundImage})` }}></div>
+                    <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
                 </div> <br />
 
                 <div className="h-min w-full flex flex-col items-center">
-                    <a className="text-white text-xl pb-2">Pozadie majiteľského panelu (png, jpg, svg)</a>
+                    <a className="text-white text-xl pb-2">Pozadie majiteľského panelu (png / jpg)</a>
                     <input type="file" accept="image/png, image/jpeg, image/svg"></input>
-                    <div className="h-20 w-20 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}></div>
+                    <div className="w-32 h-16 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}></div>
+                    <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
 
                     <div className="h-min w-full flex flex-col items-center bg-white h-px w-full"></div>   
                 </div> <br />
@@ -508,8 +509,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const fetchLogo = async () => {
         const { data } = await supabase.storage
             .from('images')
-            .getPublicUrl('logo.svg');
-        setLogo(data.publicUrl);
+            .getPublicUrl('logo.png');
+            setLogo(data.publicUrl + "?c=" + Math.random());
     }
     const fetchPanelData = async () => {
         const { data } = await supabase
@@ -773,12 +774,18 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
 
     const setNewLogo = async () => {
+        const { error } = await supabase.storage
+        .from('images')
+        .remove(['logo.png'])
+        console.log(error)
+
+
         const { } = await supabase.storage
-            .from('images')
-            .upload(settings_newPanelLogo, avatarFile, {
-                cacheControl: '3600',
-                upsert: true
-              })
+        .from('images')
+        .upload('logo.png', settings_newPanelLogo, {
+            upsert: true
+          })
+        fetchLogo();
     }
 
     const addNewAction = async () => {
@@ -839,7 +846,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="invisible absolute lg:visible lg:static flex items-center mb-5">
                 
                 <div className="flex items-center w-full ">
-                <div className="rounded-full h-40 w-40 bg-center bg-contain" style={{ backgroundImage: `url(${logo})` }}></div>
+                <div className="rounded-full h-40 w-40 bg-center bg-contain m-2" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white">{panelName}</a>
                     <div className="h-14 flex items-end absolute lg:static">
                         <a className="text-xl text-amber-400 ">Admin</a>

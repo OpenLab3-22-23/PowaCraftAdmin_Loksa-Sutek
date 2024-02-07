@@ -183,7 +183,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const fetchLogo = async () => {
         const { data } = await supabase.storage
             .from('images')
-            .getPublicUrl('logo.svg');
+            .getPublicUrl('logo.png');
         setLogo(data.publicUrl);
     }
     const fetchPanelData = async () => {
@@ -369,7 +369,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="flex justify-between items-center">
                 
                 <div className="flex items-center w-8/12 ">
-                    <div className="rounded-full h-40 w-40 bg-center bg-contain" style={{ backgroundImage: `url(${logo})` }}></div>
+                    <div className="rounded-full h-40 w-40 bg-center bg-contain m-2" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white" href="https://powacraft.sk/">{panelName}</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400">Admin</a>
@@ -404,7 +404,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             </div>
 
             <div className="pl-5">
-                <a className="text-7xl text-white">{t("userpanel.welcome")},{username}</a>
+                <a className="text-7xl text-white">{t("userpanel.welcome")}, {username}</a>
             </div>
 
             <div className="flex grid grid-cols-2 grid-rows-2 h-4/6 w-full gap-1 px-5 py-5">
@@ -412,7 +412,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <div className="box-content bg-zinc-700/80 rounded-lg p-2 col-start-2 w-3/5 justify-self-end">
 
                     <div className="justify-center flex pb-2 pt-2 bg-lime-800/70 rounded-tl-lg rounded-tr-lg mb-2 h-1/5 items-center flex-col">
-                        <a className="text-2xl text-white">{t("userpanel.lastpoints.header")},{username}</a>
+                        <a className="text-2xl text-white">{t("userpanel.lastpoints.header")}</a>
                         <hr/>
                     </div>
 
