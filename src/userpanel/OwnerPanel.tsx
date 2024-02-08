@@ -196,7 +196,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
             <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
@@ -231,7 +231,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-            <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+            <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
             <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
