@@ -190,6 +190,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     } 
 
     const AddPlus = props => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
@@ -223,6 +225,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     } 
 
     const AddMinus = props => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
