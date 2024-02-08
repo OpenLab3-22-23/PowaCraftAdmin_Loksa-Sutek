@@ -56,8 +56,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     
     //Panel settings variables
     const [settings_newPanelName, settings_setNewPanelName] = useState("");
-    const [settings_newPanelLogo, settings_setNewPanelLogo] = useState("");
-    const [settings_newAction, settings_setNewAction] = useState("");
+    const [settings_newPanelLogo, settings_setNewPanelLogo] = useState();
+    const [settings_newUserBackground, settings_setNewUserBackground] = useState();
+    const [settings_newOwnerBackground, settings_setNewOwnerBackground] = useState();    
+    const [settings_newAction, settings_setNewAction] = useState();
     const [settings_newActionPoints, settings_setNewActionPoints] = useState();
     const [settings_actionToRemove, settings_setActionToRemove] = useState();
 
@@ -774,15 +776,25 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
 
     const setNewLogo = async () => {
-        const { error } = await supabase.storage
-        .from('images')
-        .remove(['logo.png'])
-        console.log(error)
-
-
         const { } = await supabase.storage
         .from('images')
         .upload('logo.png', settings_newPanelLogo, {
+            upsert: true
+          })
+        fetchLogo();
+    }
+    const setNewUserBackground = async () => {
+        const { } = await supabase.storage
+        .from('backgrounds')
+        .upload('bg.png', settings_newPanelLogo, {
+            upsert: true
+          })
+        fetchLogo();
+    }
+    const setNewOwnerBackground = async () => {
+        const { } = await supabase.storage
+        .from('backgrounds')
+        .upload('owner-bg.png', settings_newPanelLogo, {
             upsert: true
           })
         fetchLogo();
@@ -846,7 +858,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="invisible absolute lg:visible lg:static flex items-center mb-5">
                 
                 <div className="flex items-center w-full ">
-                <div className="rounded-full h-40 w-40 bg-center bg-contain m-2" style={{ backgroundImage: `url(${logo})` }}></div>
+                <div className="rounded-full h-40 w-40 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white">{panelName}</a>
                     <div className="h-14 flex items-end absolute lg:static">
                         <a className="text-xl text-amber-400 ">Admin</a>
