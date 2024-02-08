@@ -60,7 +60,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="items-center justify-center flex w-screen h-screen bg-black/80">      
+        <div className="items-center justify-center flex w-full h-screen bg-black/80">      
             <div className="lg:w-1/3 w-full mx-1 lg:mx-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] md:p-2 pt-1 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
@@ -114,7 +114,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col absolute w-screen h-screen bg-black/80">      
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
             <div className="lg:w-1/2 w-full h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] md:p-2 pt-1 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                         <a className="text-3xl text-white">{t("userpanel.memberslist.header")}</a><br/>
@@ -133,7 +133,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
@@ -390,7 +390,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 </div>
 
                 <div>
-                    <div className="flex justify-end items-stretch pr-10 pt-10">
+                    <div className="flex justify-end items-stretch pr-5">
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-3" onClick={handleLogOut}>{t("userpanel.logout")}</button>
                         <div className="flex w-5"></div>
                         <img id="drobbox" src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
@@ -404,7 +404,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             </div>
 
             <div className="pl-5">
-                <a className="text-7xl text-white">{t("userpanel.welcome")}, {username}</a>
+                <a className="text-5xl text-white">{t("userpanel.welcome")}, {username}</a>
             </div>
 
             <div className="flex grid grid-cols-2 grid-rows-2 h-4/6 w-full gap-1 px-5 py-5">

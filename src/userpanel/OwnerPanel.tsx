@@ -75,7 +75,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
             <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
@@ -129,7 +129,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+        <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
             <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addaccount.header")}</a>
@@ -162,7 +162,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
+        <div className="box-content items-center justify-center flex flex-col w-full h-screen bg-black/80">      
             <div className="w-4/5 lg:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a>
@@ -266,7 +266,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-            <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+            <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
             <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
@@ -315,7 +315,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-            <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
+            <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
                 <div className="w-full md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-7">
@@ -914,7 +914,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col w-4/12">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
-                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
+                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-2/3 justify-center border-slate-500 border-2 text-white">
                             <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
                                 {t("ownerpanel.questlist.addquest")}
                             </button>
@@ -924,7 +924,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.questlist.header")}</a>
                         </div>
 
-                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
+                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-2/3 justify-center border-slate-500 border-2 text-white">
                             <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full">
                             {t("ownerpanel.questlist.remquest")}
                             </button>
