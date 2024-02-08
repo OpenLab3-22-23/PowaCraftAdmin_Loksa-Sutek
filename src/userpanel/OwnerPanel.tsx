@@ -79,7 +79,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("ownerpanel.addquest.header")}</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.addquest.header")}</a>
                     <button onClick={() => closeQuestTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
@@ -91,7 +91,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
                     maxlength="35"
                     placeholder={t("ownerpanel.addquest.questplaceholder")}>
-                </input><br/>
+                </input>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addquest.points")}</a>
                 <input 
@@ -101,7 +101,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     type="number" 
                     className="border border-green-300 rounded-2xl w-1/6 h-11 text-center" 
                     placeholder="0">
-                </input><br/>
+                </input>
 
                 <a className="text-white text-xl">{t("ownerpanel.addquest.generaltask")}</a>
                 <a className="text-white text-sm pb-2">{t("ownerpanel.addquest.generaltasksubtext")}</a>
@@ -132,7 +132,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
             <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("ownerpanel.addaccount.header")}</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.addaccount.header")}</a>
                     <button onClick={() => closeAddAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
@@ -143,7 +143,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     type="email"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
                     placeholder={t("ownerpanel.addaccount.mailplaceholder")}>
-                </input><br/>
+                </input>
 
                 <button onClick={addNewMail} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addaccount.add")}</button>
             </div>      
@@ -165,13 +165,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         <div className="box-content items-center justify-center flex flex-col w-full h-full bg-black/80">      
             <div className="w-4/5 lg:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a>
                     <button onClick={() => closeDeleteAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <div className="flex flex-col h-full justify-center items-center pb-12">
                     {allUsersResponse && rankList ? <ATList response={allUsersResponse} rankList={rankList} /> : null}
-                    <br />
+                    
                     <a className="text-white text-xl my-2 text-center">{t("ownerpanel.delaccount.nicktodelete")}</a>
                     <input 
                         value={nickToDelete}
@@ -180,7 +180,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         className="border border-green-300 rounded-2xl w-4/5 text-center" 
                         maxlength="40"
                         placeholder={t("ownerpanel.delaccount.nickplaceholder")}>
-                    </input><br/>
+                    </input>
 
                     <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.delaccount.delete")}</button>
                 </div>
@@ -198,7 +198,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("ownerpanel.addplus.header")}</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.addplus.header")}</a>
                     <button onClick={() => setAddPlusShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
@@ -214,7 +214,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </option>
                         ) : null
                     ))}
-                </select><br/>
+                </select>
 
                 <button onClick={savePlusPoints} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addplus.add")}</button>
             </div>      
@@ -231,7 +231,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("ownerpanel.addminus.header")}</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.addminus.header")}</a>
                     <button onClick={() => setAddMinusShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
@@ -247,25 +247,26 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </option>
                         ) : null
                     ))}
-                </select><br/>
+                </select>
 
                 <button onClick={saveMinusPoints} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addminus.add")}</button>
             </div>      
         </div>
         )
     } 
-
-
+    
     const ChangeRank = props => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
         return (
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+            <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("ownerpanel.changerank.header")}</a><br/>
+                    <a className="text-3xl text-white">{t("ownerpanel.changerank.header")}</a>
                     <button onClick={() => setChangeRankShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
@@ -281,7 +282,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </option>
                     ))}
                 </select>
-                <br/>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.resetpoints")}</a>
                 <input 
@@ -290,7 +290,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     className="border border-green-300 rounded-2xl h-10 w-10"
                     onChange={(e) => setShouldResetPoints(e.target.checked)}>
                 </input>
-                <br />
+
 
                 <button onClick={changeUserRank} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.changerank.change")}</button>
             </div>      
@@ -299,180 +299,206 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     } 
 
 
-
+    const closePanelSettings = props => {
+        setPanelSettingsShown(false);
+        document.body.classList.remove('overflow-hidden');
+    }
+    
     const PanelSettings = props => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
         return (
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border overflow-auto"> 
-
-                <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-4xl text-white">Nastavenia panelu</a><br/>
-                    <button onClick={() => setPanelSettingsShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
-                </div>
-
-                <a className="text-white text-xl pb-2">Názov serveru</a>
-                <div className="flex flex-row w-full">
-                    <input 
-                        value={settings_newPanelName}
-                        onChange={(e) => settings_setNewPanelName(e.target.value)} 
-                        type="text"
-                        className="border-2 border-green-300 rounded-2xl w-full text-center" 
-                        maxlength="30"
-                        placeholder={panelName}>
-                    </input> 
-                    <button onClick={() => setNewPanelName()} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
-                </div><br/>
-
-                <div className="h-min w-full flex flex-col items-center">
-                    <a className="text-white text-xl pb-2">Logo panelu (png / jpg)</a>
-                    <input onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
-                    <div className="rounded-full h-20 w-20 bg-center bg-contain bg-no-repeat border-4 border-green-500" style={{ backgroundImage: `url(${logo})` }}></div>
-                    <button onClick={() => setNewLogo()} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
-                </div> <br />
-
-                <div className="h-min w-full flex flex-col items-center">
-                    <a className="text-white text-xl pb-2">Pozadie používateľského panelu (png / jpg)</a>
-                    <input type="file" accept="image/png, image/jpeg, image/svg"></input>
-                    <div className="w-32 h-16 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${userPanelBackgroundImage})` }}></div>
-                    <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
-                </div> <br />
-
-                <div className="h-min w-full flex flex-col items-center">
-                    <a className="text-white text-xl pb-2">Pozadie majiteľského panelu (png / jpg)</a>
-                    <input type="file" accept="image/png, image/jpeg, image/svg"></input>
-                    <div className="w-32 h-16 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}></div>
-                    <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">ULOŽIŤ</button>
-
-                    <div className="h-min w-full flex flex-col items-center bg-white h-px w-full"></div>   
-                </div> <br />
-
-
-
-
-                <a className="text-4xl text-white">Nastavenia rankov</a><br/>
-
-                <div className="h-min w-full flex flex-col items-center">
-                    <a className="text-white text-xl pb-2">Ukážka zoznamu AT rankov</a>
-                    <select
-                    value={rankList[0].rank}
-                    className="border-2 border-green-300 rounded-2xl w-4/5 h-11 text-center" >
-                    {rankList.map((rank) => (
-                        <option key={rank.rank} value={rank.rank}>
-                            {rank.rank}
-                        </option>
-                    ))}
-                    </select><br/>            
-                </div> <br />
+                <div className="w-full md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
+                    <div className="flex flex-col items-center w-full">
+                            <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-7">
+                                <a className="text-4xl text-white">Nastavenia panelu</a>
+                            </div> 
+                            <div className="absolute w-full md:w-1/2 py-2 mr-7 z-50">
+                                <button onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl w-full text-end">X</button>                                
+                            </div>  
                         
-                <a className="text-white text-xl pb-2">Pridanie nového ranku</a>
-                <div className="flex inline-block w-full">
-                    <input 
-                        value={null}
-                        onChange={null} 
-                        type="text"
-                        className="border-2 border-green-300 rounded-2xl w-2/3 text-center" 
-                        placeholder="Rank">
-                    </input><br/>
-                    <input 
-                        value={null}
-                        onChange={null} 
-                        type="text"
-                        className="border-2 border-green-300 rounded-2xl w-1/3 text-center ml-2" 
-                        placeholder="#FF00FF">
-                    </input><br/>
-                    <button className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">PRIDAŤ</button>
-                </div>
-                <select
-                    value={null}
-                    onChange={null} 
-                    className="border-2 border-green-300 rounded-2xl w-4/5 h-11 text-center mt-2 mb-6" >
-                    <option>Permission level 1 (Basic access)</option>
-                    <option>Permission level 2 (Basic access with access to task deletion)</option>
-                    <option>Permission level 3 (Full access to owner panel)</option>
-                </select><br/>  
+                        
+                        <div className="flex flex-col items-center gap-y-2 w-4/6">
+                            <a className="text-white text-2xl">Názov serveru</a>
+                            <input 
+                                value={settings_newPanelName}
+                                onChange={(e) => settings_setNewPanelName(e.target.value)} 
+                                type="text"
+                                className="border-2 border-amber-400 rounded-2xl text-center" 
+                                maxlength="30"
+                                placeholder={panelName}>
+                            </input> 
+                            <button onClick={() => setNewPanelName()} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>
+                            <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
+                        </div>
 
-                <a className="text-white text-xl pb-2">Zmazanie ranku</a>
-                <div className="flex inline-block w-full">
-                    <input 
-                        value={null}
-                        onChange={null} 
-                        type="text"
-                        className="border-2 border-green-300 rounded-2xl w-full text-center" 
-                        placeholder="Rank">
-                    </input><br/>
-                    <button className="border-2 border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 mx-2 px-2">ZMAZAŤ</button>
-                </div>
-                <br />   
 
-                <div className="h-min w-full flex flex-col items-center">
-                    <div className="bg-white h-px w-full"></div>
-                </div>
-                
+                        <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
+                            <a className="text-white text-2xl">Logo panelu (png / jpg)</a>
+                            <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat border-4" style={{ backgroundImage: `url(${logo})` }}></div>
+                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate" onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
+                            <button onClick={() => setNewLogo()} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>
+                            <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
+                        </div>
+
+                        
+
+                        <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
+                            <a className="text-white text-2xl">Pozadie používateľského panelu (png / jpg)</a>
+                            <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat rounded" style={{ backgroundImage: `url(${userPanelBackgroundImage})` }}></div>                   
+                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate" type="file" accept="image/png, image/jpeg, image/svg"></input>
+                            <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>
+                            <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
+                        </div>
+
+                        <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
+                            <a className="text-white text-2xl">Pozadie majiteľského panelu (png / jpg)</a>
+                            <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat rounded" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}></div>                        
+                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate" type="file" accept="image/png, image/jpeg, image/svg"></input>
+                            <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>   
+                        </div> 
+                    </div>
+                        
 
 
 
 
-                <a className="text-4xl text-white">Nastavenia bodovania</a><br/>
+                    <div className="w-full gap-y-2 items-center flex flex-col">
+                        <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 mb-7">
+                            <a className="text-4xl text-white">Nastavenia rankov</a>
+                        </div>
 
-                <div className="h-min w-full flex flex-col items-center">
-                    <a className="text-white text-xl pb-2">Ukážka zoznamu akcií</a>
-                    <select
-                    value={1}
-                    className="border-2 border-green-300 rounded-2xl w-4/5 h-11 text-center" >
-                    {pointsList.map((point) => (
-                        point.points > 0 ? (
-                            <option key={point.id} value={point.id} className="text-green-700">
-                                {point.id + "."} {point.action_name} | {point.points}+
-                            </option>
-                        ) : null
-                    ))}    
-                    {pointsList.map((point, index) => (
-                        point.points < 0 ? (
-                            <option key={point.id} value={point.id} className="text-red-600">
-                                {index + ". "} {point.action_name} | {Math.abs(point.points)}-
-                            </option>
-                        ) : null
-                    ))}
-                    </select><br/>            
-                </div> <br />
-     
-                <a className="text-white text-xl pb-2">Pridanie novej akcie</a>
-                <div className="flex inline-block w-full">
-                    <input 
-                        value={settings_newAction}
-                        onChange={(e) => settings_setNewAction(e.target.value)} 
-                        type="text"
-                        className="border-2 border-green-300 rounded-2xl w-2/3 text-center" 
-                        placeholder="Uloha">
-                    </input><br/>
-                    <input 
-                        value={settings_newActionPoints}
-                        onChange={(e) => settings_setNewActionPoints(e.target.value)} 
-                        type="number"
-                        maxLength="2"
-                        className="border-2 border-green-300 rounded-2xl w-1/3 text-center ml-2" 
-                        placeholder="1,2 / -1,-2..">
-                    </input><br/>
-                    <button onClick={() => addNewAction()} className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 mx-2 px-2">PRIDAŤ</button>
-                </div><br />
+                        <div className="h-min w-4/6 flex flex-col items-center gap-y-2">
+                            <a className="text-white text-2xl">Ukážka zoznamu AT rankov</a>
+                            <select
+                            value={rankList[0].rank}
+                            className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center" >
+                            {rankList.map((rank) => (
+                                <option key={rank.rank} value={rank.rank}>
+                                    {rank.rank}
+                                </option>
+                            ))}
+                            </select>  
+                            <div className="border-2 border-amber-500 w-11/12 mb-2"></div>          
+                        </div> 
+                                
+                        
+                        <div className="flex flex-col items-center w-4/6 gap-y-2">
+                            <a className="text-white text-2xl">Pridanie nového ranku</a>
+                            <div className="flex gap-x-2">
+                                <input 
+                                    value={null}
+                                    onChange={null} 
+                                    type="text"
+                                    className="border-2 border-amber-400 rounded-2xl w-2/3 text-center" 
+                                    placeholder="Rank">
+                                </input>
+                                <input 
+                                    value={null}
+                                    onChange={null} 
+                                    type="text"
+                                    className="border-2 border-amber-400 rounded-2xl w-1/3 text-center" 
+                                    placeholder="#FF00FF">
+                                </input>
+                            </div>
+                            <select
+                                value={null}
+                                onChange={null} 
+                                className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center truncate" >
+                                <option>Permission level 1 (Basic access)</option>
+                                <option>Permission level 2 (Basic access with access to task deletion)</option>
+                                <option>Permission level 3 (Full access to owner panel)</option>
+                            </select>
+                            <button className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">PRIDAŤ</button>
+                            <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
+                        </div>
+                        
+                        <div className="flex flex-col items-center w-4/6 gap-y-2">
+                            <a className="text-white text-2xl">Zmazanie ranku</a>
+                            <input 
+                                value={null}
+                                onChange={null} 
+                                type="text"
+                                className="border-2 border-amber-400 rounded-2xl w-full text-center" 
+                                placeholder="Rank">
+                            </input>
+                            <button className="border-2 border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ZMAZAŤ</button>
+                        </div>   
+                    </div>    
 
-                <a className="text-white text-xl pb-2">Zmazanie akcie</a>
-                <div className="flex inline-block w-full">
-                    <input 
-                        value={settings_actionToRemove}
-                        onChange={(e) => settings_setActionToRemove(e.target.value)} 
-                        type="number"
-                        className="border-2 border-green-300 rounded-2xl w-full text-center" 
-                        placeholder="Pozícia úlohy - z ukážky úloh!! (číslo)">
-                    </input><br/>
-                    <button onClick={() => removeAction()} className="border border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 mx-2 px-2">ZMAZAŤ</button>
-                </div>
-                <br />
-            </div>      
-        </div>
+
+
+
+
+                    <div className="w-full flex flex-col items-center">
+                        <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 mb-7">
+                            <a className="text-4xl text-white">Nastavenia bodovania</a>
+                        </div>
+
+                        <div className="h-min w-4/6 flex flex-col items-center gap-y-2">
+                            <a className="text-white text-2xl">Ukážka zoznamu akcií</a>
+                            <select
+                                value={1}
+                                className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center truncate">
+                                {pointsList.map((point) => (
+                                    point.points > 0 ? (
+                                        <option key={point.id} value={point.id} className="text-green-700">
+                                            {point.id + "."} {point.action_name} | {point.points}+
+                                        </option>
+                                    ) : null
+                                ))}    
+                                {pointsList.map((point, index) => (
+                                    point.points < 0 ? (
+                                        <option key={point.id} value={point.id} className="text-red-600">
+                                            {index + ". "} {point.action_name} | {Math.abs(point.points)}-
+                                        </option>
+                                    ) : null
+                                ))}
+                            </select>  
+                            <div className="border-2 border-amber-500 w-11/12 mb-2"></div>         
+                        </div>
+            
+                        <div className="flex flex-col items-center w-4/6 gap-y-2">
+                            <a className="text-white text-2xl">Pridanie novej akcie</a>
+                            <div className="flex gap-2">
+                                <input 
+                                    value={settings_newAction}
+                                    onChange={(e) => settings_setNewAction(e.target.value)} 
+                                    type="text"
+                                    className="border-2 border-amber-400 rounded-2xl w-2/3 text-center" 
+                                    placeholder="Uloha">
+                                </input>
+                                <input 
+                                    value={settings_newActionPoints}
+                                    onChange={(e) => settings_setNewActionPoints(e.target.value)} 
+                                    type="number"
+                                    maxLength="2"
+                                    className="border-2 border-amber-400 rounded-2xl w-1/3 text-center" 
+                                    placeholder="1,2 / -1,-2..">
+                                </input>
+                            </div>
+                            <button onClick={() => addNewAction()} className="border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">PRIDAŤ</button>
+                            <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
+                        </div>
+                        
+                        <div className="flex flex-col items-center w-4/6 gap-y-2">
+                            <a className="text-white text-2xl">Zmazanie akcie</a>
+                            <input 
+                                value={settings_actionToRemove}
+                                onChange={(e) => settings_setActionToRemove(e.target.value)} 
+                                type="number"
+                                className="border-2 border-amber-400 rounded-2xl w-full text-center" 
+                                placeholder="Pozícia úlohy - z ukážky úloh!! (číslo)">
+                            </input>
+                            <button onClick={() => removeAction()} className="border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 px-2 h-10 mb-3 w-2/5 lg:w-1/5">ZMAZAŤ</button>
+                        </div>
+                    </div>                        
+                </div>      
+            </div>
         )
     } 
 
@@ -824,7 +850,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     return (
 // PC HTML
-        <div className=" h-max lg:h-screen w-screen bg-cover bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}>
+        <div className=" h-max lg:h-screen w-screen bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}>
 
             {addQuestShown && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={addQuestShown}/>
@@ -855,10 +881,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div>}
 
 
-            <div className="invisible absolute lg:visible lg:static flex items-center mb-5">
+            <div className="invisible absolute lg:visible lg:static flex items-center pb-2">
                 
                 <div className="flex items-center w-full ">
-                <div className="rounded-full h-40 w-40 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
+                <div className="rounded-full h-32 w-32 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white">{panelName}</a>
                     <div className="h-14 flex items-end absolute lg:static">
                         <a className="text-xl text-amber-400 ">Admin</a>
@@ -914,7 +940,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
                     </div>
-                    <div className="h-full w-full overflow-auto">
+                    <div className=" w-full overflow-auto">
                         {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} rankList={rankList} /> : null}
                     </div>
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
@@ -969,7 +995,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>
                         <div className="h-0.5 bg-cyan-400 mb-4 "></div>
                     </div>
-                    <div className="h-full w-full overflow-auto">
+                    <div className="w-full overflow-auto">
                         {allUsersResponse ? <OwnerATList response={allUsersResponse}  addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} addPlusPoint={openAddPlusPoint} rankList={rankList}/> : null}
                     </div>
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">

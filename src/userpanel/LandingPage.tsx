@@ -350,7 +350,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         
 
 
-    //** HTML **/
+    //**PC HTML **/
 
     return (
         <div className="h-max lg:h-screen w-screen bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${backgroundImage})` }}>
@@ -369,7 +369,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="flex justify-between items-center">
                 
                 <div className="flex items-center w-8/12 ">
-                    <div className="rounded-full h-40 w-40 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
+                    <div className="rounded-full h-32 w-32 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white" href="https://powacraft.sk/">{panelName}</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400">Admin</a>
