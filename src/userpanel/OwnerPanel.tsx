@@ -195,7 +195,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+            <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addplus.header")}</a>
@@ -206,7 +206,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <select
                     value={addPlusTask}
                     onChange={(e) => setAddPlusTask(e.target.value)} 
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" >
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center truncate" >
                     {pointsList.map((point) => (
                         point.points > 0 ? (
                             <option key={point.id} value={point.id}>
@@ -228,7 +228,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-full bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+            <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addminus.header")}</a>
@@ -239,7 +239,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <select
                     value={addMinusTask}
                     onChange={(e) => setAddMinusTask(e.target.value)} 
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" >
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center truncate">
                     {pointsList.map((point) => (
                         point.points < 0 ? (
                             <option key={point.id} value={point.id}>
@@ -340,7 +340,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
                             <a className="text-white text-2xl">Logo panelu (png / jpg)</a>
                             <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat border-4" style={{ backgroundImage: `url(${logo})` }}></div>
-                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate" onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
+                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate mx-2" onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
                             <button onClick={() => setNewLogo()} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
@@ -350,7 +350,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
                             <a className="text-white text-2xl">Pozadie používateľského panelu (png / jpg)</a>
                             <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat rounded" style={{ backgroundImage: `url(${userPanelBackgroundImage})` }}></div>                   
-                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate" type="file" accept="image/png, image/jpeg, image/svg"></input>
+                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate mx-2" type="file" accept="image/png, image/jpeg, image/svg"></input>
                             <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
@@ -358,7 +358,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
                             <a className="text-white text-2xl">Pozadie majiteľského panelu (png / jpg)</a>
                             <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat rounded" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}></div>                        
-                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate" type="file" accept="image/png, image/jpeg, image/svg"></input>
+                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate mx-2" type="file" accept="image/png, image/jpeg, image/svg"></input>
                             <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>   
                         </div> 
                     </div>
