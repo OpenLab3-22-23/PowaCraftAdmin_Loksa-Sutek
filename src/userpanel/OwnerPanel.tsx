@@ -881,7 +881,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div>
         
             <div className="invisible absolute lg:visible lg:static flex w-full h-3/4 gap-7 justify-center">
-                <div className="bg-zinc-700/80 rounded-lg flex flex-col">
+                <div className="bg-zinc-700/80 rounded-lg flex flex-col w-4/12">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-full justify-center border-slate-500 border-2 text-white">
