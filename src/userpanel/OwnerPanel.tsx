@@ -317,7 +317,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-7">
                                 <a className="text-4xl text-white">Nastavenia panelu</a>
                             </div> 
-                            <div className="absolute w-full md:w-1/2 py-2 mr-7 z-50">
+                            <div className="absolute w-full md:w-1/2 py-2 mr-3 z-50">
                                 <button onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl w-full text-end">X</button>                                
                             </div>  
                         
@@ -883,7 +883,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             <div className="invisible absolute lg:visible lg:static flex items-center pb-2">
                 
-                <div className="flex items-center w-full ">
+                <div className="flex items-center w-full">
                 <div className="rounded-full h-32 w-32 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white">{panelName}</a>
                     <div className="h-14 flex items-end absolute lg:static">
@@ -906,7 +906,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
             </div>
         
-            <div className="invisible absolute lg:visible lg:static flex w-full h-3/4 gap-7 justify-center">
+            <div className="invisible absolute lg:visible lg:static flex md:w-full h-3/4 gap-7 justify-center w-0">
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col w-4/12">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
