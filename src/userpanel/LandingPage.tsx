@@ -377,13 +377,13 @@ export default function LandingPage( {userData} ): JSX.Element {
                 </div>
 
                 <div className="absolute lg:static h-20 items-center space-x-6 mr-12 " style={{ display: isHelper ? "flex" : "none" }}>
-                    <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
+                    <div className="bg-white rounded-full flex justify-center items-center w-40 h-12 border-4 border-gray-400">
                         <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                     </div>
-                    <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
+                    <div className="bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400">
                         <a className="text-green-500 text-2xl">+{plusPoints}</a> 
                     </div>
-                    <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
+                    <div className="bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400">
                         <a className="text-red-500 text-2xl">-{minusPoints}</a>
                     </div> 
                     <img src={languageIconSource} className="w-14 h-14 cursor-pointer" onClick={changeLanguage}></img>   

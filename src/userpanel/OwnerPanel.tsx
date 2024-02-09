@@ -315,18 +315,18 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-            <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
+            <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80 ">      
                 <div className="w-full md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
-                            <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-7">
+                            <div className="flex w-full justify-center sticky top-0 pt-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2">
                                 <a className="text-4xl text-white">Nastavenia panelu</a>
                             </div> 
-                            <div className="absolute w-full md:w-1/2 py-2 mr-3 z-50">
+                            <div className="absolute w-full md:w-1/2 py-1 mr-3 z-50">
                                 <button onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl w-full text-end">X</button>                                
                             </div>  
                         
                         
-                        <div className="flex flex-col items-center gap-y-2 w-4/6">
+                        <div className="flex flex-col items-center gap-y-2 w-4/6 pt-4">
                             <a className="text-white text-2xl">Názov serveru</a>
                             <input 
                                 value={settings_newPanelName}
@@ -372,11 +372,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
 
                     <div className="w-full gap-y-2 items-center flex flex-col">
-                        <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 mb-7">
+                        <div className="flex w-full justify-center sticky top-0 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 pt-2">
                             <a className="text-4xl text-white">Nastavenia rankov</a>
                         </div>
 
-                        <div className="h-min w-4/6 flex flex-col items-center gap-y-2">
+                        <div className="h-min w-4/6 flex flex-col items-center gap-y-2 pt-4">
                             <a className="text-white text-2xl">Ukážka zoznamu AT rankov</a>
                             <select
                             value={rankList[0].rank}
@@ -439,11 +439,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
 
                     <div className="w-full flex flex-col items-center">
-                        <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 mb-7">
+                        <div className="flex w-full justify-center sticky top-0 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 pt-2">
                             <a className="text-4xl text-white">Nastavenia bodovania</a>
                         </div>
 
-                        <div className="h-min w-4/6 flex flex-col items-center gap-y-2">
+                        <div className="h-min w-4/6 flex flex-col items-center gap-y-2 pt-4">
                             <a className="text-white text-2xl">Ukážka zoznamu akcií</a>
                             <select
                                 value={1}
@@ -901,7 +901,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="absolute lg:static">
                     <div className="flex justify-end items-stretch right-10 pr-10">
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-3" onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
-                        <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full" onClick={() => setPanelSettingsShown(true)}></img>
+                        <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full cursor-pointer" onClick={() => setPanelSettingsShown(true)}></img>
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
@@ -958,7 +958,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="flex content-center items-stretch p-2 w-full">
                     <div className="flex w-screen">
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full" onClick={() => setPanelSettingsShown(true)}></img>
-                        <div className="self-center ml-1 border-4 border-gray-400 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} rankList={rankList} /></div>
+                        <div className="self-center ml-1 border-4 border-amber-500 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} rankList={rankList} /></div>
                     </div>
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-1"onClick={handleLogOut}>{t("userpanel.logout")}</button>
                 </div>
