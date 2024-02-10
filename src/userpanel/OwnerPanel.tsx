@@ -338,17 +338,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80 ">      
                 <div className="w-full md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
-<<<<<<< Updated upstream
-                            <div className="flex w-full justify-center sticky top-0 pt-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2">
-                                <a className="text-4xl text-white">Nastavenia panelu</a>
-                            </div> 
-                            <div className="absolute w-full md:w-1/2 py-1 mr-3 z-50">
-=======
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
                                 <a className="text-4xl text-white">Nastavenia panelu</a>
                             </div> 
                             <div className="absolute w-full md:w-1/2 py-2 mr-8 z-50">
->>>>>>> Stashed changes
                                 <button onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl w-full text-end">X</button>                                
                             </div>  
                             <a className={`mb-6 text-white text-xl ${notificationColour}`}>{notification}</a>
