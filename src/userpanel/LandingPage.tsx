@@ -177,14 +177,14 @@ export default function LandingPage( {userData} ): JSX.Element {
     const fetchBackground = async () => {
         const { data } = await supabase.storage
             .from('backgrounds')
-            .getPublicUrl('bg.png');
-        setBackgroundImage(data.publicUrl);
+            .getPublicUrl('user-bg.png');
+        setBackgroundImage(data.publicUrl + "?c=" + Math.random());
     }
     const fetchLogo = async () => {
         const { data } = await supabase.storage
             .from('images')
             .getPublicUrl('logo.png');
-        setLogo(data.publicUrl);
+        setLogo(data.publicUrl + "?c=" + Math.random());
     }
     const fetchPanelData = async () => {
         const { data } = await supabase

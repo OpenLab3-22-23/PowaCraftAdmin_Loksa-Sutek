@@ -41,7 +41,7 @@ export default function LogIn() {
   const fetchLogo = async () => {
     const { data } = await supabase.storage
         .from('images')
-        .getPublicUrl('logo.svg');
+        .getPublicUrl('logo.png');
     setLogo(data.publicUrl);
   }
 

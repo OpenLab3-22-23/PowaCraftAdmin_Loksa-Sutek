@@ -39,7 +39,7 @@
         "addquest": {
             "header": "Create task",
             "questdesc": "Task description",
-            "questplaceholder": "Brief description of the task (max. 35 chars)",
+            "questplaceholder": "Brief description of the task (max. 40 chars)",
             "generaltask": "Creating general task?",
             "generaltasksubtext": "(for all players)",
             "points": "Points",

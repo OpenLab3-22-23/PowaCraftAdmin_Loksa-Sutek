@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../auth/Auth";
 import { supabase } from "../supabase/supabaseClient";
 import { useTranslation } from 'react-i18next'
@@ -20,6 +20,21 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         changeLanguage();
     };
 
+    function showNotification(error)
+    {
+        if (error) {
+            setNotification("Chyba pri vykonávaní akcie!");
+            setNotificationColour("text-red-600")
+        }
+        else {
+            setNotification("Akcia úspešne vykonaná!");
+            setNotificationColour("text-green-600")
+        }
+        setTimeout(() => {
+            setNotification(null);
+          }, 2000);
+    }
+
     const [rank, setRank] = useState("");
     const [username, setUsername] = useState("");    
     const [languageIconSource, setLanguageIconSource] = useState("");
@@ -33,13 +48,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [questList, setQuestList] = useState();   
     const [pointsList, setPointsList] = useState();       
 
-    const [newTaskText, setTaskText] = useState("");    
-    const [newTaskPoints, setTaskPoints] = useState("");   
+
+    const newTaskText = useRef();
+    const newTaskPoints = useRef();
+    const generalTask = useRef();
     const [newMailText, setNewMailText] = useState("");    
     const [nickToDelete, setNickToDelete] = useState("");  
     const [newUserRank, setNewUserRank] = useState("");  
-    const [shouldResetPoints, setShouldResetPoints] = useState(false);  
-    const [generalTask, setGeneralTask] = useState(false);  
+    const [shouldResetPoints, setShouldResetPoints] = useState(false);    
 
     const [addPlusTask, setAddPlusTask] = useState(1);       
     const [addMinusTask, setAddMinusTask] = useState(7);      
@@ -55,13 +71,19 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [panelSettingsShown, setPanelSettingsShown] = useState(false);
     
     //Panel settings variables
-    const [settings_newPanelName, settings_setNewPanelName] = useState("");
+    const [notification, setNotification] = useState("");
+    const [notificationColour, setNotificationColour] = useState("");
+    const settings_newPanelName = useRef();
     const [settings_newPanelLogo, settings_setNewPanelLogo] = useState();
     const [settings_newUserBackground, settings_setNewUserBackground] = useState();
-    const [settings_newOwnerBackground, settings_setNewOwnerBackground] = useState();    
-    const [settings_newAction, settings_setNewAction] = useState();
-    const [settings_newActionPoints, settings_setNewActionPoints] = useState();
-    const [settings_actionToRemove, settings_setActionToRemove] = useState();
+    const [settings_newOwnerBackground, settings_setNewOwnerBackground] = useState(); 
+    const settings_newRankName = useRef();   
+    const settings_newRankColour = useRef();   
+    const settings_newRankPermissionLevel = useRef();   
+    const settings_rankToRemove = useRef();   
+    const settings_newAction = useRef();
+    const settings_newActionPoints = useRef();
+    const settings_actionToRemove = useRef();
 
 
     const closeQuestTab = () => {
@@ -85,19 +107,16 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addquest.questdesc")}</a>
                 <input 
-                    value={newTaskText}
-                    onChange={(e) => setTaskText(e.target.value)} 
+                    ref={newTaskText}
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    maxlength="35"
+                    maxlength="40"
                     placeholder={t("ownerpanel.addquest.questplaceholder")}>
                 </input>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addquest.points")}</a>
                 <input 
-                    value={newTaskPoints}
-                    onInput={(e) => e.target.value = e.target.value.slice(0, 1)}
-                    onChange={(e) => setTaskPoints(e.target.value)}
+                    ref={newTaskPoints}
                     type="number" 
                     className="border border-green-300 rounded-2xl w-1/6 h-11 text-center" 
                     placeholder="0">
@@ -106,10 +125,9 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <a className="text-white text-xl">{t("ownerpanel.addquest.generaltask")}</a>
                 <a className="text-white text-sm pb-2">{t("ownerpanel.addquest.generaltasksubtext")}</a>
                 <input 
-                    checked={generalTask}
+                    ref={generalTask}
                     type="checkbox" 
-                    className="border border-green-300 rounded-2xl h-10 w-10"
-                    onChange={(e) => setGeneralTask(e.target.checked)}>
+                    className="border border-green-300 rounded-2xl h-10 w-10">
                 </input>
 
                 <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addquest.create")}</button>
@@ -138,6 +156,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addaccount.useremail")}</a>
                 <input 
+                    autoFocus
                     value={newMailText}
                     onChange={(e) => setNewMailText(e.target.value)} 
                     type="email"
@@ -174,6 +193,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     
                     <a className="text-white text-xl my-2 text-center">{t("ownerpanel.delaccount.nicktodelete")}</a>
                     <input 
+                        autoFocus
                         value={nickToDelete}
                         onChange={(e) => setNickToDelete(e.target.value)} 
                         type="text"
@@ -307,7 +327,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         setPanelSettingsShown(false);
         document.body.classList.remove('overflow-hidden');
     }
-    
+
     const PanelSettings = props => {
         window.scrollTo({top: 0, behavior: 'smooth'});
         document.body.classList.add('overflow-hidden');
@@ -318,52 +338,70 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80 ">      
                 <div className="w-full md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
+<<<<<<< Updated upstream
                             <div className="flex w-full justify-center sticky top-0 pt-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2">
                                 <a className="text-4xl text-white">Nastavenia panelu</a>
                             </div> 
                             <div className="absolute w-full md:w-1/2 py-1 mr-3 z-50">
+=======
+                            <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
+                                <a className="text-4xl text-white">Nastavenia panelu</a>
+                            </div> 
+                            <div className="absolute w-full md:w-1/2 py-2 mr-8 z-50">
+>>>>>>> Stashed changes
                                 <button onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl w-full text-end">X</button>                                
                             </div>  
+                            <a className={`mb-6 text-white text-xl ${notificationColour}`}>{notification}</a>
                         
                         
                         <div className="flex flex-col items-center gap-y-2 w-4/6 pt-4">
                             <a className="text-white text-2xl">Názov serveru</a>
                             <input 
-                                value={settings_newPanelName}
-                                onChange={(e) => settings_setNewPanelName(e.target.value)} 
+                                ref={settings_newPanelName}
                                 type="text"
                                 className="border-2 border-amber-400 rounded-2xl text-center" 
                                 maxlength="30"
                                 placeholder={panelName}>
                             </input> 
-                            <button onClick={() => setNewPanelName()} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>
+                            <button onClick={() => setNewPanelName()} className="border-2 border-white/50 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">ULOŽIŤ</button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
 
 
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
                             <a className="text-white text-2xl">Logo panelu (png / jpg)</a>
-                            <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat border-4" style={{ backgroundImage: `url(${logo})` }}></div>
-                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate mx-2" onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
-                            <button onClick={() => setNewLogo()} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>
+                            <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat border-4" style={{ backgroundImage: `url(${settings_newPanelLogo ? URL.createObjectURL(settings_newPanelLogo) : logo})` }}></div>
+                            <input id="logoinput" className="hidden" onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
+                            <label for="logoinput" className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">Vybrať súbor</label>
+                            <button 
+                                onClick={() => setNewLogo()} 
+                                className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 ${settings_newPanelLogo ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
+                                NAHRAŤ</button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
 
-                        
-
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
                             <a className="text-white text-2xl">Pozadie používateľského panelu (png / jpg)</a>
-                            <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat rounded" style={{ backgroundImage: `url(${userPanelBackgroundImage})` }}></div>                   
-                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate mx-2" type="file" accept="image/png, image/jpeg, image/svg"></input>
-                            <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>
+                            <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${settings_newUserBackground ? URL.createObjectURL(settings_newUserBackground) : userPanelBackgroundImage})` }}></div>                   
+                            <input id="userbginput" className="hidden" onChange={(e) => settings_setNewUserBackground(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
+                            <label for="userbginput" className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">Vybrať súbor</label>
+                            <button 
+                                onClick={() => setNewUserBackground()} 
+                                className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 ${settings_newUserBackground ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
+                                NAHRAŤ</button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
                             <a className="text-white text-2xl">Pozadie majiteľského panelu (png / jpg)</a>
-                            <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat rounded" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}></div>                        
-                            <input className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate mx-2" type="file" accept="image/png, image/jpeg, image/svg"></input>
-                            <button onClick={null} className="border-2 border-white/50 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ULOŽIŤ</button>   
+                            <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${settings_newOwnerBackground ? URL.createObjectURL(settings_newOwnerBackground) : ownerPanelBackgroundImage})` }}></div>                        
+                            <input id="ownerbginput" className="hidden" onChange={(e) => settings_setNewOwnerBackground(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
+                            <label for="ownerbginput" className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">Vybrať súbor</label>
+                            <button 
+                                onClick={() => setNewOwnerBackground()} 
+                                className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 ${settings_newOwnerBackground ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
+                                NAHRAŤ
+                            </button>
                         </div> 
                     </div>
                         
@@ -395,42 +433,38 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             <a className="text-white text-2xl">Pridanie nového ranku</a>
                             <div className="flex gap-x-2">
                                 <input 
-                                    value={null}
-                                    onChange={null} 
+                                    ref={settings_newRankName}
                                     type="text"
                                     className="border-2 border-amber-400 rounded-2xl w-2/3 text-center" 
                                     placeholder="Rank">
                                 </input>
                                 <input 
-                                    value={null}
-                                    onChange={null} 
+                                    ref={settings_newRankColour}
                                     type="text"
                                     className="border-2 border-amber-400 rounded-2xl w-1/3 text-center" 
                                     placeholder="#FF00FF">
                                 </input>
                             </div>
                             <select
-                                value={null}
-                                onChange={null} 
+                                ref={settings_newRankPermissionLevel}
                                 className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center truncate" >
                                 <option>Permission level 1 (Basic access)</option>
                                 <option>Permission level 2 (Basic access with access to task deletion)</option>
                                 <option>Permission level 3 (Full access to owner panel)</option>
                             </select>
-                            <button className="border-2 border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">PRIDAŤ</button>
+                            <button onClick={() => addNewRank()} className="border-2 border-white/50 border-2 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">PRIDAŤ</button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
                         
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
                             <a className="text-white text-2xl">Zmazanie ranku</a>
                             <input 
-                                value={null}
-                                onChange={null} 
+                                ref={settings_rankToRemove}
                                 type="text"
-                                className="border-2 border-amber-400 rounded-2xl w-full text-center" 
-                                placeholder="Rank">
+                                className="border-2 border-amber-400 rounded-2xl w-3/4 text-center" 
+                                placeholder="Názov ranku">
                             </input>
-                            <button className="border-2 border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">ZMAZAŤ</button>
+                            <button onClick={() => removeRank()} className="border-2 border-white/50 border-2 bg-red-600 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">ZMAZAŤ</button>
                         </div>   
                     </div>    
 
@@ -470,38 +504,43 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             <a className="text-white text-2xl">Pridanie novej akcie</a>
                             <div className="flex gap-2">
                                 <input 
-                                    value={settings_newAction}
-                                    onChange={(e) => settings_setNewAction(e.target.value)} 
+                                    ref={settings_newAction}
                                     type="text"
                                     className="border-2 border-amber-400 rounded-2xl w-2/3 text-center" 
                                     placeholder="Uloha">
                                 </input>
                                 <input 
-                                    value={settings_newActionPoints}
-                                    onChange={(e) => settings_setNewActionPoints(e.target.value)} 
+                                    ref={settings_newActionPoints}
                                     type="number"
                                     maxLength="2"
                                     className="border-2 border-amber-400 rounded-2xl w-1/3 text-center" 
                                     placeholder="1,2 / -1,-2..">
                                 </input>
                             </div>
-                            <button onClick={() => addNewAction()} className="border-white/50 border-2 bg-green-700 rounded-2xl text-white/80 px-2 h-10 w-2/5 lg:w-1/5">PRIDAŤ</button>
+                            <button 
+                                onClick={() => addNewAction()} 
+                                className="border-white/50 border-2 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5 bg-green-700 hover:bg-opacity-80 text-white/80">
+                                PRIDAŤ
+                            </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
                         
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
                             <a className="text-white text-2xl">Zmazanie akcie</a>
                             <input 
-                                value={settings_actionToRemove}
-                                onChange={(e) => settings_setActionToRemove(e.target.value)} 
+                                ref={settings_actionToRemove}
                                 type="number"
-                                className="border-2 border-amber-400 rounded-2xl w-full text-center" 
+                                className="border-2 border-amber-400 rounded-2xl w-3/4 text-center" 
                                 placeholder="Pozícia úlohy - z ukážky úloh!! (číslo)">
                             </input>
-                            <button onClick={() => removeAction()} className="border-white/50 border-2 bg-red-600 rounded-2xl text-white/80 px-2 h-10 mb-3 w-2/5 lg:w-1/5">ZMAZAŤ</button>
+                            <button 
+                                onClick={() => removeAction()} 
+                                className="border-white/50 border-2 rounded-2xl text-white/80 px-2 h-10 mb-3 w-2/5 xl:w-1/5 bg-red-600 hover:bg-opacity-80 text-white/80 ">
+                                ZMAZAŤ
+                            </button>
                         </div>
                     </div>                        
-                </div>      
+                </div>   
             </div>
         )
     } 
@@ -530,13 +569,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         const { data } = await supabase.storage
             .from('backgrounds')
             .getPublicUrl('owner-bg.png');
-        setOwnerPanelBackgroundImage(data.publicUrl);
+        setOwnerPanelBackgroundImage(data.publicUrl + "?c=" + Math.random());
     }
     const fetchUserPanelBackground = async () => {
         const { data } = await supabase.storage
             .from('backgrounds')
-            .getPublicUrl('bg.png');
+            .getPublicUrl('user-bg.png');
         setUserPanelBackgroundImage(data.publicUrl);
+        console.log(data.publicUrl + "?c=" + Math.random());
     }
     const fetchLogo = async () => {
         const { data } = await supabase.storage
@@ -633,7 +673,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const getIDByUsername = (username) => {
-        const user = allUsersResponse.find((user) => user.username === username);
+        const user = allUsersResponse.find((user) => user.username == username);
         return user ? user.id : null;
     };
 
@@ -750,24 +790,30 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     //** Data push functions **/
         
     const sendNewTask = async () => {
-        
-        let taskType = null;
-        if (generalTask) { taskType = "general_task"}
-
-        const { error } = await supabase
-            .from('quest_list')
-            .insert({quest_name: newTaskText, points: newTaskPoints, assigned: taskType, creator: username})
-
-            if (error) {
-                console.log("ERROR");
-            }
-            setAddQuestVisibility(false);
-            fetchQuestList();
-            setTaskText("");
-            setTaskPoints("");
-            setGeneralTask(false);
-            document.body.classList.remove('overflow-hidden');
+        if (newTaskText.current.value && newTaskPoints.current.value)
+        {
+            let taskType = null;
+            if (generalTask.current.checked) { taskType = "general_task"}
+    
+            const { error } = await supabase
+                .from('quest_list')
+                .insert({
+                    quest_name: newTaskText.current.value, 
+                    points: newTaskPoints.current.value, 
+                    assigned: taskType, 
+                    creator: username})
+    
+                if (error) {
+                    console.log("ERROR");
+                }
+                setAddQuestVisibility(false);
+                fetchQuestList();
+                setTaskText("");
+                setTaskPoints("");
+                setGeneralTask(false);
+                document.body.classList.remove('overflow-hidden');
         }
+    }
 
     const addNewMail = async () => {
         const { error } = await supabase
@@ -798,55 +844,170 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     //** Settings data push functions **/
 
     const setNewPanelName = async () => {
-        const { } = await supabase
-            .from('paneldata')
-            .update({data: settings_newPanelName})
-            .eq('id', 0)
-            fetchPanelData();
+            if (settings_newPanelName.current.value){
+                const { error } = await supabase
+                .from('paneldata')
+                .update({data: settings_newPanelName.current.value})
+                .eq('id', 0)
+                fetchPanelData();
+
+                if (error) {
+                    showNotification(true);
+                }
+                else {
+                    showNotification(false);
+                }
+            }
+            else {
+                showNotification(true);
+            }
         }
 
     const setNewLogo = async () => {
-        const { } = await supabase.storage
-        .from('images')
-        .upload('logo.png', settings_newPanelLogo, {
-            upsert: true
-          })
-        fetchLogo();
+        if (settings_newPanelLogo)
+        {
+            const { error } = await supabase.storage
+            .from('images')
+            .upload('logo.png', settings_newPanelLogo.current.value, {
+                upsert: true
+              })
+            fetchLogo();
+            settings_setNewPanelLogo(null);
+
+            if (error) {
+                showNotification(true);
+            }
+            else {
+                showNotification(false);
+            }
+        }
     }
     const setNewUserBackground = async () => {
-        const { } = await supabase.storage
-        .from('backgrounds')
-        .upload('bg.png', settings_newPanelLogo, {
-            upsert: true
-          })
-        fetchLogo();
+        if (settings_newUserBackground)
+        {
+            const { error } = await supabase.storage
+            .from('backgrounds')
+            .upload('bg.png', settings_newUserBackground, {
+                upsert: true
+              })
+            fetchUserPanelBackground();
+            settings_setNewUserBackground(null);
+
+            if (error) {
+                showNotification(true);
+            }
+            else {
+                showNotification(false);
+            }
+        }
     }
     const setNewOwnerBackground = async () => {
-        const { } = await supabase.storage
-        .from('backgrounds')
-        .upload('owner-bg.png', settings_newPanelLogo, {
-            upsert: true
-          })
-        fetchLogo();
+        if (settings_newOwnerBackground)
+        {
+            document.body.classList.add('overflow-hidden');
+            const { error } = await supabase.storage
+            .from('backgrounds')
+            .upload('owner-bg.png', settings_newOwnerBackground, {
+                upsert: true
+              })
+            fetchOwnerPanelBackground();
+            settings_setNewOwnerBackground(null);
+
+            if (error) {
+                showNotification(true);
+            }
+            else {
+                showNotification(false);
+            }
+        }
+    }
+
+    const addNewRank = async () => {
+        if (settings_newRankName.current.value && settings_newRankColour.current.value) {
+            const { error } = await supabase
+            .from('ranks')
+            .insert({
+                rank: settings_newRankName.current.value,
+                colour: settings_newRankColour.current.value,
+                permissionLevel: settings_newRankPermissionLevel.current.selectedIndex + 1})
+            fetchRankList();
+
+            if (error) {
+                showNotification(true);
+            }
+            else {
+                showNotification(false);
+            }
+        }
+        else {
+            showNotification(true);
+        }
+    }
+
+    const removeRank = async () => {
+        if (settings_rankToRemove.current.value)
+        {
+            const { error } = await supabase
+            .from('ranks')
+            .delete()
+            .eq('rank', settings_rankToRemove.current.value)
+            fetchRankList();
+
+            if (error) {
+                showNotification(true);
+            }
+            else {
+                showNotification(false);
+            }
+        }
+        else {
+            showNotification(true);
+        }
     }
 
     const addNewAction = async () => {
-        const { } = await supabase
+        if (settings_newAction.current.value && settings_newActionPoints.current.value)
+        {
+            const { error } = await supabase
             .from('points_list')
-            .insert({action_name: settings_newAction, points: settings_newActionPoints })
+            .insert({action_name: settings_newAction.current.value, points: settings_newActionPoints.current.value })
             fetchPointsList();
             settings_setNewAction("");
             settings_setNewActionPoints();
+
+            if (error) {
+                showNotification(true);
+            }
+            else {
+                showNotification(false);
+            }
         }
+        else {
+            showNotification(true);
+        }
+    }
 
     const removeAction = async () => {
-        const { } = await supabase
+        if (settings_actionToRemove.current.value)
+        {
+            const { error } = await supabase
             .from('points_list')
             .delete()
-            .eq('id', settings_actionToRemove)
+            .eq('id', settings_actionToRemove.current.value)
             fetchPointsList();
             settings_setActionToRemove();
+
+            if (error) {
+                showNotification(true);
+            }
+            else {
+                showNotification(false);
+            }
         }
+        else {
+            showNotification(true);
+        }
+    }
 
     
 
@@ -854,7 +1015,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     return (
 // PC HTML
-        <div className=" h-max lg:h-screen w-screen bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}>
+        <div className=" h-max lg:h-screen w-screen bg-no-repeat bg-fixed bg-cover" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}>
 
             {addQuestShown && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={addQuestShown}/>
