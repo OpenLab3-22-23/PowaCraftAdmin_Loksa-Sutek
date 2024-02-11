@@ -237,7 +237,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     setSetUsernameOpened(true);
                 }
             }
-        }
+    }
 
     const fetchAllUsers = async () => {
         const { data } = await supabase
@@ -271,7 +271,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             
                 setUsersResponse(accounts);
             }
-        }
+    }
         
     /** Other data **/ 
     const fetchPointsList = async () => {
@@ -283,7 +283,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             if (data) {
                 setPointsList(data);
             }
-        }  
+    }  
         
     const fetchQuestList = async () => {
         const { data } = await supabase
@@ -293,7 +293,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             if (data) {
                 setQuestList(data);
             }
-        }         
+    }         
 
     
 /** ### Data pushing ### **/  
@@ -313,7 +313,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             setTaskText("");
             setTaskPoints("");
             setGeneralTask(false);
-        }
+    }
 
     const saveNewUsername = async () => {
 
@@ -329,7 +329,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 console.log("ERROR");
             }
             fetchUserProfile();
-        } 
+    } 
         
         
 /** ### Other functions ### **/  

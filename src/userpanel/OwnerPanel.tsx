@@ -694,8 +694,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                   setLanguageIconSource("/assets/sk.png")
                 }
             }
-        }
-
+    }
 
     const fetchAllUsers = async () => {
         const { data } = await supabase
@@ -729,7 +728,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             
                 setUsersResponse(accounts);
             }  
-        }
+    }
        
     /** Other data **/ 
     const fetchQuestList = async () => {
@@ -740,18 +739,18 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             if (data) {
                 setQuestList(data);
             }
-        }       
+    }       
 
     const fetchPointsList = async () => {
         const { data } = await supabase
             .from('points_list')
             .select()
             .order('id', { ascending: true })
-            
+
             if (data) {
                 setPointsList(data);
             }
-        }      
+    }      
 
 
 /** ### Data pushing ### **/  
@@ -783,7 +782,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .insert({mail: newMailText })
             closeAddAccountTab();
             setNewMailText("");
-        }
+    }
 
     const delAccount = async () => {
         const { } = await supabase
@@ -792,7 +791,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .eq('id', getIDByUsername(nickToDelete.current.value))
             closeDeleteAccountTab();
             fetchAllUsers();
-        }   
+    }   
 
 
 /** ### Settings data pushing ### **/  
@@ -816,7 +815,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         else {
             showNotification(true);
         }
-        }
+    }
 
     const setNewLogo = async () => {
         if (settings_newPanelLogo)
@@ -837,6 +836,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             }
         }
     }
+    
     const setNewUserBackground = async () => {
         if (settings_newUserBackground)
         {
@@ -856,6 +856,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             }
         }
     }
+
     const setNewOwnerBackground = async () => {
         if (settings_newOwnerBackground)
         {
