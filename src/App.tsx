@@ -34,10 +34,13 @@ function App() {
         .order('id', { ascending: true })
         setRankList(data);
 }
-  function getPermissionLevel(userRank)
-  {
+  function getPermissionLevel(userRank) {
     var rank = rankList.find(obj => obj.rank == userRank);
-    return (rank.permissionLevel);
+    if (rank) {
+      return (rank.permissionLevel);
+    } else {
+      return (0)
+    }
   }
 
   const getUserData = async () => {
@@ -49,7 +52,7 @@ function App() {
         
 
       if (data) {
-        if (data.length === 0) {
+        if (data.length == 0) {
           if (allowedMailResponse?.some(item => item.mail === session.user.email))
           {
             const { error } = await supabase

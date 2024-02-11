@@ -30,30 +30,29 @@ export default function LogIn() {
     changeLanguage()
     fetchBackground()
     fetchLogo()
-}, [])
+  }, [])
 
   const fetchBackground = async () => {
     const { data } = await supabase.storage
         .from('backgrounds')
-        .getPublicUrl('bg.png');
-    setBackgroundImage(data.publicUrl);
+        .getPublicUrl('user-bg.png');
+    setBackgroundImage(data.publicUrl + "?c=" + Math.random());
   }
+
   const fetchLogo = async () => {
     const { data } = await supabase.storage
         .from('images')
         .getPublicUrl('logo.png');
-    setLogo(data.publicUrl);
+    setLogo(data.publicUrl + "?c=" + Math.random());
   }
 
   function changeLanguage()
   {
-    if (i18n.language == "sk")
-    {
+    if (i18n.language == "sk") {
       i18n.changeLanguage("en")
       setLanguage("SK")
     }
-    else
-    {
+    else {
       i18n.changeLanguage("sk")
       setLanguage("EN")
     }
@@ -61,6 +60,7 @@ export default function LogIn() {
   
   return !session? (
     <div className="w-full h-screen flex flex-col justify-center bg-fixed bg-no-repeat" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      
       <div className="absolute top-10 left-10">
         <a className="inline-block flex items-center gap-4" href="https://powacraft.eu/">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>

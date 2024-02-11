@@ -4,10 +4,16 @@ import WriteUserRank from "./UserRank";
 
 export default function OwnerATList({response, addPlusPoint, addMinusPoint, changeRank, rankList}) {
 
-    function getPermissionLevel(userRank)
-    {
+    function getPermissionLevel(userRank) {
       var rank = rankList.find(obj => obj.rank == userRank);
-      return (rank.permissionLevel);
+      if (rank)
+      {
+        return (rank.permissionLevel);
+      }
+      else
+      {
+        return (0)
+      }
     }
 
 
@@ -87,6 +93,5 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
             </div>
           ))}
         </div>
-      );
-      
+      );   
 }

@@ -103,6 +103,38 @@
             "newrank": "Nový rank",
             "resetpoints": "Prajete si resetovať hráčové body?",
             "change": "ZMENIŤ"
+        },
+        "settings": {
+            "panel": {
+                "header": "Nastavenia panelu",
+                "servername": "Názov serveru",    
+                "logo": "Logo panelu",    
+                "userpanel": "Pozadie používateľského panelu",
+                "ownerpanel": "Pozadie majiteľského panelu"    
+            },
+            "ranksettings": {
+                "header": "Nastavenia rankov",    
+                "ranklist": "Ukážka zoznamu AT rankov",   
+                "newrank": "Pridanie nového ranku",
+                "permlvl1": "Prístupový level 1 (Základný prístup)",   
+                "permlvl2": "Prístupový level 2 (Základný prístup s možnosťou mazania úloh)",   
+                "permlvl3": "Prístupový level 3 (Plný prístup do majiteľského panelu)",
+                "delrank": "Zmazanie ranku",
+                "delrank_placeholder": "Názov ranku"                                            
+            },
+            "pointsettings": {
+                "header": "Nastavenia bodovania",   
+                "actionlist": "Ukážka zoznamu akcií", 
+                "addaction": "Pridanie novej akcie",  
+                "addaction_placeholder": "Úloha",     
+                "delaction": "Zmazanie akcie", 
+                "delaction_placeholder": "Pozícia úlohy - z ukážky úloh!! (číslo)"                        
+            },
+            "save": "ULOŽIŤ",  
+            "selectfile": "Vybrať súbor", 
+            "upload": "NAHRAŤ",  
+            "add": "PRIDAŤ", 
+            "delete": "ZMAZAŤ" 
         }
     },
     "questcomponent": {

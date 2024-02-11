@@ -9,19 +9,17 @@ import OwnerATList from "./OwnerATList";
 import ATList from "./ATList";
 import WriteQuests from "./Quests";
 
-
 export default function OwnerPanel( {userData} ): JSX.Element {
+    
     document.body.classList.remove('overflow-hidden');
     const {signOut} = useAuth()
     const { t, i18n } = useTranslation();
-
     const handleLogOut = () => {
         signOut();
         changeLanguage();
     };
 
-    function showNotification(error)
-    {
+    function showNotification(error) {
         if (error) {
             setNotification("Chyba pri vykonávaní akcie!");
             setNotificationColour("text-red-600")
@@ -35,32 +33,24 @@ export default function OwnerPanel( {userData} ): JSX.Element {
           }, 2000);
     }
 
-    const [rank, setRank] = useState("");
+/** ### Variables ### **/  
+
+    /** User variables **/ 
     const [username, setUsername] = useState("");    
+    const [rank, setRank] = useState("");
     const [languageIconSource, setLanguageIconSource] = useState("");
+
+    /** Panel variables **/ 
     const [userPanelBackgroundImage, setUserPanelBackgroundImage] = useState();
     const [ownerPanelBackgroundImage, setOwnerPanelBackgroundImage] = useState();
     const [logo, setLogo] = useState();
     const [panelName, setPanelName] = useState("");
     const [rankList, setRankList] = useState();   
-
     const [allUsersResponse, setUsersResponse] = useState();
-    const [questList, setQuestList] = useState();   
     const [pointsList, setPointsList] = useState();       
+    const [questList, setQuestList] = useState();   
 
-
-    const newTaskText = useRef();
-    const newTaskPoints = useRef();
-    const generalTask = useRef();
-    const [newMailText, setNewMailText] = useState("");    
-    const [nickToDelete, setNickToDelete] = useState("");  
-    const [newUserRank, setNewUserRank] = useState("");  
-    const [shouldResetPoints, setShouldResetPoints] = useState(false);    
-
-    const [addPlusTask, setAddPlusTask] = useState(1);       
-    const [addMinusTask, setAddMinusTask] = useState(7);      
-    const [activeUserID, setActiveUserID] = useState();           
-
+    /** Popup variables **/ 
     const [deleteShown, setDeleteShown] = useState(false);   
     const [addQuestShown, setAddQuestVisibility] = useState(false);
     const [addAccountShown, setAddAccountVisibility] = useState(false);
@@ -68,9 +58,9 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [addPlusShown, setAddPlusShown] = useState(false);     
     const [addMinusShown, setAddMinusShown] = useState(false);     
     const [changeRankShown, setChangeRankShown] = useState(false);     
-    const [panelSettingsShown, setPanelSettingsShown] = useState(false);
-    
-    //Panel settings variables
+    const [panelSettingsShown, setPanelSettingsShown] = useState(false);        
+
+    /** Panel settings variables **/ 
     const [notification, setNotification] = useState("");
     const [notificationColour, setNotificationColour] = useState("");
     const settings_newPanelName = useRef();
@@ -85,6 +75,19 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const settings_newActionPoints = useRef();
     const settings_actionToRemove = useRef();
 
+    /** Other variables **/ 
+    const newTaskText = useRef();
+    const newTaskPoints = useRef();
+    const generalTask = useRef();
+    const [newMailText, setNewMailText] = useState("");    
+    const [nickToDelete, setNickToDelete] = useState("");  
+    const [newUserRank, setNewUserRank] = useState("");  
+    const [shouldResetPoints, setShouldResetPoints] = useState(false);    
+    const [addPlusTask, setAddPlusTask] = useState();       
+    const [addMinusTask, setAddMinusTask] = useState();      
+    const [activeUserID, setActiveUserID] = useState();   
+
+/** ### Popup windows ### **/  
 
     const closeQuestTab = () => {
         setAddQuestVisibility(false);
@@ -130,7 +133,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     className="border border-green-300 rounded-2xl h-10 w-10">
                 </input>
 
-                <button onClick={sendNewTask} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addquest.create")}</button>
+                <button 
+                    onClick={saveNewTask} 
+                    className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">
+                    {t("ownerpanel.addquest.create")}
+                </button>
             </div>      
         </div>
         )
@@ -164,7 +171,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     placeholder={t("ownerpanel.addaccount.mailplaceholder")}>
                 </input>
 
-                <button onClick={addNewMail} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addaccount.add")}</button>
+                <button 
+                    onClick={addNewMail} 
+                    className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">
+                    {t("ownerpanel.addaccount.add")}
+                </button>
             </div>      
         </div>
         )
@@ -202,13 +213,21 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         placeholder={t("ownerpanel.delaccount.nickplaceholder")}>
                     </input>
 
-                    <button onClick={delAccount} className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.delaccount.delete")}</button>
+                    <button 
+                        onClick={delAccount} 
+                        className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
+                        {t("ownerpanel.delaccount.delete")}
+                    </button>
                 </div>
             </div>      
         </div>
         )
     } 
 
+    const closeAddPlusTab = () => {
+        setAddPlusShown(false);
+        document.body.classList.remove('overflow-hidden');
+    }
     const AddPlus = props => {
         window.scrollTo({top: 0, behavior: 'smooth'});
         document.body.classList.add('overflow-hidden');
@@ -221,7 +240,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addplus.header")}</a>
-                    <button onClick={() => setAddPlusShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button onClick={() => closeAddPlusTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addplus.questname")}</a>
@@ -238,12 +257,20 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     ))}
                 </select>
 
-                <button onClick={savePlusPoints} className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addplus.add")}</button>
+                <button 
+                    onClick={savePlusPoints} 
+                    className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">
+                    {t("ownerpanel.addplus.add")}
+                </button>
             </div>      
         </div>
         )
     } 
 
+    const closeAddMinusTab = () => {
+        setAddMinusShown(false);
+        document.body.classList.remove('overflow-hidden');
+    }
     const AddMinus = props => {
         window.scrollTo({top: 0, behavior: 'smooth'});
         document.body.classList.add('overflow-hidden');
@@ -256,7 +283,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addminus.header")}</a>
-                    <button onClick={() => setAddMinusShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button onClick={() => closeAddMinusTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addminus.questname")}</a>
@@ -273,12 +300,20 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     ))}
                 </select>
 
-                <button onClick={saveMinusPoints} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.addminus.add")}</button>
+                <button 
+                    onClick={saveMinusPoints} 
+                    className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">
+                    {t("ownerpanel.addminus.add")}
+                </button>
             </div>      
         </div>
         )
     } 
     
+    const closeChangeRankTab = () => {
+        setChangeRankShown(false);
+        document.body.classList.remove('overflow-hidden');
+    }
     const ChangeRank = props => {
         window.scrollTo({top: 0, behavior: 'smooth'});
         document.body.classList.add('overflow-hidden');
@@ -291,7 +326,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.changerank.header")}</a>
-                    <button onClick={() => setChangeRankShown(false)} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button onClick={() => closeChangeRankTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.newrank")}</a>
@@ -315,19 +350,21 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     onChange={(e) => setShouldResetPoints(e.target.checked)}>
                 </input>
 
-
-                <button onClick={changeUserRank} className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">{t("ownerpanel.changerank.change")}</button>
+                <button 
+                    onClick={changeUserRank} 
+                    className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">
+                    {t("ownerpanel.changerank.change")}
+                </button>
             </div>      
         </div>
         )
     } 
 
 
-    const closePanelSettings = props => {
+    const closePanelSettings = () => {
         setPanelSettingsShown(false);
         document.body.classList.remove('overflow-hidden');
     }
-
     const PanelSettings = props => {
         window.scrollTo({top: 0, behavior: 'smooth'});
         document.body.classList.add('overflow-hidden');
@@ -339,7 +376,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="w-full md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
-                                <a className="text-4xl text-white">Nastavenia panelu</a>
+                                <a className="text-4xl text-white">{t("ownerpanel.settings.panel.header")}</a>
                             </div> 
                             <div className="absolute w-full md:w-1/2 py-2 mr-8 z-50">
                                 <button onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl w-full text-end">X</button>                                
@@ -348,7 +385,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         
                         
                         <div className="flex flex-col items-center gap-y-2 w-4/6 pt-4">
-                            <a className="text-white text-2xl">Názov serveru</a>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.panel.servername")}</a>
                             <input 
                                 ref={settings_newPanelName}
                                 type="text"
@@ -356,59 +393,101 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                 maxlength="30"
                                 placeholder={panelName}>
                             </input> 
-                            <button onClick={() => setNewPanelName()} className="border-2 border-white/50 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">ULOŽIŤ</button>
+                            <button 
+                                onClick={() => setNewPanelName()} 
+                                className="border-2 border-white/50 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">
+                                {t("ownerpanel.settings.save")}
+                            </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
 
-
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
-                            <a className="text-white text-2xl">Logo panelu (png / jpg)</a>
-                            <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat border-4" style={{ backgroundImage: `url(${settings_newPanelLogo ? URL.createObjectURL(settings_newPanelLogo) : logo})` }}></div>
-                            <input id="logoinput" className="hidden" onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
-                            <label for="logoinput" className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">Vybrať súbor</label>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.panel.logo")} (png / jpg)</a>
+                            <div 
+                                className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat border-4" 
+                                style={{ backgroundImage: `url(${settings_newPanelLogo ? URL.createObjectURL(settings_newPanelLogo) : logo})` }}>
+                            </div>
+                            <input 
+                                id="logoinput" 
+                                className="hidden" 
+                                onChange={(e) => settings_setNewPanelLogo(e.target.files[0])} 
+                                type="file" 
+                                accept="image/png, image/jpeg, image/svg">
+                            </input>
+                            <label 
+                                for="logoinput" 
+                                className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">
+                                {t("ownerpanel.settings.selectfile")}
+                            </label>
                             <button 
                                 onClick={() => setNewLogo()} 
                                 className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 ${settings_newPanelLogo ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
-                                NAHRAŤ</button>
+                                {t("ownerpanel.settings.upload")}
+                            </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
-                            <a className="text-white text-2xl">Pozadie používateľského panelu (png / jpg)</a>
-                            <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${settings_newUserBackground ? URL.createObjectURL(settings_newUserBackground) : userPanelBackgroundImage})` }}></div>                   
-                            <input id="userbginput" className="hidden" onChange={(e) => settings_setNewUserBackground(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
-                            <label for="userbginput" className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">Vybrať súbor</label>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.panel.userpanel")} (png / jpg)</a>
+                            <div 
+                                className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" 
+                                style={{ backgroundImage: `url(${settings_newUserBackground ? URL.createObjectURL(settings_newUserBackground) : userPanelBackgroundImage})` }}>
+                            </div>                   
+                            <input 
+                                id="userbginput" 
+                                className="hidden" 
+                                onChange={(e) => settings_setNewUserBackground(e.target.files[0])} 
+                                type="file" 
+                                accept="image/png, image/jpeg, image/svg">
+                            </input>
+                            <label 
+                                for="userbginput" 
+                                className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">
+                                {t("ownerpanel.settings.selectfile")}
+                            </label>
                             <button 
                                 onClick={() => setNewUserBackground()} 
                                 className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 ${settings_newUserBackground ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
-                                NAHRAŤ</button>
+                                {t("ownerpanel.settings.upload")}
+                            </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
-                            <a className="text-white text-2xl">Pozadie majiteľského panelu (png / jpg)</a>
-                            <div className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${settings_newOwnerBackground ? URL.createObjectURL(settings_newOwnerBackground) : ownerPanelBackgroundImage})` }}></div>                        
-                            <input id="ownerbginput" className="hidden" onChange={(e) => settings_setNewOwnerBackground(e.target.files[0])} type="file" accept="image/png, image/jpeg, image/svg"></input>
-                            <label for="ownerbginput" className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">Vybrať súbor</label>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.panel.ownerpanel")} (png / jpg)</a>
+                            <div 
+                                className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" 
+                                style={{ backgroundImage: `url(${settings_newOwnerBackground ? URL.createObjectURL(settings_newOwnerBackground) : ownerPanelBackgroundImage})` }}>
+                            </div>                        
+                            <input 
+                                id="ownerbginput" 
+                                className="hidden" 
+                                onChange={(e) => settings_setNewOwnerBackground(e.target.files[0])} 
+                                type="file" 
+                                accept="image/png, image/jpeg, image/svg">
+                            </input>
+                            <label 
+                                for="ownerbginput" 
+                                className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">
+                                {t("ownerpanel.settings.selectfile")}
+                            </label>
                             <button 
                                 onClick={() => setNewOwnerBackground()} 
                                 className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 ${settings_newOwnerBackground ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
-                                NAHRAŤ
+                                {t("ownerpanel.settings.upload")}
                             </button>
                         </div> 
                     </div>
-                        
-
-
-
+                    
+        
 
                     <div className="w-full gap-y-2 items-center flex flex-col">
                         <div className="flex w-full justify-center sticky top-0 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 pt-2">
-                            <a className="text-4xl text-white">Nastavenia rankov</a>
+                            <a className="text-4xl text-white">{t("ownerpanel.settings.ranksettings.header")}</a>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col items-center gap-y-2 pt-4">
-                            <a className="text-white text-2xl">Ukážka zoznamu AT rankov</a>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.ranksettings.ranklist")}</a>
                             <select
                             value={rankList[0].rank}
                             className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center" >
@@ -419,11 +498,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             ))}
                             </select>  
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>          
-                        </div> 
-                                
+                        </div>       
                         
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
-                            <a className="text-white text-2xl">Pridanie nového ranku</a>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.ranksettings.newrank")}</a>
                             <div className="flex gap-x-2">
                                 <input 
                                     ref={settings_newRankName}
@@ -440,38 +518,44 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </div>
                             <select
                                 ref={settings_newRankPermissionLevel}
-                                className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center truncate" >
-                                <option>Permission level 1 (Basic access)</option>
-                                <option>Permission level 2 (Basic access with access to task deletion)</option>
-                                <option>Permission level 3 (Full access to owner panel)</option>
+                                className="border-2 border-amber-400 rounded-2xl w-5/6 h-11 text-center truncate" >
+                                <option>{t("ownerpanel.settings.ranksettings.permlvl1")}</option>
+                                <option>{t("ownerpanel.settings.ranksettings.permlvl2")}</option>
+                                <option>{t("ownerpanel.settings.ranksettings.permlvl3")}</option>
                             </select>
-                            <button onClick={() => addNewRank()} className="border-2 border-white/50 border-2 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">PRIDAŤ</button>
+                            <button 
+                                onClick={() => addNewRank()} 
+                                className="border-2 border-white/50 border-2 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">
+                                {t("ownerpanel.settings.add")}
+                            </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
                         
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
-                            <a className="text-white text-2xl">Zmazanie ranku</a>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.ranksettings.delrank")}</a>
                             <input 
                                 ref={settings_rankToRemove}
                                 type="text"
                                 className="border-2 border-amber-400 rounded-2xl w-3/4 text-center" 
-                                placeholder="Názov ranku">
+                                placeholder={t("ownerpanel.settings.ranksettings.delrank_placeholder")}>
                             </input>
-                            <button onClick={() => removeRank()} className="border-2 border-white/50 border-2 bg-red-600 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">ZMAZAŤ</button>
+                            <button 
+                                onClick={() => removeRank()} 
+                                className="border-2 border-white/50 border-2 bg-red-600 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">
+                                {t("ownerpanel.settings.delete")}
+                            </button>
                         </div>   
                     </div>    
 
 
 
-
-
                     <div className="w-full flex flex-col items-center">
                         <div className="flex w-full justify-center sticky top-0 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 pt-2">
-                            <a className="text-4xl text-white">Nastavenia bodovania</a>
+                            <a className="text-4xl text-white">{t("ownerpanel.settings.pointsettings.header")}</a>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col items-center gap-y-2 pt-4">
-                            <a className="text-white text-2xl">Ukážka zoznamu akcií</a>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.pointsettings.actionlist")}</a>
                             <select
                                 value={1}
                                 className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center truncate">
@@ -494,42 +578,42 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>
             
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
-                            <a className="text-white text-2xl">Pridanie novej akcie</a>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.pointsettings.addaction")}</a>
                             <div className="flex gap-2">
                                 <input 
                                     ref={settings_newAction}
                                     type="text"
                                     className="border-2 border-amber-400 rounded-2xl w-2/3 text-center" 
-                                    placeholder="Uloha">
+                                    placeholder={t("ownerpanel.settings.pointsettings.addaction_placeholder")}>
                                 </input>
                                 <input 
                                     ref={settings_newActionPoints}
                                     type="number"
                                     maxLength="2"
                                     className="border-2 border-amber-400 rounded-2xl w-1/3 text-center" 
-                                    placeholder="1,2 / -1,-2..">
+                                    placeholder="1, 2 / -1, -2..">
                                 </input>
                             </div>
                             <button 
                                 onClick={() => addNewAction()} 
                                 className="border-white/50 border-2 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5 bg-green-700 hover:bg-opacity-80 text-white/80">
-                                PRIDAŤ
+                                {t("ownerpanel.settings.add")}
                             </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
                         
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
-                            <a className="text-white text-2xl">Zmazanie akcie</a>
+                            <a className="text-white text-2xl">{t("ownerpanel.settings.pointsettings.delaction")}</a>
                             <input 
                                 ref={settings_actionToRemove}
                                 type="number"
                                 className="border-2 border-amber-400 rounded-2xl w-3/4 text-center" 
-                                placeholder="Pozícia úlohy - z ukážky úloh!! (číslo)">
+                                placeholder={t("ownerpanel.settings.pointsettings.delaction_placeholder")}>
                             </input>
                             <button 
                                 onClick={() => removeAction()} 
                                 className="border-white/50 border-2 rounded-2xl text-white/80 px-2 h-10 mb-3 w-2/5 xl:w-1/5 bg-red-600 hover:bg-opacity-80 text-white/80 ">
-                                ZMAZAŤ
+                                {t("ownerpanel.settings.delete")}
                             </button>
                         </div>
                     </div>                        
@@ -539,7 +623,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     } 
 
 
-    //** Data fetching **/
+/** ### Data fetching ### **/  
 
     useEffect(() => {
         fetchOwnerPanelBackground();
@@ -558,6 +642,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }   
     }, [rankList]);
 
+    /** Panel data **/ 
     const fetchOwnerPanelBackground = async () => {
         const { data } = await supabase.storage
             .from('backgrounds')
@@ -591,6 +676,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             setRankList(data);
     }
 
+    /** User data **/ 
     const fetchUserProfile = async () => {
         const { data } = await supabase
             .from('profiles')
@@ -619,23 +705,35 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .select()
             .order('plus', { ascending: false })
 
-            if (data)
-            {
+            if (data) {
+                console.log(data);
                 let accounts = [];
-                for (let i = 0; i < rankList.length; i++)
-                {
-                    for (let x = 0; x < data.length; x++)
-                    {
-                        if (data[x].rank == rankList[i].rank)
-                        {
+                let unrankedAccounts = [];
+            
+                for (let i = 0; i < rankList.length; i++) {
+                    for (let x = 0; x < data.length; x++) {
+                        if (data[x].rank == rankList[i].rank) {
                             accounts.push(data[x]); 
                         }
                     }
-                }   
+                }
+            
+                for (let i = 0; i < data.length; i++) {
+                    if (!accounts.includes(data[i])) {
+                        unrankedAccounts.push(data[i]);
+                    }
+                }
+            
+                //Docasne nezobrazuje nezname ranky, aby si videl bug s tabulkou ked tam je malo hracov
+                // for (let i = 0; i < unrankedAccounts.length; i++) {
+                //     accounts.push(unrankedAccounts[i]);
+                // }
+            
                 setUsersResponse(accounts);
-            }
+            }  
         }
-        
+       
+    /** Other data **/ 
     const fetchQuestList = async () => {
         const { data } = await supabase
             .from('quest_list')
@@ -656,137 +754,15 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 setPointsList(data);
             }
         }      
+
+
+/** ### Data pushing ### **/  
         
-
-    //** Other functions **/
-    function RefreshQuests()
-    {
-        setDeleteShown(!deleteShown);
-        fetchQuestList();
-    }
-
-    const getIDByUsername = (username) => {
-        const user = allUsersResponse.find((user) => user.username == username);
-        return user ? user.id : null;
-    };
-
-    function openAddPlusPoint(id)
-    {
-        setActiveUserID(id);
-        setAddPlusShown(true);
-    }
-    function openAddMinusPoint(id)
-    {
-        setActiveUserID(id);
-        setAddMinusShown(true);
-    }
-    function openChangeRank(id)
-    {
-        setActiveUserID(id);
-        setChangeRankShown(true);
-        setNewUserRank(rankList[rankList.length - 1].rank);
-        setShouldResetPoints(true);
-    }
-
-    const savePlusPoints = async () => {
-
-        let partialData;
-
-        const { data } = await supabase
-        .from('profiles')
-        .select('plus, last_point1, last_point2, last_point3')
-        .eq('id', activeUserID)
-            
-            if (data) {
-                partialData = data;
-            }
-
-            const { error } = await supabase
-            .from('profiles')
-            .update({plus: partialData[0].plus + pointsList[addPlusTask].points, last_point1: addPlusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
-            .eq('id', activeUserID)
-            if (error) {
-                console.log(error);
-            }
-            setAddPlusShown(false);
-
-        fetchAllUsers();
-    } 
-
-    const saveMinusPoints = async () => {
-
-        let partialData;
-
-        const { data } = await supabase
-        .from('profiles')
-        .select('minus, last_point1, last_point2, last_point3')
-        .eq('id', activeUserID)
-            
-            if (data) {
-                partialData = data;
-            }
-
-            const { error } = await supabase
-            .from('profiles')
-            .update({minus: partialData[0].minus - pointsList[addMinusTask].points, last_point1: addMinusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
-            .eq('id', activeUserID)
-            if (error) {
-                console.log(error);
-            }
-            setAddMinusShown(false);
-
-        fetchAllUsers();
-    } 
-
-    const changeUserRank = async () => {
-   
-        setChangeRankShown(false);
-        const { error } = await supabase
-        .from('profiles')
-        .update({rank: newUserRank})
-        .eq('id', activeUserID)
-        if (error) {
-            console.log(error);
-        }
-
-        if (shouldResetPoints)
-        {
-            const { error } = await supabase
-            .from('profiles')
-            .update({plus: 0, minus : 0})
-            .eq('id', activeUserID)
-            if (error) {
-                console.log(error);
-            }
-        }
-        fetchAllUsers();
-        setAddMinusShown(false);
-    } 
-
-    function changeLanguage()
-    {
-      if (i18n.language == "sk")
-      {
-        i18n.changeLanguage("en")
-        setLanguageIconSource("/assets/sk.png")
-      }
-      else
-      {
-        i18n.changeLanguage("sk")
-        setLanguageIconSource("/assets/en.png")
-      }
-    }
-        
-    
-
-
-    //** Data push functions **/
-        
-    const sendNewTask = async () => {
+    const saveNewTask = async () => {
         if (newTaskText.current.value && newTaskPoints.current.value)
         {
             let taskType = null;
-            if (generalTask.current.checked) { taskType = "general_task"}
+            if (generalTask.current.checked) { taskType = "general_task" }
     
             const { error } = await supabase
                 .from('quest_list')
@@ -834,7 +810,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             document.body.classList.remove('overflow-hidden');
         }   
 
-    //** Settings data push functions **/
+
+/** ### Settings data pushing ### **/  
 
     const setNewPanelName = async () => {
             if (settings_newPanelName.current.value){
@@ -861,7 +838,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         {
             const { error } = await supabase.storage
             .from('images')
-            .upload('logo.png', settings_newPanelLogo.current.value, {
+            .upload('logo.png', settings_newPanelLogo, {
                 upsert: true
               })
             fetchLogo();
@@ -880,7 +857,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         {
             const { error } = await supabase.storage
             .from('backgrounds')
-            .upload('bg.png', settings_newUserBackground, {
+            .upload('user-bg.png', settings_newUserBackground, {
                 upsert: true
               })
             fetchUserPanelBackground();
@@ -1002,12 +979,107 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
     }
 
+
+/** ### Other functions ### **/ 
+
+    function openAddPlusPoint(id) {
+        setActiveUserID(id);
+        setAddPlusShown(true);
+    }
+    function openAddMinusPoint(id) {
+        setActiveUserID(id);
+        setAddMinusShown(true);
+    }
+    function openChangeRank(id) {
+        setActiveUserID(id);
+        setChangeRankShown(true);
+        setNewUserRank(rankList[rankList.length - 1].rank);
+        setShouldResetPoints(true);
+    }
+
+    const getIDByUsername = (username) => {
+        const user = allUsersResponse.find((user) => user.username == username);
+        return user ? user.id : null;
+    };
+
+    function RefreshQuests() {
+        setDeleteShown(!deleteShown);
+        fetchQuestList();
+    }
+
+    const savePlusPoints = async () => {
+
+        let partialData;
+        const { data } = await supabase
+        .from('profiles')
+        .select('plus, last_point1, last_point2, last_point3')
+        .eq('id', activeUserID)     
+        if (data) {
+            partialData = data;
+        }
+
+        const { } = await supabase
+        .from('profiles')
+        .update({plus: partialData[0].plus + pointsList[addPlusTask].points, last_point1: addPlusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
+        .eq('id', activeUserID)
+        setAddPlusShown(false);
+        fetchAllUsers();
+    } 
+
+    const saveMinusPoints = async () => {
+
+        let partialData;
+        const { data } = await supabase
+        .from('profiles')
+        .select('minus, last_point1, last_point2, last_point3')
+        .eq('id', activeUserID)    
+        if (data) {
+            partialData = data;
+        }
+
+        const { error } = await supabase
+        .from('profiles')
+        .update({minus: partialData[0].minus - pointsList[addMinusTask].points, last_point1: addMinusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
+        .eq('id', activeUserID)
+        if (error) {
+            console.log(error);
+        }
+        setAddMinusShown(false);
+        fetchAllUsers();
+    } 
+
+    const changeUserRank = async () => {
+
+        setChangeRankShown(false);
+        const { } = await supabase
+        .from('profiles')
+        .update({rank: newUserRank})
+        .eq('id', activeUserID)
+
+        if (shouldResetPoints) {
+            const { } = await supabase
+            .from('profiles')
+            .update({plus: 0, minus : 0})
+            .eq('id', activeUserID)
+        }
+        fetchAllUsers();
+        setAddMinusShown(false);
+    } 
+
+    function changeLanguage() {
+      if (i18n.language == "sk") {
+        i18n.changeLanguage("en")
+        setLanguageIconSource("/assets/sk.png")
+      }
+      else {
+        i18n.changeLanguage("sk")
+        setLanguageIconSource("/assets/en.png")
+      }
+    }
     
 
-//** HTML **/
-
+/** ### PC HTML ### **/ 
     return (
-// PC HTML
         <div className=" h-max lg:h-screen w-screen bg-no-repeat bg-fixed bg-cover" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}>
 
             {addQuestShown && <div className="z-10 w-full h-full absolute">
@@ -1038,19 +1110,17 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <PanelSettings show={panelSettingsShown}/>
             </div>}
 
-
             <div className="invisible absolute lg:visible lg:static flex items-center pb-2">
                 
                 <div className="flex items-center w-full">
-                <div className="rounded-full h-32 w-32 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
+                    <div className="rounded-full h-32 w-32 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white">{panelName}</a>
                     <div className="h-14 flex items-end absolute lg:static">
                         <a className="text-xl text-amber-400 ">Admin</a>
                     </div>
                     <img src={languageIconSource} className="w-14 h-14 inset-1/2 cursor-pointer ml-6 absolute lg:static" onClick={changeLanguage}></img>
                 </div>
-
-                
+  
 
                 <div className="absolute lg:static">
                     <div className="flex justify-end items-stretch right-10 pr-10">
@@ -1059,10 +1129,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
-                        <a className="text-4xl w-48 border-4 border-amber-500 rounded-full px-2 bg-white text-center"><WriteUserRank rank={rank} rankList={rankList} /></a>
+                        <div className="h-12 w-48 border-4 border-amber-500 rounded-full px-2 bg-white flex items-center justify-center">
+                            <WriteUserRank rank={rank} rankList={rankList} />
+                        </div>
                     </div>
                 </div>
             </div>
+
         
             <div className="invisible absolute lg:visible lg:static flex md:w-full h-3/4 gap-7 justify-center w-0">
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col w-4/12">
@@ -1075,7 +1148,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>                     
 
                         <div className="flex justify-center">
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.questlist.header")}</a>
+                            <a 
+                                className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">
+                                {t("ownerpanel.questlist.header")}
+                            </a>
                         </div>
 
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-2/3 justify-center border-slate-500 border-2 text-white">
@@ -1084,12 +1160,19 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </button>
                         </div>
                     </div>
-
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
                     <div className="h-full overflow-auto mb-4">
-                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests} username={username} fetchQuests={() => fetchQuestList()} /> : null}
+                        {questList ? 
+                            <WriteQuests 
+                            questList={questList} 
+                            deleteShown={deleteShown} 
+                            onDelete={RefreshQuests} 
+                            username={username} 
+                            fetchQuests={() => fetchQuestList()} /> 
+                        : null}
                     </div>
                 </div>
+
 
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-center w-3/5 justify-self-end absolute lg:static">
                     <div>
@@ -1099,22 +1182,38 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
                     </div>
                     <div className=" w-full overflow-auto">
-                        {allUsersResponse ? <OwnerATList response={allUsersResponse} addPlusPoint={openAddPlusPoint} addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} rankList={rankList} /> : null}
+                        {allUsersResponse ? 
+                            <OwnerATList 
+                            response={allUsersResponse} 
+                            addPlusPoint={openAddPlusPoint} 
+                            addMinusPoint={openAddMinusPoint} 
+                            changeRank={openChangeRank} 
+                            rankList={rankList} /> 
+                        : null}
                     </div>
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
-                        <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>
-                        <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.delaccount")}</button>
+                        <button 
+                            onClick={() => setAddAccountVisibility(true)} 
+                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">
+                            {t("ownerpanel.memberslist.addaccount")}
+                        </button>
+                        <button 
+                            onClick={() => setDelAccountVisibility(true)} 
+                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">
+                            {t("ownerpanel.memberslist.delaccount")}
+                        </button>
                     </div>
                 </div>
-                </div>
-{/* MOBILE HTML */}
+            </div>
+            
+{/** ### MOBILE HTML ### **/}
             <div className="lg:invisible lg:fixed">
                 <div className="flex content-center items-stretch p-2 w-full">
                     <div className="flex w-screen">
                         <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full" onClick={() => setPanelSettingsShown(true)}></img>
                         <div className="self-center ml-1 border-4 border-amber-500 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} rankList={rankList} /></div>
                     </div>
-                        <button className="text-2xl text-white hover:text-gray-300 text-center pr-1"onClick={handleLogOut}>{t("userpanel.logout")}</button>
+                    <button className="text-2xl text-white hover:text-gray-300 text-center pr-1"onClick={handleLogOut}>{t("userpanel.logout")}</button>
                 </div>
 
                 <div className="flex justify-center">
@@ -1130,7 +1229,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>                     
 
                         <div className="flex justify-center">
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.questlist.header")}</a>
+                            <a 
+                                className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">
+                                {t("ownerpanel.questlist.header")}
+                            </a>
                         </div>
 
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-12 justify-center border-slate-500 border-2 text-white">
@@ -1142,23 +1244,49 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
                     <div className="h-full overflow-auto mb-4">
-                        {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests} username={username} fetchQuests={() => fetchQuestList()}/> : null}
+                        {questList ? 
+                            <WriteQuests 
+                            questList={questList} 
+                            deleteShown={deleteShown} 
+                            onDelete={RefreshQuests} 
+                            username={username} 
+                            fetchQuests={() => fetchQuestList()}/> 
+                        : null}
                     </div>
                 </div>
+
 
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col h-3/4 mx-2">
                     <div>
                         <div className="flex justify-center p-4">
-                            <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">{t("ownerpanel.memberslist.header")}</a>
+                            <a 
+                                className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 text-center">
+                                {t("ownerpanel.memberslist.header")}
+                            </a>
                         </div>
                         <div className="h-0.5 bg-cyan-400 mb-4 "></div>
                     </div>
                     <div className="w-full overflow-auto">
-                        {allUsersResponse ? <OwnerATList response={allUsersResponse}  addMinusPoint={openAddMinusPoint} changeRank={openChangeRank} addPlusPoint={openAddPlusPoint} rankList={rankList}/> : null}
+                        {allUsersResponse ? 
+                            <OwnerATList 
+                            response={allUsersResponse}  
+                            addMinusPoint={openAddMinusPoint} 
+                            changeRank={openChangeRank} 
+                            addPlusPoint={openAddPlusPoint} 
+                            rankList={rankList}/> 
+                        : null}
                     </div>
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
-                        <button onClick={() => setAddAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.addaccount")}</button>
-                        <button onClick={() => setDelAccountVisibility(true)} className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">{t("ownerpanel.memberslist.delaccount")}</button>
+                        <button 
+                            onClick={() => setAddAccountVisibility(true)} 
+                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">
+                            {t("ownerpanel.memberslist.addaccount")}
+                        </button>
+                        <button 
+                            onClick={() => setDelAccountVisibility(true)} 
+                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">
+                            {t("ownerpanel.memberslist.delaccount")}
+                        </button>
                     </div>
                 </div>
             </div>

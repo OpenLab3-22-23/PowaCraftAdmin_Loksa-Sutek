@@ -3,11 +3,15 @@
 import WriteUserRank from "./UserRank";
 
 export default function ATList({response, rankList}) {
-        
-    function getPermissionLevel(userRank)
-    {
-      var rank = rankList.find(obj => obj.rank == userRank);
-      return (rank.permissionLevel);
+
+    function getPermissionLevel(userRank) {
+        var rank = rankList.find(obj => obj.rank == userRank);
+        if (rank) {
+          return (rank.permissionLevel);
+        }
+        else {
+          return (0)
+        }
     }
 
     return(
@@ -30,9 +34,7 @@ export default function ATList({response, rankList}) {
                 </div> 
 
                 <div className="invisible absolute lg:visible lg:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-44 overflow-hidden">   
-                    <div className="text-2xl">
-                        <WriteUserRank rank={user.rank} rankList={rankList} />
-                    </div>
+                    <WriteUserRank rank={user.rank} rankList={rankList} />
                 </div>
 
                 {(getPermissionLevel(user.rank) == 1) ? (

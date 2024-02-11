@@ -103,8 +103,40 @@
             "newrank": "New rank",
             "resetpoints": "Do you wish to reset the player's points?",
             "change": "CHANGE"
+        },
+        "settings": {
+            "panel": {
+                "header": "Panel settings",
+                "servername": "Server name",    
+                "logo": "Panel logo",    
+                "userpanel": "User panel background",
+                "ownerpanel": "Owner panel background"    
+            },
+            "ranksettings": {
+                "header": "Rank settings",    
+                "ranklist": "Rank list preview",   
+                "newrank": "Add new rank",
+                "permlvl1": "Permission level 1 (Basic access)",   
+                "permlvl2": "Permission level 2 (Basic access with task deletion)",   
+                "permlvl3": "Permission level 3 (Full access to owner panel)",
+                "delrank": "Delete rank",
+                "delrank_placeholder": "Rank name"                                            
+            },
+            "pointsettings": {
+                "header": "Point settings",   
+                "actionlist": "Action list preview", 
+                "addaction": "Add new action",  
+                "addaction_placeholder": "Action",     
+                "delaction": "Delete action", 
+                "delaction_placeholder": "Action position - from the preview!! (number)"                        
+            },
+            "save": "SAVE",  
+            "selectfile": "Select file", 
+            "upload": "UPLOAD",  
+            "add": "ADD", 
+            "delete": "DELETE" 
         }
-    } ,
+    },
     "questcomponent": {
         "generaltask": "General task",  
         "freetask": "Free task - (accept with click)",  

@@ -1,15 +1,20 @@
 // @ts-nocheck
 
-export default function WriteUserRank({rank, rankList})
-{
-    if (rankList != null)
-    {
+export default function WriteUserRank({rank, rankList}) {
+    if (rankList != null) {    
+        let returnTag = "";
         const result = rankList.map((rankFromRankList, index) => {
             if (rank == rankFromRankList.rank)
             {
-                return <a key={index} className={`text-4xl`} style={{ color: rankFromRankList.colour }}>{rank}</a>
+                returnTag = <a key={index} className={`text-4xl`} style={{ color: rankFromRankList.colour }}>{rank}</a>
             }
         });
-        return result.length > 0 ? result : <a className="text-gray-500 text-4xl">UNKNOWN</a>;
+
+        if (returnTag == "") {
+            return <a className="text-gray-500 text-xl truncate">DELETED RANK</a>
+        }
+        else  {
+            return returnTag
+        }
     }
 }
