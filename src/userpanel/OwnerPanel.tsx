@@ -204,7 +204,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     
                     <a className="text-white text-xl my-2 text-center">{t("ownerpanel.delaccount.nicktodelete")}</a>
                     <input 
-                        autoFocus
                         value={nickToDelete}
                         onChange={(e) => setNickToDelete(e.target.value)} 
                         type="text"
