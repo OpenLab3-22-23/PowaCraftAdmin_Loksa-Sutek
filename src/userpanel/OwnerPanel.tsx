@@ -80,7 +80,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const newTaskPoints = useRef();
     const generalTask = useRef();
     const [newMailText, setNewMailText] = useState("");    
-    const [nickToDelete, setNickToDelete] = useState("");  
+    const nickToDelete = useRef();
     const [newUserRank, setNewUserRank] = useState("");  
     const [shouldResetPoints, setShouldResetPoints] = useState(false);    
     const [addPlusTask, setAddPlusTask] = useState();       
@@ -204,8 +204,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     
                     <a className="text-white text-xl my-2 text-center">{t("ownerpanel.delaccount.nicktodelete")}</a>
                     <input 
-                        value={nickToDelete}
-                        onChange={(e) => setNickToDelete(e.target.value)} 
+                        ref={nickToDelete}
                         type="text"
                         className="border border-green-300 rounded-2xl w-4/5 text-center" 
                         maxlength="40"
@@ -763,73 +762,60 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             let taskType = null;
             if (generalTask.current.checked) { taskType = "general_task" }
     
-            const { error } = await supabase
+            const { } = await supabase
                 .from('quest_list')
                 .insert({
                     quest_name: newTaskText.current.value, 
                     points: newTaskPoints.current.value, 
                     assigned: taskType, 
                     creator: username})
-    
-                if (error) {
-                    console.log("ERROR");
-                }
-                setAddQuestVisibility(false);
+                closeQuestTab();
                 fetchQuestList();
                 setTaskText("");
                 setTaskPoints("");
                 setGeneralTask(false);
-                document.body.classList.remove('overflow-hidden');
         }
     }
 
     const addNewMail = async () => {
-        const { error } = await supabase
+        const { } = await supabase
             .from('allowed_mails')
             .insert({mail: newMailText })
-
-            if (error) {
-                console.log("ERROR");
-            }
-            setAddAccountVisibility(false);
-            document.body.classList.remove('overflow-hidden');
+            closeAddAccountTab();
+            setNewMailText("");
         }
 
     const delAccount = async () => {
-        const { error } = await supabase
+        const { } = await supabase
             .from('profiles')
             .delete()
-            .eq('id', getIDByUsername(nickToDelete))
-            if (error) {
-                console.log("ERROR");
-            }
-
-            setDelAccountVisibility(false);
+            .eq('id', getIDByUsername(nickToDelete.current.value))
+            closeDeleteAccountTab();
             fetchAllUsers();
-            document.body.classList.remove('overflow-hidden');
         }   
 
 
 /** ### Settings data pushing ### **/  
 
     const setNewPanelName = async () => {
-            if (settings_newPanelName.current.value){
-                const { error } = await supabase
-                .from('paneldata')
-                .update({data: settings_newPanelName.current.value})
-                .eq('id', 0)
-                fetchPanelData();
 
-                if (error) {
-                    showNotification(true);
-                }
-                else {
-                    showNotification(false);
-                }
-            }
-            else {
+        if (settings_newPanelName.current.value){
+            const { error } = await supabase
+            .from('paneldata')
+            .update({data: settings_newPanelName.current.value})
+            .eq('id', 0)
+            fetchPanelData();
+
+            if (error) {
                 showNotification(true);
             }
+            else {
+                showNotification(false);
+            }
+        }
+        else {
+            showNotification(true);
+        }
         }
 
     const setNewLogo = async () => {
@@ -873,7 +859,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const setNewOwnerBackground = async () => {
         if (settings_newOwnerBackground)
         {
-            document.body.classList.add('overflow-hidden');
             const { error } = await supabase.storage
             .from('backgrounds')
             .upload('owner-bg.png', settings_newOwnerBackground, {
@@ -1021,7 +1006,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         .from('profiles')
         .update({plus: partialData[0].plus + pointsList[addPlusTask].points, last_point1: addPlusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
         .eq('id', activeUserID)
-        setAddPlusShown(false);
+        closeAddPlusTab();
         fetchAllUsers();
     } 
 
@@ -1036,20 +1021,16 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             partialData = data;
         }
 
-        const { error } = await supabase
+        const { } = await supabase
         .from('profiles')
         .update({minus: partialData[0].minus - pointsList[addMinusTask].points, last_point1: addMinusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
         .eq('id', activeUserID)
-        if (error) {
-            console.log(error);
-        }
-        setAddMinusShown(false);
+        closeAddMinusTab();
         fetchAllUsers();
     } 
 
     const changeUserRank = async () => {
 
-        setChangeRankShown(false);
         const { } = await supabase
         .from('profiles')
         .update({rank: newUserRank})
@@ -1061,8 +1042,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .update({plus: 0, minus : 0})
             .eq('id', activeUserID)
         }
+        closeChangeRankTab();
         fetchAllUsers();
-        setAddMinusShown(false);
     } 
 
     function changeLanguage() {
