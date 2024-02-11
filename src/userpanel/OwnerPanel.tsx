@@ -163,7 +163,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addaccount.useremail")}</a>
                 <input 
-                    autoFocus
                     value={newMailText}
                     onChange={(e) => setNewMailText(e.target.value)} 
                     type="email"

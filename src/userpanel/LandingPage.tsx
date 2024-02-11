@@ -150,7 +150,6 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 <a className="text-white text-xl pb-2">{t("userpanel.setusername.yournick")}</a>
                 <input 
-                    autoFocus
                     value={newUsername}
                     onChange={(e) => setNewUsername(e.target.value)} 
                     type="text"
