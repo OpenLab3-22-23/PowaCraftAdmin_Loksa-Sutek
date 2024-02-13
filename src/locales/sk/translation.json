@@ -70,7 +70,7 @@
         "addquest": {
             "header": "Pridanie úlohy",
             "questdesc": "Popis úlohy",
-            "questplaceholder": "Stručný opis úlohy (max. 35 znakov)",
+            "questplaceholder": "Stručný opis úlohy (max. 40 znakov)",
             "generaltask": "Vytvárate všeobecnú úlohu?",
             "generaltasksubtext": "(pre všetkých hráčov)",
             "points": "Počet bodov",
