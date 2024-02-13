@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../auth/Auth";
 import { supabase } from "../supabase/supabaseClient";
 import { useTranslation } from 'react-i18next'
@@ -39,7 +39,6 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [usersResponseByPlus, setUsersResponseByPlus] = useState();
     const [pointsList, setPointsList] = useState();    
     const [questList, setQuestList] = useState();   
-    const [generalTask, setGeneralTask] = useState(false);  
 
     /** Popup variables **/ 
     const [deleteShown, setDeleteShown] = useState(false);   
@@ -48,14 +47,15 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [isSetUsernameOpened, setSetUsernameOpened] = useState(false);
 
     /** Other variables **/ 
-    const [newTaskText, setTaskText] = useState("");    
-    const [newTaskPoints, setTaskPoints] = useState("");
+    const newTaskText = useRef();
+    const newTaskPoints = useRef();
+    const generalTask = useRef();
     const [newUsername, setNewUsername] = useState("");      
 
 
 /** ### Popup windows ### **/  
 
-    const CloseAddQuest = () => {
+    const closeAddQuest = () => {
         setAddQuestOpened(false);
         document.body.classList.remove('overflow-hidden');
     }
@@ -76,31 +76,29 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 <a className="text-white text-xl pb-2">{t("userpanel.addquest.questdesc")}</a>
                 <input 
-                    value={newTaskText}
-                    onChange={(e) => setTaskText(e.target.value)} 
+                    ref={newTaskText}
                     type="text"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    maxlength="35"
+                    maxlength="40"
                     placeholder={t("userpanel.addquest.questplaceholder")}>
                 </input><br/>
 
                 <a className="text-white text-xl pb-2">{t("userpanel.addquest.points")}</a>
                 <input 
-                    value={newTaskPoints}
-                    onInput={(e) => e.target.value = e.target.value.slice(0, 1)}
+                    ref={newTaskPoints}
                     onChange={(e) => setTaskPoints(e.target.value)}
                     type="number" 
                     className="border border-green-300 rounded-2xl w-1/6 h-11 text-center" 
+                    maxLength="2"
                     placeholder="0">
                 </input><br/>
 
                 <a className="text-white text-xl">{t("ownerpanel.addquest.generaltask")}</a>
                 <a className="text-white text-sm pb-2">{t("ownerpanel.addquest.generaltasksubtext")}</a>
                 <input 
-                    checked={generalTask}
+                    ref={generalTask}
                     type="checkbox" 
-                    className="border border-green-300 rounded-2xl h-10 w-10"
-                    onChange={(e) => setGeneralTask(e.target.checked)}>
+                    className="border border-green-300 rounded-2xl h-10 w-10">
                 </input>
 
                 <button onClick={saveNewTask} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">{t("userpanel.addquest.create")}</button>
@@ -109,7 +107,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         )
     } 
 
-    const CloseMemberList = () => {
+    const closeMemberList = () => {
         setMembersListOpened(false);
         document.body.classList.remove('overflow-hidden');
     }
@@ -124,7 +122,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="xl:w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] md:p-2 pt-1 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("userpanel.memberslist.header")}</a><br/>
-                    <button onClick={() => CloseMemberList()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button onClick={() => closeMemberList()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
                 <div className="pt-5 h-full">
                     {allUsersResponse ? <ATList response={allUsersResponse} rankList={rankList}/> : null}
@@ -299,19 +297,25 @@ export default function LandingPage( {userData} ): JSX.Element {
         
     const saveNewTask = async () => {
         
-        let taskType = null;
-        if (generalTask) { taskType = "general_task" }
-
-        const { } = await supabase
-            .from('quest_list')
-            .insert({quest_name: newTaskText, points: newTaskPoints, assigned: taskType, creator: username})
-
-            setAddQuestOpened(false);
-            document.body.classList.remove('overflow-hidden');
-            fetchQuestList();
-            setTaskText("");
-            setTaskPoints("");
-            setGeneralTask(false);
+        if (newTaskText.current.value && newTaskPoints.current.value && newTaskPoints.current.value.length < 3)
+        {
+            let taskType = null;
+            if (generalTask.current.checked) { taskType = "general_task" }
+    
+            const { } = await supabase
+                .from('quest_list')
+                .insert({
+                    quest_name: newTaskText.current.value, 
+                    points: newTaskPoints.current.value, 
+                    assigned: taskType, 
+                    creator: username})
+    
+                closeAddQuest();
+                fetchQuestList();
+                setTaskText("");
+                setTaskPoints("");
+                setGeneralTask(false);
+        }
     }
 
     const saveNewUsername = async () => {
