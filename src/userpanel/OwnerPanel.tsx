@@ -79,7 +79,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const newTaskText = useRef();
     const newTaskPoints = useRef();
     const generalTask = useRef();
-    const [newMailText, setNewMailText] = useState("");    
+    const newMailText = useRef();
     const nickToDelete = useRef();
     const [newUserRank, setNewUserRank] = useState("");  
     const [shouldResetPoints, setShouldResetPoints] = useState(false);    
@@ -121,7 +121,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <input 
                     ref={newTaskPoints}
                     type="number" 
-                    className="border border-green-300 rounded-2xl w-1/6 h-11 text-center" 
+                    className="border border-green-300 rounded-2xl w-1/6 h-11 text-center"
                     placeholder="0">
                 </input>
 
@@ -163,8 +163,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addaccount.useremail")}</a>
                 <input 
-                    value={newMailText}
-                    onChange={(e) => setNewMailText(e.target.value)} 
+                    ref={newMailText}
                     type="email"
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
                     placeholder={t("ownerpanel.addaccount.mailplaceholder")}>
@@ -755,8 +754,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 /** ### Data pushing ### **/  
         
     const saveNewTask = async () => {
-        if (newTaskText.current.value && newTaskPoints.current.value)
-        {
+        if (newTaskText.current.value && newTaskPoints.current.value && newTaskPoints.current.value.length < 3) {
             let taskType = null;
             if (generalTask.current.checked) { taskType = "general_task" }
     
@@ -776,28 +774,31 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const addNewMail = async () => {
-        const { } = await supabase
+        if (newMailText.current.value) {
+            const { } = await supabase
             .from('allowed_mails')
-            .insert({mail: newMailText })
+            .insert({mail: newMailText.current.value})
             closeAddAccountTab();
             setNewMailText("");
+        }
     }
 
     const delAccount = async () => {
-        const { } = await supabase
+        if (nickToDelete.current.value) {
+            const { } = await supabase
             .from('profiles')
             .delete()
             .eq('id', getIDByUsername(nickToDelete.current.value))
             closeDeleteAccountTab();
             fetchAllUsers();
+        }
     }   
 
 
 /** ### Settings data pushing ### **/  
 
     const setNewPanelName = async () => {
-
-        if (settings_newPanelName.current.value){
+        if (settings_newPanelName.current.value) {
             const { error } = await supabase
             .from('paneldata')
             .update({data: settings_newPanelName.current.value})
@@ -817,8 +818,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const setNewLogo = async () => {
-        if (settings_newPanelLogo)
-        {
+        if (settings_newPanelLogo) {
             const { error } = await supabase.storage
             .from('images')
             .upload('logo.png', settings_newPanelLogo, {
@@ -837,8 +837,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
     
     const setNewUserBackground = async () => {
-        if (settings_newUserBackground)
-        {
+        if (settings_newUserBackground) {
             const { error } = await supabase.storage
             .from('backgrounds')
             .upload('user-bg.png', settings_newUserBackground, {
@@ -857,8 +856,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const setNewOwnerBackground = async () => {
-        if (settings_newOwnerBackground)
-        {
+        if (settings_newOwnerBackground) {
             const { error } = await supabase.storage
             .from('backgrounds')
             .upload('owner-bg.png', settings_newOwnerBackground, {
@@ -899,8 +897,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const removeRank = async () => {
-        if (settings_rankToRemove.current.value)
-        {
+        if (settings_rankToRemove.current.value) {
             const { error } = await supabase
             .from('ranks')
             .delete()
@@ -920,8 +917,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const addNewAction = async () => {
-        if (settings_newAction.current.value && settings_newActionPoints.current.value)
-        {
+        if (settings_newAction.current.value && settings_newActionPoints.current.value) {
             const { error } = await supabase
             .from('points_list')
             .insert({action_name: settings_newAction.current.value, points: settings_newActionPoints.current.value })
@@ -942,8 +938,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const removeAction = async () => {
-        if (settings_actionToRemove.current.value)
-        {
+        if (settings_actionToRemove.current.value) {
             const { error } = await supabase
             .from('points_list')
             .delete()
