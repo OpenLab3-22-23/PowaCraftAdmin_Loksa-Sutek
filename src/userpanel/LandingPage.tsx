@@ -70,28 +70,28 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="lg:w-1/3 w-full mx-1 lg:mx-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] md:p-2 pt-1 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("userpanel.addquest.header")}</a><br/>
-                    <button onClick={() => CloseAddQuest()} className="absolute right-1 text-white text-4xl">X</button>
+                    <a className="text-3xl text-white">{t("userpanel.addquest.header")}</a>
+                    <button onClick={() => closeAddQuest()} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("userpanel.addquest.questdesc")}</a>
                 <input 
                     ref={newTaskText}
                     type="text"
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    maxlength="40"
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center mb-4" 
+                    maxLength="40"
                     placeholder={t("userpanel.addquest.questplaceholder")}>
-                </input><br/>
+                </input>
 
                 <a className="text-white text-xl pb-2">{t("userpanel.addquest.points")}</a>
                 <input 
                     ref={newTaskPoints}
                     onChange={(e) => setTaskPoints(e.target.value)}
                     type="number" 
-                    className="border border-green-300 rounded-2xl w-1/6 h-11 text-center" 
+                    className="border border-green-300 rounded-2xl w-1/6 h-11 text-center mb-4" 
                     maxLength="2"
                     placeholder="0">
-                </input><br/>
+                </input>
 
                 <a className="text-white text-xl">{t("ownerpanel.addquest.generaltask")}</a>
                 <a className="text-white text-sm pb-2">{t("ownerpanel.addquest.generaltasksubtext")}</a>
@@ -202,6 +202,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         const { data } = await supabase
             .from('ranks')
             .select()
+            .order('id', { ascending: true })
             setRankList(data);
     }
 
@@ -323,14 +324,10 @@ export default function LandingPage( {userData} ): JSX.Element {
         setSetUsernameOpened(false);
         document.body.classList.remove('overflow-hidden');
 
-        const { error } = await supabase
+        const { } = await supabase
             .from('profiles')
             .update({username: newUsername})
             .eq('id', userData.user.id)
-
-            if (error) {
-                console.log("ERROR");
-            }
             fetchUserProfile();
     } 
         
@@ -392,7 +389,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
 
                     <div className="absolute lg:static h-20 items-center space-x-6 mr-12 " style={{ display: isHelper ? "flex" : "none" }}>
-                        <div className="bg-white rounded-full flex justify-center items-center w-40 h-12 border-4 border-gray-400">
+                        <div className="bg-white rounded-full flex justify-center items-center w-48 h-12 border-4 border-gray-400">
                             <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                         </div>
                         <div className="bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400">

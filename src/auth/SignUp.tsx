@@ -53,13 +53,10 @@ export default function SignUp() {
     } 
 
   const deleteMail = async () => {
-    const { error } = await supabase
+    const { } = await supabase
         .from('allowed_mails')
         .delete()
         .eq('mail', email)
-        if (error) {
-            console.log("ERROR");
-        }
     }   
 
     function checkEmail(currentMail) 

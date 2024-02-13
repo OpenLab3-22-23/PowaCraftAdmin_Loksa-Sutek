@@ -112,8 +112,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <input 
                     ref={newTaskText}
                     type="text"
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center" 
-                    maxlength="40"
+                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center mb-4" 
+                    maxLength="40"
                     placeholder={t("ownerpanel.addquest.questplaceholder")}>
                 </input>
 
@@ -121,7 +121,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <input 
                     ref={newTaskPoints}
                     type="number" 
-                    className="border border-green-300 rounded-2xl w-1/6 h-11 text-center"
+                    className="border border-green-300 rounded-2xl w-1/6 h-11 text-center mb-4"
                     placeholder="0">
                 </input>
 
@@ -191,7 +191,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col w-full h-screen bg-black/80">      
-            <div className="w-4/5 lg:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div className="w-4/5 xl:w-3/5 2xl:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a>
                     <button onClick={() => closeDeleteAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -205,7 +205,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         ref={nickToDelete}
                         type="text"
                         className="border border-green-300 rounded-2xl w-4/5 text-center" 
-                        maxlength="40"
+                        maxLength="40"
                         placeholder={t("ownerpanel.delaccount.nickplaceholder")}>
                     </input>
 
@@ -278,7 +278,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("ownerpanel.addminus.header")}</a>
+                    <a className="text-3xl text-white text-center w-4/5">{t("ownerpanel.addminus.header")}</a>
                     <button onClick={() => closeAddMinusTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
@@ -369,7 +369,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80 ">      
-                <div className="w-full md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
+                <div className="w-1/2 md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
                                 <a className="text-4xl text-white">{t("ownerpanel.settings.panel.header")}</a>
@@ -386,7 +386,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                 ref={settings_newPanelName}
                                 type="text"
                                 className="border-2 border-amber-400 rounded-2xl text-center" 
-                                maxlength="30"
+                                maxLength="30"
                                 placeholder={panelName}>
                             </input> 
                             <button 
@@ -411,7 +411,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                 accept="image/png, image/jpeg, image/svg">
                             </input>
                             <label 
-                                for="logoinput" 
+                                htmlFor="logoinput" 
                                 className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">
                                 {t("ownerpanel.settings.selectfile")}
                             </label>
@@ -437,7 +437,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                 accept="image/png, image/jpeg, image/svg">
                             </input>
                             <label 
-                                for="userbginput" 
+                                htmlFor="userbginput" 
                                 className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">
                                 {t("ownerpanel.settings.selectfile")}
                             </label>
@@ -463,7 +463,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                 accept="image/png, image/jpeg, image/svg">
                             </input>
                             <label 
-                                for="ownerbginput" 
+                                htmlFor="ownerbginput" 
                                 className="text-center rounded-lg border-2 border-white text-white bg-gradient-to-r from-amber-400 to-yellow-600 truncate px-2 cursor-pointer">
                                 {t("ownerpanel.settings.selectfile")}
                             </label>
@@ -485,7 +485,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-min w-4/6 flex flex-col items-center gap-y-2 pt-4">
                             <a className="text-white text-2xl">{t("ownerpanel.settings.ranksettings.ranklist")}</a>
                             <select
-                            value={rankList[0].rank}
+                            defaultValue={rankList[0].rank}
                             className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center" >
                             {rankList.map((rank) => (
                                 <option key={rank.rank} value={rank.rank}>
@@ -553,7 +553,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-min w-4/6 flex flex-col items-center gap-y-2 pt-4">
                             <a className="text-white text-2xl">{t("ownerpanel.settings.pointsettings.actionlist")}</a>
                             <select
-                                value={1}
+                                defaultValue={1}
                                 className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center truncate">
                                 {pointsList.map((point) => (
                                     point.points > 0 ? (
@@ -649,8 +649,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         const { data } = await supabase.storage
             .from('backgrounds')
             .getPublicUrl('user-bg.png');
-        setUserPanelBackgroundImage(data.publicUrl);
-        console.log(data.publicUrl + "?c=" + Math.random());
+        setUserPanelBackgroundImage(data.publicUrl + "?c=" + Math.random());
     }
     const fetchLogo = async () => {
         const { data } = await supabase.storage
@@ -701,7 +700,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .order('plus', { ascending: false })
 
             if (data) {
-                console.log(data);
                 let accounts = [];
                 let unrankedAccounts = [];
             
@@ -719,10 +717,9 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     }
                 }
             
-                //Docasne nezobrazuje nezname ranky, aby si videl bug s tabulkou ked tam je malo hracov
-                // for (let i = 0; i < unrankedAccounts.length; i++) {
-                //     accounts.push(unrankedAccounts[i]);
-                // }
+                for (let i = 0; i < unrankedAccounts.length; i++) {
+                    accounts.push(unrankedAccounts[i]);
+                }
             
                 setUsersResponse(accounts);
             }  
@@ -1116,7 +1113,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col w-4/12">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
-                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-2/3 justify-center border-slate-500 border-2 text-white">
+                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 justify-center border-slate-500 border-2 text-white">
                             <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
                                 {t("ownerpanel.questlist.addquest")}
                             </button>
@@ -1129,7 +1126,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </a>
                         </div>
 
-                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 h-2/3 justify-center border-slate-500 border-2 text-white">
+                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 justify-center border-slate-500 border-2 text-white">
                             <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full">
                             {t("ownerpanel.questlist.remquest")}
                             </button>
