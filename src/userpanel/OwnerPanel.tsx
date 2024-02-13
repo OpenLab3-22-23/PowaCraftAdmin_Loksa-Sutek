@@ -235,7 +235,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("ownerpanel.addplus.header")}</a>
+                    <a className="text-3xl text-white text-center w-4/5">{t("ownerpanel.addplus.header")}</a>
                     <button onClick={() => closeAddPlusTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
@@ -1149,14 +1149,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
 
 
-                <div className="bg-zinc-700/80 rounded-lg flex flex-col justify-center w-3/5 justify-self-end absolute lg:static">
+                <div className="bg-zinc-700/80 rounded-lg flex flex-col w-3/5 h-full absolute lg:static">
                     <div>
                         <div className="flex justify-center p-4">
                             <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.memberslist.header")}</a>
                         </div>
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
                     </div>
-                    <div className=" w-full overflow-auto">
+                    <div className=" w-full overflow-auto h-full">
                         {allUsersResponse ? 
                             <OwnerATList 
                             response={allUsersResponse} 
@@ -1166,7 +1166,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             rankList={rankList} /> 
                         : null}
                     </div>
-                    <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4">
+                    <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4 ">
                         <button 
                             onClick={() => setAddAccountVisibility(true)} 
                             className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">
