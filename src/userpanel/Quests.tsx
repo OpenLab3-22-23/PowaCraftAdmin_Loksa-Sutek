@@ -31,25 +31,25 @@ export default function WriteQuests({questList, deleteShown, onDelete, username,
             case "general_task": 
                 return (
                 <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto">
-                    <a className="text-2xl text-white">{quest.quest_name}</a>
-                    <a className="text-base text-white">{t("questcomponent.generaltask")}</a>
+                    <a className="text-2xl text-white text-clip">{quest.quest_name}</a>
+                    <a className="text-base text-white truncate">{t("questcomponent.generaltask")}</a>
                 </div>)
             case null:
                 return (
-                <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto  hover:bg-zinc-400/60 hover:cursor-pointer " onClick={() => assignQuest(quest.id)}>
-                    <a className="text-2xl text-white">{quest.quest_name}</a>
-                    <a className="text-base text-green-500">{t("questcomponent.freetask")}</a>
+                <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto  hover:bg-zinc-400/60 hover:cursor-pointer" onClick={() => assignQuest(quest.id)}>
+                    <a className="text-2xl text-white text-clip">{quest.quest_name}</a>
+                    <a className="text-base text-green-500 truncate">{t("questcomponent.freetask")}</a>
                 </div>)
             case username:
                 return (
                 <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto  outline outline-3 outline-green-600">
-                    <a className="text-2xl text-white">{quest.quest_name}</a>
+                    <a className="text-2xl text-white text-clip">{quest.quest_name}</a>
                     <a className="text-base text-white truncate">{t("questcomponent.assignedtask")} {quest.assigned}</a>
                 </div>)
             default:
                 return (
-                <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto ">
-                    <a className="text-2xl text-white">{quest.quest_name}</a>
+                <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto">
+                    <a className="text-2xl text-white text-clip">{quest.quest_name}</a>
                     <a className="text-base text-white truncate">{t("questcomponent.assignedtask")} {quest.assigned}</a>
                 </div>)
         }
