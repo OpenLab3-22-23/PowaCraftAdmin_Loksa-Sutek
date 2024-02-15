@@ -369,19 +369,19 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80 ">      
-                <div className="w-1/2 md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
+                <div className="w-3/4 md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
-                                <a className="text-4xl text-white">{t("ownerpanel.settings.panel.header")}</a>
+                                <a className="text-4xl text-white text-center">{t("ownerpanel.settings.panel.header")}</a>
                             </div> 
-                            <div className="absolute w-full md:w-1/2 py-2 mr-8 z-50">
+                            <div className="absolute w-full md:w-1/2 py-2 mr-2 z-50">
                                 <button onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl w-full text-end">X</button>                                
                             </div>  
                             <a className={`mb-6 text-white text-xl ${notificationColour}`}>{notification}</a>
                         
                         
                         <div className="flex flex-col items-center gap-y-2 w-4/6 pt-4">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.panel.servername")}</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.panel.servername")}</a>
                             <input 
                                 ref={settings_newPanelName}
                                 type="text"
@@ -391,14 +391,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </input> 
                             <button 
                                 onClick={() => setNewPanelName()} 
-                                className="border-2 border-white/50 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">
+                                className="border-2 border-white/50 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5 flex items-center justify-center text-xs sm:text-base">
                                 {t("ownerpanel.settings.save")}
                             </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.panel.logo")} (png / jpg)</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.panel.logo")} (png / jpg)</a>
                             <div 
                                 className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat border-4" 
                                 style={{ backgroundImage: `url(${settings_newPanelLogo ? URL.createObjectURL(settings_newPanelLogo) : logo})` }}>
@@ -417,14 +417,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </label>
                             <button 
                                 onClick={() => setNewLogo()} 
-                                className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 ${settings_newPanelLogo ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
+                                className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 flex items-center justify-center text-xs sm:text-base ${settings_newPanelLogo ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
                                 {t("ownerpanel.settings.upload")}
                             </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.panel.userpanel")} (png / jpg)</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.panel.userpanel")} (png / jpg)</a>
                             <div 
                                 className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" 
                                 style={{ backgroundImage: `url(${settings_newUserBackground ? URL.createObjectURL(settings_newUserBackground) : userPanelBackgroundImage})` }}>
@@ -443,14 +443,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </label>
                             <button 
                                 onClick={() => setNewUserBackground()} 
-                                className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 ${settings_newUserBackground ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
+                                className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 flex items-center justify-center text-xs sm:text-base ${settings_newUserBackground ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
                                 {t("ownerpanel.settings.upload")}
                             </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.panel.ownerpanel")} (png / jpg)</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.panel.ownerpanel")} (png / jpg)</a>
                             <div 
                                 className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" 
                                 style={{ backgroundImage: `url(${settings_newOwnerBackground ? URL.createObjectURL(settings_newOwnerBackground) : ownerPanelBackgroundImage})` }}>
@@ -469,7 +469,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </label>
                             <button 
                                 onClick={() => setNewOwnerBackground()} 
-                                className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 ${settings_newOwnerBackground ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
+                                className={`border-2 border-white/50 rounded-2xl px-2 h-10 w-2/5 xl:w-1/5 flex items-center justify-center text-xs sm:text-base ${settings_newOwnerBackground ? 'bg-green-700 hover:bg-opacity-80 text-white/80' : 'bg-green-600/20 text-gray-900'}`}>
                                 {t("ownerpanel.settings.upload")}
                             </button>
                         </div> 
@@ -479,11 +479,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <div className="w-full gap-y-2 items-center flex flex-col">
                         <div className="flex w-full justify-center sticky top-0 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 pt-2">
-                            <a className="text-4xl text-white">{t("ownerpanel.settings.ranksettings.header")}</a>
+                            <a className="text-4xl text-white text-center">{t("ownerpanel.settings.ranksettings.header")}</a>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col items-center gap-y-2 pt-4">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.ranksettings.ranklist")}</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.ranksettings.ranklist")}</a>
                             <select
                             defaultValue={rankList[0].rank}
                             className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center" >
@@ -497,7 +497,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>       
                         
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.ranksettings.newrank")}</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.ranksettings.newrank")}</a>
                             <div className="flex gap-x-2">
                                 <input 
                                     ref={settings_newRankName}
@@ -521,14 +521,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </select>
                             <button 
                                 onClick={() => addNewRank()} 
-                                className="border-2 border-white/50 border-2 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">
+                                className="border-2 border-white/50 border-2 bg-green-700 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5 flex items-center justify-center text-xs sm:text-base">
                                 {t("ownerpanel.settings.add")}
                             </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
                         
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.ranksettings.delrank")}</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.ranksettings.delrank")}</a>
                             <input 
                                 ref={settings_rankToRemove}
                                 type="text"
@@ -537,7 +537,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </input>
                             <button 
                                 onClick={() => removeRank()} 
-                                className="border-2 border-white/50 border-2 bg-red-600 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5">
+                                className="border-2 border-white/50 border-2 bg-red-600 hover:bg-opacity-80 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5 flex items-center justify-center text-xs sm:text-base">
                                 {t("ownerpanel.settings.delete")}
                             </button>
                         </div>   
@@ -547,11 +547,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <div className="w-full flex flex-col items-center">
                         <div className="flex w-full justify-center sticky top-0 bg-[url('/assets/popupbackground.png')] bg-repeat border-y-2 pt-2">
-                            <a className="text-4xl text-white">{t("ownerpanel.settings.pointsettings.header")}</a>
+                            <a className="text-4xl text-white text-center">{t("ownerpanel.settings.pointsettings.header")}</a>
                         </div>
 
                         <div className="h-min w-4/6 flex flex-col items-center gap-y-2 pt-4">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.pointsettings.actionlist")}</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.pointsettings.actionlist")}</a>
                             <select
                                 defaultValue={1}
                                 className="border-2 border-amber-400 rounded-2xl w-4/5 h-11 text-center truncate">
@@ -574,7 +574,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>
             
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.pointsettings.addaction")}</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.pointsettings.addaction")}</a>
                             <div className="flex gap-2">
                                 <input 
                                     ref={settings_newAction}
@@ -592,14 +592,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </div>
                             <button 
                                 onClick={() => addNewAction()} 
-                                className="border-white/50 border-2 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5 bg-green-700 hover:bg-opacity-80 text-white/80">
+                                className="border-white/50 border-2 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5 bg-green-700 hover:bg-opacity-80 text-white/80 flex items-center justify-center text-xs sm:text-base">
                                 {t("ownerpanel.settings.add")}
                             </button>
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>
                         </div>
                         
                         <div className="flex flex-col items-center w-4/6 gap-y-2">
-                            <a className="text-white text-2xl">{t("ownerpanel.settings.pointsettings.delaction")}</a>
+                            <a className="text-white text-2xl text-center">{t("ownerpanel.settings.pointsettings.delaction")}</a>
                             <input 
                                 ref={settings_actionToRemove}
                                 type="number"
@@ -608,7 +608,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </input>
                             <button 
                                 onClick={() => removeAction()} 
-                                className="border-white/50 border-2 rounded-2xl text-white/80 px-2 h-10 mb-3 w-2/5 xl:w-1/5 bg-red-600 hover:bg-opacity-80 text-white/80 ">
+                                className="border-white/50 border-2 rounded-2xl text-white/80 px-2 h-10 mb-3 w-2/5 xl:w-1/5 bg-red-600 hover:bg-opacity-80 text-white/80 flex items-center justify-center text-xs sm:text-base">
                                 {t("ownerpanel.settings.delete")}
                             </button>
                         </div>
@@ -1097,7 +1097,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="absolute lg:static">
                     <div className="flex justify-end items-stretch right-10 pr-10">
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-3" onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
-                        <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full cursor-pointer" onClick={() => setPanelSettingsShown(true)}></img>
+                        <img src="assets/settings_icon.png" className="w-20 h-20 rounded-full cursor-pointer" onClick={() => setPanelSettingsShown(true)}></img>
                     </div>
 
                     <div className="flex justify-end pr-10 pt-2">
@@ -1182,7 +1182,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="lg:invisible lg:fixed">
                 <div className="flex content-center items-stretch p-2 w-full">
                     <div className="flex w-screen">
-                        <img src={`https://mineskin.eu/helm/${username}`} className="w-16 h-16 rounded-full" onClick={() => setPanelSettingsShown(true)}></img>
+                        <img src="assets/settings_icon.png" className="w-16 h-16 rounded-full" onClick={() => setPanelSettingsShown(true)}></img>
                         <div className="self-center ml-1 border-4 border-amber-500 rounded-full px-2 bg-gray-100"><WriteUserRank rank={rank} rankList={rankList} /></div>
                     </div>
                     <button className="text-2xl text-white hover:text-gray-300 text-center pr-1"onClick={handleLogOut}>{t("userpanel.logout")}</button>
