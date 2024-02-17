@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../auth/Auth";
 import { supabase } from "../supabase/supabaseClient";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 import WriteUserRank from "./UserRank";
 import WriteLastPoints from "./LastPoints";
 import WriteBestHelpers from "./BestHelpers";

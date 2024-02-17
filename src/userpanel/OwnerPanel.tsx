@@ -682,12 +682,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 setRank(data[0].rank);
                 setUsername(data[0].username);
                 i18n.changeLanguage(data[0].language)
-                if (i18n.language == "sk")
-                {
+                if (i18n.language == "sk") {
                   setLanguageIconSource("/assets/en.png")
                 }
-                else
-                {
+                else {
                   setLanguageIconSource("/assets/sk.png")
                 }
             }

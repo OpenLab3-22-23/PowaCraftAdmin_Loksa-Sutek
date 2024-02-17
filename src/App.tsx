@@ -79,7 +79,7 @@ function App() {
           {
             setPageToRender('banned');
           }
-        } else if (getPermissionLevel(data[0].rank) >= 3) {
+        } else if (getPermissionLevel(data[0].rank) > 2) {
           setPageToRender('admin');
         } else {
           setPageToRender('user');
