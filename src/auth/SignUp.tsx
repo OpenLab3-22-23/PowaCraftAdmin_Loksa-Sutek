@@ -12,8 +12,6 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [nick, setNick] = useState("");
   const [correct, setCorrect] = useState("");
-  const [emailEnabled, setEmailEnabled] = useState(false);  
-  const [allowedMailResponse, setMailResponse] = useState<{ id: number; mail: string }[] | undefined>();
   const [language, setLanguage] = useState("")
   const [backgroundImage, setBackgroundImage] = useState("");
   const [logo, setLogo] = useState("");  
@@ -47,9 +45,8 @@ export default function SignUp() {
         .select()
         
         if (data) {
-          if (allowedMailResponse?.some(item => item.mail === currentMail))
+          if (data?.some(item => item.mail === email))
           {
-            e.preventDefault();
             try{
               const { error } = await signUp(email, password, nick, i18n.language);  
               if (error) { throw error; }
@@ -83,6 +80,7 @@ export default function SignUp() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     if (password == correct && password != "") {
+      e.preventDefault();
       fetchAllowedMailsAndRegister();
     }
   }
@@ -120,7 +118,7 @@ export default function SignUp() {
               type="email"
               placeholder="email@gmail.com"
               value={email}
-              onChange={(e) => { setEmail(e.target.value); checkEmail(e.target.value); }}
+              onChange={(e) => { setEmail(e.target.value); }}
               className="w-80 lg:w-96 my-2 bg-gray-200 rounded-full"
             />
           </div>
