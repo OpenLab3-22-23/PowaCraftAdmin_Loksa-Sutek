@@ -45,7 +45,7 @@ export default function SignUp() {
         .select()
         
         if (data) {
-          if (data?.some(item => item.mail === mail))
+          if (data?.some(item => item.mail === email))
           {
             try{
               const { error } = await signUp(email, password, nick, i18n.language);  
