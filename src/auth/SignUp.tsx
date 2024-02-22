@@ -82,16 +82,17 @@ export default function SignUp() {
     }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    try{
-      const { error } = await signUp(email, password, nick, i18n.language);  
-      if (error) { throw error; }
-      else { deleteMail(); }
-    }
-    catch(error: any) {
-      alert(error.error_description || error.message);
-    }
-    finally {
+    if (password == correct && password != "" && emailEnabled)
+    {
+      e.preventDefault();
+      try{
+        const { error } = await signUp(email, password, nick, i18n.language);  
+        if (error) { throw error; }
+        else { deleteMail(); }
+      }
+      catch(error: any) {
+        alert(error.error_description || error.message);
+      }
     }
   }
 
