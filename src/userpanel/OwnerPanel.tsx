@@ -374,10 +374,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
                                 <a className="text-4xl text-white text-center">{t("ownerpanel.settings.panel.header")}</a>
                             </div> 
-                            <div className="absolute w-full md:w-1/2 py-2 mr-2 md:mr-8 z-50">
+                            <div className="absolute w-full md:w-1/2 py-2 mr-2 md:mr-6 z-50">
                                 <button onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl w-full text-end">X</button>                                
                             </div>  
-                            <a className={`mb-6 text-white text-xl ${notificationColour}`}>{notification}</a>
+                            <a className={`text-white text-xl ${notificationColour}`}>{notification}</a>
                         
                         
                         <div className="flex flex-col items-center gap-y-2 w-4/6 pt-4">
@@ -1111,7 +1111,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col w-4/12">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
-                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 justify-center border-slate-500 border-2 text-white">
+                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 px-2 justify-center border-slate-500 border-2 text-white">
                             <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
                                 {t("ownerpanel.questlist.addquest")}
                             </button>
@@ -1164,12 +1164,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4 ">
                         <button 
                             onClick={() => setAddAccountVisibility(true)} 
-                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">
+                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">
                             {t("ownerpanel.memberslist.addaccount")}
                         </button>
                         <button 
                             onClick={() => setDelAccountVisibility(true)} 
-                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center w-full h-full">
+                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">
                             {t("ownerpanel.memberslist.delaccount")}
                         </button>
                     </div>
