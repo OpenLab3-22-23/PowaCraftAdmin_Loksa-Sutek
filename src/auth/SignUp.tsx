@@ -80,7 +80,6 @@ export default function SignUp() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     if (password == correct && password != "") {
-      e.preventDefault();
       fetchAllowedMailsAndRegister();
     }
   }
