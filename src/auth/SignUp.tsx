@@ -45,7 +45,7 @@ export default function SignUp() {
         .select()
         
         if (data) {
-          if (data?.some(item => item.mail === email))
+          if (data?.some(item => item.mail === mail))
           {
             try{
               const { error } = await signUp(email, password, nick, i18n.language);  
@@ -55,6 +55,15 @@ export default function SignUp() {
             catch(error: any) {
               alert(error.error_description || error.message);
             }
+          }
+          else
+          {
+            setEmail("");
+            setPassword("");
+            setNick("");
+            setCorrect("");
+            // refresh stránky
+            window.location.reload();
           }
         }
     } 
@@ -80,6 +89,7 @@ export default function SignUp() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     if (password == correct && password != "") {
+      e.preventDefault();
       fetchAllowedMailsAndRegister();
     }
   }
