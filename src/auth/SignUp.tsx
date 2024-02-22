@@ -22,7 +22,6 @@ export default function SignUp() {
 
 
   useEffect(() => {
-    fetchAllowedMails();
     changeLanguage();
     fetchBackground();
     fetchLogo();
@@ -42,13 +41,24 @@ export default function SignUp() {
     setLogo(data.publicUrl + "?c=" + Math.random());
   }
 
-  const fetchAllowedMails = async () => {
+  const fetchAllowedMailsAndRegister = async () => {
     const { data } = await supabase
         .from('allowed_mails')
         .select()
         
         if (data) {
-          setMailResponse(data);
+          if (allowedMailResponse?.some(item => item.mail === currentMail))
+          {
+            e.preventDefault();
+            try{
+              const { error } = await signUp(email, password, nick, i18n.language);  
+              if (error) { throw error; }
+              else { deleteMail(); }
+            }
+            catch(error: any) {
+              alert(error.error_description || error.message);
+            }
+          }
         }
     } 
 
@@ -58,16 +68,6 @@ export default function SignUp() {
         .delete()
         .eq('mail', email)
     }   
-
-    function checkEmail(currentMail) 
-    {
-      if (allowedMailResponse?.some(item => item.mail === currentMail)){
-        setEmailEnabled(true);
-      }
-      else{
-        setEmailEnabled(false);
-      }
-    }
 
     function changeLanguage()
     {
@@ -82,17 +82,8 @@ export default function SignUp() {
     }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    if (password == correct && password != "" && emailEnabled)
-    {
-      e.preventDefault();
-      try{
-        const { error } = await signUp(email, password, nick, i18n.language);  
-        if (error) { throw error; }
-        else { deleteMail(); }
-      }
-      catch(error: any) {
-        alert(error.error_description || error.message);
-      }
+    if (password == correct && password != "") {
+      fetchAllowedMailsAndRegister();
     }
   }
 
@@ -160,7 +151,7 @@ export default function SignUp() {
             type="submit"
             value={t("register.register")}
             className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-3 text-2xl hover:bg-green-400/80 disabled:bg-green-600/40 disabled:text-black/40"
-            disabled={password != correct || password == "" || !emailEnabled}
+            disabled={password != correct || password == ""}
           />
           <Link to="/login" className="text-white hover:text-gray-300 text-2xl mb-3">{t("register.login")}</Link>
 
