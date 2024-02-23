@@ -36,7 +36,9 @@ export default function WriteQuests({questList, deleteShown, onDelete, username,
                 </div>)
             case null:
                 return (
-                <div className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto  hover:bg-zinc-400/60 hover:cursor-pointer" onClick={() => assignQuest(quest.id)}>
+                <div 
+                    className="box-content w-9/12 px-4 py-1 bg-zinc-500/40 rounded-lg flex flex-col overflow-auto  hover:bg-zinc-400/60 hover:cursor-pointer" 
+                    onClick={() => assignQuest(quest.id)}>
                     <a className="text-2xl text-white text-clip">{quest.quest_name}</a>
                     <a className="text-base text-green-500 truncate">{t("questcomponent.freetask")}</a>
                 </div>)
@@ -55,7 +57,6 @@ export default function WriteQuests({questList, deleteShown, onDelete, username,
         }
     }
 
-
     return(
         <div>
         {
@@ -68,7 +69,10 @@ export default function WriteQuests({questList, deleteShown, onDelete, username,
                 <div className="box-content h-8 w-1/12 p-4 bg-white rounded-lg mx-4 items-center justify-center flex">
                     <a className="text-green-600 text-2xl">+{quest.points}</a>
                 </div>
-                <button onClick={() => deleteQuest(quest.id) } style={{ display: deleteShown ? "block" : "none" }} className="bg-red-500 hover:bg-red-500/70 w-12 h-12 rounded-lg text-white mr-4 text-2xl hidden">X</button>
+                <button 
+                    onClick={() => deleteQuest(quest.id) } 
+                    style={{ display: deleteShown ? "block" : "none" }} 
+                    className="bg-red-500 hover:bg-red-500/70 w-12 h-12 rounded-lg text-white mr-4 text-2xl hidden">X</button>
             </div>
         )}
         </div>
