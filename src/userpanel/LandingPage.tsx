@@ -481,7 +481,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                                         {t("userpanel.questlist.addquest")}
                                     </button>
                                 </div>
-                                <div>
+                                <div className="text-center">
                                     <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full items-center">
                                         {t("userpanel.questlist.header")}
                                     </a>
@@ -518,13 +518,13 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
 
                     <div className="h-20 items-center justify-center space-x-3 px-1" style={{ display: isHelper ? "flex" : "none" }}>
-                        <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 ">
+                        <div className="bg-white rounded-full flex justify-center items-center w-40 h-14 border-4 border-gray-400">
                             <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                         </div>
-                        <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
+                        <div className="bg-white rounded-full flex justify-center items-center w-16 h-14 border-4 border-gray-400">
                             <a className="text-green-500 text-2xl">+{plusPoints}</a> 
                         </div>
-                        <div className="bg-white rounded-full flex justify-center items-center w-16 h-14">
+                        <div className="bg-white rounded-full flex justify-center items-center w-16 h-14 border-4 border-gray-400">
                             <a className="text-red-500 text-2xl">-{minusPoints}</a>
                         </div> 
                         <img src={languageIconSource} className="w-14 h-14 cursor-pointer" onClick={changeLanguage}></img>
@@ -545,19 +545,19 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <div className="h-full w-full bg-zinc-700/80 rounded-lg flex flex-col">
                             <div className="inline-block flex items-center justify-between p-4">
                                 <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-full justify-center">
-                                    <button onClick={() => setAddQuestOpened(true)} className="box-content w-full h-full">
+                                    <button onClick={() => setAddQuestOpened(true)} className="box-content w-full h-16">
                                         {t("userpanel.questlist.addquest")}
                                     </button>
                                 </div>
                                 <div className="text-center">
-                                    <a className="font-extrabold text-transparent text-4xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full">
+                                    <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full">
                                         {t("userpanel.questlist.header")}
                                     </a>
                                 </div>
                                 <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-full justify-center">
                                     <button 
                                         onClick={() => setDeleteShown(!deleteShown)} 
-                                        className="box-content w-full h-full disabled:bg-gray-600/60 disabled:text-white/60" 
+                                        className="box-content w-full h-16 disabled:bg-gray-600/60 disabled:text-white/60" 
                                         disabled = { isHelper }>
                                         {t("userpanel.questlist.remquest")}
                                     </button>
