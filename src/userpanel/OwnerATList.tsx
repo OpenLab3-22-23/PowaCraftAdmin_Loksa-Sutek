@@ -36,8 +36,8 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
                 </div>
               ) : (
                 <div className="items-center flex bg-white border-2 border-yellow-600 rounded-2xl box-content h-12 justify-center w-full min-w-48 mx-2">
-                  <div className="mx-6">
-                    <a className="text-2xl text-black truncate">{user.username}</a>
+                  <div className="mx-6 truncate">
+                    <a className="text-2xl text-black ">{user.username}</a>
                   </div>
                 </div>
               )}
