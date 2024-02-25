@@ -1080,7 +1080,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <PanelSettings show={panelSettingsShown}/>
             </div>}
 
-            <div className="invisible absolute lg:visible lg:static flex items-center pb-2 w-0 lg:w-full">
+            <div className="invisible absolute lg:visible lg:static flex items-center pb-2 w-full">
                 
                 <div className="flex items-center w-full">
                     <div className="rounded-full h-32 w-32 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
@@ -1107,7 +1107,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div>
 
         
-            <div className="invisible absolute lg:visible lg:static flex md:w-full h-3/4 gap-7 justify-center w-0 lg:w-full">
+            <div className="invisible absolute lg:visible lg:static flex md:w-full h-3/4 gap-7 justify-center w-full">
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col w-4/12">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
@@ -1177,7 +1177,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div>
             
 {/** ### MOBILE HTML ### **/}
-            <div className="lg:invisible lg:fixed">
+            <div className="lg:invisible lg:fixed overflow-x-hidden">
                 <div className="flex content-center items-stretch p-2 w-full">
                     <div className="flex w-screen">
                         <img src="assets/settings_icon.png" className="w-16 h-16 rounded-full" onClick={() => setPanelSettingsShown(true)}></img>
