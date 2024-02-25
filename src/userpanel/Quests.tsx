@@ -58,7 +58,7 @@ export default function WriteQuests({questList, deleteShown, onDelete, username,
     }
 
     return(
-        <div>
+        <div className="">
         {
             questList.map((quest, index) => 
             <div key={index} className="w-full flex inline-block pb-5 items-center">

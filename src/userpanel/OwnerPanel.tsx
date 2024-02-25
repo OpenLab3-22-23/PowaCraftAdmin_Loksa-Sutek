@@ -1080,19 +1080,19 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <PanelSettings show={panelSettingsShown}/>
             </div>}
 
-            <div className="invisible absolute lg:visible lg:static flex items-center pb-2">
+            <div className="invisible absolute lg:visible lg:static flex items-center pb-2 w-0 lg:w-full">
                 
                 <div className="flex items-center w-full">
                     <div className="rounded-full h-32 w-32 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
                     <a className="text-4xl text-white">{panelName}</a>
-                    <div className="h-14 flex items-end absolute lg:static">
+                    <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400 ">Admin</a>
                     </div>
-                    <img src={languageIconSource} className="w-14 h-14 inset-1/2 cursor-pointer ml-6 absolute lg:static" onClick={changeLanguage}></img>
+                    <img src={languageIconSource} className="w-14 h-14 inset-1/2 cursor-pointer ml-6 " onClick={changeLanguage}></img>
                 </div>
   
 
-                <div className="absolute lg:static">
+                <div className="">
                     <div className="flex justify-end items-stretch right-10 pr-10">
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-3" onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
                         <img src="assets/settings_icon.png" className="w-20 h-20 rounded-full cursor-pointer" onClick={() => setPanelSettingsShown(true)}></img>
@@ -1107,7 +1107,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div>
 
         
-            <div className="invisible absolute lg:visible lg:static flex md:w-full h-3/4 gap-7 justify-center w-0">
+            <div className="invisible absolute lg:visible lg:static flex md:w-full h-3/4 gap-7 justify-center w-0 lg:w-full">
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col w-4/12">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
@@ -1144,7 +1144,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
 
 
-                <div className="bg-zinc-700/80 rounded-lg flex flex-col w-3/5 h-full absolute lg:static">
+                <div className="bg-zinc-700/80 rounded-lg flex flex-col w-3/5 h-full">
                     <div>
                         <div className="flex justify-center p-4">
                             <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.memberslist.header")}</a>
