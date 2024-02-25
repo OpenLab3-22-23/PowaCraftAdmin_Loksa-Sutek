@@ -378,8 +378,8 @@ export default function LandingPage( {userData} ): JSX.Element {
             </div>}
 
             <div className="invisible absolute w-0 lg:visible lg:static lg:w-full">
-                <div className="flex justify-between items-center"> 
-
+                
+                <div className="flex items-center"> 
                     <div className="flex items-center w-8/12 ">
                         <div className="rounded-full h-32 w-32 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
                         <a className="text-4xl text-white" href="https://powacraft.sk/">{panelName}</a>
@@ -388,7 +388,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
                     </div>
 
-                    <div className="absolute lg:static h-20 items-center space-x-6 mr-12 " style={{ display: isHelper ? "flex" : "none" }}>
+                    <div className="absolute lg:static h-20 items-center space-x-6 mr-12 pr-6" style={{ display: isHelper ? "flex" : "none" }}>
                         <div className="bg-white rounded-full flex justify-center items-center w-48 h-12 border-4 border-gray-400">
                             <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                         </div>
@@ -401,15 +401,15 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <img src={languageIconSource} className="w-14 h-14 cursor-pointer" onClick={changeLanguage}></img>   
                     </div>
 
-                    <div>
+                    <div className="w-2/12">
                         <div className="flex justify-end items-stretch pr-5">
                             <button className="text-2xl text-white hover:text-gray-300 text-center pr-3" onClick={handleLogOut}>{t("userpanel.logout")}</button>
                             <div className="flex w-5"></div>
-                            <img id="drobbox" src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full"></img>
+                            <img id="drobbox" src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full truncate"></img>
                         </div>
 
-                        <div className="flex justify-end pr-10 pt-2">
-                            <div className="h-12 w-48 border-4 border-gray-400 rounded-full px-2 bg-white flex items-center justify-center">
+                        <div className="flex justify-end pr-5 pt-2">
+                            <div className="h-12 w-full border-4 border-gray-400 rounded-full px-2 bg-white flex items-center justify-center">
                                 <WriteUserRank rank={rank} rankList={rankList} />
                             </div>
                         </div>
