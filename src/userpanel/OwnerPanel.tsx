@@ -1080,7 +1080,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <PanelSettings show={panelSettingsShown}/>
             </div>}
 
-            <div className="invisible absolute lg:visible lg:static flex items-center pb-2 w-0 lg:w-full">
+            <div className=" absolute lg:visible lg:static flex items-center pb-2 w-0 lg:w-full">
                 
                 <div className="flex items-center w-full">
                     <div className="rounded-full h-32 w-32 bg-center bg-contain m-2 bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
