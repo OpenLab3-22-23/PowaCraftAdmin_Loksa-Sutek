@@ -1092,7 +1092,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
   
 
-                <div className="">
+                <div>
                     <div className="flex justify-end items-stretch right-10 pr-10">
                         <button className="text-2xl text-white hover:text-gray-300 text-center pr-3" onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
                         <img src="assets/settings_icon.png" className="w-20 h-20 rounded-full cursor-pointer" onClick={() => setPanelSettingsShown(true)}></img>
@@ -1107,7 +1107,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div>
 
         
-            <div className="invisible absolute lg:visible lg:static flex md:w-full h-3/4 gap-7 justify-center w-0 lg:w-full">
+            <div className="invisible absolute lg:visible lg:static flex lg:w-full h-3/4 gap-7 justify-center w-0 lg:w-full">
                 <div className="bg-zinc-700/80 rounded-lg flex flex-col w-4/12">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
@@ -1176,7 +1176,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
             </div>
             
-{/** ### MOBILE HTML ### **/}
+{/** MOBILE HTML **/}
             <div className="lg:invisible lg:fixed">
                 <div className="flex content-center items-stretch p-2 w-full">
                     <div className="flex w-screen">
@@ -1259,6 +1259,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </button>
                     </div>
                 </div>
+                <div className="h-4"></div>
             </div>
         </div>
     )

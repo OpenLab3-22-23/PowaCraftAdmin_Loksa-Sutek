@@ -31,7 +31,7 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
               {getPermissionLevel(user.rank) == 1 ? (
                 <div className="items-center flex bg-white rounded-2xl box-content h-12 w-1/4 lg:justify-center mx-1 lg:mx-2">
                   <div className="truncate">
-                    <a className="text-2xl text-black">{user.username}</a>
+                    <a className="text-2xl text-black pl-2">{user.username}</a>
                   </div>
                 </div>
               ) : (
