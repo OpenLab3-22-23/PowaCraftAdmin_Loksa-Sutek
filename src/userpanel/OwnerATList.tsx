@@ -35,9 +35,9 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
                   </div>
                 </div>
               ) : (
-                <div className="items-center flex bg-white border-2 border-yellow-600 rounded-2xl box-content h-12 justify-center w-full mx-2">
+                <div className="items-center flex bg-white border-2 border-yellow-600 rounded-2xl box-content h-12 justify-center w-full min-w-48 mx-2">
                   <div className="mx-6">
-                    <a className="text-2xl text-black">{user.username}</a>
+                    <a className="text-2xl text-black truncate">{user.username}</a>
                   </div>
                 </div>
               )}
@@ -46,14 +46,14 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
               {getPermissionLevel(user.rank) == 1 ? (
                 <button 
                   onClick={() => changeRank(user.id)}
-                  className="items-center flex bg-gray-800 border-slate-500 border-2 rounded-2xl box-content h-12 lg:justify-center w-1/3 lg-2/3 mx-1 lg:mx-2 truncate md:text-clip invisible absolute lg:visible lg:static">
+                  className="items-center flex bg-gray-800 border-slate-500 border-2 rounded-2xl box-content h-12 lg:justify-center w-full lg:w-2/3 mx-1 lg:mx-2 truncate md:text-clip invisible absolute lg:visible lg:static">
                   <div className="mx-1 lg:mx-6 text-2xl">
                     <WriteUserRank rank={user.rank} rankList={rankList} />
                   </div>
                 </button>
               ) : getPermissionLevel(user.rank) == 4 ? (
               <div className="items-center flex bg-white border-2 border-yellow-600 rounded-2xl box-content h-12 justify-center w-1/3 mx-2">
-                <div className="mx-6 text-2xl">
+                <div className="mx-1 lg:mx-6 text-2xl">
                   <WriteUserRank rank={user.rank} rankList={rankList} />
                 </div>
               </div>  
@@ -77,7 +77,7 @@ export default function OwnerATList({response, addPlusPoint, addMinusPoint, chan
               )}
       
               {(getPermissionLevel(user.rank) == 1) && (
-                <div className="items-center flex bg-white rounded-2xl box-content h-12 justify-center w-1/12 mx-1 lg:mx-2">
+                <div className="items-center flex bg-white rounded-2xl box-content h-12 min-w-10 justify-center w-1/12 mx-1 lg:mx-2">
                   <div className="mx-6">
                     <a className="text-red-600 text-2xl">-{user.minus}</a>
                   </div>

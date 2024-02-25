@@ -1236,7 +1236,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>
                         <div className="h-0.5 bg-cyan-400 mb-4 "></div>
                     </div>
-                    <div className="w-full overflow-auto">
+                    <div className="w-full">
                         {allUsersResponse ? 
                             <OwnerATList 
                             response={allUsersResponse}  
