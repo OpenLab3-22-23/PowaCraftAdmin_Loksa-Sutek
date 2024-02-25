@@ -1050,7 +1050,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
 /** ### PC HTML ### **/ 
     return (
-        <div className=" h-max lg:h-screen w-screen bg-no-repeat bg-fixed bg-cover" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}>
+        <div className=" h-max lg:h-screen w-screen bg-repeat bg-fixed bg-cover" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}>
 
             {addQuestShown && <div className="z-10 w-full h-full absolute">
                 <AddQuest show={addQuestShown}/>
