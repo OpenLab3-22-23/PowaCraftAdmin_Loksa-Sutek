@@ -1177,7 +1177,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div>
             
 {/** MOBILE HTML **/}
-            <div className="lg:invisible lg:fixed">
+            <div className="lg:invisible lg:fixed pb-5">
                 <div className="flex content-center items-stretch p-2 w-full">
                     <div className="flex w-screen">
                         <img src="assets/settings_icon.png" className="w-16 h-16 rounded-full" onClick={() => setPanelSettingsShown(true)}></img>
@@ -1259,7 +1259,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </button>
                     </div>
                 </div>
-                <div className="h-4"></div>
             </div>
         </div>
     )
