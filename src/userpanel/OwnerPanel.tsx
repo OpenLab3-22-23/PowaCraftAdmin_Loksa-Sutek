@@ -1112,7 +1112,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 px-2 justify-center border-slate-500 border-2 text-white">
-                            <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-full">
+                            <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-12">
                                 {t("ownerpanel.questlist.addquest")}
                             </button>
                         </div>                     
@@ -1125,7 +1125,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>
 
                         <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 justify-center border-slate-500 border-2 text-white">
-                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-full">
+                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-12">
                             {t("ownerpanel.questlist.remquest")}
                             </button>
                         </div>

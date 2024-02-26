@@ -398,8 +398,8 @@ export default function LandingPage( {userData} ): JSX.Element {
                         <div className="bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400">
                             <a className="text-red-500 text-2xl">-{minusPoints}</a>
                         </div> 
-                        <img src={languageIconSource} className="w-14 h-14 cursor-pointer" onClick={changeLanguage}></img>   
                     </div>
+                    <img src={languageIconSource} className="w-14 h-14 cursor-pointer mr-5" onClick={changeLanguage}></img>   
 
                     <div className="inline-block">
                         <div className="flex justify-end items-stretch m-2">
