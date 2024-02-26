@@ -298,7 +298,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <button 
                     onClick={saveMinusPoints} 
-                    className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">
+                    className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
                     {t("ownerpanel.addminus.add")}
                 </button>
             </div>      
@@ -348,7 +348,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <button 
                     onClick={changeUserRank} 
-                    className="border border-white/50 border-2 bg-red-600 p-4 rounded-2xl text-white/80 m-3">
+                    className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
                     {t("ownerpanel.changerank.change")}
                 </button>
             </div>      
@@ -565,7 +565,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                 {pointsList.map((point, index) => (
                                     point.points < 0 ? (
                                         <option key={point.id} value={point.id} className="text-red-600">
-                                            {index + ". "} {point.action_name} | {Math.abs(point.points)}-
+                                            {point.id + ". "} {point.action_name} | {Math.abs(point.points)}-
                                         </option>
                                     ) : null
                                 ))}
@@ -667,6 +667,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         const { data } = await supabase
             .from('ranks')
             .select()
+            .order('permissionLevel', { ascending: false})
             .order('id', { ascending: true })
             setRankList(data);
     }
@@ -742,6 +743,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             if (data) {
                 setPointsList(data);
+                const plusPointList = data.filter(point => point.points > 0);
+                const minusPointList = data.filter(point => point.points < 0);
+                setAddPlusTask(plusPointList[0].id)        
+                setAddMinusTask(minusPointList[0].id)
             }
     }      
 
@@ -917,8 +922,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .from('points_list')
             .insert({action_name: settings_newAction.current.value, points: settings_newActionPoints.current.value })
             fetchPointsList();
-            settings_setNewAction("");
-            settings_setNewActionPoints();
 
             if (error) {
                 showNotification(true);
@@ -939,7 +942,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .delete()
             .eq('id', settings_actionToRemove.current.value)
             fetchPointsList();
-            settings_setActionToRemove();
 
             if (error) {
                 showNotification(true);
@@ -994,7 +996,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
         const { } = await supabase
         .from('profiles')
-        .update({plus: partialData[0].plus + pointsList[addPlusTask].points, last_point1: addPlusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
+        .update({plus: partialData[0].plus + pointsList[pointsList.findIndex(point => point.id == addPlusTask)].points, last_point1: addPlusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
         .eq('id', activeUserID)
         closeAddPlusTab();
         fetchAllUsers();
@@ -1013,7 +1015,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
         const { } = await supabase
         .from('profiles')
-        .update({minus: partialData[0].minus - pointsList[addMinusTask].points, last_point1: addMinusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
+        .update({minus: partialData[0].minus + pointsList[pointsList.findIndex(point => point.id == addMinusTask)].points, last_point1: addMinusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
         .eq('id', activeUserID)
         closeAddMinusTab();
         fetchAllUsers();
