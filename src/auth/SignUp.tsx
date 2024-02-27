@@ -95,7 +95,7 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-screen flex justify-center bg-fixed pb-3 bg-cover" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="w-full h-screen flex justify-center bg-fixed pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
       <div className="absolute top-5 left-5 sm:top-10 sm:left-10">
         <Link to="/login" className="inline-block flex items-center gap-4 content-center">
@@ -107,7 +107,7 @@ export default function SignUp() {
       <a className=" absolute top-6 right-5 sm:top-11 sm:right-10 cursor-pointer text-2xl text-white" onClick={changeLanguage}>{language}</a>
 
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
-      <img className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative bg-contain bg-no-repeat h-56 w-56" style={{ backgroundImage: `url(${logo})` }}></img>
+      <img className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative bg-contain bg-no-repeat mt-5 h-48 w-48 bg-center" style={{ backgroundImage: `url(${logo})` }}></img>
         <h2 className="text-5xl lg:text-7xl text-white text-center xl:mt-0 lg:mt-16 mt-32">{t("register.header")}</h2>
         <h3 className="text-3xl lg:text-5xl text-amber-400">{t("register.subheader")}</h3>
         <div className="lg:grid lg:grid-cols-2 gap-36 text-center mt-6">
