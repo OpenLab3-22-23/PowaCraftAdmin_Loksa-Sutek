@@ -59,7 +59,7 @@ export default function LogIn() {
   }
   
   return !session? (
-    <div className="w-full h-screen flex flex-col justify-center bg-fixed bg-no-repeat" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="w-full h-screen flex flex-col justify-center bg-fixed bg-no-repeat bg-cover" style={{ backgroundImage: `url(${backgroundImage})` }}>
       
       <div className="absolute top-10 left-10">
         <a className="inline-block flex items-center gap-4" href="https://powacraft.eu/">
