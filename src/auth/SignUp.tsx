@@ -95,16 +95,16 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-screen flex justify-center bg-fixed pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="w-full h-screen flex justify-center bg-fixed pb-3 bg-cover" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
-      <div className="absolute top-10 left-10">
-        <Link to="/login" className="inline-block flex items-center gap-4">
+      <div className="absolute top-5 left-5 sm:top-10 sm:left-10">
+        <Link to="/login" className="inline-block flex items-center gap-4 content-center">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>
           <span className="text-white text-4xl">{t("register.back")}</span>
         </Link>
       </div>
 
-      <a className="w-14 h-14 absolute top-10 right-10 cursor-pointer text-2xl text-white" onClick={changeLanguage}>{language}</a>
+      <a className=" absolute top-6 right-5 sm:top-11 sm:right-10 cursor-pointer text-2xl text-white" onClick={changeLanguage}>{language}</a>
 
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <img className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative bg-contain bg-no-repeat mt-9 min-h-56 min-w-56" style={{ backgroundImage: `url(${logo})` }}></img>
