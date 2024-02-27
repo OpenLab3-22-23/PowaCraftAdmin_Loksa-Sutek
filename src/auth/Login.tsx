@@ -71,7 +71,7 @@ export default function LogIn() {
       <a onClick={changeLanguage} className="w-14 h-14 absolute top-10 right-10 text-2xl text-white cursor-pointer" >{language}</a>
 
       <form onSubmit={handleLogIn} className="flex flex-col items-center">
-      <img className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative bg-contain bg-no-repeat min-h-56 min-w-56" style={{ backgroundImage: `url(${logo})` }}></img>
+      <img className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative bg-contain bg-no-repeat h-56 w-56" style={{ backgroundImage: `url(${logo})` }}></img>
         <h2 className="text-5xl lg:text-7xl text-white text-center lg:mt-0 mt-32">{t("login.header")}</h2>
         <h3 className="text-3xl lg:text-5xl text-amber-400">{t("login.subheader")}</h3><br/><br/>
   
