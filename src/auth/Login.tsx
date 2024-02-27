@@ -99,7 +99,7 @@ export default function LogIn() {
         <input
           type="submit"
           value={t("login.login")}
-          className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-400/80"
+          className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-4 text-2xl hover:bg-green-400/80 cursor-pointer"
         />
         <Link to="/signup" className="text-white hover:text-gray-300 text-2xl">{t("login.register")}</Link>
       </form>
