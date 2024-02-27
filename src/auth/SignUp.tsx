@@ -95,7 +95,7 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-max lg:h-screen flex justify-center bg-fixed bg-no-repeat pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="w-full h-screen flex justify-center bg-fixed pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
       <div className="absolute top-10 left-10">
         <Link to="/login" className="inline-block flex items-center gap-4">
@@ -162,7 +162,7 @@ export default function SignUp() {
           />
           <Link to="/login" className="text-white hover:text-gray-300 text-2xl mb-3">{t("register.login")}</Link>
 
-          <a className="text-white text-4xl text-center border-4 border-red-700 pb-1 px-2">{t("register.warning")}</a>
+          <a className="text-white text-4xl text-center border-4 border-red-700 pb-1 px-2 invisible sm:visible absolute sm:relative">{t("register.warning")}</a>
       </form>
     </div>
   ) : (
