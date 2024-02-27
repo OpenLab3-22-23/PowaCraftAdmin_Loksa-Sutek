@@ -157,10 +157,10 @@ export default function SignUp() {
             id="submitbtn"
             type="submit"
             value={t("register.register")}
-            className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-3 text-2xl hover:bg-green-400/80 disabled:bg-green-600/40 disabled:text-black/40"
+            className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-3 text-2xl hover:bg-green-400/80 disabled:bg-green-600/40 disabled:text-black/40 cursor-pointer"
             disabled={password != correct || password == ""}
           />
-          <Link to="/login" className="text-white hover:text-gray-300 text-2xl mb-3 cursor-pointer">{t("register.login")}</Link>
+          <Link to="/login" className="text-white hover:text-gray-300 text-2xl mb-3">{t("register.login")}</Link>
 
           <a className="text-white text-4xl text-center border-4 border-red-700 pb-1 px-2">{t("register.warning")}</a>
       </form>
