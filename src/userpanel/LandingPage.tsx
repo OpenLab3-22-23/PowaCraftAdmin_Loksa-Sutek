@@ -396,7 +396,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <a className="text-green-500 text-2xl">+{plusPoints}</a> 
                         </div>
                         <div className="bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400">
-                            <a className="text-red-500 text-2xl">-{minusPoints}</a>
+                            <a className="text-red-500 text-2xl">{minusPoints}</a>
                         </div> 
                     </div>
                     <img src={languageIconSource} className="w-14 h-14 cursor-pointer mr-5" onClick={changeLanguage}></img>   
