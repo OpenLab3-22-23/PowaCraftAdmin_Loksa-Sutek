@@ -48,7 +48,7 @@ export default function ATList({response, rankList}) {
 
                         <div className="invisible absolute lg:visible lg:static items-center justify-center flex bg-white rounded-2xl box-content h-12 w-14 overflow-hidden ml-2">
                             <div>
-                                <a className="text-red-600 text-2xl">-{user.minus}</a>
+                                <a className="text-red-600 text-2xl">{user.minus}</a>
                             </div>
                         </div>  
                     </div>
