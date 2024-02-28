@@ -388,7 +388,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
                     </div>
                 <div className="flex items-center absolute lg:static">
-                    <div className=" h-20 items-center space-x-6 mr-12 pr-6" style={{ display: isHelper ? "flex" : "none" }}>
+                    <div className=" h-20 items-center space-x-6 mr-12 pr-6 w-0 lg:w-full" style={{ display: isHelper ? "flex" : "none" }}>
                         <div className="bg-white rounded-full flex justify-center items-center w-48 h-12 border-4 border-gray-400">
                             <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                         </div>
@@ -401,7 +401,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     </div>
                     <img src={languageIconSource} className="w-14 h-14 cursor-pointer mr-5" onClick={changeLanguage}></img>   
 
-                    <div className="inline-block">
+                    <div className="inline-block absolute">
                         <div className="flex justify-end items-stretch m-2">
                             <button className="text-2xl text-white hover:text-gray-300 text-center pr-3" onClick={handleLogOut}>{t("userpanel.logout")}</button>
                             <div className="flex w-5"></div>
