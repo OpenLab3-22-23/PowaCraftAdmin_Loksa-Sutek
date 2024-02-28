@@ -383,7 +383,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                     <div className="flex flex-col md:flex-row md:items-center gap-2 justify-between md:w-5/6 lg:w-4/5">
                         <div className="flex items-center gap-2">
                             <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full hidden sm:max-lg:block"></img>
-                            <div className="h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center lg:hidden text-center px-5">
+                            <div className="h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center lg:hidden text-center px-5 ml-5">
                                 <WriteUserRank rank={rank} rankList={rankList} />
                             </div>
                             <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat hidden lg:block" style={{ backgroundImage: `url(${logo})` }}></div>
