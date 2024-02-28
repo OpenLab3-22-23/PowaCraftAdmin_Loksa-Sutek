@@ -5,7 +5,7 @@ export default function WriteLastPoints({actionName, points}) {
     if (points > 0) {
         return(
 
-            <div className="w-full flex inline-block pb-2 gap-2 h-1/4 justify-center items-center">
+            <div className="w-full flex inline-block pb-2 px-2 gap-2 h-1/4 justify-center items-center">
                 <div className="flex bg-white rounded-lg w-full h-full justify-center items-center">
                     <a className="text-xl">{actionName}</a>
                 </div>
@@ -17,7 +17,7 @@ export default function WriteLastPoints({actionName, points}) {
     } else {
         return(
 
-            <div className="w-full flex inline-block pb-2 gap-2 h-1/4 justify-center items-center">
+            <div className="w-full flex inline-block pb-2 px-2 gap-2 h-1/4 justify-center items-center">
                 <div className="flex bg-white rounded-lg w-full h-full justify-center items-center">
                     <a className="text-xl">{actionName}</a>
                 </div>
