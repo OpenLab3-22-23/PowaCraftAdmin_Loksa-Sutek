@@ -95,7 +95,7 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-screen flex justify-center bg-fixed pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="w-full h-full sm:h-screen flex justify-center bg-fixed pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
       <div className="absolute top-5 left-5 sm:top-10 sm:left-10">
         <Link to="/login" className="inline-block flex items-center gap-4 content-center">
