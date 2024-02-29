@@ -379,11 +379,11 @@ export default function LandingPage( {userData} ): JSX.Element {
 
             <div className="static w-full">
                 
-                <div className="flex items-center sm:max-md:items-start justify-between py-2 w-full h-fit"> 
+                <div className="flex items-center sm:max-md:items-start justify-evenly sm:justify-between py-2 w-full h-fit"> 
                     <div className="flex flex-col md:flex-row md:items-center gap-2 justify-between md:w-5/6 lg:w-4/5">
                         <div className="flex items-center gap-2">
                             <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full hidden sm:max-lg:block"></img>
-                            <div className="h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center lg:hidden text-center px-5 ml-5">
+                            <div className="h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center lg:hidden text-center px-5">
                                 <WriteUserRank rank={rank} rankList={rankList} />
                             </div>
                             <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat hidden lg:block" style={{ backgroundImage: `url(${logo})` }}></div>
@@ -404,7 +404,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                             </div> 
                         </div>
                     </div>
-                    <div className="flex items-center gap-5 px-2 pr-8">
+                    <div className="flex items-center gap-5 px-2 sm:pr-8">
                         <img src={languageIconSource} className="w-14 h-14 cursor-pointer" onClick={changeLanguage}></img>
                         <div className="flex lg:flex-col items-center">
                             <div className="flex gap-5">
@@ -428,8 +428,8 @@ export default function LandingPage( {userData} ): JSX.Element {
                     {/** Task list **/}
                         <div className="lg:w-full h-1/2 lg:h-4/6 bg-zinc-700/80 rounded-lg flex flex-col mx-2 lg:ml-5">
                             <div className="inline-block flex items-center justify-between p-4">
-                                <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-3/4 sm:h-full justify-center">
-                                    <button onClick={() => setAddQuestOpened(true)} className="box-content w-full h-full">
+                                <div className="flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center">
+                                    <button onClick={() => setAddQuestOpened(true)} className="box-content w-full h-full px-2">
                                         {t("userpanel.questlist.addquest")}
                                     </button>
                                 </div>
@@ -438,10 +438,10 @@ export default function LandingPage( {userData} ): JSX.Element {
                                         {t("userpanel.questlist.header")}
                                     </a>
                                 </div>
-                                <div className="flex bg-white hover:bg-gray-300 rounded-lg w-1/5 h-2/3 sm:h-full justify-center">
+                                <div className="flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center">
                                     <button 
                                         onClick={() => setDeleteShown(!deleteShown)} 
-                                        className="box-content w-full h-1/2h-full disabled:bg-gray-600/60 disabled:text-white/60" 
+                                        className="box-content w-full disabled:bg-gray-600/60 disabled:text-white/60 px-2" 
                                         disabled = { isHelper }>
                                         {t("userpanel.questlist.remquest")}
                                     </button>
