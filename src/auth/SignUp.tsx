@@ -95,20 +95,20 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-full sm:h-screen flex justify-center bg-fixed pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="w-full h-screen sm:h-full sm:h-screen flex flex-col justify-center items-center bg-fixed pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
-      <div className="absolute top-5 left-5 sm:top-10 sm:left-10">
+      <div id="slidefromleft" className="absolute top-5 left-5 sm:top-10 sm:left-10">
         <Link to="/login" className="inline-block flex items-center gap-4 content-center">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>
           <span className="text-white text-4xl">{t("register.back")}</span>
         </Link>
       </div>
 
-      <a className=" absolute top-6 right-5 sm:top-11 sm:right-10 cursor-pointer text-2xl text-white" onClick={changeLanguage}>{language}</a>
+      <a id="slidefromright" className="animate absolute top-6 right-5 sm:top-11 sm:right-10 cursor-pointer text-2xl text-white hover:text-gray-300" onClick={changeLanguage}>{language}</a>
 
-      <form onSubmit={handleSubmit} className="flex flex-col items-center">
+      <form id="slidefromtop" onSubmit={handleSubmit} className="flex flex-col items-center">
       <img className="xl:rounded-full xl:border-4 xl:border-amber-400 invisible xl:visible absolute xl:relative bg-contain bg-no-repeat mt-5 h-48 w-48 bg-center" style={{ backgroundImage: `url(${logo})` }}></img>
-        <h2 className="text-5xl lg:text-7xl text-white text-center xl:mt-0 lg:mt-16 mt-32">{t("register.header")}</h2>
+        <h2 className="text-5xl lg:text-7xl text-white text-center xl:mt-0 lg:mt-16 mt-28">{t("register.header")}</h2>
         <h3 className="text-3xl lg:text-5xl text-amber-400">{t("register.subheader")}</h3>
         <div className="lg:grid lg:grid-cols-2 gap-36 text-center mt-6">
           <div>
@@ -157,13 +157,13 @@ export default function SignUp() {
             id="submitbtn"
             type="submit"
             value={t("register.register")}
-            className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-3 text-2xl hover:bg-green-400/80 disabled:bg-green-600/40 disabled:text-black/40 cursor-pointer"
+            className="w-52 rounded-full bg-green-600/80 px-2 py-1 my-3 text-2xl hover:bg-green-700/80 disabled:bg-green-600/40 disabled:text-black/40 cursor-pointer"
             disabled={password != correct || password == ""}
           />
-          <Link to="/login" className="text-white hover:text-gray-300 text-2xl mb-3">{t("register.login")}</Link>
+          <Link to="/login" className="animate text-white hover:text-gray-300 text-2xl mb-3">{t("register.login")}</Link>
 
-          <a className="text-white text-4xl text-center border-4 border-red-700 pb-1 px-2 invisible sm:visible absolute sm:relative">{t("register.warning")}</a>
       </form>
+        <a id="slidefrombottom" className="text-white w-fit text-4xl text-center border-4 border-red-700 pb-1 px-2 hidden md:block">{t("register.warning")}</a>
     </div>
   ) : (
     <Navigate to="/" />

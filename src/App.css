@@ -3,7 +3,10 @@
 html {
     font-family: 'K2D', sans-serif;
 }
-button{
+button, input,Link{
+  transition: all 1s ease;
+}
+.animate{
   transition: all 1s ease;
 }
 #slidefromright{
