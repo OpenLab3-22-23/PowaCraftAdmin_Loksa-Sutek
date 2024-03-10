@@ -95,10 +95,10 @@ export default function SignUp() {
   }
 
   return !session ? (
-    <div className="w-full h-screen sm:h-full sm:h-screen flex flex-col justify-center items-center bg-fixed pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div id="signup" className="w-full h-screen sm:h-full sm:h-screen flex flex-col justify-center items-center bg-fixed pb-3 bg-cover bg-center" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
       <div id="slidefromleft" className="absolute top-5 left-5 sm:top-10 sm:left-10">
-        <Link to="/login" className="inline-block flex items-center gap-4 content-center">
+        <Link id="arrowbox" to="/login" className="inline-block flex items-center gap-4 content-center">
           <img src="/assets/arrow.png" className="w-10 h-10"></img>
           <span className="text-white text-4xl">{t("register.back")}</span>
         </Link>

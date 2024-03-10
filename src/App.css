@@ -30,6 +30,18 @@ button, input,Link{
 #closebtn{
   animation: showin 2s;
 }
+#login #slidefromleft a img{
+  transition: all 1s ease;
+}
+#login #slidefromleft a:hover img{
+  transform: translateX(-20%);
+}
+#signup #slidefromleft #arrowbox img{
+  transition: all 1s ease;
+}
+#signup #slidefromleft #arrowbox:hover img{
+  transform: translateX(-20%);
+}
 
 @keyframes fromright {
   from {
