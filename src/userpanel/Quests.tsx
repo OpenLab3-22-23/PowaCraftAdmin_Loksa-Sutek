@@ -70,6 +70,7 @@ export default function WriteQuests({questList, deleteShown, onDelete, username,
                     <a className="text-green-600 text-2xl">+{quest.points}</a>
                 </div>
                 <button 
+                    id="deletebtn"
                     onClick={() => deleteQuest(quest.id) } 
                     style={{ display: deleteShown ? "block" : "none" }} 
                     className="bg-red-500 hover:bg-red-500/70 w-12 h-12 rounded-lg text-white mr-4 text-2xl hidden">X</button>

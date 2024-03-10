@@ -101,11 +101,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+            <div id="popup" className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addquest.header")}</a>
-                    <button onClick={() => closeQuestTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button id="closebtn" onClick={() => closeQuestTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addquest.questdesc")}</a>
@@ -155,10 +155,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div id="popup" className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addaccount.header")}</a>
-                    <button onClick={() => closeAddAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button id="closebtn" onClick={() => closeAddAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addaccount.useremail")}</a>
@@ -191,10 +191,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col w-full h-screen bg-black/80">      
-            <div className="w-4/5 xl:w-3/5 2xl:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div id="popup" className="w-4/5 xl:w-3/5 2xl:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a>
-                    <button onClick={() => closeDeleteAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button id="closebtn" onClick={() => closeDeleteAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <div className="flex flex-col h-full justify-center items-center pb-12">
@@ -232,11 +232,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+            <div id="popup" className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white text-center w-4/5">{t("ownerpanel.addplus.header")}</a>
-                    <button onClick={() => closeAddPlusTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button id="closebtn" onClick={() => closeAddPlusTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addplus.questname")}</a>
@@ -275,34 +275,34 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+                <div id="popup" className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
-                <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white text-center w-4/5">{t("ownerpanel.addminus.header")}</a>
-                    <button onClick={() => closeAddMinusTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
-                </div>
+                    <div className="inline-block flex relative w-full justify-center pb-5">
+                        <a className="text-3xl text-white text-center w-4/5">{t("ownerpanel.addminus.header")}</a>
+                        <button id="closebtn" onClick={() => closeAddMinusTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    </div>
 
-                <a className="text-white text-xl pb-2">{t("ownerpanel.addminus.questname")}</a>
-                <select
-                    value={addMinusTask}
-                    onChange={(e) => setAddMinusTask(e.target.value)} 
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center truncate">
-                    {pointsList.map((point) => (
-                        point.points < 0 ? (
-                            <option key={point.id} value={point.id}>
-                                {point.action_name} | {Math.abs(point.points)}-
-                            </option>
-                        ) : null
-                    ))}
-                </select>
+                    <a className="text-white text-xl pb-2">{t("ownerpanel.addminus.questname")}</a>
+                    <select
+                        value={addMinusTask}
+                        onChange={(e) => setAddMinusTask(e.target.value)} 
+                        className="border border-green-300 rounded-2xl w-4/5 h-11 text-center truncate">
+                        {pointsList.map((point) => (
+                            point.points < 0 ? (
+                                <option key={point.id} value={point.id}>
+                                    {point.action_name} | {Math.abs(point.points)}-
+                                </option>
+                            ) : null
+                        ))}
+                    </select>
 
-                <button 
-                    onClick={saveMinusPoints} 
-                    className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
-                    {t("ownerpanel.addminus.add")}
-                </button>
-            </div>      
-        </div>
+                    <button 
+                        onClick={saveMinusPoints} 
+                        className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
+                        {t("ownerpanel.addminus.add")}
+                    </button>
+                </div>      
+            </div>
         )
     } 
     
@@ -318,41 +318,41 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+                <div id="popup" className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
-                <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("ownerpanel.changerank.header")}</a>
-                    <button onClick={() => closeChangeRankTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
-                </div>
+                    <div className="inline-block flex relative w-full justify-center pb-5">
+                        <a className="text-3xl text-white">{t("ownerpanel.changerank.header")}</a>
+                        <button id="closebtn" onClick={() => closeChangeRankTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    </div>
 
-                <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.newrank")}</a>
-                <select
-                    value={newUserRank}
-                    onChange={(e) => setNewUserRank(e.target.value)} 
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center">
+                    <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.newrank")}</a>
+                    <select
+                        value={newUserRank}
+                        onChange={(e) => setNewUserRank(e.target.value)} 
+                        className="border border-green-300 rounded-2xl w-4/5 h-11 text-center">
 
-                    {rankList.map((rank, index) => (
-                        <option key={index} value={rank.rank}>
-                            {rank.rank}
-                        </option>
-                    ))}
-                </select>
+                        {rankList.map((rank, index) => (
+                            <option key={index} value={rank.rank}>
+                                {rank.rank}
+                            </option>
+                        ))}
+                    </select>
 
-                <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.resetpoints")}</a>
-                <input 
-                    checked={shouldResetPoints}
-                    type="checkbox" 
-                    className="border border-green-300 rounded-2xl h-10 w-10"
-                    onChange={(e) => setShouldResetPoints(e.target.checked)}>
-                </input>
+                    <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.resetpoints")}</a>
+                    <input 
+                        checked={shouldResetPoints}
+                        type="checkbox" 
+                        className="border border-green-300 rounded-2xl h-10 w-10"
+                        onChange={(e) => setShouldResetPoints(e.target.checked)}>
+                    </input>
 
-                <button 
-                    onClick={changeUserRank} 
-                    className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
-                    {t("ownerpanel.changerank.change")}
-                </button>
-            </div>      
-        </div>
+                    <button 
+                        onClick={changeUserRank} 
+                        className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
+                        {t("ownerpanel.changerank.change")}
+                    </button>
+                </div>      
+            </div>
         )
     } 
 
@@ -364,18 +364,21 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const PanelSettings = props => {
         window.scrollTo({top: 0, behavior: 'smooth'});
         document.body.classList.add('overflow-hidden');
+        document.getElementById('settings')?.style.opacity(1);
         if (!props.show) {
             return null;
         }
         return (
-            <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80 ">      
-                <div className="w-3/4 md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
+            <div  className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
+                <div id="popup" className="w-3/4 md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
-                                <a className="text-4xl text-white text-center">{t("ownerpanel.settings.panel.header")}</a>
+                                <a className="text-4xl text-white text-center mx-10">{t("ownerpanel.settings.panel.header")}</a>
                             </div> 
-                            <div className="absolute w-full md:w-1/2 py-2 mr-2 md:mr-6 z-50">
-                                <button onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl w-full text-end">X</button>                                
+                            <div className="absolute w-9/12 md:w-1/2 py-2 z-50">
+                                <div className="flex justify-end transition duration-500 mr-2">
+                                    <button id="closebtn" onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl text-end">X</button>                                
+                                </div>
                             </div>  
                             <a className={`text-white text-xl ${notificationColour}`}>{notification}</a>
                         
@@ -1082,11 +1085,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <PanelSettings show={panelSettingsShown}/>
             </div>}
 
-            <div className="flex items-center p-3 w-full justify-between">
+            <div id="slidefromtop" className="flex items-center p-3 w-full justify-between">
                 
                 <div className="flex items-center w-full hidden sm:flex">
                     <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
-                    <a className="text-4xl text-white">{panelName}</a>
+                    <a className="text-4xl text-white" href="https://powacraft.sk/">{panelName}</a>
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400 ">Admin</a>
                     </div>
@@ -1094,8 +1097,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <img src={languageIconSource} className="w-14 h-14 cursor-pointer mr-4" onClick={changeLanguage}></img>
                 <div className="flex sm:flex-col items-center">
                     <div className="flex flex-row-reverse sm:flex-row justify-between items-center gap-2 sm:gap-0">
-                        <button className="text-2xl text-white hover:text-gray-300 text-center sm:pr-3" onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
-                        <img src="assets/settings_icon.png" className="w-20 h-20 rounded-full cursor-pointer" onClick={() => setPanelSettingsShown(true)}></img>
+                        <button className="text-2xl text-white hover:text-gray-400 text-center sm:pr-3" onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
+                        <img src="assets/settings_icon.png" className="w-20 h-20 rounded-full cursor-pointer transition duration-500 hover:rotate-90 active:rotate-180" onClick={() => setPanelSettingsShown(true)}></img>
                     </div>
 
                     <div className="flex justify-end hidden sm:flex">
@@ -1108,14 +1111,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
         
             <div className="flex flex-col lg:flex-row lg:w-full h-3/4 items-center gap-y-5 lg:justify-evenly pb-5 px-3 sm:px-0">
-                <div className="bg-zinc-700/80 rounded-lg flex flex-col w-full sm:w-3/4 lg:w-4/12 h-1/6 lg:h-full">
+                <div id="slidefromtop" className="bg-zinc-700/80 rounded-lg flex flex-col w-full sm:w-3/4 lg:w-4/12 h-1/6 lg:h-full">
 
                     <div className="inline-block flex items-center justify-between p-4 flex">
-                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 px-2 justify-center border-slate-500 border-2 text-white">
-                            <button onClick={() => setAddQuestVisibility(true)} className="box-content w-full h-12 px-2">
-                                {t("ownerpanel.questlist.addquest")}
-                            </button>
-                        </div>                     
+                        <button onClick={() => setAddQuestVisibility(true)} className="bg-gray-600 hover:bg-gray-700/60 rounded-lg px-2 justify-center border-slate-500 hover:border-slate-400 border-2 text-white sm:h-12">
+                            {t("ownerpanel.questlist.addquest")}
+                        </button>                   
 
                         <div className="flex justify-center">
                             <a 
@@ -1124,14 +1125,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             </a>
                         </div>
 
-                        <div className="flex bg-gray-600 hover:bg-gray-500/60 rounded-lg w-1/5 justify-center border-slate-500 border-2 text-white">
-                            <button onClick={() => setDeleteShown(!deleteShown)} className="box-content w-full h-12 px-2">
-                            {t("ownerpanel.questlist.remquest")}
-                            </button>
-                        </div>
+                        <button onClick={() => setDeleteShown(!deleteShown)} className="bg-gray-600 hover:bg-gray-700/60 hover:border-slate-400 rounded-lg px-2 justify-center border-slate-500 border-2 text-white sm:h-12">
+                        {t("ownerpanel.questlist.remquest")}
+                        </button>
                     </div>
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                    <div className="h-full overflow-auto mb-4">
+                    <div id="slidefrombottom" className="h-full overflow-auto mb-4">
                         {questList ? 
                             <WriteQuests 
                             questList={questList} 
@@ -1144,12 +1143,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div>
 
 
-                <div className="bg-zinc-700/80 rounded-lg flex flex-col w-full sm:w-3/4 lg:w-3/5 h-full">
+                <div id="slidefromtop"  className="bg-zinc-700/80 rounded-lg flex flex-col w-full sm:w-3/4 lg:w-3/5 h-full">
                     <div className="flex justify-center text-center p-4">
                         <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.memberslist.header")}</a>
                     </div>
                     <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                    <div className="w-full overflow-auto h-full">
+                    <div id="slidefrombottom" className="w-full overflow-auto h-full">
                         {allUsersResponse ? 
                             <OwnerATList 
                             response={allUsersResponse} 
@@ -1162,12 +1161,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="flex inline-block pb-5 mt-5 w-full px-4 gap-4 ">
                         <button 
                             onClick={() => setAddAccountVisibility(true)} 
-                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">
+                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-700/60 border-slate-500 hover:border-slate-400 border-2 text-white rounded-lg items-center flex justify-center">
                             {t("ownerpanel.memberslist.addaccount")}
                         </button>
                         <button 
                             onClick={() => setDelAccountVisibility(true)} 
-                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-500/60 border-slate-500 border-2 text-white rounded-lg items-center flex justify-center">
+                            className="box-content h-4 w-8/12 p-4 bg-gray-600 hover:bg-gray-700/60 border-slate-500 hover:border-slate-400 border-2 text-white rounded-lg items-center flex justify-center">
                             {t("ownerpanel.memberslist.delaccount")}
                         </button>
                     </div>

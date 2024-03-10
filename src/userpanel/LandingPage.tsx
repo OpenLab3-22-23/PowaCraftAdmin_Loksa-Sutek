@@ -67,11 +67,11 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="items-center justify-center flex w-full h-screen bg-black/80">      
-            <div className="lg:w-1/3 w-full mx-1 lg:mx-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] lg:p-2 pt-1 border"> 
+            <div id="popup" className="lg:w-1/3 w-full mx-1 lg:mx-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] lg:p-2 pt-1 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("userpanel.addquest.header")}</a>
-                    <button onClick={() => closeAddQuest()} className="absolute right-1 text-white text-4xl">X</button>
+                    <button id="closebtn" onClick={() => closeAddQuest()} className="absolute right-1 text-white text-4xl">X</button>
                 </div>
 
                 <a className="text-white text-xl pb-2">{t("userpanel.addquest.questdesc")}</a>
@@ -119,10 +119,10 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div className="xl:w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] lg:p-2 pt-1 border">      
+            <div id="popup" className="xl:w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] lg:p-2 pt-1 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("userpanel.memberslist.header")}</a><br/>
-                    <button onClick={() => closeMemberList()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <button id="closebtn" onClick={() => closeMemberList()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
                 <div className="pt-5 h-full">
                     {allUsersResponse ? <ATList response={allUsersResponse} rankList={rankList}/> : null}
@@ -140,7 +140,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div id="popup" className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("userpanel.setusername.header")}</a><br/>
@@ -377,7 +377,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <SetUsername show={isSetUsernameOpened}/>
             </div>}
 
-            <div className="static w-full">
+            <div id="slidefromtop" className="static w-full">
                 
                 <div className="flex items-center sm:max-md:items-start justify-evenly sm:justify-between py-2 w-full h-fit"> 
                     <div className="flex flex-col md:flex-row md:items-center gap-2 justify-between md:w-5/6 lg:w-4/5">
@@ -428,27 +428,23 @@ export default function LandingPage( {userData} ): JSX.Element {
                     {/** Task list **/}
                         <div className="lg:w-full h-1/2 lg:h-4/6 bg-zinc-700/80 rounded-lg flex flex-col mx-2 lg:ml-5">
                             <div className="inline-block flex items-center justify-between p-4">
-                                <div className="flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center">
-                                    <button onClick={() => setAddQuestOpened(true)} className="box-content w-full h-full px-2">
+                                    <button onClick={() => setAddQuestOpened(true)} className="flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center items-center px-2">
                                         {t("userpanel.questlist.addquest")}
                                     </button>
-                                </div>
                                 <div className="text-center px-1">
                                     <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600 w-full items-center">
                                         {t("userpanel.questlist.header")}
                                     </a>
                                 </div>
-                                <div className="flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center">
                                     <button 
                                         onClick={() => setDeleteShown(!deleteShown)} 
-                                        className="box-content w-full disabled:bg-gray-600/60 disabled:text-white/60 px-2" 
+                                        className="disabled:bg-gray-600/60 disabled:text-white/60 px-2 flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center items-center" 
                                         disabled = { isHelper }>
                                         {t("userpanel.questlist.remquest")}
                                     </button>
-                                </div>
                             </div>
                             <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                            <div className="overflow-auto mb-4">
+                            <div id="slidefrombottom" className="overflow-auto mb-4">
                                 {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests} username={username} fetchQuests={() => fetchQuestList()} /> : null}
                             </div>
                         </div>
