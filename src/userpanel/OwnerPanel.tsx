@@ -101,7 +101,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div id="popup" className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+            <div id="popup" className="w-full sm:w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addquest.header")}</a>
@@ -155,7 +155,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div id="popup" className="w-4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div id="popup" className="w-full sm:4/5 lg:w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.addaccount.header")}</a>
                     <button id="closebtn" onClick={() => closeAddAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -191,7 +191,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col w-full h-screen bg-black/80">      
-            <div id="popup" className="w-4/5 xl:w-3/5 2xl:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div id="popup" className="w-full sm:4/5 xl:w-3/5 2xl:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("ownerpanel.delaccount.header")}</a>
                     <button id="closebtn" onClick={() => closeDeleteAccountTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
@@ -370,12 +370,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
             <div  className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-                <div id="popup" className="w-3/4 md:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
+                <div id="popup" className="w-full sm:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
                                 <a className="text-4xl text-white text-center mx-10">{t("ownerpanel.settings.panel.header")}</a>
                             </div> 
-                            <div className="absolute w-9/12 md:w-1/2 py-2 z-50">
+                            <div className="absolute w-full sm:w-1/2 py-2 z-50">
                                 <div className="flex justify-end transition duration-500 mr-2">
                                     <button id="closebtn" onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl text-end">X</button>                                
                                 </div>
