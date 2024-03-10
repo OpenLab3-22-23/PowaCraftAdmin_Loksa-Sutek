@@ -60,7 +60,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         document.body.classList.remove('overflow-hidden');
     }
     const AddQuest = props => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0, 0);
         document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
@@ -112,7 +112,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         document.body.classList.remove('overflow-hidden');
     }
     const MembersList = props => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0, 0);
         document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
@@ -133,7 +133,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     }
 
     const SetUsername = props => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0, 0);
         document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
