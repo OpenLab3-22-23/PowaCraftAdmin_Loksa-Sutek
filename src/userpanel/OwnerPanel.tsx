@@ -94,7 +94,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         document.body.classList.remove('overflow-hidden');
     }
     const AddQuest = props => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0, 0);
         document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
@@ -148,7 +148,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         document.body.classList.remove('overflow-hidden');
     }
     const AddAccount = props => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0, 0);
         document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
@@ -184,7 +184,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         document.body.classList.remove('overflow-hidden');
     }
     const DeleteAccount = props => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0, 0);
         document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
@@ -225,7 +225,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         document.body.classList.remove('overflow-hidden');
     }
     const AddPlus = props => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0, 0);
         document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
@@ -268,7 +268,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         document.body.classList.remove('overflow-hidden');
     }
     const AddMinus = props => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0, 0);
         document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
@@ -311,7 +311,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         document.body.classList.remove('overflow-hidden');
     }
     const ChangeRank = props => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        window.scrollTo(0, 0);
         document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
