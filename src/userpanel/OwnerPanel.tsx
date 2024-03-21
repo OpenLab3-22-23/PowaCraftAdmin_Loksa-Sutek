@@ -71,7 +71,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const settings_newRankColour = useRef();   
     const settings_newRankPermissionLevel = useRef();   
     const settings_rankToRemove = useRef();   
-    const settings_newAction = useRef();
+    const settings_newAction_sk = useRef();
+    const settings_newAction_en = useRef();
     const settings_newActionPoints = useRef();
     const settings_actionToRemove = useRef();
 
@@ -247,7 +248,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     {pointsList.map((point) => (
                         point.points > 0 ? (
                             <option key={point.id} value={point.id}>
-                                {point.action_name} | {point.points}+
+                                {i18n.language == "sk" ? point.action_name_sk : point.action_name_en} | {point.points}+
                             </option>
                         ) : null
                     ))}
@@ -290,7 +291,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         {pointsList.map((point) => (
                             point.points < 0 ? (
                                 <option key={point.id} value={point.id}>
-                                    {point.action_name} | {Math.abs(point.points)}-
+                                    {i18n.language == "sk" ? point.action_name_sk : point.action_name_en} | {Math.abs(point.points)}-
                                 </option>
                             ) : null
                         ))}
@@ -561,14 +562,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                 {pointsList.map((point) => (
                                     point.points > 0 ? (
                                         <option key={point.id} value={point.id} className="text-green-700">
-                                            {point.id + "."} {point.action_name} | {point.points}+
+                                            {point.id + "."} {i18n.language == "sk" ? point.action_name_sk : point.action_name_en} | {point.points}+
                                         </option>
                                     ) : null
                                 ))}    
                                 {pointsList.map((point, index) => (
                                     point.points < 0 ? (
                                         <option key={point.id} value={point.id} className="text-red-600">
-                                            {point.id + ". "} {point.action_name} | {Math.abs(point.points)}-
+                                            {point.id + ". "} {i18n.language == "sk" ? point.action_name_sk : point.action_name_en} | {Math.abs(point.points)}-
                                         </option>
                                     ) : null
                                 ))}
@@ -576,14 +577,19 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             <div className="border-2 border-amber-500 w-11/12 mb-2"></div>         
                         </div>
             
-                        <div className="flex flex-col items-center w-4/6 gap-y-2">
+                        <div className="flex flex-col w-4/6 items-center gap-y-2">
                             <a className="text-white text-2xl text-center">{t("ownerpanel.settings.pointsettings.addaction")}</a>
-                            <div className="flex gap-2">
                                 <input 
-                                    ref={settings_newAction}
+                                    ref={settings_newAction_sk}
                                     type="text"
-                                    className="border-2 border-amber-400 rounded-2xl w-2/3 text-center" 
-                                    placeholder={t("ownerpanel.settings.pointsettings.addaction_placeholder")}>
+                                    className="border-2 border-amber-400 rounded-2xl text-center w-3/4" 
+                                    placeholder={t("ownerpanel.settings.pointsettings.addaction_placeholder_sk")}>
+                                </input>
+                                <input 
+                                    ref={settings_newAction_en}
+                                    type="text"
+                                    className="border-2 border-amber-400 rounded-2xl text-center w-3/4" 
+                                    placeholder={t("ownerpanel.settings.pointsettings.addaction_placeholder_en")}>
                                 </input>
                                 <input 
                                     ref={settings_newActionPoints}
@@ -592,7 +598,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                     className="border-2 border-amber-400 rounded-2xl w-1/3 text-center" 
                                     placeholder="1, 2 / -1, -2..">
                                 </input>
-                            </div>
                             <button 
                                 onClick={() => addNewAction()} 
                                 className="border-white/50 border-2 rounded-2xl text-white/80 px-2 h-10 w-2/5 xl:w-1/5 bg-green-700 hover:bg-opacity-80 text-white/80 flex items-center justify-center text-xs sm:text-base">
@@ -631,7 +636,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchPanelData();
         fetchRankList();
         fetchQuestList();
-        fetchPointsList();
     }, [])
     useEffect(() => {
         if (rankList != undefined)
@@ -640,6 +644,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             fetchAllUsers();
         }   
     }, [rankList]);
+
 
     /** Panel data **/ 
     const fetchOwnerPanelBackground = async () => {
@@ -692,6 +697,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 else {
                   setLanguageIconSource("/assets/sk.png")
                 }
+                fetchPointsList();
             }
     }
 
@@ -739,6 +745,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }       
 
     const fetchPointsList = async () => {
+        console.log(i18n.language)
         const { data } = await supabase
             .from('points_list')
             .select()

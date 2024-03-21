@@ -169,7 +169,6 @@ export default function LandingPage( {userData} ): JSX.Element {
         fetchLogo();
         fetchPanelData();
         fetchRankList();
-        fetchPointsList();
         fetchQuestList();
     }, [])
     useEffect(() => {
@@ -234,6 +233,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 if(data[0].username == null) {
                     setSetUsernameOpened(true);
                 }
+                fetchPointsList();
             }
     }
 
@@ -455,21 +455,21 @@ export default function LandingPage( {userData} ): JSX.Element {
                                 <a className="text-2xl text-white">{t("userpanel.lastpoints.header")}</a>
                                 <hr/>
                             </div>
-                            {userResponse && pointsList[userResponse[0].last_point1] ? 
+                            {userResponse && pointsList && pointsList[userResponse[0].last_point1] ? 
                                 <WriteLastPoints 
-                                actionName={pointsList[userResponse[0].last_point1].action_name} 
+                                actionName={i18n.language == "sk" ? pointsList[userResponse[0].last_point1].action_name_sk : pointsList[userResponse[0].last_point1].action_name_en} 
                                 points={pointsList[userResponse[0].last_point1].points}/> 
                             : null}
 
-                            {userResponse && pointsList[userResponse[0].last_point2] ? 
+                            {userResponse && pointsList && pointsList[userResponse[0].last_point2] ? 
                                 <WriteLastPoints 
-                                actionName={pointsList[userResponse[0].last_point2].action_name} 
+                                actionName={i18n.language == "sk" ? pointsList[userResponse[0].last_point2].action_name_sk : pointsList[userResponse[0].last_point2].action_name_en} 
                                 points={pointsList[userResponse[0].last_point2].points}/> 
                             : null}
 
-                            {userResponse && pointsList[userResponse[0].last_point3] ? 
+                            {userResponse && pointsList && pointsList[userResponse[0].last_point3] ? 
                                 <WriteLastPoints 
-                                actionName={pointsList[userResponse[0].last_point3].action_name} 
+                                actionName={i18n.language == "sk" ? pointsList[userResponse[0].last_point3].action_name_sk : pointsList[userResponse[0].last_point3].action_name_en} 
                                 points={pointsList[userResponse[0].last_point3].points}/> 
                             : null}                 
                         </div>

@@ -126,7 +126,8 @@
                 "header": "Point settings",   
                 "actionlist": "Action list preview", 
                 "addaction": "Add new action",  
-                "addaction_placeholder": "Action",     
+                "addaction_placeholder_sk": "Action (Slovak)",   
+                "addaction_placeholder_en": "Action (English)",                     
                 "delaction": "Delete action", 
                 "delaction_placeholder": "Action position - from the preview!! (number)"                        
             },
