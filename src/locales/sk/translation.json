@@ -126,7 +126,8 @@
                 "header": "Nastavenia bodovania",   
                 "actionlist": "Ukážka zoznamu akcií", 
                 "addaction": "Pridanie novej akcie",  
-                "addaction_placeholder": "Úloha",     
+                "addaction_placeholder_sk": "Akcia (Slovenský preklad)",   
+                "addaction_placeholder_en": "Akcia (Anglický preklad)",       
                 "delaction": "Zmazanie akcie", 
                 "delaction_placeholder": "Pozícia úlohy - z ukážky úloh!! (číslo)"                        
             },

@@ -927,10 +927,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const addNewAction = async () => {
-        if (settings_newAction.current.value && settings_newActionPoints.current.value) {
+        if (settings_newAction_sk.current.value && settings_newAction_en.current.value && settings_newActionPoints.current.value) {
             const { error } = await supabase
             .from('points_list')
-            .insert({action_name: settings_newAction.current.value, points: settings_newActionPoints.current.value })
+            .insert({action_name_sk: settings_newAction_sk.current.value, action_name_en: settings_newAction_en.current.value, points: settings_newActionPoints.current.value })
             fetchPointsList();
 
             if (error) {
