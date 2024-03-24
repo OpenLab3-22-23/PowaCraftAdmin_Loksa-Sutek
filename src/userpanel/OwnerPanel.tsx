@@ -8,6 +8,7 @@ import WriteUserRank from "./UserRank";
 import OwnerATList from "./OwnerATList";
 import ATList from "./ATList";
 import WriteQuests from "./Quests";
+import ChatMessages from "./ChatMessages";
 
 export default function OwnerPanel( {userData} ): JSX.Element {
     
@@ -58,7 +59,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [addPlusShown, setAddPlusShown] = useState(false);     
     const [addMinusShown, setAddMinusShown] = useState(false);     
     const [changeRankShown, setChangeRankShown] = useState(false);     
-    const [panelSettingsShown, setPanelSettingsShown] = useState(false);        
+    const [panelSettingsShown, setPanelSettingsShown] = useState(false);  
+    const [chatOpened, setChatOpened] = useState(true);         
 
     /** Panel settings variables **/ 
     const [notification, setNotification] = useState("");
@@ -87,6 +89,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [addPlusTask, setAddPlusTask] = useState();       
     const [addMinusTask, setAddMinusTask] = useState();      
     const [activeUserID, setActiveUserID] = useState();   
+    const [chatHistory, setChatHistory] = useState();   
+    const newChatMessage = useRef();
 
 /** ### Popup windows ### **/  
 
@@ -626,6 +630,37 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         )
     } 
 
+    
+    const ChatPopup = props => {
+        if (!props.show) {
+            return null;
+        }
+        return (
+        <div className="absolute w-1/4 h-screen bg-black/80">
+            <div className="w-14 absolute right-2 top-2 cursor-pointer">
+                <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(!chatOpened)}></img>
+            </div>
+            <div className="flex justify-center flex-grow">
+                <a className="text-5xl text-white pt-2 pb-4">Chat</a>     
+            </div> 
+            <div className="bg-white h-0.5 w-full"></div>  
+
+            {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} /> : null}
+            
+            <div className="absolute bottom-2 w-full">
+                <div className="bg-white h-0.5 w-full"></div>  
+                <div className="flex items-center h-12 gap-2 m-4">  
+                    <input ref={newChatMessage} type="text" className="h-full w-full rounded-lg"></input>
+                    <button onClick={() => sendNewMessage()}  className="h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center flex">
+                        <img src="assets/send_arrow.png" className="h-3/4 w-3/4"></img>
+                    </button>
+                </div> 
+            </div>
+        </div>
+        )
+    } 
+
+
 
 /** ### Data fetching ### **/  
 
@@ -636,6 +671,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchPanelData();
         fetchRankList();
         fetchQuestList();
+        fetchChatMessages();
     }, [])
     useEffect(() => {
         if (rankList != undefined)
@@ -732,6 +768,22 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 setUsersResponse(accounts);
             }  
     }
+
+    const fetchChatMessages = async () => {
+        console.log("fetchujem spravy");
+        const { data } = await supabase
+            .from('chat')
+            .select()
+            .order('created_at', { ascending: true})
+            setChatHistory(data);
+
+        setTimeout(() => {
+            if (chatOpened)
+            {
+                fetchChatMessages()
+            }
+            }, 5000);
+    }
        
     /** Other data **/ 
     const fetchQuestList = async () => {
@@ -745,7 +797,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }       
 
     const fetchPointsList = async () => {
-        console.log(i18n.language)
         const { data } = await supabase
             .from('points_list')
             .select()
@@ -803,6 +854,16 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             fetchAllUsers();
         }
     }   
+
+    const sendNewMessage = async () => {
+        if (newChatMessage.current.value) {
+            const { } = await supabase
+            .from('chat')
+            .insert({creator: username, text: newChatMessage.current.value})
+            fetchChatMessages();
+        }
+    }   
+    
 
 
 /** ### Settings data pushing ### **/  
@@ -1092,6 +1153,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <PanelSettings show={panelSettingsShown}/>
             </div>}
 
+            {chatOpened && <div className="z-10 w-full h-full absolute">
+                <ChatPopup show={chatOpened}/>
+                
+            </div>}
+
             <div id="slidefromtop" className="flex items-center p-3 w-full justify-between">
                 
                 <div className="flex items-center w-full hidden sm:flex">
@@ -1100,6 +1166,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400 ">Admin</a>
                     </div>
+                    <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => setChatOpened(!chatOpened)}>CHAT</a>
                 </div>
                 <img src={languageIconSource} className="w-14 h-14 cursor-pointer mr-4" onClick={changeLanguage}></img>
                 <div className="flex sm:flex-col items-center">
