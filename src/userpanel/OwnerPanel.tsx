@@ -630,7 +630,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         )
     } 
 
-    
+    const handleKeyPress = (event) => {
+        if (event.key == 'Enter') {
+            sendNewMessage()
+        }
+      };
+
     const ChatPopup = props => {
         if (!props.show) {
             return null;
@@ -650,7 +655,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             <div className="absolute bottom-2 w-full">
                 <div className="bg-white h-0.5 w-full"></div>  
                 <div className="flex items-center h-12 gap-2 m-4">  
-                    <input ref={newChatMessage} type="text" className="h-full w-full rounded-lg"></input>
+                    <input autoFocus onKeyDown={handleKeyPress}  ref={newChatMessage} type="text" className="h-full w-full rounded-lg"></input>
                     <button onClick={() => sendNewMessage()}  className="h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center flex">
                         <img src="assets/send_arrow.png" className="h-3/4 w-3/4"></img>
                     </button>
