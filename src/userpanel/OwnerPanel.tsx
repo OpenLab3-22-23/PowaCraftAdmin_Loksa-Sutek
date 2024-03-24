@@ -60,7 +60,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [addMinusShown, setAddMinusShown] = useState(false);     
     const [changeRankShown, setChangeRankShown] = useState(false);     
     const [panelSettingsShown, setPanelSettingsShown] = useState(false);  
-    const [chatOpened, setChatOpened] = useState(true);         
+    const [chatOpened, setChatOpened] = useState(false);         
 
     /** Panel settings variables **/ 
     const [notification, setNotification] = useState("");
@@ -645,7 +645,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div> 
             <div className="bg-white h-0.5 w-full"></div>  
 
-            {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} /> : null}
+                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} /> : null} 
             
             <div className="absolute bottom-2 w-full">
                 <div className="bg-white h-0.5 w-full"></div>  
@@ -671,7 +671,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchPanelData();
         fetchRankList();
         fetchQuestList();
-        fetchChatMessages();
     }, [])
     useEffect(() => {
         if (rankList != undefined)
@@ -770,7 +769,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const fetchChatMessages = async () => {
-        console.log("fetchujem spravy");
         const { data } = await supabase
             .from('chat')
             .select()
@@ -1166,7 +1164,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400 ">Admin</a>
                     </div>
-                    <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => setChatOpened(!chatOpened)}>CHAT</a>
+                    <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() =>  {fetchChatMessages(); setChatOpened(!chatOpened);}}>CHAT</a>
                 </div>
                 <img src={languageIconSource} className="w-14 h-14 cursor-pointer mr-4" onClick={changeLanguage}></img>
                 <div className="flex sm:flex-col items-center">
