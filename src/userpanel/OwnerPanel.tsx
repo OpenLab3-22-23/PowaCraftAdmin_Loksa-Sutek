@@ -778,11 +778,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             setChatHistory(data);
 
         setTimeout(() => {
-            if (chatOpened)
+            if (chatOpened && newChatMessage.current.value == "")
             {
                 fetchChatMessages()
             }
-            }, 5000);
+        }, 5000);
     }
        
     /** Other data **/ 
