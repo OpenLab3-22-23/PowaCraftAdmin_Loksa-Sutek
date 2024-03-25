@@ -10,7 +10,7 @@ export default function ChatMessages({chatHistory, username}) {
     }, [chatHistory]);
 
     return(
-        <div ref={chatContainerRef} className="py-4 px-3 flex flex-col overflow-scroll h-4/5">
+        <div ref={chatContainerRef} className="py-4 px-3 flex flex-col overflow-y-auto h-4/5">
         {
             chatHistory.map((message, index) => 
             <div key={index} className={`w-full flex ${username == message.creator ? 'justify-end' : 'justify-start'}`}>
