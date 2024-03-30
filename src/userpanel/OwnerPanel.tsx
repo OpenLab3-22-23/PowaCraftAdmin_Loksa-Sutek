@@ -643,14 +643,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         return (
         <div className="absolute w-1/4 h-screen bg-black/80">
             <div className="w-14 absolute right-2 top-2 cursor-pointer">
-                <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(!chatOpened)}></img>
+                <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
             </div>
             <div className="flex justify-center flex-grow">
                 <a className="text-5xl text-white pt-2 pb-4">Chat</a>     
             </div> 
             <div className="bg-white h-0.5 w-full"></div>  
 
-                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} /> : null} 
+                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} fetchChatMessages={fetchChatMessages} /> : null} 
             
             <div className="absolute bottom-2 w-full">
                 <div className="bg-white h-0.5 w-full"></div>  
@@ -778,14 +778,12 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .from('chat')
             .select()
             .order('created_at', { ascending: true})
-            setChatHistory(data);
-
-        setTimeout(() => {
-            if (chatOpened && newChatMessage.current.value == "")
+            if (data != chatHistory)
             {
-                fetchChatMessages()
+                console.log("UPDATUJEM")
+                console.log(chatHistory)
+                setChatHistory(data);
             }
-        }, 5000);
     }
        
     /** Other data **/ 
@@ -865,7 +863,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .insert({creator: username, text: newChatMessage.current.value})
             fetchChatMessages();
         }
-    }   
+    }    
     
 
 
@@ -1122,6 +1120,26 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         setLanguageIconSource("/assets/en.png")
       }
     }
+
+    useEffect(() => {
+        if (chatOpened)
+        {
+            chatRefreshTimer()
+        }
+    }, [chatOpened])
+    function chatRefreshTimer()
+    {
+        setTimeout(() => {
+            console.log(chatOpened)
+            if (newChatMessage.current.value == "")
+            {
+                fetchChatMessages();
+                console.log(chatHistory)
+            }
+            chatRefreshTimer();
+        }, 10000);
+    } 
+
     
 
 /** ### PC HTML ### **/ 
@@ -1158,7 +1176,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             {chatOpened && <div className="z-10 w-full h-full absolute">
                 <ChatPopup show={chatOpened}/>
-                
             </div>}
 
             <div id="slidefromtop" className="flex items-center p-3 w-full justify-between">
@@ -1169,7 +1186,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="h-14 flex items-end">
                         <a className="text-xl text-amber-400 ">Admin</a>
                     </div>
-                    <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() =>  {fetchChatMessages(); setChatOpened(!chatOpened);}}>CHAT</a>
+                    <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => {fetchChatMessages(); setChatOpened(true);}}>CHAT</a>
                 </div>
                 <img src={languageIconSource} className="w-14 h-14 cursor-pointer mr-4" onClick={changeLanguage}></img>
                 <div className="flex sm:flex-col items-center">
