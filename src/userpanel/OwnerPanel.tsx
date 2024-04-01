@@ -1121,20 +1121,20 @@ export default function OwnerPanel( {userData} ): JSX.Element {
       }
     }
 
+
+
     useEffect(() => {
         if (chatOpened)
         {
             chatRefreshTimer()
         }
     }, [chatOpened])
-    function chatRefreshTimer()
-    {
+    const chatRefreshTimer = async () => {
         setTimeout(() => {
             console.log(chatOpened)
             if (newChatMessage.current.value == "")
             {
                 fetchChatMessages();
-                console.log(chatHistory)
             }
             chatRefreshTimer();
         }, 10000);

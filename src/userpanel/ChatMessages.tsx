@@ -1,12 +1,12 @@
 // @ts-nocheck
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useLayoutEffect } from 'react';
 import { supabase } from "../supabase/supabaseClient";
 
 export default function ChatMessages({chatHistory, username, fetchChatMessages}) {
 
     const chatContainerRef = useRef(null);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }, [chatHistory]);
 
@@ -16,7 +16,7 @@ export default function ChatMessages({chatHistory, username, fetchChatMessages})
         .delete()
         .eq('id', messageID)
         fetchChatMessages();
-    }  
+    }   
 
     return (
         <div ref={chatContainerRef} className="py-4 px-3 flex flex-col overflow-y-auto h-4/5">
