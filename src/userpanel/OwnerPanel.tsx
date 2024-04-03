@@ -61,6 +61,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [changeRankShown, setChangeRankShown] = useState(false);     
     const [panelSettingsShown, setPanelSettingsShown] = useState(false);  
     const [chatOpened, setChatOpened] = useState(false);         
+    const [deleteMessageShown, setDeleteMessageShown] = useState(false);      
 
     /** Panel settings variables **/ 
     const [notification, setNotification] = useState("");
@@ -91,6 +92,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [activeUserID, setActiveUserID] = useState();   
     const [chatHistory, setChatHistory] = useState();   
     const newChatMessage = useRef();
+    const [messageToDeleteData, setMessageToDeleteData] = useState([]);   
 
 /** ### Popup windows ### **/  
 
@@ -650,7 +652,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div> 
             <div className="bg-white h-0.5 w-full"></div>  
 
-                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} fetchChatMessages={fetchChatMessages} /> : null} 
+                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} openDeleteMessageTab={openDeleteMessageTab} /> : null} 
             
             <div className="absolute bottom-2 w-full">
                 <div className="bg-white h-0.5 w-full"></div>  
@@ -662,6 +664,47 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div> 
             </div>
         </div>
+        )
+    } 
+
+    const openDeleteMessageTab = (messageID, messageText) => {
+        messageToDeleteData.push([messageID, messageText])
+        setDeleteMessageShown(true);
+    }
+    const closeDeleteMessageTab = () => {
+        setDeleteMessageShown(false);
+        setMessageToDeleteData([]);
+        document.body.classList.remove('overflow-hidden');
+    }
+    const DeleteMessage = props => {
+        window.scrollTo(0, 0);
+        document.body.classList.add('overflow-hidden');
+        if (!props.show) {
+            return null;
+        }
+        console.log(messageToDeleteData)
+        return (
+            <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
+                <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+
+                    <div className="inline-block flex relative w-full justify-center pb-5">
+                        <a className="text-3xl text-white text-center w-4/5">Potvrdenie zmazania</a>
+                        <button onClick={() => closeDeleteMessageTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    </div>
+
+                    <a className="text-white text-xl">Naozaj si prajete vymazať túto správu?</a>
+                    <br/>
+                    <div className="w-2/3 h-0.5 bg-white"></div>
+                    <a className="text-gray-300 w-2/3 text-center break-words">{messageToDeleteData[0][1]}</a>
+                    <div className="w-2/3 h-0.5 bg-white"></div>
+
+                    <button 
+                        onClick={() => deleteMessage(messageToDeleteData[0][0])}
+                        className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
+                        ZMAZAŤ
+                    </button>
+                </div>      
+            </div>
         )
     } 
 
@@ -780,8 +823,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .order('created_at', { ascending: true})
             if (data != chatHistory)
             {
-                console.log("UPDATUJEM")
-                console.log(chatHistory)
                 setChatHistory(data);
             }
     }
@@ -1027,6 +1068,15 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
     }
 
+    const deleteMessage = async (messageID) => {
+        const { } = await supabase
+        .from('chat')
+        .delete()
+        .eq('id', messageID)
+        fetchChatMessages();
+        closeDeleteMessageTab();
+    } 
+
 
 /** ### Other functions ### **/ 
 
@@ -1121,17 +1171,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
       }
     }
 
-
-
     useEffect(() => {
         if (chatOpened)
         {
             chatRefreshTimer()
         }
     }, [chatOpened])
-    const chatRefreshTimer = async () => {
+    function chatRefreshTimer() {
         setTimeout(() => {
-            console.log(chatOpened)
             if (newChatMessage.current.value == "")
             {
                 fetchChatMessages();
@@ -1176,6 +1223,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             {chatOpened && <div className="z-10 w-full h-full absolute">
                 <ChatPopup show={chatOpened}/>
+            </div>}
+
+            {deleteMessageShown &&  messageToDeleteData.length > 0 && <div className="z-10 w-full h-full absolute">
+                <DeleteMessage show={deleteMessageShown}/>
             </div>}
 
             <div id="slidefromtop" className="flex items-center p-3 w-full justify-between">
@@ -1223,7 +1274,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         {t("ownerpanel.questlist.remquest")}
                         </button>
                     </div>
-                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
+                    <div className="h-1 bg-cyan-400 mb-4"></div>
                     <div id="slidefrombottom" className="h-full overflow-auto mb-4">
                         {questList ? 
                             <WriteQuests 
@@ -1241,7 +1292,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="flex justify-center text-center p-4">
                         <a className="font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.memberslist.header")}</a>
                     </div>
-                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
+                    <div className="h-1 bg-cyan-400 mb-4"></div>
                     <div id="slidefrombottom" className="w-full overflow-auto h-full">
                         {allUsersResponse ? 
                             <OwnerATList 
