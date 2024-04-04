@@ -477,8 +477,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <div className="h-14 flex items-end hidden lg:block">
                                 <a className="text-xl text-amber-400">Admin</a>
                             </div>    
+                            <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => {fetchChatMessages(); setChatOpened(true);}}>CHAT</a>
                         </div>
-                        <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => {fetchChatMessages(); setChatOpened(true);}}>CHAT</a>
+                        
                         <div className="h-20 items-center space-x-4 absolute sm:relative" style={{ display: isHelper ? "flex" : "none" }}>
                             <div className="bg-white rounded-full flex justify-center items-center w-44 h-12 border-4 border-gray-400 hidden sm:flex">
                                 <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
