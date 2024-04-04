@@ -636,8 +636,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         if (event.key == 'Enter') {
             sendNewMessage()
         }
-      };
-
+    };
     const ChatPopup = props => {
         if (!props.show) {
             return null;
@@ -652,7 +651,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             </div> 
             <div className="bg-white h-0.5 w-full"></div>  
 
-                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} openDeleteMessageTab={openDeleteMessageTab} /> : null} 
+                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} openDeleteMessageTab={openDeleteMessageTab} isAdmin={true} /> : null} 
             
             <div className="absolute bottom-2 w-full">
                 <div className="bg-white h-0.5 w-full"></div>  
@@ -1197,7 +1196,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
     
 
-/** ### PC HTML ### **/ 
+/** ### HTML ### **/ 
     return (
         <div className="h-fit lg:h-screen w-screen bg-no-repeat bg-center bg-fixed bg-cover overflow-hidden" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}>
 

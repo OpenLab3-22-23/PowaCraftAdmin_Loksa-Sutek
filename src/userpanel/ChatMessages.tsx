@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useRef, useLayoutEffect } from 'react';
 
-export default function ChatMessages({chatHistory, username, openDeleteMessageTab}) {
+export default function ChatMessages({chatHistory, username, openDeleteMessageTab, isAdmin}) {
 
     const chatContainerRef = useRef(null);
 
@@ -21,7 +21,7 @@ export default function ChatMessages({chatHistory, username, openDeleteMessageTa
                 <div className={`w-3/4 p-1 rounded-lg flex flex-col my-2 ${username == message.creator ? 'bg-zinc-500/80' : 'bg-zinc-700/80'}`}>
                   <div className='flex flex-row items-center'>
                     <a className="text-xl text-white pl-2">{message.creator}</a>
-                    <img onClick={() => openDeleteMessageTab(message.id, message.text)} src='assets/bin.png' className='h-4 w-4 ml-4 cursor-pointer'></img>
+                    {isAdmin ? <img onClick={() => openDeleteMessageTab(message.id, message.text)} src='assets/bin.png' className='h-4 w-4 ml-4 cursor-pointer'></img> : null}
                   </div>
                   <a className="text-base text-white pl-2">{message.text}</a>
                   <a className="text-sm text-cyan-600 pl-2">{formattedCreationTime}</a>
