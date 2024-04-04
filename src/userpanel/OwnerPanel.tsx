@@ -682,17 +682,16 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         if (!props.show) {
             return null;
         }
-        console.log(messageToDeleteData)
         return (
             <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
                 <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
 
                     <div className="inline-block flex relative w-full justify-center pb-5">
-                        <a className="text-3xl text-white text-center w-4/5">Potvrdenie zmazania</a>
+                        <a className="text-3xl text-white text-center w-4/5">{t("ownerpanel.delmessage.header")}</a>
                         <button onClick={() => closeDeleteMessageTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                     </div>
 
-                    <a className="text-white text-xl">Naozaj si prajete vymazať túto správu?</a>
+                    <a className="text-white text-xl">{t("ownerpanel.delmessage.question")}</a>
                     <br/>
                     <div className="w-2/3 h-0.5 bg-white"></div>
                     <a className="text-gray-300 w-2/3 text-center break-words">{messageToDeleteData[0][1]}</a>
@@ -701,7 +700,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <button 
                         onClick={() => deleteMessage(messageToDeleteData[0][0])}
                         className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
-                        ZMAZAŤ
+                        {t("ownerpanel.delmessage.delete")}
                     </button>
                 </div>      
             </div>
@@ -902,6 +901,15 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             const { } = await supabase
             .from('chat')
             .insert({creator: username, text: newChatMessage.current.value})
+
+            if (chatHistory.length + 1 >= 100)
+            {
+                const { } = await supabase
+                .from('chat')
+                .delete()
+                .eq('id', chatHistory[0].id)
+            }
+
             fetchChatMessages();
         }
     }    
@@ -1068,15 +1076,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
     }
 
-    const deleteMessage = async (messageID) => {
-        const { } = await supabase
-        .from('chat')
-        .delete()
-        .eq('id', messageID)
-        fetchChatMessages();
-        closeDeleteMessageTab();
-    } 
-
 
 /** ### Other functions ### **/ 
 
@@ -1170,6 +1169,15 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         setLanguageIconSource("/assets/en.png")
       }
     }
+
+    const deleteMessage = async (messageID) => {
+        const { } = await supabase
+        .from('chat')
+        .delete()
+        .eq('id', messageID)
+        fetchChatMessages();
+        closeDeleteMessageTab();
+    } 
 
     useEffect(() => {
         if (chatOpened)
