@@ -13,7 +13,7 @@ export default function ChatMessages({chatHistory, username}) {
         <div ref={chatContainerRef} className="py-4 px-3 flex flex-col overflow-y-auto h-4/5">
         {
             chatHistory.map((message, index) => 
-            <div key={index} className={`w-full flex ${username == message.creator ? 'justify-end' : 'justify-start'}`}>
+            <div key={index} className={`shadowT w-full flex ${username == message.creator ? 'justify-end' : 'justify-start'}`}>
                 <div className={`w-3/4 p-1 rounded-lg flex flex-col my-2 ${username == message.creator ? 'bg-zinc-500/80' : 'bg-zinc-700/80'}`}>
                     <a className="text-xl text-white pl-2">{message.creator}</a>
                     <a className="text-base text-white pl-2">{message.text}</a>
