@@ -9,6 +9,7 @@ import WriteLastPoints from "./LastPoints";
 import WriteBestHelpers from "./BestHelpers";
 import ATList from "./ATList";
 import WriteQuests from "./Quests";
+import ChatMessages from "./ChatMessages";
 
 export default function LandingPage( {userData} ): JSX.Element {
 
@@ -45,12 +46,15 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [isAddQuestOpened, setAddQuestOpened] = useState(false);
     const [isMemberListOpened, setMembersListOpened] = useState(false);
     const [isSetUsernameOpened, setSetUsernameOpened] = useState(false);
+    const [chatOpened, setChatOpened] = useState(false);      
 
     /** Other variables **/ 
     const newTaskText = useRef();
     const newTaskPoints = useRef();
     const generalTask = useRef();
-    const [newUsername, setNewUsername] = useState("");      
+    const [newUsername, setNewUsername] = useState("");   
+    const [chatHistory, setChatHistory] = useState();   
+    const newChatMessage = useRef();  
 
 
 /** ### Popup windows ### **/  
@@ -157,6 +161,40 @@ export default function LandingPage( {userData} ): JSX.Element {
 
                 <button onClick={saveNewUsername} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">{t("userpanel.setusername.set")}</button>
             </div>      
+        </div>
+        )
+    } 
+
+    const handleKeyPress = (event) => {
+        if (event.key == 'Enter') {
+            sendNewMessage()
+        }
+    };
+    const ChatPopup = props => {
+        if (!props.show) {
+            return null;
+        }
+        return (
+        <div className="absolute w-1/3 h-screen bg-black/80">
+            <div className="w-14 absolute right-2 top-2 cursor-pointer">
+                <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
+            </div>
+            <div className="flex justify-center flex-grow">
+                <a className="text-5xl text-white pt-2 pb-4">Chat</a>     
+            </div> 
+            <div className="bg-white h-0.5 w-full"></div>  
+
+                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} isAdmin={false} /> : null} 
+            
+            <div className="absolute bottom-2 w-full">
+                <div className="bg-white h-0.5 w-full"></div>  
+                <div className="flex items-center h-12 gap-2 m-4">  
+                    <input autoFocus onKeyDown={handleKeyPress}  ref={newChatMessage} type="text" className="h-full w-full rounded-lg"></input>
+                    <button onClick={() => sendNewMessage()}  className="h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center flex">
+                        <img src="assets/send_arrow.png" className="h-3/4 w-3/4"></img>
+                    </button>
+                </div> 
+            </div>
         </div>
         )
     } 
@@ -270,6 +308,17 @@ export default function LandingPage( {userData} ): JSX.Element {
                 setUsersResponse(accounts);
             }
     }
+
+    const fetchChatMessages = async () => {
+        const { data } = await supabase
+            .from('chat')
+            .select()
+            .order('created_at', { ascending: true})
+            if (data != chatHistory)
+            {
+                setChatHistory(data);
+            }
+    }
         
     /** Other data **/ 
     const fetchPointsList = async () => {
@@ -323,13 +372,30 @@ export default function LandingPage( {userData} ): JSX.Element {
 
         setSetUsernameOpened(false);
         document.body.classList.remove('overflow-hidden');
-
         const { } = await supabase
             .from('profiles')
             .update({username: newUsername})
             .eq('id', userData.user.id)
             fetchUserProfile();
     } 
+
+    const sendNewMessage = async () => {
+        if (newChatMessage.current.value) {
+            const { } = await supabase
+            .from('chat')
+            .insert({creator: username, text: newChatMessage.current.value})
+
+            if (chatHistory.length + 1 >= 100)
+            {
+                const { } = await supabase
+                .from('chat')
+                .delete()
+                .eq('id', chatHistory[0].id)
+            }
+
+            fetchChatMessages();
+        }
+    }  
         
         
 /** ### Other functions ### **/  
@@ -360,8 +426,24 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
     }
 
+    useEffect(() => {
+        if (chatOpened)
+        {
+            chatRefreshTimer()
+        }
+    }, [chatOpened])
+    function chatRefreshTimer() {
+        setTimeout(() => {
+            if (newChatMessage.current.value == "")
+            {
+                fetchChatMessages();
+            }
+            chatRefreshTimer();
+        }, 10000);
+    } 
 
-/** ### PC HTML ### **/ 
+
+/** ### HTML ### **/ 
     return (
         <div className="h-fit lg:h-screen w-screen bg-no-repeat bg-center bg-fixed bg-cover md:overflow-hidden pb-44 sm:pb-2" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
@@ -375,6 +457,10 @@ export default function LandingPage( {userData} ): JSX.Element {
 
             {isSetUsernameOpened && <div className="z-10 w-full h-full absolute">
                 <SetUsername show={isSetUsernameOpened}/>
+            </div>}
+
+            {chatOpened && <div className="z-10 w-full h-full absolute">
+                <ChatPopup show={chatOpened}/>
             </div>}
 
             <div className="slidefromtop static w-full">
@@ -391,8 +477,10 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <div className="h-14 flex items-end hidden lg:block">
                                 <a className="text-xl text-amber-400">Admin</a>
                             </div>    
+                            <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => {fetchChatMessages(); setChatOpened(true);}}>CHAT</a>
                         </div>
-                        <div className="h-20 items-center space-x-4 absolute sm:relative px-4" style={{ display: isHelper ? "flex" : "none" }}>
+                        
+                        <div className="h-20 items-center space-x-4 absolute sm:relative" style={{ display: isHelper ? "flex" : "none" }}>
                             <div className="shadow bg-white rounded-full flex justify-center items-center w-44 h-12 border-4 border-gray-400 hidden sm:flex">
                                 <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                             </div>

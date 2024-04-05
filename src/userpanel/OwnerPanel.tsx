@@ -61,6 +61,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [changeRankShown, setChangeRankShown] = useState(false);     
     const [panelSettingsShown, setPanelSettingsShown] = useState(false);  
     const [chatOpened, setChatOpened] = useState(false);         
+    const [deleteMessageShown, setDeleteMessageShown] = useState(false);      
 
     /** Panel settings variables **/ 
     const [notification, setNotification] = useState("");
@@ -91,6 +92,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [activeUserID, setActiveUserID] = useState();   
     const [chatHistory, setChatHistory] = useState();   
     const newChatMessage = useRef();
+    const [messageToDeleteData, setMessageToDeleteData] = useState([]);   
 
 /** ### Popup windows ### **/  
 
@@ -634,23 +636,22 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         if (event.key == 'Enter') {
             sendNewMessage()
         }
-      };
-
+    };
     const ChatPopup = props => {
         if (!props.show) {
             return null;
         }
         return (
-        <div className="chat absolute w-1/3 h-screen bg-gray-900">
-            <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
-                <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(!chatOpened)}></img>
+        <div className="chat absolute w-1/4 h-screen bg-black/80">
+            <div className="w-14 absolute right-2 top-2 cursor-pointer">
+                <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
             </div>
             <div className="flex justify-center flex-grow">
                 <a className="text-5xl text-white pt-2 pb-4">Chat</a>     
             </div> 
             <div className="bg-white h-0.5 w-full"></div>  
 
-                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} /> : null} 
+                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} openDeleteMessageTab={openDeleteMessageTab} isAdmin={true} /> : null} 
             
             <div className=" w-full">
                 <div className="bg-white h-0.5 w-full"></div>  
@@ -662,6 +663,46 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div> 
             </div>
         </div>
+        )
+    } 
+
+    const openDeleteMessageTab = (messageID, messageText) => {
+        messageToDeleteData.push([messageID, messageText])
+        setDeleteMessageShown(true);
+    }
+    const closeDeleteMessageTab = () => {
+        setDeleteMessageShown(false);
+        setMessageToDeleteData([]);
+        document.body.classList.remove('overflow-hidden');
+    }
+    const DeleteMessage = props => {
+        window.scrollTo(0, 0);
+        document.body.classList.add('overflow-hidden');
+        if (!props.show) {
+            return null;
+        }
+        return (
+            <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
+                <div className="w-full md:w-1/3 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat p-2 border"> 
+
+                    <div className="inline-block flex relative w-full justify-center pb-5">
+                        <a className="text-3xl text-white text-center w-4/5">{t("ownerpanel.delmessage.header")}</a>
+                        <button onClick={() => closeDeleteMessageTab()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    </div>
+
+                    <a className="text-white text-xl">{t("ownerpanel.delmessage.question")}</a>
+                    <br/>
+                    <div className="w-2/3 h-0.5 bg-white"></div>
+                    <a className="text-gray-300 w-2/3 text-center break-words">{messageToDeleteData[0][1]}</a>
+                    <div className="w-2/3 h-0.5 bg-white"></div>
+
+                    <button 
+                        onClick={() => deleteMessage(messageToDeleteData[0][0])}
+                        className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
+                        {t("ownerpanel.delmessage.delete")}
+                    </button>
+                </div>      
+            </div>
         )
     } 
 
@@ -778,14 +819,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             .from('chat')
             .select()
             .order('created_at', { ascending: true})
-            setChatHistory(data);
-
-        setTimeout(() => {
-            if (chatOpened && newChatMessage.current.value == "")
+            if (data != chatHistory)
             {
-                fetchChatMessages()
+                setChatHistory(data);
             }
-        }, 5000);
     }
        
     /** Other data **/ 
@@ -863,9 +900,18 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             const { } = await supabase
             .from('chat')
             .insert({creator: username, text: newChatMessage.current.value})
+
+            if (chatHistory.length + 1 >= 100)
+            {
+                const { } = await supabase
+                .from('chat')
+                .delete()
+                .eq('id', chatHistory[0].id)
+            }
+
             fetchChatMessages();
         }
-    }   
+    }    
     
 
 
@@ -1122,9 +1168,35 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         setLanguageIconSource("/assets/en.png")
       }
     }
+
+    const deleteMessage = async (messageID) => {
+        const { } = await supabase
+        .from('chat')
+        .delete()
+        .eq('id', messageID)
+        fetchChatMessages();
+        closeDeleteMessageTab();
+    } 
+
+    useEffect(() => {
+        if (chatOpened)
+        {
+            chatRefreshTimer()
+        }
+    }, [chatOpened])
+    function chatRefreshTimer() {
+        setTimeout(() => {
+            if (newChatMessage.current.value == "")
+            {
+                fetchChatMessages();
+            }
+            chatRefreshTimer();
+        }, 10000);
+    } 
+
     
 
-/** ### PC HTML ### **/ 
+/** ### HTML ### **/ 
     return (
         <div className="h-fit lg:h-screen w-screen bg-no-repeat bg-center bg-fixed bg-cover overflow-hidden" style={{ backgroundImage: `url(${ownerPanelBackgroundImage})` }}>
 
@@ -1158,7 +1230,10 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
             {chatOpened && <div className="z-10 w-full h-full absolute">
                 <ChatPopup show={chatOpened}/>
-                
+            </div>}
+
+            {deleteMessageShown &&  messageToDeleteData.length > 0 && <div className="z-10 w-full h-full absolute">
+                <DeleteMessage show={deleteMessageShown}/>
             </div>}
 
             <div className="slidefromtop flex items-center p-3 w-full justify-between">
@@ -1171,6 +1246,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             <a className="text-xl text-amber-400 ">Admin</a>
                         </div>
                     </div>
+                    <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => {fetchChatMessages(); setChatOpened(true);}}>CHAT</a>
                 </div>
                 <div className="flex w-1/2 justify-evenly items-center">
                     <img id="chat" className="w-20 cursor-pointer transition duration-500 hover:-translate-y-1 drop-shadow-lg" src="/assets/chat.png" alt="CHAT" onClick={() => {fetchChatMessages(); setChatOpened(!chatOpened);}} />
@@ -1211,7 +1287,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         {t("ownerpanel.questlist.remquest")}
                         </button>
                     </div>
-                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
+                    <div className="h-1 bg-cyan-400 mb-4"></div>
                     <div className="slidefrombottom h-full overflow-auto mb-4">
                         {questList ? 
                             <WriteQuests 
@@ -1229,8 +1305,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     <div className="flex justify-center text-center p-4">
                         <a className=" font-extrabold text-transparent text-5xl bg-clip-text bg-gradient-to-r from-yellow-500 to-lime-600">{t("ownerpanel.memberslist.header")}</a>
                     </div>
-                    <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                    <div className="slidefrombottom w-full overflow-auto h-full">
+                    <div className="h-1 bg-cyan-400 mb-4"></div>
+                    <div  className="slidefrombottom w-full overflow-auto h-full">
                         {allUsersResponse ? 
                             <OwnerATList 
                             response={allUsersResponse} 

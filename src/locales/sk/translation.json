@@ -136,6 +136,11 @@
             "upload": "NAHRAŤ",  
             "add": "PRIDAŤ", 
             "delete": "ZMAZAŤ" 
+        },
+        "delmessage": {
+            "header": "Potvrdenie zmazania",
+            "question": "Naozaj si prajete vymazať túto správu?",
+            "delete": "ZMAZAŤ"
         }
     },
     "questcomponent": {
