@@ -642,9 +642,9 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="chat absolute w-1/4 h-screen bg-black/80">
-            <div className="w-14 absolute right-2 top-2 cursor-pointer">
-                <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
+        <div className="chat absolute w-1/3 h-screen bg-black/80">
+            <div className="w-14  absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
+                <img className="" src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
             </div>
             <div className="flex justify-center flex-grow">
                 <a className="text-5xl text-white pt-2 pb-4">Chat</a>     
@@ -1246,7 +1246,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                             <a className="text-xl text-amber-400 ">Admin</a>
                         </div>
                     </div>
-                    <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => {fetchChatMessages(); setChatOpened(true);}}>CHAT</a>
                 </div>
                 <div className="flex w-1/2 justify-evenly items-center">
                     <img id="chat" className="w-20 cursor-pointer transition duration-500 hover:-translate-y-1 drop-shadow-lg" src="/assets/chat.png" alt="CHAT" onClick={() => {fetchChatMessages(); setChatOpened(!chatOpened);}} />

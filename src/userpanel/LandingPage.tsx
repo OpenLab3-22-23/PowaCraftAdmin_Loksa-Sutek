@@ -176,7 +176,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="absolute w-1/3 h-screen bg-black/80">
-            <div className="w-14 absolute right-2 top-2 cursor-pointer">
+            <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
                 <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
             </div>
             <div className="flex justify-center flex-grow">
@@ -189,8 +189,8 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="absolute bottom-2 w-full">
                 <div className="bg-white h-0.5 w-full"></div>  
                 <div className="flex items-center h-12 gap-2 m-4">  
-                    <input autoFocus onKeyDown={handleKeyPress}  ref={newChatMessage} type="text" className="h-full w-full rounded-lg"></input>
-                    <button onClick={() => sendNewMessage()}  className="h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center flex">
+                    <input autoFocus onKeyDown={handleKeyPress}  ref={newChatMessage} type="text" className="shadow h-full w-full rounded-lg"></input>
+                    <button onClick={() => sendNewMessage()}  className="shadow click h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center flex">
                         <img src="assets/send_arrow.png" className="h-3/4 w-3/4"></img>
                     </button>
                 </div> 
@@ -466,10 +466,10 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="slidefromtop static w-full">
                 
                 <div className="flex items-center sm:max-md:items-start justify-evenly sm:justify-between py-2 w-full h-fit"> 
-                    <div className="flex flex-col md:flex-row md:items-center gap-2 justify-between md:w-5/6 lg:w-4/5">
+                    <div className="flex flex-col md:flex-row md:items-center gap-2 justify-between lg:w-3/5">
                         <div className="shadowT flex items-center gap-2">
-                            <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full hidden sm:max-lg:block"></img>
-                            <div className="shadow h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center lg:hidden text-center px-5">
+                            <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full hidden "></img>
+                            <div className="shadow h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center hidden sm:relative lg:hidden text-center px-5">
                                 <WriteUserRank rank={rank} rankList={rankList} />
                             </div>
                             <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat hidden lg:block" style={{ backgroundImage: `url(${logo})` }}></div>
@@ -477,7 +477,6 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <div className="h-14 flex items-end hidden lg:block">
                                 <a className="text-xl text-amber-400">Admin</a>
                             </div>    
-                            <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => {fetchChatMessages(); setChatOpened(true);}}>CHAT</a>
                         </div>
                         
                         <div className="h-20 items-center space-x-4 absolute sm:relative" style={{ display: isHelper ? "flex" : "none" }}>
@@ -492,8 +491,11 @@ export default function LandingPage( {userData} ): JSX.Element {
                             </div> 
                         </div>
                     </div>
-                    <div className="flex items-center gap-5 px-2 sm:pr-8">
-                        <img src={languageIconSource} className="w-14 h-14 cursor-pointer rounded-full shadow" onClick={changeLanguage}></img>
+                    <div className="flex items-center justify-center sm:justify-end gap-5 px-2 sm:pr-8 w-full sm:w-1/2">
+                        <div className="flex items-center justify-evenly w-1/2">
+                            <img id="chat" className="w-20 cursor-pointer transition duration-500 hover:-translate-y-1 drop-shadow-lg" src="/assets/chat.png" alt="CHAT" onClick={() => {fetchChatMessages(); setChatOpened(!chatOpened);}} />
+                            <img src={languageIconSource} className="w-14 h-14 cursor-pointer rounded-full shadow" onClick={changeLanguage}></img>
+                        </div>
                         <div className="flex lg:flex-col items-center">
                             <div className="flex gap-5">
                                 <img src={`https://mineskin.eu/helm/${username}`} className="shadow w-20 h-20 rounded-full hidden lg:block mb-2"></img>
@@ -503,12 +505,23 @@ export default function LandingPage( {userData} ): JSX.Element {
                                 <div className="shadow h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center hidden lg:block text-center">
                                     <WriteUserRank rank={rank} rankList={rankList} />
                                 </div>
-                                <button className="text-2xl text-white hover:text-gray-300 text-center lg:hidden" onClick={handleLogOut}>{t("userpanel.logout")}</button>
+                                <button className="shadowT text-2xl text-white hover:text-gray-300 text-center lg:hidden" onClick={handleLogOut}>{t("userpanel.logout")}</button>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
-
+                <div className="h-20 items-center justify-center space-x-4 sm:absolute" style={{ display: isHelper ? "flex" : "none" }}>
+                            <div className="shadow bg-white rounded-full flex justify-center items-center w-44 h-12 border-4 border-gray-400 sm:hidden">
+                                <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
+                            </div>
+                            <div className="shadow bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400 sm:hidden">
+                                <a className="text-green-500 text-2xl">+{plusPoints}</a> 
+                            </div>
+                            <div className="shadow bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400 sm:hidden">
+                                <a className="text-red-500 text-2xl">{minusPoints}</a>
+                            </div> 
+                        </div>
                 <div className="pl-5">
                     <a className="shadowT text-6xl text-white">{t("userpanel.welcome")}, {username}</a>
                 </div>
