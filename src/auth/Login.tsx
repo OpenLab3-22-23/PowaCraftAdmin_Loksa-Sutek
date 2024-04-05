@@ -76,7 +76,7 @@ export default function LogIn() {
         </div>
         <div className="flex flex-col justify-center items-center gap-5">
           <div className="flex flex-col justify-center items-center">
-            <p className="text-2xl text-white">{t("login.email")}</p>
+            <p className="shadowT text-2xl text-white">{t("login.email")}</p>
             <input
               id="email"
               type="email"
@@ -87,7 +87,7 @@ export default function LogIn() {
             />            
           </div>
           <div className="flex flex-col justify-center items-center">
-            <p className="text-2xl text-white">{t("login.password")}</p>
+            <p className="shadowT text-2xl text-white">{t("login.password")}</p>
             <input
               id="password"
               type="password"
@@ -101,7 +101,7 @@ export default function LogIn() {
           <input
             type="submit"
             value={t("login.login")}
-            className="shadow w-52 rounded-full bg-green-600/80 px-2 py-1 text-2xl hover:bg-green-700/80 cursor-pointer"
+            className="shadow click w-52 rounded-full bg-green-600/80 px-2 py-1 text-2xl hover:bg-green-700/80 cursor-pointer"
           />
           <Link to="/signup" className="shadowT animate text-white hover:text-gray-300 text-2xl">{t("login.register")}</Link>
         </div>

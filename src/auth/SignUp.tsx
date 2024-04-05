@@ -157,13 +157,13 @@ export default function SignUp() {
             id="submitbtn"
             type="submit"
             value={t("register.register")}
-            className="shadow w-52 rounded-full bg-green-600/80 px-2 py-1 my-3 text-2xl hover:bg-green-700/80 disabled:bg-green-600/40 disabled:text-black/40 cursor-pointer"
+            className="shadow click w-52 rounded-full bg-green-600/80 px-2 py-1 my-3 text-2xl hover:bg-green-700/80 disabled:bg-green-600/40 disabled:text-black/40 cursor-pointer"
             disabled={password != correct || password == ""}
           />
           <Link to="/login" className="shadowT animate text-white hover:text-gray-300 text-2xl mb-3">{t("register.login")}</Link>
 
       </form>
-        <a className="shadowT slidefrombottom text-white w-fit text-4xl text-center border-4 border-red-700 pb-1 px-2 hidden md:block">{t("register.warning")}</a>
+        <a className="shadowT shadow slidefrombottom text-white w-fit text-4xl text-center border-4 border-red-700 pb-1 px-2 hidden md:block">{t("register.warning")}</a>
     </div>
   ) : (
     <Navigate to="/" />
