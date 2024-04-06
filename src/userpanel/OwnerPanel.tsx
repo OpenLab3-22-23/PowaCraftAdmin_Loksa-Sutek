@@ -639,12 +639,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
     };
     const ChatPopup = props => {
+        window.scrollTo(0, 0);
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
         return (
-        <div className="chat absolute w-1/3 h-screen bg-black/80">
-            <div className="w-14  absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
+        <div className="absolute w-full lg:w-3/5 h-screen bg-black/80">
+            <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
                 <img className="" src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
             </div>
             <div className="flex justify-center flex-grow">
@@ -1251,7 +1253,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         </div>
                     </div>
                 </div>
-                <div className="flex w-1/2 justify-evenly items-center">
+                <div className="flex border-2 border-white/40 w-1/2 md:w-1/5 justify-evenly items-center rounded-full bg-white/20">
                     <img id="chat" className="w-20 cursor-pointer transition duration-500 hover:-translate-y-1 drop-shadow-lg" src="/assets/chat.png" alt="CHAT" onClick={() => {fetchChatMessages(); setChatOpened(!chatOpened);}} />
                     <img src={languageIconSource} className="w-14 h-14 transition duration-500 cursor-pointer mr-4 rounded-full shadow hover:-translate-y-1 " onClick={changeLanguage}></img>
                 </div>

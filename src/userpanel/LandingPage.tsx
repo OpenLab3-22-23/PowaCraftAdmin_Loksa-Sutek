@@ -171,11 +171,13 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
     };
     const ChatPopup = props => {
+        window.scrollTo(0, 0);
+        document.body.classList.add('overflow-hidden');
         if (!props.show) {
             return null;
         }
         return (
-        <div className="absolute w-1/3 h-screen bg-black/80">
+        <div className="absolute w-full lg:w-3/5 h-screen bg-black/80">
             <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
                 <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
             </div>
@@ -492,9 +494,9 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
                     </div>
                     <div className="flex items-center justify-center sm:justify-end gap-5 px-2 sm:pr-8 w-full sm:w-1/2">
-                        <div className="flex items-center justify-evenly w-1/2">
+                        <div className="flex px-5 items-center border-2 border-white/40 justify-evenly w-full md:w-1/2 rounded-full bg-white/20">
                             <img id="chat" className="w-20 cursor-pointer transition duration-500 hover:-translate-y-1 drop-shadow-lg" src="/assets/chat.png" alt="CHAT" onClick={() => {fetchChatMessages(); setChatOpened(!chatOpened);}} />
-                            <img src={languageIconSource} className="w-14 h-14 cursor-pointer rounded-full shadow" onClick={changeLanguage}></img>
+                            <img src={languageIconSource} className="w-14 h-14 cursor-pointer rounded-full shadow transition duration-500 hover:-translate-y-1" onClick={changeLanguage}></img>
                         </div>
                         <div className="flex lg:flex-col items-center">
                             <div className="flex gap-5">
