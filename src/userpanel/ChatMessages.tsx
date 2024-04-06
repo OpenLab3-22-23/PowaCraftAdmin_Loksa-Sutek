@@ -17,7 +17,7 @@ export default function ChatMessages({chatHistory, username, openDeleteMessageTa
             const formattedCreationTime = `${creationTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} - ${creationTime.toLocaleDateString()}`;
             
             return (
-              <div key={index} className={`w-full flex ${username == message.creator ? 'justify-end' : 'justify-start'}`}>
+              <div key={index} className={`shadowT w-full flex ${username == message.creator ? 'justify-end' : 'justify-start'}`}>
                 <div className={`w-3/4 p-1 rounded-lg flex flex-col my-2 ${username == message.creator ? 'bg-zinc-500/80' : 'bg-zinc-700/80'}`}>
                   <div className='flex flex-row items-center'>
                     <a className="text-xl text-white pl-2">{message.creator}</a>

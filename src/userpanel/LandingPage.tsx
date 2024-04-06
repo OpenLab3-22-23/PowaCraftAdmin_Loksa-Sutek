@@ -71,41 +71,41 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="items-center justify-center flex w-full h-screen bg-black/80">      
-            <div id="popup" className="lg:w-1/3 w-full mx-1 lg:mx-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] lg:p-2 pt-1 border"> 
+            <div  className="popup lg:w-1/3 w-full mx-1 lg:mx-0 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] lg:p-2 pt-1 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("userpanel.addquest.header")}</a>
-                    <button id="closebtn" onClick={() => closeAddQuest()} className="absolute right-1 text-white text-4xl">X</button>
+                    <a className="shadowT text-3xl text-white">{t("userpanel.addquest.header")}</a>
+                    <button onClick={() => closeAddQuest()} className="closebtn absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
 
-                <a className="text-white text-xl pb-2">{t("userpanel.addquest.questdesc")}</a>
+                <a className="shadowT text-white text-xl pb-2">{t("userpanel.addquest.questdesc")}</a>
                 <input 
                     ref={newTaskText}
                     type="text"
-                    className="border border-green-300 rounded-2xl w-4/5 h-11 text-center mb-4" 
+                    className="shadow border border-green-300 rounded-2xl w-4/5 h-11 text-center mb-4" 
                     maxLength="40"
                     placeholder={t("userpanel.addquest.questplaceholder")}>
                 </input>
 
-                <a className="text-white text-xl pb-2">{t("userpanel.addquest.points")}</a>
+                <a className="shadowT text-white text-xl pb-2">{t("userpanel.addquest.points")}</a>
                 <input 
                     ref={newTaskPoints}
                     onChange={(e) => setTaskPoints(e.target.value)}
                     type="number" 
-                    className="border border-green-300 rounded-2xl w-1/6 h-11 text-center mb-4" 
+                    className="shadow border border-green-300 rounded-2xl w-1/6 h-11 text-center mb-4" 
                     maxLength="2"
                     placeholder="0">
                 </input>
 
-                <a className="text-white text-xl">{t("ownerpanel.addquest.generaltask")}</a>
-                <a className="text-white text-sm pb-2">{t("ownerpanel.addquest.generaltasksubtext")}</a>
+                <a className="shadowT text-white text-xl">{t("ownerpanel.addquest.generaltask")}</a>
+                <a className="shadowT text-white text-sm pb-2">{t("ownerpanel.addquest.generaltasksubtext")}</a>
                 <input 
                     ref={generalTask}
                     type="checkbox" 
-                    className="border border-green-300 rounded-2xl h-10 w-10">
+                    className="shadow cursor-pointer border border-green-300 rounded-2xl h-10 w-10">
                 </input>
 
-                <button onClick={saveNewTask} className="border border-white/50 border-2 bg-green-700 p-4 rounded-2xl text-white/80 m-3">{t("userpanel.addquest.create")}</button>
+                <button onClick={saveNewTask} className="shadow shadowT click border border-white/50 hover:border-white/50 border-2 bg-green-700 hover:bg-green-800 p-4 rounded-2xl text-white/80 m-3">{t("userpanel.addquest.create")}</button>
             </div>      
         </div>
         )
@@ -123,10 +123,10 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div id="popup" className="xl:w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] lg:p-2 pt-1 border">      
+            <div className="popup xl:w-1/2 h-2/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] lg:p-2 pt-1 border">      
                 <div className="inline-block flex relative w-full justify-center pb-5">
-                    <a className="text-3xl text-white">{t("userpanel.memberslist.header")}</a><br/>
-                    <button id="closebtn" onClick={() => closeMemberList()} className="absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
+                    <a className="shadowT text-3xl text-white">{t("userpanel.memberslist.header")}</a><br/>
+                    <button onClick={() => closeMemberList()} className="closebtn absolute right-1 text-white hover:text-gray-300 text-4xl">X</button>
                 </div>
                 <div className="pt-5 h-full">
                     {allUsersResponse ? <ATList response={allUsersResponse} rankList={rankList}/> : null}
@@ -144,7 +144,7 @@ export default function LandingPage( {userData} ): JSX.Element {
         }
         return (
         <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-            <div id="popup" className="w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
+            <div className="popup w-1/3 rounded-2xl flex flex-col items-center bg-repeat bg-[url('/assets/popupbackground.png')] p-2 border"> 
 
                 <div className="inline-block flex relative w-full justify-center pb-5">
                     <a className="text-3xl text-white">{t("userpanel.setusername.header")}</a><br/>
@@ -175,8 +175,8 @@ export default function LandingPage( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="absolute w-1/4 h-screen bg-black/80">
-            <div className="w-14 absolute right-2 top-2 cursor-pointer">
+        <div className="absolute w-1/3 h-screen bg-black/80">
+            <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
                 <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
             </div>
             <div className="flex justify-center flex-grow">
@@ -189,8 +189,8 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className="absolute bottom-2 w-full">
                 <div className="bg-white h-0.5 w-full"></div>  
                 <div className="flex items-center h-12 gap-2 m-4">  
-                    <input autoFocus onKeyDown={handleKeyPress}  ref={newChatMessage} type="text" className="h-full w-full rounded-lg"></input>
-                    <button onClick={() => sendNewMessage()}  className="h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center flex">
+                    <input autoFocus onKeyDown={handleKeyPress}  ref={newChatMessage} type="text" className="shadow h-full w-full rounded-lg"></input>
+                    <button onClick={() => sendNewMessage()}  className="shadow click h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center flex">
                         <img src="assets/send_arrow.png" className="h-3/4 w-3/4"></img>
                     </button>
                 </div> 
@@ -463,13 +463,13 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <ChatPopup show={chatOpened}/>
             </div>}
 
-            <div id="slidefromtop" className="static w-full">
+            <div className="slidefromtop static w-full">
                 
                 <div className="flex items-center sm:max-md:items-start justify-evenly sm:justify-between py-2 w-full h-fit"> 
-                    <div className="flex flex-col md:flex-row md:items-center gap-2 justify-between md:w-5/6 lg:w-4/5">
-                        <div className="flex items-center gap-2">
-                            <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full hidden sm:max-lg:block"></img>
-                            <div className="h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center lg:hidden text-center px-5">
+                    <div className="flex flex-col md:flex-row md:items-center gap-2 justify-between lg:w-3/5">
+                        <div className="shadowT flex items-center gap-2">
+                            <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full hidden "></img>
+                            <div className="shadow h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center hidden sm:relative lg:hidden text-center px-5">
                                 <WriteUserRank rank={rank} rankList={rankList} />
                             </div>
                             <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat hidden lg:block" style={{ backgroundImage: `url(${logo})` }}></div>
@@ -477,46 +477,59 @@ export default function LandingPage( {userData} ): JSX.Element {
                             <div className="h-14 flex items-end hidden lg:block">
                                 <a className="text-xl text-amber-400">Admin</a>
                             </div>    
-                            <a className="ml-12 text-black text-5xl cursor-pointer outline bg-white rounded-lg" onClick={() => {fetchChatMessages(); setChatOpened(true);}}>CHAT</a>
                         </div>
                         
                         <div className="h-20 items-center space-x-4 absolute sm:relative" style={{ display: isHelper ? "flex" : "none" }}>
-                            <div className="bg-white rounded-full flex justify-center items-center w-44 h-12 border-4 border-gray-400 hidden sm:flex">
+                            <div className="shadow bg-white rounded-full flex justify-center items-center w-44 h-12 border-4 border-gray-400 hidden sm:flex">
                                 <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
                             </div>
-                            <div className="bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400 hidden sm:flex">
+                            <div className="shadow bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400 hidden sm:flex">
                                 <a className="text-green-500 text-2xl">+{plusPoints}</a> 
                             </div>
-                            <div className="bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400 hidden sm:flex">
+                            <div className="shadow bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400 hidden sm:flex">
                                 <a className="text-red-500 text-2xl">{minusPoints}</a>
                             </div> 
                         </div>
                     </div>
-                    <div className="flex items-center gap-5 px-2 sm:pr-8">
-                        <img src={languageIconSource} className="w-14 h-14 cursor-pointer" onClick={changeLanguage}></img>
+                    <div className="flex items-center justify-center sm:justify-end gap-5 px-2 sm:pr-8 w-full sm:w-1/2">
+                        <div className="flex items-center justify-evenly w-1/2">
+                            <img id="chat" className="w-20 cursor-pointer transition duration-500 hover:-translate-y-1 drop-shadow-lg" src="/assets/chat.png" alt="CHAT" onClick={() => {fetchChatMessages(); setChatOpened(!chatOpened);}} />
+                            <img src={languageIconSource} className="w-14 h-14 cursor-pointer rounded-full shadow" onClick={changeLanguage}></img>
+                        </div>
                         <div className="flex lg:flex-col items-center">
                             <div className="flex gap-5">
-                                <img src={`https://mineskin.eu/helm/${username}`} className="w-20 h-20 rounded-full hidden lg:block mb-2"></img>
-                                <button className="text-2xl text-white hover:text-gray-300 text-center hidden lg:block" onClick={handleLogOut}>{t("userpanel.logout")}</button>
+                                <img src={`https://mineskin.eu/helm/${username}`} className="shadow w-20 h-20 rounded-full hidden lg:block mb-2"></img>
+                                <button className="shadowT text-2xl text-white hover:text-gray-300 text-center hidden lg:block" onClick={handleLogOut}>{t("userpanel.logout")}</button>
                             </div>
                             <div className="flex lg:flex-row-reverse w-full">
-                                <div className="h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center hidden lg:block text-center">
+                                <div className="shadow h-12 w-full border-4 border-gray-400 rounded-full bg-white flex items-center hidden lg:block text-center">
                                     <WriteUserRank rank={rank} rankList={rankList} />
                                 </div>
-                                <button className="text-2xl text-white hover:text-gray-300 text-center lg:hidden" onClick={handleLogOut}>{t("userpanel.logout")}</button>
+                                <button className="shadowT text-2xl text-white hover:text-gray-300 text-center lg:hidden" onClick={handleLogOut}>{t("userpanel.logout")}</button>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
-
+                <div className="h-20 items-center justify-center space-x-4 sm:absolute" style={{ display: isHelper ? "flex" : "none" }}>
+                            <div className="shadow bg-white rounded-full flex justify-center items-center w-44 h-12 border-4 border-gray-400 sm:hidden">
+                                <a className="text-2xl">{t("userpanel.yourpoints")}:</a>
+                            </div>
+                            <div className="shadow bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400 sm:hidden">
+                                <a className="text-green-500 text-2xl">+{plusPoints}</a> 
+                            </div>
+                            <div className="shadow bg-white rounded-full flex justify-center items-center w-16 h-12 border-4 border-gray-400 sm:hidden">
+                                <a className="text-red-500 text-2xl">{minusPoints}</a>
+                            </div> 
+                        </div>
                 <div className="pl-5">
-                    <a className="text-6xl text-white">{t("userpanel.welcome")}, {username}</a>
+                    <a className="shadowT text-6xl text-white">{t("userpanel.welcome")}, {username}</a>
                 </div>
                 <div className="flex h-screen flex-col lg:flex-row pt-5">
                     {/** Task list **/}
-                        <div className="lg:w-full h-1/2 lg:h-4/6 bg-zinc-700/80 rounded-lg flex flex-col mx-2 lg:ml-5">
+                        <div className="shadow lg:w-full h-1/2 lg:h-4/6 bg-zinc-700/80 rounded-lg flex flex-col mx-2 lg:ml-5">
                             <div className="inline-block flex items-center justify-between p-4">
-                                    <button onClick={() => setAddQuestOpened(true)} className="flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center items-center px-2">
+                                    <button onClick={() => setAddQuestOpened(true)} className="shadow click flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center items-center px-2">
                                         {t("userpanel.questlist.addquest")}
                                     </button>
                                 <div className="text-center px-1">
@@ -526,20 +539,20 @@ export default function LandingPage( {userData} ): JSX.Element {
                                 </div>
                                     <button 
                                         onClick={() => setDeleteShown(!deleteShown)} 
-                                        className="disabled:bg-gray-600/60 disabled:text-white/60 px-2 flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center items-center" 
+                                        className="shadow click disabled:bg-gray-600/60 disabled:text-white/60 px-2 flex bg-white hover:bg-gray-300 rounded-lg w-28 sm:w-1/5 h-2/3 sm:h-full justify-center items-center" 
                                         disabled = { isHelper }>
                                         {t("userpanel.questlist.remquest")}
                                     </button>
                             </div>
                             <div className="h-0.5 bg-cyan-400 mb-4"></div>
-                            <div id="slidefrombottom" className="overflow-auto mb-4">
+                            <div className="slidefrombottom overflow-auto mb-4">
                                 {questList ? <WriteQuests questList={questList} deleteShown={deleteShown} onDelete={RefreshQuests} username={username} fetchQuests={() => fetchQuestList()} /> : null}
                             </div>
                         </div>
                         {/** Right side tabs **/}
                     <div className="flex flex-col lg:w-3/4 gap-1 lg:items-end p-2">
-                        <div className="flex flex-col bg-zinc-700/80 rounded-lg w-full lg:w-3/5 h-64 lg:h-1/3">
-                            <div className="justify-center flex bg-lime-800/70 rounded-tl-lg rounded-lg m-2 h-1/4 items-center flex-col">
+                        <div className="shadow flex flex-col bg-zinc-700/80 rounded-lg w-full lg:w-3/5 h-64 lg:h-1/3">
+                            <div className="shadow shadowT  justify-center flex bg-lime-800/70 rounded-tl-lg rounded-lg m-2 h-1/4 items-center flex-col">
                                 <a className="text-2xl text-white">{t("userpanel.lastpoints.header")}</a>
                                 <hr/>
                             </div>
@@ -564,9 +577,9 @@ export default function LandingPage( {userData} ): JSX.Element {
 
 
 
-                        <div className="flex flex-col bg-zinc-700/80 rounded-lg w-full lg:w-3/5 h-64 lg:h-1/3">
+                        <div className="shadow flex flex-col bg-zinc-700/80 rounded-lg w-full lg:w-3/5 h-64 lg:h-1/3">
                             <div className="mb-2 h-full">
-                                <div className="justify-center flex lg:pb-2 lg:pt-2 bg-amber-500/40 rounded-lg mb-2 items-center m-2 h-1/4">
+                                <div className="shadow shadowT justify-center flex lg:pb-2 lg:pt-2 bg-amber-500/40 rounded-lg mb-2 items-center m-2 h-1/4">
                                     <a className="text-2xl text-white">{t("userpanel.besthelpers.header")}</a>
                                     <hr/>
                                 </div>
@@ -588,7 +601,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                                     plus={usersResponseByPlus[2].plus}/> 
                                 : null}     
                             </div>
-                            <button className="text-white hover:text-gray-300 w-full" onClick={() => setMembersListOpened(true)}>{t("userpanel.besthelpers.memberlist")}</button>         
+                            <button className="shadowT text-white hover:text-gray-300 w-full" onClick={() => setMembersListOpened(true)}>{t("userpanel.besthelpers.memberlist")}</button>         
                         </div>
                     </div>
                 </div>
