@@ -61,7 +61,8 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const [changeRankShown, setChangeRankShown] = useState(false);     
     const [panelSettingsShown, setPanelSettingsShown] = useState(false);  
     const [chatOpened, setChatOpened] = useState(false);         
-    const [deleteMessageShown, setDeleteMessageShown] = useState(false);      
+    const [deleteMessageShown, setDeleteMessageShown] = useState(false);
+    const [isActive, setIsActive] = useState(false); 
 
     /** Panel settings variables **/ 
     const [notification, setNotification] = useState("");
@@ -365,6 +366,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
 
     const closePanelSettings = () => {
+        setIsActive(false);
         setPanelSettingsShown(false);
         document.body.classList.remove('overflow-hidden');
     }
@@ -377,7 +379,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         }
         return (
             <div  className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-                <div className="popup w-full sm:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
+                <div className={`w-full sm:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3 ${isActive ? '' : 'popup'}`}> 
                     <div className="flex flex-col items-center w-full">
                             <div className="shadow flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
                                 <a className="shadowT text-4xl text-white text-center mx-10">{t("ownerpanel.settings.panel.header")}</a>
@@ -918,6 +920,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 /** ### Settings data pushing ### **/  
 
     const setNewPanelName = async () => {
+        setIsActive(true);
         if (settings_newPanelName.current.value) {
             const { error } = await supabase
             .from('paneldata')
@@ -938,6 +941,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const setNewLogo = async () => {
+        setIsActive(true);
         if (settings_newPanelLogo) {
             const { error } = await supabase.storage
             .from('images')
@@ -957,6 +961,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
     
     const setNewUserBackground = async () => {
+        setIsActive(true);
         if (settings_newUserBackground) {
             const { error } = await supabase.storage
             .from('backgrounds')
@@ -976,6 +981,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const setNewOwnerBackground = async () => {
+        setIsActive(true);
         if (settings_newOwnerBackground) {
             const { error } = await supabase.storage
             .from('backgrounds')
@@ -995,6 +1001,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const addNewRank = async () => {
+        setIsActive(true);
         if (settings_newRankName.current.value && settings_newRankColour.current.value) {
             const { error } = await supabase
             .from('ranks')
@@ -1017,6 +1024,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const removeRank = async () => {
+        setIsActive(true);
         if (settings_rankToRemove.current.value) {
             const { error } = await supabase
             .from('ranks')
@@ -1037,6 +1045,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const addNewAction = async () => {
+        setIsActive(true);
         if (settings_newAction_sk.current.value && settings_newAction_en.current.value && settings_newActionPoints.current.value) {
             const { error } = await supabase
             .from('points_list')
@@ -1056,6 +1065,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     }
 
     const removeAction = async () => {
+        setIsActive(true);
         if (settings_actionToRemove.current.value) {
             const { error } = await supabase
             .from('points_list')
