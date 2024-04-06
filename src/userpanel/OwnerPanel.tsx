@@ -29,9 +29,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             setNotification("Akcia úspešne vykonaná!");
             setNotificationColour("text-green-600")
         }
-        setTimeout(() => {
-            setNotification(null);
-          }, 2000);
     }
 
 /** ### Variables ### **/  
@@ -85,14 +82,20 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     const generalTask = useRef();
     const newMailText = useRef();
     const nickToDelete = useRef();
-    const [newUserRank, setNewUserRank] = useState("");  
-    const [shouldResetPoints, setShouldResetPoints] = useState(false);    
-    const [addPlusTask, setAddPlusTask] = useState();       
-    const [addMinusTask, setAddMinusTask] = useState();      
+
+    const newUserRank = useRef();
+    const shouldResetPoints = useRef();
+
+    const addPlusTask = useRef();
+    const addMinusTask = useRef();
+    //const [addPlusTask, setAddPlusTask] = useState();       
+    //const [addMinusTask, setAddMinusTask] = useState();   
+
     const [activeUserID, setActiveUserID] = useState();   
     const [chatHistory, setChatHistory] = useState();   
     const newChatMessage = useRef();
     const [messageToDeleteData, setMessageToDeleteData] = useState([]);   
+
 
 /** ### Popup windows ### **/  
 
@@ -248,8 +251,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                 <a className="text-white text-xl pb-2">{t("ownerpanel.addplus.questname")}</a>
                 <select
-                    value={addPlusTask}
-                    onChange={(e) => setAddPlusTask(e.target.value)} 
+                    ref={addPlusTask}
                     className="border border-green-300 rounded-2xl w-4/5 h-11 text-center truncate" >
                     {pointsList.map((point) => (
                         point.points > 0 ? (
@@ -261,7 +263,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </select>
 
                 <button 
-                    onClick={savePlusPoints} 
+                    onClick={() => savePlusPoints()} 
                     className="border border-white/50 border-2 bg-green-700 hover:bg-green-600 p-4 rounded-2xl text-white/80 m-3">
                     {t("ownerpanel.addplus.add")}
                 </button>
@@ -291,8 +293,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <a className="text-white text-xl pb-2">{t("ownerpanel.addminus.questname")}</a>
                     <select
-                        value={addMinusTask}
-                        onChange={(e) => setAddMinusTask(e.target.value)} 
+                        ref={addMinusTask}
                         className="border border-green-300 rounded-2xl w-4/5 h-11 text-center truncate">
                         {pointsList.map((point) => (
                             point.points < 0 ? (
@@ -304,7 +305,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                     </select>
 
                     <button 
-                        onClick={saveMinusPoints} 
+                        onClick={() => saveMinusPoints()} 
                         className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
                         {t("ownerpanel.addminus.add")}
                     </button>
@@ -334,9 +335,9 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.newrank")}</a>
                     <select
-                        value={newUserRank}
-                        onChange={(e) => setNewUserRank(e.target.value)} 
-                        className="border border-green-300 rounded-2xl w-4/5 h-11 text-center">
+                        ref={newUserRank}
+                        className="border border-green-300 rounded-2xl w-4/5 h-11 text-center"
+                        defaultValue={rankList[rankList.length - 1].rank}>
 
                         {rankList.map((rank, index) => (
                             <option key={index} value={rank.rank}>
@@ -347,14 +348,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
                     <a className="text-white text-xl pb-2">{t("ownerpanel.changerank.resetpoints")}</a>
                     <input 
-                        checked={shouldResetPoints}
                         type="checkbox" 
                         className="border border-green-300 rounded-2xl h-10 w-10"
-                        onChange={(e) => setShouldResetPoints(e.target.checked)}>
+                        ref={shouldResetPoints}
+                        defaultChecked={true}>
                     </input>
 
                     <button 
-                        onClick={changeUserRank} 
+                        onClick={() => changeUserRank()} 
                         className="border border-white/50 border-2 bg-red-600 hover:bg-red-500 p-4 rounded-2xl text-white/80 m-3">
                         {t("ownerpanel.changerank.change")}
                     </button>
@@ -376,15 +377,15 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-            <div  className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
-                <div id="popup" className="w-full sm:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
+            <div className="box-content items-center justify-center flex flex-col absolute w-full h-screen bg-black/80">      
+                <div id={notification ? "" : "popup"} className="w-full sm:w-1/2 h-5/6 rounded-2xl flex flex-col items-center bg-[url('/assets/popupbackground.png')] bg-repeat border-2 overflow-auto gap-y-3"> 
                     <div className="flex flex-col items-center w-full">
                             <div className="flex w-full justify-center sticky top-0 py-2 bg-[url('/assets/popupbackground.png')] bg-repeat border-b-2 mb-2">
                                 <a className="text-4xl text-white text-center mx-10">{t("ownerpanel.settings.panel.header")}</a>
                             </div> 
                             <div className="absolute w-full sm:w-1/2 py-2 z-50">
                                 <div className="flex justify-end transition duration-500 mr-2">
-                                    <button id="closebtn" onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl text-end">X</button>                                
+                                    <button id={notification ? "hiddenID" : "closebtn"} onClick={() => closePanelSettings()} className="text-white hover:text-gray-300 text-4xl text-end">X</button>                                
                                 </div>
                             </div>  
                             <a className={`text-white text-xl ${notificationColour}`}>{notification}</a>
@@ -515,11 +516,11 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                     className="border-2 border-amber-400 rounded-2xl w-2/3 text-center" 
                                     placeholder="Rank">
                                 </input>
-                                <input 
+                                <input
                                     ref={settings_newRankColour}
-                                    type="text"
-                                    className="border-2 border-amber-400 rounded-2xl w-1/3 text-center" 
-                                    placeholder="#FF00FF">
+                                    type="color"
+                                    className="border-2 border-amber-400 rounded-2xl p-5 cursor-pointer shadow"
+                                    onChange={handleNickColorChange}>   
                                 </input>
                             </div>
                             <select
@@ -572,7 +573,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                         </option>
                                     ) : null
                                 ))}    
-                                {pointsList.map((point, index) => (
+                                {pointsList.map((point) => (
                                     point.points < 0 ? (
                                         <option key={point.id} value={point.id} className="text-red-600">
                                             {point.id + ". "} {i18n.language == "sk" ? point.action_name_sk : point.action_name_en} | {Math.abs(point.points)}-
@@ -846,8 +847,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 setPointsList(data);
                 const plusPointList = data.filter(point => point.points > 0);
                 const minusPointList = data.filter(point => point.points < 0);
-                setAddPlusTask(plusPointList[0].id)        
-                setAddMinusTask(minusPointList[0].id)
             }
     }      
 
@@ -1089,8 +1088,6 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     function openChangeRank(id) {
         setActiveUserID(id);
         setChangeRankShown(true);
-        setNewUserRank(rankList[rankList.length - 1].rank);
-        setShouldResetPoints(true);
     }
 
     const getIDByUsername = (username) => {
@@ -1116,7 +1113,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
         const { } = await supabase
         .from('profiles')
-        .update({plus: partialData[0].plus + pointsList[pointsList.findIndex(point => point.id == addPlusTask)].points, last_point1: addPlusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
+        .update({plus: partialData[0].plus + pointsList[pointsList.findIndex(point => point.id == addPlusTask.current.value)].points, last_point1: addPlusTask.current.value, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
         .eq('id', activeUserID)
         closeAddPlusTab();
         fetchAllUsers();
@@ -1135,7 +1132,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
         const { } = await supabase
         .from('profiles')
-        .update({minus: partialData[0].minus + pointsList[pointsList.findIndex(point => point.id == addMinusTask)].points, last_point1: addMinusTask, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
+        .update({minus: partialData[0].minus + pointsList[pointsList.findIndex(point => point.id == addMinusTask.current.value)].points, last_point1: addMinusTask.current.value, last_point2: partialData[0].last_point1, last_point3: partialData[0].last_point2})
         .eq('id', activeUserID)
         closeAddMinusTab();
         fetchAllUsers();
@@ -1145,14 +1142,14 @@ export default function OwnerPanel( {userData} ): JSX.Element {
 
         const { } = await supabase
         .from('profiles')
-        .update({rank: newUserRank})
+        .update({rank: newUserRank.current.value})
         .eq('id', activeUserID)
 
-        if (shouldResetPoints) {
+        if (shouldResetPoints.current.checked == true) {
             const { } = await supabase
             .from('profiles')
             .update({plus: 0, minus : 0})
-            .eq('id', activeUserID)
+            .eq('id', activeUserID) 
         }
         closeChangeRankTab();
         fetchAllUsers();
@@ -1177,6 +1174,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         fetchChatMessages();
         closeDeleteMessageTab();
     } 
+
+    
+    const handleNickColorChange = () => {
+        const color = settings_newRankColour.current.value;
+        settings_newRankColour.current.style.backgroundColor = color;
+        console.log('Vybraná farba:', color);
+    };
 
     useEffect(() => {
         if (chatOpened)
@@ -1250,7 +1254,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="flex sm:flex-col items-center">
                     <div className="flex flex-row-reverse sm:flex-row justify-between items-center gap-2 sm:gap-0">
                         <button className="text-2xl text-white hover:text-gray-400 text-center sm:pr-3" onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
-                        <img src="assets/settings_icon.png" className="w-20 h-20 rounded-full cursor-pointer transition duration-500 hover:rotate-90 active:rotate-180" onClick={() => setPanelSettingsShown(true)}></img>
+                        <img src="assets/settings_icon.png" className="w-20 h-20 rounded-full cursor-pointer transition duration-500 hover:rotate-90 active:rotate-180" onClick={() => {setNotification(null); setPanelSettingsShown(true);}}></img>
                     </div>
 
                     <div className="flex justify-end hidden sm:flex">
