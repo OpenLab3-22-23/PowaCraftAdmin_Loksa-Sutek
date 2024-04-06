@@ -186,7 +186,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             </div> 
             <div className="bg-white h-0.5 w-full mb-2"></div>  
                 {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} isAdmin={true} /> : null}   
-            <div className=" w-full h-20 mb-10">
+            <div className=" w-full h-20">
                 <div className="bg-white h-0.5 w-full"></div>  
                 <div className="flex items-center justify-center gap-2 p-3">  
                     <input onKeyDown={handleKeyPress}  ref={newChatMessage} type="text" className="shadow h-full w-full rounded-lg"></input>
