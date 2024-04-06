@@ -10,7 +10,7 @@ export default function ChatMessages({chatHistory, username, openDeleteMessageTa
     }, [chatHistory]);  
 
     return (
-        <div ref={chatContainerRef} className="py-4 px-3 flex flex-col overflow-y-auto h-4/5">
+        <div ref={chatContainerRef} className=" px-3 flex flex-col overflow-y-auto h-5/6">
           {chatHistory.map((message, index) => {
 
             const creationTime = new Date(message.created_at);
