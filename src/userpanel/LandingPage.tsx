@@ -498,7 +498,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                         </div>
                         <div className="flex lg:flex-col items-center">
                             <div className="flex gap-5">
-                                <img src={`https://mineskin.eu/helm/${username}`} className="shadow w-20 h-20 rounded-full hidden lg:block mb-2"></img>
+                                <img src={`https://mineskin.eu/helm/${username}`} className="shadow w-16 h-16 rounded-full hidden lg:block mb-2"></img>
                                 <button className="shadowT text-2xl text-white hover:text-gray-300 text-center hidden lg:block" onClick={handleLogOut}>{t("userpanel.logout")}</button>
                             </div>
                             <div className="flex lg:flex-row-reverse w-full">

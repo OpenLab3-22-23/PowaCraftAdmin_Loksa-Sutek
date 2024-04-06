@@ -99,8 +99,8 @@ export default function SignUp() {
 
       <div className="slidefromleft absolute top-5 left-5 sm:top-10 sm:left-10">
         <Link id="arrowbox" to="/login" className="inline-block flex items-center gap-4 content-center">
-          <img src="/assets/arrow.png" className="w-10 h-10"></img>
-          <span className="text-white text-4xl">{t("register.back")}</span>
+          <img src="/assets/arrow.png" className="w-16 h-16"></img>
+          <span className="text-white shadowT text-4xl">{t("register.back")}</span>
         </Link>
       </div>
 

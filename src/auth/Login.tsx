@@ -63,8 +63,8 @@ export default function LogIn() {
       
       <div className="slidefromleft absolute top-10 left-10">
         <a className="inline-block flex justify-center items-center gap-4" href="https://powacraft.eu/">
-          <img src="/assets/arrow.png" className="w-10 h-10"></img>
-          <span className="text-white text-4xl">{t("login.back")}</span>
+          <img src="/assets/arrow.png" className="w-16 h-16"></img>
+          <span className="shadowT text-white text-4xl">{t("login.back")}</span>
         </a>
       </div>
       <a  onClick={changeLanguage} className="shadowT slidefromright animate w-14 h-14 absolute top-10 right-10 text-2xl text-white cursor-pointer hover:text-gray-300" >{language}</a>

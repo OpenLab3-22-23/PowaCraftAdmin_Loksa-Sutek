@@ -1258,7 +1258,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="flex sm:flex-col items-center">
                     <div className="flex flex-row-reverse sm:flex-row justify-between items-center gap-2 sm:gap-0">
                         <button className="shadowT text-2xl logout text-white hover:text-gray-400 text-center sm:pr-3" onClick={handleLogOut}>{t("ownerpanel.logout")}</button>
-                        <img src="assets/settings_icon.png" className="w-20 h-20 rounded-full cursor-pointer transition duration-500 hover:rotate-90 active:rotate-180" onClick={() => {setNotification(null); setPanelSettingsShown(true);}}></img>
+                        <img src="assets/settings_icon.png" className="w-16 h-16 mb-2 rounded-full cursor-pointer transition duration-500 hover:rotate-90 active:rotate-180" onClick={() => {setNotification(null); setPanelSettingsShown(true);}}></img>
                     </div>
 
                     <div className="flex justify-end hidden sm:flex">
