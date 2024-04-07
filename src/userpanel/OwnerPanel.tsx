@@ -652,7 +652,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div> 
                 <div className="bg-white h-0.5 w-full mb-2"></div>     
             </div>
-            <div className="h-3/4">
+            <div className="h-1/2 md:h-3/4">
                 {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} openDeleteMessageTab={openDeleteMessageTab} isAdmin={true} setIsOnBottom={setIsChatOnBottom} /> : null}    
             </div>
             <div className="w-full h-full">
