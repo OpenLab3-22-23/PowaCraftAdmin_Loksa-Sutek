@@ -188,7 +188,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 </div> 
                 <div className="bg-white h-0.5 w-full mb-2"></div> 
             </div>
-             <div className="row-span-8 h-screen">
+             <div className="row-span-2">
                 {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} isAdmin={false} setIsOnBottom={setIsChatOnBottom} /> : null}   
              </div>
             <div className=" w-full h-20">
