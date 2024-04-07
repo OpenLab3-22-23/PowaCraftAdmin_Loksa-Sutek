@@ -178,7 +178,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             return null;
         }
         return (
-            <div className="absolute w-full lg:w-2/5 h-screen bg-gray-900">
+        <div className="absolute w-full lg:w-2/5 h-screen bg-gray-900">
             <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
                 <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
             </div>
@@ -190,8 +190,8 @@ export default function LandingPage( {userData} ): JSX.Element {
             <div className=" w-full h-20">
                 <div className="bg-white h-0.5 w-full"></div>  
                 <div className="flex items-center justify-center gap-2 p-3">  
-                    <input onKeyDown={handleKeyPress} ref={newChatMessage} type="text" className="h-full w-full rounded-lg"></input>
-                    <button onClick={() => sendNewMessage()}  className="click h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center p-1 flex">
+                    <input onKeyDown={handleKeyPress}  ref={newChatMessage} type="text" className="shadow h-full w-full rounded-lg"></input>
+                    <button onClick={() => sendNewMessage()}  className="shadow click h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center p-1 flex">
                         <img src="assets/send_arrow.png" className="h-3/4 w-3/4"></img>
                     </button>
                 </div> 
