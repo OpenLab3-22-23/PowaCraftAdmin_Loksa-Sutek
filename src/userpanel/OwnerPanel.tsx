@@ -642,7 +642,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="absolute w-full lg:w-2/5 h-screen bg-gray-900 grid grid-rows-10">
+        <div className="absolute w-full lg:w-2/5 h-screen bg-gray-900">
             <div>
                 <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
                     <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
@@ -652,7 +652,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 </div> 
                 <div className="bg-white h-0.5 w-full mb-2"></div>     
             </div>
-            <div className="row-span-2">
+            <div className="h-3/4">
                 {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} openDeleteMessageTab={openDeleteMessageTab} isAdmin={true} setIsOnBottom={setIsChatOnBottom} /> : null}    
             </div>
             <div className="w-full h-full">
