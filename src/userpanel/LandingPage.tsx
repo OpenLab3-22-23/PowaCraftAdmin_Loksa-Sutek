@@ -178,15 +178,19 @@ export default function LandingPage( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="absolute w-full lg:w-2/5 h-screen bg-gray-900">
-            <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
-                <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
+        <div className="absolute w-full lg:w-2/5 h-screen bg-gray-900 grid grid-rows-10">
+            <div>
+                <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
+                    <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
+                </div>
+                <div className="flex justify-center flex-grow">
+                    <a className="text-5xl text-white pt-2 pb-4">Chat</a>     
+                </div> 
+                <div className="bg-white h-0.5 w-full mb-2"></div> 
             </div>
-            <div className="flex justify-center flex-grow">
-                <a className="text-5xl text-white pt-2 pb-4">Chat</a>     
-            </div> 
-            <div className="bg-white h-0.5 w-full mb-2"></div>  
-            {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} isAdmin={false} setIsOnBottom={setIsChatOnBottom} /> : null}   
+             <div className="row-span-8">
+                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} isAdmin={false} setIsOnBottom={setIsChatOnBottom} /> : null}   
+             </div>
             <div className=" w-full h-20">
                 <div className="bg-white h-0.5 w-full"></div>  
                 <div className="flex items-center justify-center gap-2 p-3">  
