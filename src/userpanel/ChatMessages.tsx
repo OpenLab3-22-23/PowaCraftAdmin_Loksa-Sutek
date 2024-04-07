@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useRef, useLayoutEffect, useEffect, useState } from 'react';
+import { useRef, useLayoutEffect, useEffect } from 'react';
 
 export default function ChatMessages({ chatHistory, username, openDeleteMessageTab, isAdmin, setIsOnBottom }) {
 
@@ -17,7 +17,6 @@ export default function ChatMessages({ chatHistory, username, openDeleteMessageT
     };
   }, []);
   
-
   useLayoutEffect(() => {
     chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
   }, [chatHistory]);

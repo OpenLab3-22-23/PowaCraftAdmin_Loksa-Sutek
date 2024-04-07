@@ -1182,15 +1182,13 @@ export default function OwnerPanel( {userData} ): JSX.Element {
     };
 
     useEffect(() => {
-        if (chatOpened)
-        {
+        if (chatOpened) {
             chatRefreshTimer()
         }
     }, [chatOpened])
     function chatRefreshTimer() {
         setTimeout(() => {
-            if (newChatMessage.current.value == "" && isChatOnBottom.current)
-            {
+            if (newChatMessage.current.value == "" && isChatOnBottom.current) {
                 fetchChatMessages();
             }
             chatRefreshTimer();
