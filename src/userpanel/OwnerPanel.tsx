@@ -642,7 +642,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="absolute w-full lg:w-2/5 h-full bg-gray-900 grid grid-rows-10">
+        <div className="absolute w-full lg:w-2/5 h-screen bg-gray-900 grid grid-rows-10">
             <div>
                 <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
                     <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
