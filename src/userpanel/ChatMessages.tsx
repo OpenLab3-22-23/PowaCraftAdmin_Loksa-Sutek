@@ -24,7 +24,7 @@ export default function ChatMessages({ chatHistory, username, openDeleteMessageT
 
 
   return (
-    <div ref={chatContainerRef} className="px-3 flex flex-col overflow-y-auto h-5/6">
+    <div ref={chatContainerRef} className="px-3 flex flex-col overflow-y-auto h-3/4 md:h-4/5">
       {chatHistory.map((message, index) => {
         const creationTime = new Date(message.created_at);
         const formattedCreationTime = `${creationTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} - ${creationTime.toLocaleDateString()}`;
