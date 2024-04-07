@@ -55,6 +55,7 @@ export default function LandingPage( {userData} ): JSX.Element {
     const [newUsername, setNewUsername] = useState("");   
     const [chatHistory, setChatHistory] = useState();   
     const newChatMessage = useRef();  
+    const isChatOnBottom = useRef(true);
 
 
 /** ### Popup windows ### **/  
@@ -177,7 +178,7 @@ export default function LandingPage( {userData} ): JSX.Element {
             return null;
         }
         return (
-        <div className="absolute w-full lg:w-3/5 h-screen bg-gray-900">
+            <div className="absolute w-full lg:w-2/5 h-screen bg-gray-900">
             <div className="w-14 absolute right-2 top-2 cursor-pointer transition duration-500 hover:-translate-x-2">
                 <img src="assets/arrow.png" alt="Arrow" onClick={() => setChatOpened(false)}></img>
             </div>
@@ -185,12 +186,12 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <a className="text-5xl text-white pt-2 pb-4">Chat</a>     
             </div> 
             <div className="bg-white h-0.5 w-full mb-2"></div>  
-                {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} isAdmin={true} /> : null}   
+            {chatHistory && username ? <ChatMessages chatHistory={chatHistory} username={username} isAdmin={false} setIsOnBottom={setIsChatOnBottom} /> : null}   
             <div className=" w-full h-20">
                 <div className="bg-white h-0.5 w-full"></div>  
                 <div className="flex items-center justify-center gap-2 p-3">  
-                    <input onKeyDown={handleKeyPress}  ref={newChatMessage} type="text" className="shadow h-full w-full rounded-lg"></input>
-                    <button onClick={() => sendNewMessage()}  className="shadow click h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center p-1 flex">
+                    <input onKeyDown={handleKeyPress} ref={newChatMessage} type="text" className="h-full w-full rounded-lg"></input>
+                    <button onClick={() => sendNewMessage()}  className="click h-full w-16 bg-blue-400/80 hover:bg-blue-600/80 rounded-lg items-center justify-center p-1 flex">
                         <img src="assets/send_arrow.png" className="h-3/4 w-3/4"></img>
                     </button>
                 </div> 
@@ -434,13 +435,17 @@ export default function LandingPage( {userData} ): JSX.Element {
     }, [chatOpened])
     function chatRefreshTimer() {
         setTimeout(() => {
-            if (newChatMessage.current.value == "")
+            if (newChatMessage.current.value == "" && isChatOnBottom.current)
             {
                 fetchChatMessages();
             }
             chatRefreshTimer();
         }, 10000);
     } 
+
+    function setIsChatOnBottom(isOnBottom) {
+        isChatOnBottom.current = isOnBottom;
+    }
 
 
 /** ### HTML ### **/ 
@@ -459,7 +464,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                 <SetUsername show={isSetUsernameOpened}/>
             </div>}
 
-            {chatOpened && <div className="z-10 w-full h-full absolute">
+            {chatOpened && <div className="z-10 w-full h-full absolute bg-black/50">
                 <ChatPopup show={chatOpened}/>
             </div>}
 

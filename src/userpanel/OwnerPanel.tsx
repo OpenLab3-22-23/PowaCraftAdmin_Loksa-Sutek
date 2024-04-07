@@ -515,8 +515,9 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                 <input
                                     ref={settings_newRankColour}
                                     type="color"
-                                    className="shadow border-2 border-amber-400 rounded-2xl p-5 cursor-pointer shadow"
-                                    onChange={handleNickColorChange}>   
+                                    className="shadow border-2 border-amber-400 rounded-2xl p-5 cursor-pointer shadow bg-cyan-500"
+                                    onChange={handleNickColorChange}
+                                    defaultValue={"#06B6D4"}>   
                                 </input>
                             </div>
                             <select
