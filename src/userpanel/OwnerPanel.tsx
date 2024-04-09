@@ -833,6 +833,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
         const { data } = await supabase
             .from('quest_list')
             .select()
+            .order('id', { ascending: true})
             
             if (data) {
                 setQuestList(data);
