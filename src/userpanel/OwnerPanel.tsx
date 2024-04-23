@@ -433,7 +433,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
                             <a className="shadowT text-white text-2xl text-center">{t("ownerpanel.settings.panel.userpanel")} (png / jpg)</a>
                             <div 
-                                className="shadow w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" 
+                                className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" 
                                 style={{ backgroundImage: `url(${settings_newUserBackground ? URL.createObjectURL(settings_newUserBackground) : userPanelBackgroundImage})` }}>
                             </div>                   
                             <input 
@@ -459,7 +459,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                         <div className="h-min w-4/6 flex flex-col gap-y-2 items-center justify-center">
                             <a className="shadowT text-white text-2xl text-center">{t("ownerpanel.settings.panel.ownerpanel")} (png / jpg)</a>
                             <div 
-                                className="shadow w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" 
+                                className="w-full h-48 lg:h-72 bg-center bg-contain bg-no-repeat" 
                                 style={{ backgroundImage: `url(${settings_newOwnerBackground ? URL.createObjectURL(settings_newOwnerBackground) : ownerPanelBackgroundImage})` }}>
                             </div>                        
                             <input 
