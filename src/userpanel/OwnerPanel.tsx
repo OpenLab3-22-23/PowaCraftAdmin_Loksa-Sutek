@@ -380,7 +380,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                                 <a className="shadowT text-4xl text-white text-center mx-10">{t("ownerpanel.settings.panel.header")}</a>
                             </div> 
                             <div className="absolute w-full sm:w-1/2 py-2 z-50">
-                                <div className="flex justify-end transition duration-500 mr-2">
+                                <div className="flex justify-end transition duration-500 mr-5">
                                     <button onClick={() => closePanelSettings()} className={`${notification ? "" : "closebtn"} text-white hover:text-gray-300 text-4xl text-end`}>X</button>                                
                                 </div>
                             </div>  
