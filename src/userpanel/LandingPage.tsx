@@ -483,7 +483,7 @@ export default function LandingPage( {userData} ): JSX.Element {
                                 <WriteUserRank rank={rank} rankList={rankList} />
                             </div>
                             <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat hidden lg:block" style={{ backgroundImage: `url(${logo})` }}></div>
-                            <a className="text-4xl text-white hidden lg:block" href="https://powacraft.sk/">{panelName}</a>
+                            <a className="text-4xl text-white hidden lg:block" href="https://powacraft.eu/">{panelName}</a>
                             <div className="h-14 flex items-end hidden lg:block">
                                 <a className="text-xl text-amber-400">Admin</a>
                             </div>    

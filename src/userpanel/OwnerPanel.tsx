@@ -1247,7 +1247,7 @@ export default function OwnerPanel( {userData} ): JSX.Element {
                 <div className="flex items-center w-1/2 hidden md:flex ">
                     <div className="shadowT items-center flex mr-16">
                         <div className="rounded-full h-32 w-32 bg-center bg-contain bg-no-repeat" style={{ backgroundImage: `url(${logo})` }}></div>
-                        <a className="text-4xl text-white" href="https://powacraft.sk/">{panelName}</a>
+                        <a className="text-4xl text-white" href="https://powacraft.eu/">{panelName}</a>
                         <div className="h-14 flex items-end">
                             <a className="text-xl text-amber-400 ">Admin</a>
                         </div>
